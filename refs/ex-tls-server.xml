@@ -1,0 +1,17 @@
+<listening-tls-server
+  xmlns="urn:ietf:params:xml:ns:yang:ietf-tls-server">
+  <port>6513</port>
+  <certificates>
+    <certificate>
+      <name>ex-key-sect571r1-cert</name>
+    </certificate>
+  </certificates>
+  <client-auth>
+    <trusted-ca-certs>
+      deployment-specific-ca-certs
+    </trusted-ca-certs>
+    <trusted-client-certs>
+      explicitly-trusted-client-certs
+    </trusted-client-certs>
+  </client-auth>
+</listening-tls-server>
