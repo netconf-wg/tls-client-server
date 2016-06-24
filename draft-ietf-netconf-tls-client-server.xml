@@ -39,7 +39,7 @@
         <area>Operations</area>
         <workgroup>NETCONF Working Group</workgroup>
         <abstract>
-            <t>This draft defines two YANG modules, one
+            <t>This document defines two YANG modules, one
             defines groupings for a generic TLS client and the other defines
             groupings for a generic TLS server.  It is intended that these
             groupings will be used by applications using the TLS protocol.</t>
@@ -82,7 +82,7 @@
 
         <section title="Introduction">
 
-            <t>This draft defines two YANG <xref target="RFC6020"/> modules,
+            <t>This document defines two YANG <xref target="RFC6020"/> modules,
             one defines groupings for a generic TLS client and the other
             defines groupings for a generic TLS server (TLS is defined in
             <xref target="RFC5246"/>).  It is intended that these groupings
@@ -91,7 +91,7 @@
             model for an HTTPS <xref target="RFC2818"/> server or a
             NETCONF over TLS <xref target="RFC7589"/> based server.</t>
 
-            <t>The two YANG modules in this draft each define two groupings. One
+            <t>The two YANG modules in this document each define two groupings. One
             grouping defines everything other than what's needed for the TCP
             <xref target="RFC793"/> protocol layer.  The other grouping uses the
             first grouping while adding TCP layer specifics (e.g., addresses to
