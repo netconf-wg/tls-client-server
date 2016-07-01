@@ -362,7 +362,7 @@ I removed all the NACM statements in the new modules
         &rfc6991;
         &rfc7589;
 
-        <reference anchor='draft-ietf-netconf-system-keychain' target="https://tools.ietf.org/html/draft-ieft-netconf-system-keychain">
+        <reference anchor='draft-ietf-netconf-system-keychain' target="https://datatracker.ietf.org/html/draft-ieft-netconf-system-keychain">
           <front>
             <title>System Keychain Model</title>
             <author initials='K.W.' surname='Watsen' fullname='Kent Watsen'>
@@ -390,7 +390,7 @@ I removed all the NACM statements in the new modules
         &rfc3688;
         &rfc5246;
 
-        <reference anchor='draft-ietf-netconf-call-home' target="https://tools.ietf.org/html/draft-ieft-netconf-call-home-17">
+        <reference anchor='draft-ietf-netconf-call-home' target="https://datatracker.ietf.org/html/draft-ieft-netconf-call-home-17">
           <front>
             <title>
               NETCONF Call Home and RESTCONF Call Home
