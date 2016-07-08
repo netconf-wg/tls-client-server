@@ -1,9 +1,14 @@
+// Editor's Note:
+// This module is incomplete at this time.  Below is
+// just a skeleton so there's something in the draft.
+// Please ignore this module for now!
+
 module ietf-tls-client {
   yang-version 1.1;
 
   namespace "urn:ietf:params:xml:ns:yang:ietf-tls-client";
   prefix "tlsc";
-
+/*
   import ietf-inet-types {
     prefix inet;
     reference 
@@ -15,7 +20,7 @@ module ietf-tls-client {
     reference
       "RFC YYYY: System Keychain Model";
   }
-
+*/
   organization
    "IETF NETCONF (Network Configuration) Working Group";
 
@@ -57,25 +62,27 @@ module ietf-tls-client {
      "RFC XXXX: TLS Client and Server Models";
   }
 
-  grouping non-initiating-tls-client-grouping {
-    description
-      "A reusable grouping for a TLS client that does not initiate
-       the underlying TCP transport connection.";
-    leaf some-TBD-tls-client-stuff {
-      type string;
-    }   
-  }         
-            
   grouping initiating-tls-client-grouping {
     description
       "A reusable grouping for a TLS client that initiates the
        underlying TCP transport connection.";
     leaf some-TBD-tcp-client-stuff {
       type string;
+      description "";
     }     
     uses non-initiating-tls-client-grouping;
   }
 
+ grouping non-initiating-tls-client-grouping {
+    description
+      "A reusable grouping for a TLS client that does not initiate
+       the underlying TCP transport connection.";
+    leaf some-TBD-tls-client-stuff {
+      type string;
+      description "";
+    }   
+  }         
+  
 }
 
 

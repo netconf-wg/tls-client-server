@@ -127,15 +127,16 @@ module ietf-tls-server {
     leaf address {
       type inet:ip-address;
       description
-       "The IP address of the interface to listen on. The TLS
+       "The IP address of the interface to listen on.  The TLS
         server will listen on all interfaces if no value is
-        specified.";
+        specified. Please note that some addresses have special
+        meanings (e.g., '0.0.0.0' and '::').";
     }
     leaf port {
       type inet:port-number;
       description
        "The local port number on this interface the TLS server
-        listens on.  When this grouping is used, it is RECOMMENED
+        listens on.  When this grouping is used, it is RECOMMENDED
         that refine statement is used to either set a default port
         value or to set mandatory true.";
     }

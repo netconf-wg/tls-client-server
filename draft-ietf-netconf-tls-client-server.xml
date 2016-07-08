@@ -136,6 +136,8 @@
 
       <section title="The TLS Client Model" anchor="tls-client-model">
 
+        <t>EDITOR NOTE: Please ignore this section, it is incomplete.</t>
+
         <t>The TLS client model presented in this section contains two
         YANG groupings, one for a client that initiates the underlying
         TCP connection and another for a client that has had the TCP
@@ -205,7 +207,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-client@YYYY-MM-DD.yang)
 
         <section title="Tree Diagram">
           <t>The following tree diagram presents the data model for
-          the two groupings defined in the ietf-ssh-server module.</t>
+          the two groupings defined in the ietf-tls-server module.</t>
           <t>
             <figure>
               <artwork><![CDATA[
@@ -405,7 +407,14 @@ I removed all the NACM statements in the new modules
       </references>
 
       <section title="Change Log">
-        <t>This draft was split out from draft-ietf-netconf-server-model</t>
+        <section title="server-model-09 to 00">
+          <t>
+            <list style="symbols">
+              <t>This draft was split out from draft-ietf-netconf-server-model-09.</t>
+              <t>Noted that '0.0.0.0' and '::' might have special meanings.</t>
+            </list>
+          </t>
+        </section>
       </section>
 
       <section title="Open Issues">
