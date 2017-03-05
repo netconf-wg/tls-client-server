@@ -15,10 +15,10 @@ module ietf-tls-client {
       "RFC 6991: Common YANG Data Types";
   }
 
-  import ietf-system-keychain {
-    prefix kc;
+  import ietf-keystore {
+    prefix ks;
     reference
-      "RFC YYYY: System Keychain Model";
+      "RFC YYYY: Keystore Model";
   }
 */
   organization

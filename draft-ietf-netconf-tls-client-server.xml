@@ -54,14 +54,14 @@
           the Normative References section, as well as in body text throughout.  
           Please update the following references to reflect their final RFC assignments:
             <list style="symbols">
-              <t>draft-ietf-netconf-system-keychain</t>
+              <t>draft-ietf-netconf-keystore</t>
             </list>
           </t>
           <t>Artwork in this document contains shorthand references to drafts in 
           progress.  Please apply the following replacements:
             <list  style="symbols">
               <t><spanx style="verb">XXXX</spanx> --&gt; the assigned RFC value for this draft</t>
-              <t><spanx style="verb">YYYY</spanx> --&gt; the assigned RFC value for draft-ietf-netconf-system-keychain</t>
+              <t><spanx style="verb">YYYY</spanx> --&gt; the assigned RFC value for draft-ietf-netconf-keystore</t>
             </list>
           </t>
           <t>Artwork in this document contains placeholder values for the date of 
@@ -144,8 +144,8 @@
         connection opened for it already (e.g., call home).</t>
 
         <t>Both of these groupings reference data nodes defined by the
-        System Keychain model <xref target="draft-ietf-netconf-system-keychain"/>.  For
-        instance, a reference to the keychain model is made to indicate
+        Keystore model <xref target="draft-ietf-netconf-keystore"/>.  For
+        instance, a reference to the keystore model is made to indicate
         which trusted CA certificate a client should use to authenticate
         the server's certificate.</t>
 
@@ -165,7 +165,7 @@ INSERT_TEXT_FROM_FILE(refs/ietf-tls-client-tree.txt)
           <t>This section shows how it would appear if the
           initiating-tls-client-grouping were populated with some data.
           This example is consistent with the examples presented in
-          Section 2.2 of <xref target="draft-ietf-netconf-system-keychain"/>.</t>
+          Section 2.2 of <xref target="draft-ietf-netconf-keystore"/>.</t>
           <t>
             <figure>
               <artwork><![CDATA[
@@ -177,7 +177,7 @@ INSERT_TEXT_FROM_FILE(refs/ex-tls-client.xml)
 
         <section title="YANG Model" anchor="tls-client-yang-module">
           <t>This YANG module has a normative references to
-          <xref target="RFC6991"/> and <xref target="draft-ietf-netconf-system-keychain"/>.</t>
+          <xref target="RFC6991"/> and <xref target="draft-ietf-netconf-keystore"/>.</t>
           <t>
             <figure>
               <artwork><![CDATA[
@@ -201,8 +201,8 @@ INSERT_TEXT_FROM_FILE(ietf-tls-client@YYYY-MM-DD.yang)
         connection opened for it already (e.g., inetd).</t>
 
         <t>Both of these groupings reference data nodes defined by the
-        System Keychain model <xref target="draft-ietf-netconf-system-keychain"/>.  
-        For instance, a reference to the keychain model is made to indicate
+        Keystore model <xref target="draft-ietf-netconf-keystore"/>.  
+        For instance, a reference to the keystore model is made to indicate
         the certificate a server should present.</t>
 
         <section title="Tree Diagram">
@@ -221,7 +221,7 @@ INSERT_TEXT_FROM_FILE(refs/ietf-tls-server-tree.txt)
           <t>This section shows how it would appear if the
           listening-tls-server-grouping were populated with some data.
           This example is consistent with the examples presented in
-          Section 2.2 of <xref target="draft-ietf-netconf-system-keychain"/>.</t>
+          Section 2.2 of <xref target="draft-ietf-netconf-keystore"/>.</t>
           <t>
             <figure>
               <artwork><![CDATA[
@@ -233,7 +233,7 @@ INSERT_TEXT_FROM_FILE(refs/ex-tls-server.xml)
 
         <section title="YANG Model" anchor="tls-server-yang-module">
           <t>This YANG module has a normative references to <xref target="RFC6991"/>,
-          and <xref target="draft-ietf-netconf-system-keychain"/>.</t>
+          and <xref target="draft-ietf-netconf-keystore"/>.</t>
           <t>
             <figure>
               <artwork><![CDATA[
@@ -364,15 +364,15 @@ I removed all the NACM statements in the new modules
         &rfc6991;
         &rfc7589;
 
-        <reference anchor='draft-ietf-netconf-system-keychain' target="https://datatracker.ietf.org/html/draft-ieft-netconf-system-keychain">
+        <reference anchor='draft-ietf-netconf-keystore' target="https://datatracker.ietf.org/html/draft-ieft-netconf-keystore">
           <front>
-            <title>System Keychain Model</title>
+            <title>Keystore Model</title>
             <author initials='K.W.' surname='Watsen' fullname='Kent Watsen'>
               <organization>Juniper Networks</organization>
             </author>
             <date year='2016' />
           </front>
-          <seriesInfo name='Internet-Draft' value='draft-ieft-netconf-system-keychain-00'/>
+          <seriesInfo name='Internet-Draft' value='draft-ieft-netconf-keystore-00'/>
         </reference>
       </references>
 

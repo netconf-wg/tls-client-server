@@ -10,10 +10,10 @@ module ietf-tls-server {
       "RFC 6991: Common YANG Data Types";
   }
 
-  import ietf-system-keychain {
-    prefix kc;
+  import ietf-keystore {
+    prefix ks;
     reference
-      "RFC YYYY: System Keychain Model";
+      "RFC YYYY: Keystore Model";
   }
 
   organization
@@ -81,12 +81,12 @@ module ietf-tls-server {
           "RFC 5246: The TLS Protocol, Section 7.4.2";
         leaf name {
           type leafref {
-            path "/kc:keychain/kc:private-keys/kc:private-key/"
-                 + "kc:certificate-chains/kc:certificate-chain/"
-                 + "kc:name";
+            path "/ks:keystore/ks:private-keys/ks:private-key/"
+                 + "ks:certificate-chains/ks:certificate-chain/"
+                 + "ks:name";
           }
           description
-            "The name of the certificate in the keychain.";
+            "The name of the certificate in the keystore.";
         }
       }
     }
@@ -98,7 +98,7 @@ module ietf-tls-server {
          certificates.";
       leaf trusted-ca-certs {
         type leafref {
-          path "/kc:keychain/kc:trusted-certificates/kc:name";
+          path "/ks:keystore/ks:trusted-certificates/ks:name";
         }
         description
           "A reference to a list of certificate authority (CA) 
@@ -108,7 +108,7 @@ module ietf-tls-server {
   
       leaf trusted-client-certs {
         type leafref {
-          path "/kc:keychain/kc:trusted-certificates/kc:name";
+          path "/ks:keystore/ks:trusted-certificates/ks:name";
         }
         description
           "A reference to a list of client certificates used by 
