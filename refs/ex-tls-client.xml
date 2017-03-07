@@ -1,1 +1,21 @@
-FIXME
+<!-- hypothetical example, as groupings don't have instance data -->
+<ssh-client xmlns="urn:ietf:params:xml:ns:yang:ietf-ssh-client">
+
+  <!-- which certificates will this client trust -->
+  <server-auth>
+    <trusted-ca-certs>
+      deployment-specific-ca-certs
+    </trusted-ca-certs>
+    <trusted-server-certs>
+      explicitly-trusted-client-certs
+    </trusted-server-certs>
+  </server-auth>
+
+  <!-- how this client will authenticate itself to the server -->
+  <client-auth>
+    <certificate>
+      builtin-idevid-cert
+    </certificate>
+  </client-auth>
+
+</ssh-client>

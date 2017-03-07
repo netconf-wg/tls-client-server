@@ -1,26 +1,15 @@
-// Editor's Note:
-// This module is incomplete at this time.  Below is
-// just a skeleton so there's something in the draft.
-// Please ignore this module for now!
-
 module ietf-tls-client {
   yang-version 1.1;
 
   namespace "urn:ietf:params:xml:ns:yang:ietf-tls-client";
   prefix "tlsc";
-/*
-  import ietf-inet-types {
-    prefix inet;
-    reference 
-      "RFC 6991: Common YANG Data Types";
-  }
 
   import ietf-keystore {
     prefix ks;
     reference
       "RFC YYYY: Keystore Model";
   }
-*/
+
   organization
    "IETF NETCONF (Network Configuration) Working Group";
 
@@ -28,13 +17,7 @@ module ietf-tls-client {
    "WG Web:   <http://tools.ietf.org/wg/netconf/>
     WG List:  <mailto:netconf@ietf.org>
 
-    WG Chair: Mehmet Ersue
-              <mailto:mehmet.ersue@nsn.com>
-
-    WG Chair: Mahesh Jethanandani
-              <mailto:mjethanandani@gmail.com>
-
-    Editor:   Kent Watsen
+    Author:   Kent Watsen
               <mailto:kwatsen@juniper.net>";
 
 
@@ -62,27 +45,58 @@ module ietf-tls-client {
      "RFC XXXX: TLS Client and Server Models";
   }
 
-  grouping initiating-tls-client-grouping {
+  grouping tls-client-grouping {
     description
-      "A reusable grouping for a TLS client that initiates the
-       underlying TCP transport connection.";
-    leaf some-TBD-tcp-client-stuff {
-      type string;
-      description "";
-    }     
-    uses non-initiating-tls-client-grouping;
-  }
+      "A reusable grouping for configuring a TLS client without
+       any consideration for how an underlying TCP session is
+       established.";
 
- grouping non-initiating-tls-client-grouping {
-    description
-      "A reusable grouping for a TLS client that does not initiate
-       the underlying TCP transport connection.";
-    leaf some-TBD-tls-client-stuff {
-      type string;
-      description "";
-    }   
-  }         
-  
+    container server-auth {
+      description
+        "Trusted server identities.";
+
+      leaf trusted-ca-certs {
+        type leafref {
+          path "/ks:keystore/ks:trusted-certificates/ks:name";
+        }
+        description
+          "A reference to a list of certificate authority (CA)
+           certificates used by the TLS client to authenticate
+           TLS server certificates.";
+      }
+
+      leaf trusted-server-certs {
+        type leafref {
+          path "/ks:keystore/ks:trusted-certificates/ks:name";
+        }
+        description
+          "A reference to a list of server certificates used by
+           the TLS client to authenticate TLS server certificates.
+           A server certificate is authenticated if it is an
+           exact match to a configured trusted server certificate.";
+      }
+    }
+
+    container client-auth {
+      description
+        "The credentials used by the client to authenticate to
+         the TLS server.";
+
+      choice auth-type {
+        description
+          "The authentication type.";
+        leaf certificate {
+          type leafref {
+            path "/keystore/keys/key/certificates/certificate/name";
+          }
+          description
+            "A certificates to be used for user authentication.";
+        }
+      }
+    }
+
+  } // end tls-client-grouping
+
 }
 
 

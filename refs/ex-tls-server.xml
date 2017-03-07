@@ -1,6 +1,7 @@
-<listening-tls-server
+<!-- hypothetical example, groupings don't have instance data -->
+
+<tls-server
   xmlns="urn:ietf:params:xml:ns:yang:ietf-tls-server">
-  <port>6513</port>
   <certificates>
     <certificate>
       <name>ex-key-sect571r1-cert</name>
@@ -14,4 +15,4 @@
       explicitly-trusted-client-certs
     </trusted-client-certs>
   </client-auth>
-</listening-tls-server>
+</tls-server>
