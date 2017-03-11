@@ -87,7 +87,7 @@ module ietf-tls-client {
           "The authentication type.";
         leaf certificate {
           type leafref {
-            path "/keystore/keys/key/certificates/certificate/name";
+            path "/ks:keystore/ks:keys/ks:key/ks:certificates/ks:certificate/ks:name";
           }
           description
             "A certificates to be used for user authentication.";

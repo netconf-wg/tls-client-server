@@ -4,15 +4,11 @@
   xmlns="urn:ietf:params:xml:ns:yang:ietf-tls-server">
   <certificates>
     <certificate>
-      <name>ex-key-sect571r1-cert</name>
+      <name>tls-ec-cert</name>
     </certificate>
   </certificates>
   <client-auth>
-    <trusted-ca-certs>
-      deployment-specific-ca-certs
-    </trusted-ca-certs>
-    <trusted-client-certs>
-      explicitly-trusted-client-certs
-    </trusted-client-certs>
+    <trusted-ca-certs>deployment-specific-ca-certs</trusted-ca-certs>
+    <trusted-client-certs>explicitly-trusted-client-certs</trusted-client-certs>
   </client-auth>
 </tls-server>
