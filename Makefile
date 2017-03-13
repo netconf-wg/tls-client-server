@@ -47,11 +47,12 @@ ifeq (org,$(draft_type))
 	-rm -f $(draft).xml
 endif
 
-$(next).xml: $(draft).xml ietf-tls-client.yang ietf-tls-server.yang
+$(next).xml: $(draft).xml ietf-tls-client.yang ietf-tls-server.yang ietf-tls-common.yang
 	sed -e"s/$(basename $<)-latest/$(basename $@)/" -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" $< > $@
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../keystore/ietf-keystore.yang > ietf-keystore\@$(shell date +%Y-%m-%d).yang
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ietf-tls-client.yang > ietf-tls-client\@$(shell date +%Y-%m-%d).yang
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ietf-tls-server.yang > ietf-tls-server\@$(shell date +%Y-%m-%d).yang
+	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ietf-tls-common.yang > ietf-tls-common\@$(shell date +%Y-%m-%d).yang
 	cd refs; ./validate-all.sh; ./gen-trees.sh; cd ..;
 	./.insert-figures.sh $@ > tmp; mv tmp $@
 	rm refs/*-tree.txt

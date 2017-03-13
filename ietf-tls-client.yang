@@ -4,6 +4,12 @@ module ietf-tls-client {
   namespace "urn:ietf:params:xml:ns:yang:ietf-tls-client";
   prefix "tlsc";
 
+  import ietf-tls-common {
+    prefix tlscom;
+    reference
+      "RFC XXXX: TLS Client and Server Models";
+  }
+
   import ietf-keystore {
     prefix ks;
     reference
@@ -43,6 +49,12 @@ module ietf-tls-client {
      "Initial version";
     reference
      "RFC XXXX: TLS Client and Server Models";
+  }
+
+  feature tls-client-hello-params-config {
+    description
+      "TLS hello message parameters are configurable on a TLS
+       client.";
   }
 
   grouping tls-client-grouping {
@@ -93,6 +105,13 @@ module ietf-tls-client {
             "A certificates to be used for user authentication.";
         }
       }
+    }
+
+    container hello-params {
+      if-feature tls-client-hello-params-config;
+      uses tlscom:hello-params-grouping;
+      description
+        "Configurable parameters for the TLS hello message.";
     }
 
   } // end tls-client-grouping

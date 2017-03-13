@@ -26,14 +26,22 @@
                 <email>kwatsen@juniper.net</email>
             </address>
         </author>
+        <author initials="G.W." surname="Wu" fullname="Gary Wu">
+            <organization>Cisco Systems</organization>
+            <address>
+                <email>garywu@cisco.com</email>
+            </address>
+        </author>
         <date/>
         <area>Operations</area>
         <workgroup>NETCONF Working Group</workgroup>
         <abstract>
-            <t>This document defines two YANG modules, one
-            defines a grouping for a generic TLS client and the other defines
-            a grouping for a generic TLS server.  It is intended that these
-            groupings will be used by applications using the TLS protocol.</t>
+            <t>This document defines three YANG modules: the first defines
+            groupings for a generic TLS client, the second defines groupings
+            for a generic TLS server, and the third defines common identities
+            and groupings used by both the client and the server.  It is
+            intended that these groupings will be used by applications using
+            the TLS protocol.</t>
         </abstract>
         <note title="Editorial Note (To be removed by RFC Editor)">
           <t>This draft contains many placeholder values that need to be replaced
@@ -73,16 +81,18 @@
 
         <section title="Introduction">
 
-            <t>This document defines two YANG <xref target="RFC7950"/> modules,
-            one defines a grouping for a generic TLS client and the other
-            defines a grouping for a generic TLS server (TLS is defined in
-            <xref target="RFC5246"/>).  It is intended that these groupings
-            will be used by applications using the TLS protocol.  For
-            instance, these groupings could be used to help define the data
-            model for an HTTPS <xref target="RFC2818"/> server or a
-            NETCONF over TLS <xref target="RFC7589"/> based server.</t>
+            <t>This document defines three YANG <xref target="RFC7950"/>
+            modules: the first defines a grouping for a generic TLS client, the
+            second defines a grouping for a generic TLS server, and the third
+            defines identities and groupings common to both the client and the
+            server (TLS is defined in <xref target="RFC5246"/>).  It is
+            intended that these groupings will be used by applications using
+            the TLS protocol.  For instance, these groupings could be used to
+            help define the data model for an HTTPS <xref target="RFC2818"/>
+            server or a NETCONF over TLS <xref target="RFC7589"/> based
+            server.</t>
 
-            <t>The two YANG modules in this document each define one grouping,
+            <t>The client and server YANG modules in this document each define one grouping,
             which is focused on just TLS-specific configuration, and specifically
             avoids any transport-level configuration, such as what ports to
             listen-on or connect-to.  This enables applications the opportunity
@@ -238,6 +248,68 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
         </section>
       </section>
 
+      <section title="The TLS Common Model" anchor="tls-common-model">
+
+        <t>The TLS common model presented in this section contains identities
+        and groupings common to both TLS clients and TLS servers.  The
+        hello-params-grouping can be used to configure the list of TLS
+        algorithms permitted by the TLS client or TLS server.  The lists of
+        algorithms are ordered such that, if multiple algorithms are permitted
+        by the client, the algorithm that appears first in its list that is
+        also permitted by the server is used for the TLS transport layer
+        connection.  The ability to restrict the the algorithms allowed is
+        provided in this grouping for TLS clients and TLS servers that are
+        capable of doing so and may serve to make TLS clients and TLS servers
+        compliant with security policies.</t>
+
+        <t>Features are defined for algorithms that are OPTIONAL or are not
+        widely supported by popular implementations.  Note that the list of
+        algorithms is not exhaustive.</t>
+
+        <section title="Tree Diagram">
+          <t>The following tree diagram presents the data model for
+          the grouping defined in the ietf-tls-common module.  Please
+          see <xref target="tree-diagrams"/> for tree diagram notation.</t>
+          <t>
+            <figure>
+              <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(refs/ietf-tls-common-tree.txt)
+]]></artwork>
+            </figure>
+          </t>
+        </section>
+
+        <section title="Example Usage">
+          <t>This section shows how it would appear if the
+          transport-params-grouping were populated with some data.</t>
+          <t>
+            <figure>
+              <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(refs/ex-tls-common.xml)
+]]></artwork>
+            </figure>
+          </t>
+        </section>
+
+        <section title="YANG Model" anchor="tls-common-yang-module">
+          <t>This YANG module has a normative references to <xref target="RFC4492"/>,
+          <xref target="RFC5246"/>, <xref target="RFC5288"/>,
+          and <xref target="RFC5289"/>.</t>
+          <t>
+            <figure>
+              <artwork><![CDATA[
+
+<CODE BEGINS> file "ietf-tls-common@YYYY-MM-DD.yang"
+
+INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
+
+<CODE ENDS>
+]]></artwork>
+            </figure>
+          </t>
+        </section>
+      </section>
+
       <section title="Security Considerations">
         <t>FIXME</t>
       </section>
@@ -256,6 +328,10 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
    XML: N/A, the requested URI is an XML namespace.
 
    URI: urn:ietf:params:xml:ns:yang:ietf-tls-server
+   Registrant Contact: The NETCONF WG of the IETF.
+   XML: N/A, the requested URI is an XML namespace.
+
+   URI: urn:ietf:params:xml:ns:yang:ietf-tls-common
    Registrant Contact: The NETCONF WG of the IETF.
    XML: N/A, the requested URI is an XML namespace.
 ]]></artwork>
@@ -280,6 +356,11 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
    namespace:    urn:ietf:params:xml:ns:yang:ietf-tls-server
    prefix:       tlss
    reference:    RFC XXXX
+
+   name:         ietf-tls-common
+   namespace:    urn:ietf:params:xml:ns:yang:ietf-tls-common
+   prefix:       tlss
+   reference:    RFC XXXX
 ]]></artwork>
             </figure>
           </t>
@@ -300,6 +381,10 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
     <back>
       <references title="Normative References">
         <?rfc include="reference.RFC.2119.xml"?>
+        <?rfc include="reference.RFC.4492.xml"?>
+        <?rfc include="reference.RFC.5246.xml"?>
+        <?rfc include="reference.RFC.5288.xml"?>
+        <?rfc include="reference.RFC.5289.xml"?>
         <?rfc include="reference.RFC.6991.xml"?>
         <?rfc include="reference.RFC.7589.xml"?>
         <?rfc include="reference.RFC.7950.xml"?>
@@ -317,20 +402,8 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
       </references>
 
       <references title="Informative References">
-        <reference anchor="RFC793" target="https://www.ietf.org/rfc/rfc793.txt">
-          <front>
-            <title>TRANSMISSION CONTROL PROTOCOL</title>
-            <author initials="J." surname="Postel" fullname="J. Postel">
-              <organization/>
-            </author>
-            <date year="1981" month="September"/>
-          </front>
-          <seriesInfo name="STD" value="7"/>
-        </reference>
-
         <?rfc include="reference.RFC.2818.xml"?>
         <?rfc include="reference.RFC.3688.xml"?>
-        <?rfc include="reference.RFC.5246.xml"?>
         <?rfc include="reference.RFC.8071.xml"?>
       </references>
 

@@ -4,6 +4,12 @@ module ietf-tls-server {
   namespace "urn:ietf:params:xml:ns:yang:ietf-tls-server";
   prefix "tlss";
 
+  import ietf-tls-common {
+    prefix tlscom;
+    reference
+      "RFC XXXX: TLS Client and Server Models";
+  }
+
   import ietf-keystore {
     prefix ks;
     reference
@@ -45,6 +51,11 @@ module ietf-tls-server {
      "RFC XXXX: TLS Client and Server Models";
   }
 
+  feature tls-server-hello-params-config {
+    description
+      "TLS hello message parameters are configurable on a TLS
+       server.";
+  }
 
   // grouping
   grouping tls-server-grouping {
@@ -104,6 +115,13 @@ module ietf-tls-server {
            A clients certificate is authenticated if it is an
            exact match to a configured trusted client certificate.";
       }
+    }
+
+    container hello-params {
+      if-feature tls-server-hello-params-config;
+      uses tlscom:hello-params-grouping;
+      description
+        "Configurable parameters for the TLS hello message.";
     }
 
   } // end tls-server-grouping

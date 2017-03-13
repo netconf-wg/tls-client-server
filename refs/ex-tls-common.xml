@@ -1,0 +1,14 @@
+<!-- hypothetical example, as groupings don't have instance data -->
+<hello-params xmlns="urn:ietf:params:xml:ns:yang:ietf-tls-common">
+
+  <tls-versions>
+    <tls-version>1.2</tls-version>
+  </tls-versions>
+  <cipher-suites>
+    <cipher-suite>ecdhe-rsa-with-3des-ede-cbc-sha</cipher-suite>
+    <cipher-suite>dhe-rsa-with-aes-128-cbc-sha</cipher-suite>
+    <cipher-suite>rsa-with-aes-128-cbc-sha</cipher-suite>
+    <cipher-suite>rsa-with-3des-ede-cbc-sha</cipher-suite>
+  </cipher-suites>
+
+</hello-params>
