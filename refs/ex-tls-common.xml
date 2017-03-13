@@ -2,7 +2,7 @@
 <hello-params xmlns="urn:ietf:params:xml:ns:yang:ietf-tls-common">
 
   <tls-versions>
-    <tls-version>1.2</tls-version>
+    <tls-version>tls-1.2</tls-version>
   </tls-versions>
   <cipher-suites>
     <cipher-suite>ecdhe-rsa-with-3des-ede-cbc-sha</cipher-suite>
