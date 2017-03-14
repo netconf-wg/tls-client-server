@@ -6,6 +6,7 @@ module ietf-tls-server {
 
   import ietf-tls-common {
     prefix tlscom;
+    revision-date YYYY-MM-DD; // stable grouping definitions
     reference
       "RFC XXXX: TLS Client and Server Models";
   }

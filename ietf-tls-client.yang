@@ -6,6 +6,7 @@ module ietf-tls-client {
 
   import ietf-tls-common {
     prefix tlscom;
+    revision-date YYYY-MM-DD; // stable grouping definitions
     reference
       "RFC XXXX: TLS Client and Server Models";
   }
@@ -99,7 +100,8 @@ module ietf-tls-client {
           "The authentication type.";
         leaf certificate {
           type leafref {
-            path "/ks:keystore/ks:keys/ks:key/ks:certificates/ks:certificate/ks:name";
+            path "/ks:keystore/ks:keys/ks:key/ks:certificates"
+                 + "/ks:certificate/ks:name";
           }
           description
             "A certificates to be used for user authentication.";
