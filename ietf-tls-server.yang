@@ -103,7 +103,9 @@ module ietf-tls-server {
         description
           "A reference to a list of certificate authority (CA) 
            certificates used by the TLS server to authenticate
-           TLS client certificates.";
+           TLS client certificates.  A client certificate is
+           authenticated if it has a valid chain of trust to
+           a configured trusted CA certificate.";
       }
       leaf trusted-client-certs {
         type leafref {

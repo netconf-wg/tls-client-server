@@ -476,6 +476,16 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
             </list>
           </t>
         </section>
+        <section title="03 to 04">
+          <t>
+            <list style="symbols">
+              <t>Added RFC 8174 to Requirements Language Section.</t>
+              <t>Enhanced description statement for ietf-tls-server's 
+                 "trusted-ca-certs" leaf.</t>
+
+            </list>
+          </t>
+        </section>
       </section>
     </back>
 </rfc>
