@@ -65,9 +65,9 @@ module ietf-tls-client {
        established.";
 
     container server-auth {
+      must 'trusted-ca-certs or trusted-server-certs';
       description
         "Trusted server identities.";
-
       leaf trusted-ca-certs {
         type leafref {
           path "/ks:keystore/ks:trusted-certificates/ks:name";
@@ -75,7 +75,9 @@ module ietf-tls-client {
         description
           "A reference to a list of certificate authority (CA)
            certificates used by the TLS client to authenticate
-           TLS server certificates.";
+           TLS server certificates.  A server certificate is
+           authenticated if it has a valid chain of trust to
+           a configured trusted CA certificate.";
       }
 
       leaf trusted-server-certs {

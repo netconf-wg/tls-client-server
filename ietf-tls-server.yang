@@ -68,7 +68,7 @@ module ietf-tls-server {
       description
         "The list of certificates the TLS server will present when
          establishing a TLS connection in its Certificate message,
-         as defined in Section 7.4.2 in RRC 5246.";
+         as defined in Section 7.4.2 in RFC 5246.";
       reference
         "RFC 5246:
            The Transport Layer Security (TLS) Protocol Version 1.2";
@@ -105,7 +105,6 @@ module ietf-tls-server {
            certificates used by the TLS server to authenticate
            TLS client certificates.";
       }
-  
       leaf trusted-client-certs {
         type leafref {
           path "/ks:keystore/ks:trusted-certificates/ks:name";
