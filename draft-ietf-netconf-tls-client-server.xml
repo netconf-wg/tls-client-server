@@ -292,8 +292,12 @@ INSERT_TEXT_FROM_FILE(refs/ex-tls-common.xml)
         </section>
 
         <section title="YANG Model" anchor="tls-common-yang-module">
-          <t>This YANG module has a normative references to <xref target="RFC4492"/>,
-          <xref target="RFC5246"/>, <xref target="RFC5288"/>,
+          <t>This YANG module has a normative references to
+          <xref target="RFC2246"/>,
+          <xref target="RFC4346"/>,
+          <xref target="RFC4492"/>,
+          <xref target="RFC5246"/>,
+          <xref target="RFC5288"/>,
           and <xref target="RFC5289"/>.</t>
           <t>
             <figure>
@@ -398,7 +402,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
 
    name:         ietf-tls-common
    namespace:    urn:ietf:params:xml:ns:yang:ietf-tls-common
-   prefix:       tlss
+   prefix:       tlscmn
    reference:    RFC XXXX
 ]]></artwork>
             </figure>
@@ -420,6 +424,8 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
     <back>
       <references title="Normative References">
         <?rfc include="reference.RFC.2119.xml"?>
+        <?rfc include="reference.RFC.2246.xml"?>
+        <?rfc include="reference.RFC.4346.xml"?>
         <?rfc include="reference.RFC.4492.xml"?>
         <?rfc include="reference.RFC.5246.xml"?>
         <?rfc include="reference.RFC.5288.xml"?>
@@ -482,7 +488,9 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
               <t>Added RFC 8174 to Requirements Language Section.</t>
               <t>Enhanced description statement for ietf-tls-server's 
                  "trusted-ca-certs" leaf.</t>
-
+              <t>Changed the YANG prefix for ietf-tls-common from
+                 'tlscom' to 'tlscmn'.</t>
+              <t>Added TLS protocol verions 1.0 and 1.1.</t>
             </list>
           </t>
         </section>

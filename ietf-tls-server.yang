@@ -5,7 +5,7 @@ module ietf-tls-server {
   prefix "tlss";
 
   import ietf-tls-common {
-    prefix tlscom;
+    prefix tlscmn;
     revision-date YYYY-MM-DD; // stable grouping definitions
     reference
       "RFC XXXX: TLS Client and Server Models";
@@ -121,7 +121,7 @@ module ietf-tls-server {
 
     container hello-params {
       if-feature tls-server-hello-params-config;
-      uses tlscom:hello-params-grouping;
+      uses tlscmn:hello-params-grouping;
       description
         "Configurable parameters for the TLS hello message.";
     }
@@ -129,5 +129,3 @@ module ietf-tls-server {
   } // end tls-server-grouping
 
 }
-
-
