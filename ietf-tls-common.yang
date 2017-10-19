@@ -2,7 +2,7 @@ module ietf-tls-common {
   yang-version 1.1;
 
   namespace "urn:ietf:params:xml:ns:yang:ietf-tls-common";
-  prefix "tlscom";
+  prefix "tlscmn";
 
   organization
    "IETF NETCONF (Network Configuration) Working Group";
@@ -43,6 +43,29 @@ module ietf-tls-common {
   }
 
   // features
+  feature tls-1_0 {
+    description
+      "TLS Protocol Version 1.0 is supported.";
+    reference
+      "RFC 2246: The TLS Protocol Version 1.0";
+  }
+
+  feature tls-1_1 {
+    description
+      "TLS Protocol Version 1.1 is supported.";
+    reference
+      "RFC 4346: The Transport Layer Security (TLS) Protocol
+                 Version 1.1";
+  }
+
+  feature tls-1_2 {
+    description
+      "TLS Protocol Version 1.2 is supported.";
+    reference
+      "RFC 5246: The Transport Layer Security (TLS) Protocol
+                 Version 1.2";
+  }
+
   feature tls-ecc {
     description
       "Elliptic Curve Cryptography (ECC) is supported for TLS.";
@@ -72,7 +95,8 @@ module ietf-tls-common {
       "The Galois/Counter Mode authenticated encryption mode is
        supported for TLS.";
     reference
-      "RFC 5288: AES Galois Counter Mode (GCM) Cipher Suites for TLS";
+      "RFC 5288: AES Galois Counter Mode (GCM) Cipher Suites for
+                 TLS";
   }
 
   feature tls-sha2 {
@@ -89,10 +113,30 @@ module ietf-tls-common {
       "Base identity used to identify TLS protocol versions.";
   }
 
+  identity tls-1.0 {
+    base tls-version-base;
+    if-feature tls-1_0;
+    description
+      "TLS Protocol Version 1.0.";
+    reference
+      "RFC 2246: The TLS Protocol Version 1.0";
+  }
+
+  identity tls-1.1 {
+    base tls-version-base;
+    if-feature tls-1_1;
+    description
+      "TLS Protocol Version 1.1.";
+    reference
+      "RFC 4346: The Transport Layer Security (TLS) Protocol
+                 Version 1.1";
+  }
+
   identity tls-1.2 {
     base tls-version-base;
+    if-feature tls-1_2;
     description
-      "TLS protocol version 1.2.";
+      "TLS Protocol Version 1.2.";
     reference
       "RFC 5246: The Transport Layer Security (TLS) Protocol
                  Version 1.2";
@@ -305,12 +349,11 @@ module ietf-tls-common {
 
   grouping hello-params-grouping {
     description
-      "A reusable grouping for TLS hello message parameters.  For
-       configurable parameters, a zero-element leaf-list indicates the
-       system default configuration for that parameter.";
+      "A reusable grouping for TLS hello message parameters.";
     reference
       "RFC 5246: The Transport Layer Security (TLS) Protocol
                  Version 1.2";
+
     container tls-versions {
       description
         "Parameters regarding TLS versions.";
@@ -319,7 +362,11 @@ module ietf-tls-common {
           base tls-version-base;
         }
         description
-          "Allowed TLS protocol versions.";
+          "Acceptable TLS protocol versions.
+
+           If this leaf-list is not configured (has zero elements)
+           the acceptable TLS protocol versions are implementation-
+           defined.";
       }
     }
     container cipher-suites {
@@ -331,8 +378,15 @@ module ietf-tls-common {
         }
         ordered-by user;
         description
-          "Cipher suites in order of descending preference.";
+          "Acceptable cipher suites in order of descending
+           preference.
+
+           If this leaf-list is not configured (has zero elements)
+           the acceptable cipher suites are implementation-
+           defined.";
       }
     }
-  }
+
+  } // end hello-params-grouping
+
 }

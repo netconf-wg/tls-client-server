@@ -1,9 +1,19 @@
-echo "Testing YANG module syntax..."
-pyang --ietf --max-line-length=70 -p ../ ../ietf-tls-client\@*.yang
-pyang --ietf --max-line-length=70 -p ../ ../ietf-tls-server\@*.yang
-pyang --ietf --max-line-length=70 -p ../ ../ietf-tls-common\@*.yang
+echo "Testing ietf-tls-client (pyang)..."
+pyang --ietf --max-line-length=69 -p ../ ../ietf-tls-client\@*.yang
+
+echo "Testing ietf-tls-client (yanglint)..."
 yanglint -p ../ ../ietf-tls-client\@*.yang
+
+echo "Testing ietf-tls-server (pyang)..."
+pyang --ietf --max-line-length=69 -p ../ ../ietf-tls-server\@*.yang
+
+echo "Testing ietf-tls-server (yanglint)..."
 yanglint -p ../ ../ietf-tls-server\@*.yang
+
+echo "Testing ietf-tls-common (pyang)..."
+pyang --ietf --max-line-length=69 -p ../ ../ietf-tls-common\@*.yang
+
+echo "Testing ietf-tls-common (yanglint)..."
 yanglint -p ../ ../ietf-tls-common\@*.yang
 
 

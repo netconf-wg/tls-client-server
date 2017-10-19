@@ -1,12 +1,16 @@
-<!-- hypothetical example, as groupings don't have instance data -->
 <tls-server xmlns="urn:ietf:params:xml:ns:yang:ietf-tls-server">
+
+  <!-- how this server will authenticate itself to the client -->
   <certificates>
     <certificate>
       <name>tls-ec-cert</name>
     </certificate>
   </certificates>
+
+  <!-- which certificates will this server trust -->
   <client-auth>
     <pinned-ca-certs>deployment-specific-ca-certs</pinned-ca-certs>
     <pinned-client-certs>explicitly-trusted-client-certs</pinned-client-certs>
   </client-auth>
+
 </tls-server>
