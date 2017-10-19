@@ -39,7 +39,7 @@ module ietf-tls-common {
     description
      "Initial version";
     reference
-     "RFC XXXX: TLS Client and Server Models";
+     "RFC XXXX: YANG Groupings for TLS Clients and TLS Servers";
   }
 
   // features
@@ -302,6 +302,7 @@ module ietf-tls-common {
   }
 
   // groupings
+
   grouping hello-params-grouping {
     description
       "A reusable grouping for TLS hello message parameters.  For

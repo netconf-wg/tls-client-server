@@ -8,7 +8,7 @@ module ietf-tls-client {
     prefix tlscom;
     revision-date YYYY-MM-DD; // stable grouping definitions
     reference
-      "RFC XXXX: TLS Client and Server Models";
+      "RFC XXXX: YANG Groupings for TLS Clients and TLS Servers";
   }
 
   import ietf-keystore {
@@ -25,14 +25,17 @@ module ietf-tls-client {
     WG List:  <mailto:netconf@ietf.org>
 
     Author:   Kent Watsen
-              <mailto:kwatsen@juniper.net>";
+              <mailto:kwatsen@juniper.net>
+
+    Author:   Gary Wu
+              <mailto:garywu@cisco.com>";
 
 
   description
    "This module defines a reusable grouping for a TLS client that
     can be used as a basis for specific TLS client instances.
 
-    Copyright (c) 2014 IETF Trust and the persons identified as
+    Copyright (c) 2017 IETF Trust and the persons identified as
     authors of the code. All rights reserved.
 
     Redistribution and use in source and binary forms, with or
@@ -49,7 +52,7 @@ module ietf-tls-client {
     description
      "Initial version";
     reference
-     "RFC XXXX: TLS Client and Server Models";
+     "RFC XXXX: YANG Groupings for TLS Clients and TLS Servers";
   }
 
   feature tls-client-hello-params-config {
@@ -63,34 +66,6 @@ module ietf-tls-client {
       "A reusable grouping for configuring a TLS client without
        any consideration for how an underlying TCP session is
        established.";
-
-    container server-auth {
-      must 'trusted-ca-certs or trusted-server-certs';
-      description
-        "Trusted server identities.";
-      leaf trusted-ca-certs {
-        type leafref {
-          path "/ks:keystore/ks:trusted-certificates/ks:name";
-        }
-        description
-          "A reference to a list of certificate authority (CA)
-           certificates used by the TLS client to authenticate
-           TLS server certificates.  A server certificate is
-           authenticated if it has a valid chain of trust to
-           a configured trusted CA certificate.";
-      }
-
-      leaf trusted-server-certs {
-        type leafref {
-          path "/ks:keystore/ks:trusted-certificates/ks:name";
-        }
-        description
-          "A reference to a list of server certificates used by
-           the TLS client to authenticate TLS server certificates.
-           A server certificate is authenticated if it is an
-           exact match to a configured trusted server certificate.";
-      }
-    }
 
     container client-auth {
       description
@@ -111,6 +86,34 @@ module ietf-tls-client {
       }
     }
 
+    container server-auth {
+      must 'pinned-ca-certs or pinned-server-certs';
+      description
+        "Trusted server identities.";
+      leaf pinned-ca-certs {
+        type leafref {
+          path "/ks:keystore/ks:pinned-certificates/ks:name";
+        }
+        description
+          "A reference to a list of certificate authority (CA)
+           certificates used by the TLS client to authenticate
+           TLS server certificates.  A server certificate is
+           authenticated if it has a valid chain of trust to
+           a configured pinned CA certificate.";
+      }
+
+      leaf pinned-server-certs {
+        type leafref {
+          path "/ks:keystore/ks:pinned-certificates/ks:name";
+        }
+        description
+          "A reference to a list of server certificates used by
+           the TLS client to authenticate TLS server certificates.
+           A server certificate is authenticated if it is an
+           exact match to a configured pinned server certificate.";
+      }
+    }
+
     container hello-params {
       if-feature tls-client-hello-params-config;
       uses tlscom:hello-params-grouping;
@@ -121,5 +124,3 @@ module ietf-tls-client {
   } // end tls-client-grouping
 
 }
-
-

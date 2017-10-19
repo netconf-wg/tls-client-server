@@ -19,7 +19,7 @@
      ipr="trust200902"
      docName="draft-ietf-netconf-tls-client-server-latest" >
     <front>
-        <title>TLS Client and Server Models</title>
+        <title>YANG Groupings for TLS Clients and TLS Servers</title>
         <author initials="K.W." surname="Watsen" fullname="Kent Watsen">
             <organization>Juniper Networks</organization>
             <address>
@@ -136,7 +136,7 @@
       <section title="The TLS Client Model" anchor="tls-client-model">
 
        <t>The TLS client model presented in this section contains one
-        YANG grouping, to just configure the TLS client omitting, for
+        YANG grouping, to just configure the TLS client, omitting, for
         instance, any configuration for which IP address or port the
         client should connect to.</t>
 
@@ -179,11 +179,8 @@ INSERT_TEXT_FROM_FILE(refs/ex-tls-client.xml)
           <t>
             <figure>
               <artwork><![CDATA[
-
 <CODE BEGINS> file "ietf-tls-client@YYYY-MM-DD.yang"
-
 INSERT_TEXT_FROM_FILE(ietf-tls-client@YYYY-MM-DD.yang)
-
 <CODE ENDS>
 ]]></artwork>
             </figure>
@@ -194,7 +191,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-client@YYYY-MM-DD.yang)
       <section title="The TLS Server Model" anchor="tls-server-model">
 
         <t>The TLS server model presented in this section contains one
-        YANG grouping, for just the TLS-level configuration omitting,
+        YANG grouping, for just the TLS-level configuration, omitting,
         for instance, configuration for which ports to open to listen
         for connections on.</t>
 
@@ -236,11 +233,8 @@ INSERT_TEXT_FROM_FILE(refs/ex-tls-server.xml)
           <t>
             <figure>
               <artwork><![CDATA[
-
 <CODE BEGINS> file "ietf-tls-server@YYYY-MM-DD.yang"
-
 INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
-
 <CODE ENDS>
 ]]></artwork>
             </figure>
@@ -298,11 +292,8 @@ INSERT_TEXT_FROM_FILE(refs/ex-tls-common.xml)
           <t>
             <figure>
               <artwork><![CDATA[
-
 <CODE BEGINS> file "ietf-tls-common@YYYY-MM-DD.yang"
-
 INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
-
 <CODE ENDS>
 ]]></artwork>
             </figure>
@@ -311,7 +302,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
       </section>
 
       <section title="Security Considerations">
-        <t>The YANG module defined in this document is designed to be accessed via YANG
+        <t>The YANG modules defined in this document are designed to be accessed via YANG
         based management protocols, such as NETCONF <xref target="RFC6241"/> and
         RESTCONF <xref target="RFC8040"/>.  Both of these protocols have mandatory-to-implement
         secure transport layers (e.g., SSH, TLS) with mutual authentication.</t>
@@ -320,22 +311,27 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
         to restrict access for particular users to a pre-configured subset of all available
         protocol operations and content.</t>
 
-        <t>There are a number of data nodes defined in this YANG module that are
+        <t>Since the modules defined in this document only define groupings, these
+        considerations are primarily for the designers of other modules that use
+        these groupings.</t>
+
+        <t>There are a number of data nodes defined in the YANG modules that are
         writable/creatable/deletable (i.e., config true, which is the default). These data
         nodes may be considered sensitive or vulnerable in some network environments. Write
         operations (e.g., edit-config) to these data nodes without proper protection can
         have a negative effect on network operations. These are the subtrees and data nodes
         and their sensitivity/vulnerability:
           <list style="hanging" hangIndent="6">
-            <t hangText="   /:">The entire data tree defined by this module is sensitive to
-              write operations.  For instance, the addition or removal of references to
-              keys, certificates, trusted anchors, etc., can dramatically alter the 
-              implemented security policy.  However, no NACM annotations are applied as
-              the data SHOULD be editable by users other than a designated 'recovery session'.</t>
+            <t hangText="   /:">The entire data tree of all the groupings defined in
+              this draft is sensitive to write operations.  For instance, the addition or
+              removal of references to keys, certificates, trusted anchors, etc., can 
+              dramatically alter the implemented security policy.  However, no NACM 
+              annotations are applied as the data SHOULD be editable by users other than 
+              a designated 'recovery session'.</t>
           </list>
         </t>
 
-        <t>Some of the readable data nodes in this YANG module may be considered sensitive
+        <t>Some of the readable data nodes in the YANG modules may be considered sensitive
         or vulnerable in some network environments. It is thus important to control read
         access (e.g., via get, get-config, or notification) to these data nodes. These are
         the subtrees and data nodes and their sensitivity/vulnerability:
@@ -479,10 +475,9 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
         <section title="03 to 04">
           <t>
             <list style="symbols">
-              <t>Added RFC 8174 to Requirements Language Section.</t>
-              <t>Enhanced description statement for ietf-tls-server's 
-                 "trusted-ca-certs" leaf.</t>
-
+              <t>Updated title to "YANG Groupings for TLS Clients and TLS Servers"</t>
+              <t>Updated leafref paths to point to new keystore path</t>
+              <t>Made author lists consistent</t>
             </list>
           </t>
         </section>
