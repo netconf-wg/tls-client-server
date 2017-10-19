@@ -1,15 +1,15 @@
 <!-- hypothetical example, as groupings don't have instance data -->
 <tls-client xmlns="urn:ietf:params:xml:ns:yang:ietf-tls-client">
 
-  <!-- which certificates will this client trust -->
-  <server-auth>
-    <trusted-ca-certs>deployment-specific-ca-certs</trusted-ca-certs>
-    <trusted-server-certs>explicitly-trusted-client-certs</trusted-server-certs>
-  </server-auth>
-
   <!-- how this client will authenticate itself to the server -->
   <client-auth>
     <certificate>builtin-idevid-cert</certificate>
   </client-auth>
+
+  <!-- which certificates will this client trust -->
+  <server-auth>
+    <pinned-ca-certs>deployment-specific-ca-certs</pinned-ca-certs>
+    <pinned-server-certs>explicitly-trusted-client-certs</pinned-server-certs>
+  </server-auth>
 
 </tls-client>
