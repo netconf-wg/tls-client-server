@@ -55,6 +55,8 @@ module ietf-tls-server {
      "RFC XXXX: YANG Groupings for TLS Clients and TLS Servers";
   }
 
+  // features
+
   feature tls-server-hello-params-config {
     description
       "TLS hello message parameters are configurable on a TLS
@@ -70,7 +72,7 @@ module ietf-tls-server {
        any consideration for how underlying TCP sessions are
        established.";
 
-    container certificates {
+    container server-identity {
       description
         "The list of certificates the TLS server will present when
          establishing a TLS connection in its Certificate message,
@@ -78,23 +80,8 @@ module ietf-tls-server {
       reference
         "RFC 5246:
            The Transport Layer Security (TLS) Protocol Version 1.2";
-      list certificate {
-        key name;
-        min-elements 1;
-        description
-          "An unordered list of certificates the TLS server can pick 
-           from when sending its Server Certificate message.";
-        reference
-          "RFC 5246: The TLS Protocol, Section 7.4.2";
-        leaf name {
-          type leafref {
-            path "/ks:keystore/ks:keys/ks:key/ks:certificates/"
-                 + "ks:certificate/ks:name";
-          }
-          description
-            "The name of the certificate in the keystore.";
-        }
-      }
+      uses ks:private-key-grouping;
+      uses ks:certificate-grouping;
     }
 
     container client-auth {
@@ -103,9 +90,7 @@ module ietf-tls-server {
          certificates and a reference to a list of pinned client
          certificates.";
       leaf pinned-ca-certs {
-        type leafref {
-          path "/ks:keystore/ks:pinned-certificates/ks:name";
-        }
+        type ks:pinned-certificates;
         description
           "A reference to a list of certificate authority (CA) 
            certificates used by the TLS server to authenticate
@@ -114,9 +99,7 @@ module ietf-tls-server {
            a configured pinned CA certificate.";
       }
       leaf pinned-client-certs {
-        type leafref {
-          path "/ks:keystore/ks:pinned-certificates/ks:name";
-        }
+        type ks:pinned-certificates;
         description
           "A reference to a list of client certificates used by 
            the TLS server to authenticate TLS client certificates.

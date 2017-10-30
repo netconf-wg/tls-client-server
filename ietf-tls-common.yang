@@ -43,6 +43,7 @@ module ietf-tls-common {
   }
 
   // features
+
   feature tls-1_0 {
     description
       "TLS Protocol Version 1.0 is supported.";
@@ -108,6 +109,7 @@ module ietf-tls-common {
   }
 
   // identities
+
   identity tls-version-base {
     description
       "Base identity used to identify TLS protocol versions.";

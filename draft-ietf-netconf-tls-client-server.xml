@@ -78,60 +78,36 @@
     </front>
     <middle>
 
-        <section title="Introduction">
+      <section title="Introduction">
+        <t>This document defines three YANG <xref target="RFC7950"/>
+        modules: the first defines a grouping for a generic TLS client, the
+        second defines a grouping for a generic TLS server, and the third
+        defines identities and groupings common to both the client and the
+        server (TLS is defined in <xref target="RFC5246"/>).  It is
+        intended that these groupings will be used by applications using
+        the TLS protocol.  For instance, these groupings could be used to
+        help define the data model for an HTTPS <xref target="RFC2818"/>
+        server or a NETCONF over TLS <xref target="RFC7589"/> based
+        server.</t>
 
-            <t>This document defines three YANG <xref target="RFC7950"/>
-            modules: the first defines a grouping for a generic TLS client, the
-            second defines a grouping for a generic TLS server, and the third
-            defines identities and groupings common to both the client and the
-            server (TLS is defined in <xref target="RFC5246"/>).  It is
-            intended that these groupings will be used by applications using
-            the TLS protocol.  For instance, these groupings could be used to
-            help define the data model for an HTTPS <xref target="RFC2818"/>
-            server or a NETCONF over TLS <xref target="RFC7589"/> based
-            server.</t>
+        <t>The client and server YANG modules in this document each define one grouping,
+        which is focused on just TLS-specific configuration, and specifically
+        avoids any transport-level configuration, such as what ports to
+        listen-on or connect-to.  This enables applications the opportunity
+        to define their own strategy for how the underlying TCP connection
+        is established.  For instance, applications supporting NETCONF Call
+        Home <xref target="RFC8071"/> could use the grouping for the TLS
+        parts it provides, while adding data nodes for the TCP-level call-home
+        configuration.</t>
+      </section>
 
-            <t>The client and server YANG modules in this document each define one grouping,
-            which is focused on just TLS-specific configuration, and specifically
-            avoids any transport-level configuration, such as what ports to
-            listen-on or connect-to.  This enables applications the opportunity
-            to define their own strategy for how the underlying TCP connection
-            is established.  For instance, applications supporting NETCONF Call
-            Home <xref target="RFC8071"/> could use the grouping for the TLS
-            parts it provides, while adding data nodes for the TCP-level call-home
-            configuration.</t>
-
-            <section title="Terminology">
-             <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
-             NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
-             "MAY", and "OPTIONAL" in this document are to be interpreted as
-             described in BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/>
-             when, and only when, they appear in all capitals, as shown here.</t>
-            </section>
-
-            <section title="Tree Diagrams" anchor="tree-diagrams">
-            <t>A simplified graphical representation of the data models
-            is used in this document.  The meaning of the symbols in
-            these diagrams is as follows:
-              <list style="symbols">
-                <t>Brackets "[" and "]" enclose list keys.</t>
-                <t>Braces "{" and "}" enclose feature names, and indicate
-                that the named feature must be present for the subtree
-                to be present.</t>
-                <t>Abbreviations before data node names: "rw" means
-                configuration (read-write) and "ro" state data 
-                (read-only).</t>
-                <t>Symbols after data node names: "?" means an optional
-                node, "!" means a presence container, and "*" denotes a
-                list and leaf-list.</t>
-                <t>Parentheses enclose choice and case nodes, and case
-                nodes are also marked with a colon (":").</t>
-                <t>Ellipsis ("...") stands for contents of subtrees that
-                are not shown.</t>
-              </list>
-            </t>
-            </section>
-        </section>
+      <section title="Terminology">
+       <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
+       NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
+       "MAY", and "OPTIONAL" in this document are to be interpreted as
+       described in BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/>
+       when, and only when, they appear in all capitals, as shown here.</t>
+      </section>
 
       <section title="The TLS Client Model" anchor="tls-client-model">
 
@@ -147,9 +123,8 @@
         the server's certificate.</t>
 
         <section title="Tree Diagram">
-          <t>The following tree diagram presents the data model for
-          the grouping defined in the ietf-tls-client module.  Please
-          see <xref target="tree-diagrams"/> for tree diagram notation.</t>
+          <t>The following tree diagram <xref target="I-D.ietf-netmod-yang-tree-diagrams"/>
+          provides an overview of the data model for the "ietf-tls-client" module.</t>
           <t>
             <figure>
               <artwork><![CDATA[
@@ -167,13 +142,13 @@ INSERT_TEXT_FROM_FILE(refs/ietf-tls-client-tree.txt)
           <t>
             <figure>
               <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(refs/ex-tls-client.xml)
+INSERT_TEXT_FROM_FILE(refs/ex-tls-client.xml,69)
 ]]></artwork>
             </figure>
           </t>
         </section>
 
-        <section title="YANG Model" anchor="tls-client-yang-module">
+        <section title="YANG Module" anchor="tls-client-yang-module">
           <t>This YANG module has a normative references to
           <xref target="RFC6991"/> and <xref target="I-D.ietf-netconf-keystore"/>.</t>
           <t>
@@ -201,9 +176,8 @@ INSERT_TEXT_FROM_FILE(ietf-tls-client@YYYY-MM-DD.yang)
         which certificate a server should present.</t>
 
         <section title="Tree Diagram">
-          <t>The following tree diagram presents the data model for
-          the grouping defined in the ietf-tls-server module. Please
-          see <xref target="tree-diagrams"/> for tree diagram notation.</t>
+          <t>The following tree diagram <xref target="I-D.ietf-netmod-yang-tree-diagrams"/>
+          provides an overview of the data model for the "ietf-tls-server" module.</t>
           <t>
             <figure>
               <artwork><![CDATA[
@@ -221,13 +195,13 @@ INSERT_TEXT_FROM_FILE(refs/ietf-tls-server-tree.txt)
           <t>
             <figure>
               <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(refs/ex-tls-server.xml)
+INSERT_TEXT_FROM_FILE(refs/ex-tls-server.xml,69)
 ]]></artwork>
             </figure>
           </t>
         </section>
 
-        <section title="YANG Model" anchor="tls-server-yang-module">
+        <section title="YANG Module" anchor="tls-server-yang-module">
           <t>This YANG module has a normative references to <xref target="RFC6991"/>,
           and <xref target="I-D.ietf-netconf-keystore"/>.</t>
           <t>
@@ -261,9 +235,8 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
         algorithms is not exhaustive.</t>
 
         <section title="Tree Diagram">
-          <t>The following tree diagram presents the data model for
-          the grouping defined in the ietf-tls-common module.  Please
-          see <xref target="tree-diagrams"/> for tree diagram notation.</t>
+          <t>The following tree diagram <xref target="I-D.ietf-netmod-yang-tree-diagrams"/>
+          provides an overview of the data model for the "ietf-tls-common" module.</t>
           <t>
             <figure>
               <artwork><![CDATA[
@@ -285,7 +258,7 @@ INSERT_TEXT_FROM_FILE(refs/ex-tls-common.xml)
           </t>
         </section>
 
-        <section title="YANG Model" anchor="tls-common-yang-module">
+        <section title="YANG Module" anchor="tls-common-yang-module">
           <t>This YANG module has a normative references to
           <xref target="RFC2246"/>,
           <xref target="RFC4346"/>,
@@ -440,20 +413,14 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
         <?rfc include="reference.RFC.6241.xml"?>
         <?rfc include="reference.RFC.8040.xml"?>
         <?rfc include="reference.RFC.8071.xml"?>
+        <?rfc include="reference.I-D.ietf-netmod-yang-tree-diagrams"?>
       </references>
 
       <section title="Change Log">
-        <section title="server-model-09 to 00">
-          <t>
-            <list style="symbols">
-              <t>This draft was split out from draft-ietf-netconf-server-model-09.</t>
-              <t>Noted that '0.0.0.0' and '::' might have special meanings.</t>
-            </list>
-          </t>
-        </section>
         <section title="00 to 01">
           <t>
             <list style="symbols">
+              <t>Noted that '0.0.0.0' and '::' might have special meanings.</t>
               <t>Renamed "keychain" to "keystore".</t>
             </list>
           </t>
@@ -486,6 +453,9 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
               <t>Changed the YANG prefix for ietf-tls-common from 'tlscom' to 'tlscmn'.</t>
               <t>Added TLS protocol verions 1.0 and 1.1.</t>
               <t>Made author lists consistent</t>
+              <t>Now tree diagrams reference ietf-netmod-yang-tree-diagrams</t>
+              <t>Updated YANG to use typedefs around leafrefs to common keystore paths</t>
+              <t>Now inlines key and certificates (no longer a leafref to keystore)</t>
             </list>
           </t>
         </section>

@@ -55,11 +55,15 @@ module ietf-tls-client {
      "RFC XXXX: YANG Groupings for TLS Clients and TLS Servers";
   }
 
+  // features
+
   feature tls-client-hello-params-config {
     description
       "TLS hello message parameters are configurable on a TLS
        client.";
   }
+
+  // groupings
 
   grouping tls-client-grouping {
     description
@@ -67,7 +71,7 @@ module ietf-tls-client {
        any consideration for how an underlying TCP session is
        established.";
 
-    container client-auth {
+    container client-identity {
       description
         "The credentials used by the client to authenticate to
          the TLS server.";
@@ -75,14 +79,12 @@ module ietf-tls-client {
       choice auth-type {
         description
           "The authentication type.";
-        leaf certificate {
-          type leafref {
-            path "/ks:keystore/ks:keys/ks:key/ks:certificates"
-                 + "/ks:certificate/ks:name";
-          }
+        container certificate {
+          uses ks:private-key-grouping;
+          uses ks:certificate-grouping; 
           description
-            "A certificates to be used for user authentication.";
-        }
+            "Choice statement for future augmentations.";
+        }   
       }
     }
 
@@ -91,9 +93,7 @@ module ietf-tls-client {
       description
         "Trusted server identities.";
       leaf pinned-ca-certs {
-        type leafref {
-          path "/ks:keystore/ks:pinned-certificates/ks:name";
-        }
+        type ks:pinned-certificates;
         description
           "A reference to a list of certificate authority (CA)
            certificates used by the TLS client to authenticate
@@ -103,9 +103,7 @@ module ietf-tls-client {
       }
 
       leaf pinned-server-certs {
-        type leafref {
-          path "/ks:keystore/ks:pinned-certificates/ks:name";
-        }
+        type ks:pinned-certificates;
         description
           "A reference to a list of server certificates used by
            the TLS client to authenticate TLS server certificates.
