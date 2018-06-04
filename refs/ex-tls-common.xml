@@ -1,4 +1,3 @@
-<!-- hypothetical example, as groupings don't have instance data -->
 <hello-params
    xmlns="urn:ietf:params:xml:ns:yang:ietf-tls-common"
    xmlns:tlscmn="urn:ietf:params:xml:ns:yang:ietf-tls-common">

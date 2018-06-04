@@ -11,17 +11,23 @@ module ietf-tls-client {
       "RFC XXXX: YANG Groupings for TLS Clients and TLS Servers";
   }
 
+  import ietf-trust-anchors {
+    prefix ta;
+    reference
+      "RFC YYYY: YANG Data Model for Global Trust Anchors";
+  }
+
   import ietf-keystore {
     prefix ks;
     reference
-      "RFC YYYY: Keystore Model";
+      "RFC ZZZZ: YANG Data Model for a 'Keystore' Mechanism";
   }
 
   organization
    "IETF NETCONF (Network Configuration) Working Group";
 
   contact
-   "WG Web:   <http://tools.ietf.org/wg/netconf/>
+   "WG Web:   <http://datatracker.ietf.org/wg/netconf/>
     WG List:  <mailto:netconf@ietf.org>
 
     Author:   Kent Watsen
@@ -35,7 +41,7 @@ module ietf-tls-client {
    "This module defines a reusable grouping for a TLS client that
     can be used as a basis for specific TLS client instances.
 
-    Copyright (c) 2017 IETF Trust and the persons identified as
+    Copyright (c) 2018 IETF Trust and the persons identified as
     authors of the code. All rights reserved.
 
     Redistribution and use in source and binary forms, with or
@@ -80,20 +86,22 @@ module ietf-tls-client {
         description
           "The authentication type.";
         container certificate {
-          uses ks:private-key-grouping;
-          uses ks:certificate-grouping; 
+          uses ks:local-or-keystore-end-entity-certificate-grouping;
           description
-            "Choice statement for future augmentations.";
-        }   
+            "A locally-defined or referenced certificate
+             to be used for client authentication.";
+          reference
+            "RFC ZZZZ: YANG Data Model for a 'Keystore' Mechanism";
+        }
       }
-    }
+    } // end client-identity
 
     container server-auth {
       must 'pinned-ca-certs or pinned-server-certs';
       description
         "Trusted server identities.";
       leaf pinned-ca-certs {
-        type ks:pinned-certificates;
+        type ta:pinned-certificates-ref;
         description
           "A reference to a list of certificate authority (CA)
            certificates used by the TLS client to authenticate
@@ -103,7 +111,7 @@ module ietf-tls-client {
       }
 
       leaf pinned-server-certs {
-        type ks:pinned-certificates;
+        type ta:pinned-certificates-ref;
         description
           "A reference to a list of server certificates used by
            the TLS client to authenticate TLS server certificates.

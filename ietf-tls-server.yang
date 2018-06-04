@@ -11,17 +11,23 @@ module ietf-tls-server {
       "RFC XXXX: YANG Groupings for TLS Clients and TLS Servers";
   }
 
+  import ietf-trust-anchors {
+    prefix ta;
+    reference
+      "RFC YYYY: YANG Data Model for Global Trust Anchors";
+  }
+
   import ietf-keystore {
     prefix ks;
     reference
-      "RFC YYYY: Keystore Model";
+      "RFC ZZZZ: YANG Data Model for a 'Keystore' Mechanism";
   }
 
   organization
    "IETF NETCONF (Network Configuration) Working Group";
 
   contact
-   "WG Web:   <http://tools.ietf.org/wg/netconf/>
+   "WG Web:   <http://datatracker.ietf.org/wg/netconf/>
     WG List:  <mailto:netconf@ietf.org>
 
     Author:   Kent Watsen
@@ -35,7 +41,7 @@ module ietf-tls-server {
    "This module defines a reusable grouping for a TLS server that
     can be used as a basis for specific TLS server instances.
 
-    Copyright (c) 2017 IETF Trust and the persons identified as
+    Copyright (c) 2018 IETF Trust and the persons identified as
     authors of the code. All rights reserved.
 
     Redistribution and use in source and binary forms, with or
@@ -74,14 +80,17 @@ module ietf-tls-server {
 
     container server-identity {
       description
-        "The list of certificates the TLS server will present when
-         establishing a TLS connection in its Certificate message,
-         as defined in Section 7.4.2 in RFC 5246.";
+        "A locally-defined or referenced end-entity certificate,
+         including any configured intermediate certificates, the
+         TLS server will present when establishing a TLS connection
+         in its Certificate message, as defined in Section 7.4.2
+         in RFC 5246.";
       reference
         "RFC 5246:
-           The Transport Layer Security (TLS) Protocol Version 1.2";
-      uses ks:private-key-grouping;
-      uses ks:certificate-grouping;
+           The Transport Layer Security (TLS) Protocol Version 1.2
+         RFC ZZZZ:
+           YANG Data Model for a 'Keystore' Mechanism";
+      uses ks:local-or-keystore-end-entity-certificate-grouping;
     }
 
     container client-auth {
@@ -90,21 +99,25 @@ module ietf-tls-server {
          certificates and a reference to a list of pinned client
          certificates.";
       leaf pinned-ca-certs {
-        type ks:pinned-certificates;
+        type ta:pinned-certificates-ref;
         description
           "A reference to a list of certificate authority (CA) 
            certificates used by the TLS server to authenticate
            TLS client certificates.  A client certificate is
            authenticated if it has a valid chain of trust to
            a configured pinned CA certificate.";
+        reference
+          "RFC YYYY: YANG Data Model for Global Trust Anchors";
       }
       leaf pinned-client-certs {
-        type ks:pinned-certificates;
+        type ta:pinned-certificates-ref;
         description
           "A reference to a list of client certificates used by 
            the TLS server to authenticate TLS client certificates.
            A clients certificate is authenticated if it is an
            exact match to a configured pinned client certificate.";
+        reference
+          "RFC YYYY: YANG Data Model for Global Trust Anchors";
       }
     }
 

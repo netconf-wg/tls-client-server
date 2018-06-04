@@ -19,7 +19,7 @@
      ipr="trust200902"
      docName="draft-ietf-netconf-tls-client-server-latest" >
     <front>
-        <title>YANG Groupings for TLS Clients and TLS Servers</title>
+        <title abbrev="Groupings for TLS Clients and Servers">YANG Groupings for TLS Clients and TLS Servers</title>
         <author initials="K.W." surname="Watsen" fullname="Kent Watsen">
             <organization>Juniper Networks</organization>
             <address>
@@ -53,6 +53,7 @@
           the Normative References section, as well as in body text throughout.  
           Please update the following references to reflect their final RFC assignments:
             <list style="symbols">
+              <t>I-D.ietf-netconf-trust-anchors</t>
               <t>I-D.ietf-netconf-keystore</t>
             </list>
           </t>
@@ -60,7 +61,8 @@
           progress.  Please apply the following replacements:
             <list  style="symbols">
               <t><spanx style="verb">XXXX</spanx> --&gt; the assigned RFC value for this draft</t>
-              <t><spanx style="verb">YYYY</spanx> --&gt; the assigned RFC value for I-D.ietf-netconf-keystore</t>
+              <t><spanx style="verb">YYYY</spanx> --&gt; the assigned RFC value for I-D.ietf-netconf-trust-anchors</t>
+              <t><spanx style="verb">ZZZZ</spanx> --&gt; the assigned RFC value for I-D.ietf-netconf-keystore</t>
             </list>
           </t>
           <t>Artwork in this document contains placeholder values for the date of 
@@ -79,7 +81,7 @@
     <middle>
 
       <section title="Introduction">
-        <t>This document defines three YANG <xref target="RFC7950"/>
+        <t>This document defines three YANG 1.1 <xref target="RFC7950"/>
         modules: the first defines a grouping for a generic TLS client, the
         second defines a grouping for a generic TLS server, and the third
         defines identities and groupings common to both the client and the
@@ -93,12 +95,19 @@
         <t>The client and server YANG modules in this document each define one grouping,
         which is focused on just TLS-specific configuration, and specifically
         avoids any transport-level configuration, such as what ports to
-        listen-on or connect-to.  This enables applications the opportunity
+        listen-on or connect-to.  This affords applications the opportunity
         to define their own strategy for how the underlying TCP connection
         is established.  For instance, applications supporting NETCONF Call
-        Home <xref target="RFC8071"/> could use the grouping for the TLS
-        parts it provides, while adding data nodes for the TCP-level call-home
-        configuration.</t>
+        Home <xref target="RFC8071"/> could use the "ssh-server-grouping"
+        grouping for the TLS parts it provides, while adding data nodes
+        for the TCP-level call-home configuration.</t>
+
+        <t>The modules defined in this document uses groupings defined
+        in <xref target="I-D.ietf-netconf-keystore"/> <!-- and
+        <xref target="I-D.kwatsen-netconf-trust-anchors"/> --> enabling keys
+        <!-- and trust anchors, respectively,--> to be either locally defined
+        or a reference to globally configured values.</t>
+
       </section>
 
       <section title="Terminology">
@@ -111,46 +120,54 @@
 
       <section title="The TLS Client Model" anchor="tls-client-model">
 
-       <t>The TLS client model presented in this section contains one
-        YANG grouping, to just configure the TLS client, omitting, for
-        instance, any configuration for which IP address or port the
-        client should connect to.</t>
-
-        <t>This grouping references data nodes defined by the
-        keystore model <xref target="I-D.ietf-netconf-keystore"/>.  For
-        instance, a reference to the keystore model is made to indicate
-        which trusted CA certificate a client should use to authenticate
-        the server's certificate.</t>
-
         <section title="Tree Diagram">
-          <t>The following tree diagram <xref target="I-D.ietf-netmod-yang-tree-diagrams"/>
-          provides an overview of the data model for the "ietf-tls-client" module.</t>
-          <t>
+          <t>This section provides two tree diagrams <xref target="RFC8340"/> for
+          the "ietf-tls-client" module, the first with used groupings expanded and the
+          second with used groupings not expanded.</t>
+          <t>The following tree diagram has used groupings expanded:
             <figure>
               <artwork><![CDATA[
 INSERT_TEXT_FROM_FILE(refs/ietf-tls-client-tree.txt)
 ]]></artwork>
             </figure>
           </t>
+          <t>The following tree diagram does not have the groupings expanded:
+            <figure>
+              <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(refs/ietf-tls-client-tree-no-expand.txt)
+]]></artwork>
+            </figure>
+          </t>
         </section>
 
         <section title="Example Usage">
-          <t>This section shows how it would appear if the
-          tls-client-grouping were populated with some data.
-          This example is consistent with the examples presented in
-          Section 2.2 of <xref target="I-D.ietf-netconf-keystore"/>.</t>
-          <t>
+          <t>This section presents two examples showing the tls-client-grouping
+          populated with some data.  These examples are effectively the same
+          except the first configures the client identity using a local key
+          while the second uses a key configured in a keystore.  Both examples
+          are consistent with the examples presented in Section 3 of
+          <xref target="I-D.ietf-netconf-trust-anchors"/> and Section 3.2
+          of <xref target="I-D.ietf-netconf-keystore"/>.</t>
+          <t>The following example configures the client identity using a local key:
             <figure>
               <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(refs/ex-tls-client.xml,69)
+INSERT_TEXT_FROM_FILE(refs/ex-tls-client-local.xml)
+]]></artwork>
+            </figure>
+          </t>
+          <t>The following example configures the client identity using a key from the keystore:
+            <figure>
+              <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(refs/ex-tls-client-keystore.xml)
 ]]></artwork>
             </figure>
           </t>
         </section>
 
         <section title="YANG Module" anchor="tls-client-yang-module">
-          <t>This YANG module has a normative references to
-          <xref target="RFC6991"/> and <xref target="I-D.ietf-netconf-keystore"/>.</t>
+          <t>This YANG module has normative references to
+          <xref target="I-D.ietf-netconf-trust-anchors"/> and
+          <xref target="I-D.ietf-netconf-keystore"/>.</t>
           <t>
             <figure>
               <artwork><![CDATA[
@@ -165,45 +182,53 @@ INSERT_TEXT_FROM_FILE(ietf-tls-client@YYYY-MM-DD.yang)
 
       <section title="The TLS Server Model" anchor="tls-server-model">
 
-        <t>The TLS server model presented in this section contains one
-        YANG grouping, for just the TLS-level configuration, omitting,
-        for instance, configuration for which ports to open to listen
-        for connections on.</t>
-
-        <t>This grouping references data nodes defined by the
-        keystore model <xref target="I-D.ietf-netconf-keystore"/>.
-        For instance, a reference to the keystore model is made to indicate
-        which certificate a server should present.</t>
-
         <section title="Tree Diagram">
-          <t>The following tree diagram <xref target="I-D.ietf-netmod-yang-tree-diagrams"/>
-          provides an overview of the data model for the "ietf-tls-server" module.</t>
-          <t>
+          <t>This section provides two tree diagrams <xref target="RFC8340"/> for
+          the "ietf-tls-server" module, the first with used groupings expanded and the
+          second with used groupings not expanded.</t>
+          <t>The following tree diagram has used groupings expanded:
             <figure>
               <artwork><![CDATA[
 INSERT_TEXT_FROM_FILE(refs/ietf-tls-server-tree.txt)
 ]]></artwork>
             </figure>
           </t>
+          <t>The following tree diagram does not have the used groupings expanded:
+            <figure>
+              <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(refs/ietf-tls-server-tree-no-expand.txt)
+]]></artwork>
+            </figure>
+          </t>
         </section>
 
         <section title="Example Usage">
-          <t>This section shows how it would appear if the
-          tls-server-grouping were populated with some data.
-          This example is consistent with the examples presented in
-          Section 2.2 of <xref target="I-D.ietf-netconf-keystore"/>.</t>
-          <t>
+          <t>This section presents two examples showing the tls-server-grouping
+          populated with some data.  These examples are effectively the same
+          except the first configures the server identity using a local key
+          while the second uses a key configured in a keystore.  Both examples
+          are consistent with the examples presented in Section 3 of
+          <xref target="I-D.ietf-netconf-trust-anchors"/> and Section 3.2
+          of <xref target="I-D.ietf-netconf-keystore"/>.</t>
+          <t>The following example configures the server identity using a local key:
             <figure>
               <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(refs/ex-tls-server.xml,69)
+INSERT_TEXT_FROM_FILE(refs/ex-tls-server-local.xml)
+]]></artwork>
+            </figure>
+          </t>
+          <t>The following example configures the server identity using a key from the keystore:
+            <figure>
+              <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(refs/ex-tls-server-keystore.xml)
 ]]></artwork>
             </figure>
           </t>
         </section>
 
         <section title="YANG Module" anchor="tls-server-yang-module">
-          <t>This YANG module has a normative references to <xref target="RFC6991"/>,
-          and <xref target="I-D.ietf-netconf-keystore"/>.</t>
+          <t>This YANG module has a normative references to <xref target="RFC5246"/>,
+          <xref target="I-D.ietf-netconf-trust-anchors"/> and <xref target="I-D.ietf-netconf-keystore"/>.</t>
           <t>
             <figure>
               <artwork><![CDATA[
@@ -235,7 +260,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
         algorithms is not exhaustive.</t>
 
         <section title="Tree Diagram">
-          <t>The following tree diagram <xref target="I-D.ietf-netmod-yang-tree-diagrams"/>
+          <t>The following tree diagram <xref target="RFC8340"/>
           provides an overview of the data model for the "ietf-tls-common" module.</t>
           <t>
             <figure>
@@ -400,10 +425,10 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
         <?rfc include="reference.RFC.5288.xml"?>
         <?rfc include="reference.RFC.5289.xml"?>
         <?rfc include="reference.RFC.6536.xml"?>
-        <?rfc include="reference.RFC.6991.xml"?>
         <?rfc include="reference.RFC.7589.xml"?>
         <?rfc include="reference.RFC.7950.xml"?>
         <?rfc include="reference.RFC.8174.xml"?>
+        <?rfc include="reference.I-D.ietf-netconf-trust-anchors"?>
         <?rfc include="reference.I-D.ietf-netconf-keystore"?>
       </references>
 
@@ -413,7 +438,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
         <?rfc include="reference.RFC.6241.xml"?>
         <?rfc include="reference.RFC.8040.xml"?>
         <?rfc include="reference.RFC.8071.xml"?>
-        <?rfc include="reference.I-D.ietf-netmod-yang-tree-diagrams"?>
+        <?rfc include="reference.RFC.8340.xml"?>
       </references>
 
       <section title="Change Log">
@@ -456,6 +481,22 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
               <t>Now tree diagrams reference ietf-netmod-yang-tree-diagrams</t>
               <t>Updated YANG to use typedefs around leafrefs to common keystore paths</t>
               <t>Now inlines key and certificates (no longer a leafref to keystore)</t>
+            </list>
+          </t>
+        </section>
+        <section title="04 to 05">
+          <t>
+            <list style="symbols">
+              <t>Merged changes from co-author.</t>
+            </list>
+          </t>
+        </section>
+        <section title="05 to 06">
+          <t>
+            <list style="symbols">
+              <t>Updated to use trust anchors from trust-anchors draft (was keystore draft)</t>
+              <t>Now Uses new keystore grouping enabling asymmetric key to be either locally
+                 defined or a reference to the keystore.</t>
             </list>
           </t>
         </section>
