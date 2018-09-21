@@ -71,7 +71,7 @@ module ietf-tls-common {
     description
       "Elliptic Curve Cryptography (ECC) is supported for TLS.";
     reference
-      "RFC 4492: Elliptic Curve Cryptography (ECC) Cipher Suites
+      "RFC 8422: Elliptic Curve Cryptography (ECC) Cipher Suites
                  for Transport Layer Security (TLS)";
   }
 
@@ -323,7 +323,7 @@ module ietf-tls-common {
     description
       "Cipher suite TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA.";
     reference
-      "RFC 4492: Elliptic Curve Cryptography (ECC) Cipher Suites
+      "RFC 8422: Elliptic Curve Cryptography (ECC) Cipher Suites
                  for Transport Layer Security (TLS)";
   }
 
@@ -333,7 +333,7 @@ module ietf-tls-common {
     description
       "Cipher suite TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA.";
     reference
-      "RFC 4492: Elliptic Curve Cryptography (ECC) Cipher Suites
+      "RFC 8422: Elliptic Curve Cryptography (ECC) Cipher Suites
                  for Transport Layer Security (TLS)";
   }
 
@@ -343,7 +343,7 @@ module ietf-tls-common {
     description
       "Cipher suite TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA.";
     reference
-      "RFC 4492: Elliptic Curve Cryptography (ECC) Cipher Suites
+      "RFC 8422: Elliptic Curve Cryptography (ECC) Cipher Suites
                  for Transport Layer Security (TLS)";
   }
 

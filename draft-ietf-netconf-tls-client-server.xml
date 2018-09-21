@@ -121,17 +121,9 @@
       <section title="The TLS Client Model" anchor="tls-client-model">
 
         <section title="Tree Diagram">
-          <t>This section provides two tree diagrams <xref target="RFC8340"/> for
-          the "ietf-tls-client" module, the first with used groupings expanded and the
-          second with used groupings not expanded.</t>
-          <t>The following tree diagram has used groupings expanded:
-            <figure>
-              <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(refs/ietf-tls-client-tree.txt)
-]]></artwork>
-            </figure>
-          </t>
-          <t>The following tree diagram does not have the groupings expanded:
+          <t>This section provides a tree diagram <xref target="RFC8340"/> for
+          the "ietf-tls-client" module that does not have groupings expanded.</t>
+          <t>
             <figure>
               <artwork><![CDATA[
 INSERT_TEXT_FROM_FILE(refs/ietf-tls-client-tree-no-expand.txt)
@@ -183,17 +175,9 @@ INSERT_TEXT_FROM_FILE(ietf-tls-client@YYYY-MM-DD.yang)
       <section title="The TLS Server Model" anchor="tls-server-model">
 
         <section title="Tree Diagram">
-          <t>This section provides two tree diagrams <xref target="RFC8340"/> for
-          the "ietf-tls-server" module, the first with used groupings expanded and the
-          second with used groupings not expanded.</t>
-          <t>The following tree diagram has used groupings expanded:
-            <figure>
-              <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(refs/ietf-tls-server-tree.txt)
-]]></artwork>
-            </figure>
-          </t>
-          <t>The following tree diagram does not have the used groupings expanded:
+          <t>This section provides a tree diagram <xref target="RFC8340"/> for
+          the "ietf-tls-server" module that does not have groupings expanded.</t>
+          <t>
             <figure>
               <artwork><![CDATA[
 INSERT_TEXT_FROM_FILE(refs/ietf-tls-server-tree-no-expand.txt)
@@ -287,10 +271,14 @@ INSERT_TEXT_FROM_FILE(refs/ex-tls-common.xml)
           <t>This YANG module has a normative references to
           <xref target="RFC2246"/>,
           <xref target="RFC4346"/>,
-          <xref target="RFC4492"/>,
           <xref target="RFC5246"/>,
           <xref target="RFC5288"/>,
-          and <xref target="RFC5289"/>.</t>
+          <xref target="RFC5289"/>,
+          and <xref target="RFC8422"/>.</t>
+          <t>This YANG module has a informative references to
+          <xref target="RFC2246"/>,
+          <xref target="RFC4346"/>,
+          and <xref target="RFC5246"/>.</t>
           <t>
             <figure>
               <artwork><![CDATA[
@@ -309,7 +297,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
         RESTCONF <xref target="RFC8040"/>.  Both of these protocols have mandatory-to-implement
         secure transport layers (e.g., SSH, TLS) with mutual authentication.</t>
 
-        <t>The NETCONF access control model (NACM) <xref target="RFC6536"/> provides the means
+        <t>The NETCONF access control model (NACM) <xref target="RFC8341"/> provides the means
         to restrict access for particular users to a pre-configured subset of all available
         protocol operations and content.</t>
 
@@ -329,7 +317,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
               removal of references to keys, certificates, trusted anchors, etc., can 
               dramatically alter the implemented security policy.  However, no NACM 
               annotations are applied as the data SHOULD be editable by users other than 
-              a designated 'recovery session'.</t>
+              a designated 'recovery session'.</t> <!-- KENT, FIXME -->
           </list>
         </t>
 
@@ -353,10 +341,9 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
 
       <section title="IANA Considerations">
         <section title="The IETF XML Registry">
-          <t>This document registers three URIs in the IETF XML 
-          registry <xref target="RFC3688"/>.  Following the format in 
-          <xref target="RFC3688"/>, the following registrations are
-          requested:</t>
+          <t>This document registers three URIs in the "ns" subregistry of the
+          IETF XML Registry <xref target="RFC3688"/>.  Following the format in 
+          <xref target="RFC3688"/>, the following registrations are requested:</t>
           <t>
             <figure>
                 <artwork><![CDATA[
@@ -378,8 +365,8 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
 
         <section title="The YANG Module Names Registry">
           <t>This document registers three YANG modules in the
-          YANG Module Names registry <xref target="RFC7950"/>.
-          Following the format in <xref target="RFC7950"/>, the
+          YANG Module Names registry <xref target="RFC6020"/>.
+          Following the format in <xref target="RFC6020"/>, the
           the following registrations are requested:</t>
           <t>
             <figure>
@@ -404,37 +391,29 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
         </section>
       </section>
 
-      <section title="Acknowledgements">
-        <t>The authors would like to thank for following for
-        lively discussions on list and in the halls (ordered
-        by last name): Andy Bierman, Martin Bjorklund, Benoit Claise,
-        Mehmet Ersue, Balázs Kovács, David Lamparter, Alan Luchuk, Ladislav Lhotka,
-        Radek Krejci, Tom Petch, Juergen Schoenwaelder, Phil Shafer,
-        Sean Turner, and Bert Wijnen.</t>
-     </section>
-
     </middle>
 
     <back>
       <references title="Normative References">
         <?rfc include="reference.RFC.2119.xml"?>
-        <?rfc include="reference.RFC.2246.xml"?>
-        <?rfc include="reference.RFC.4346.xml"?>
-        <?rfc include="reference.RFC.4492.xml"?>
-        <?rfc include="reference.RFC.5246.xml"?>
         <?rfc include="reference.RFC.5288.xml"?>
         <?rfc include="reference.RFC.5289.xml"?>
-        <?rfc include="reference.RFC.6536.xml"?>
+        <?rfc include="reference.RFC.6020.xml"?>
         <?rfc include="reference.RFC.7589.xml"?>
         <?rfc include="reference.RFC.7950.xml"?>
         <?rfc include="reference.RFC.8174.xml"?>
+        <?rfc include="reference.RFC.8341.xml"?>
+        <?rfc include="reference.RFC.8422.xml"?>
         <?rfc include="reference.I-D.ietf-netconf-trust-anchors"?>
         <?rfc include="reference.I-D.ietf-netconf-keystore"?>
       </references>
 
       <references title="Informative References">
         <?rfc include="reference.RFC.2818.xml"?>
+        <?rfc include="reference.RFC.2246.xml"?>
         <?rfc include="reference.RFC.3688.xml"?>
+        <?rfc include="reference.RFC.4346.xml"?>
+        <?rfc include="reference.RFC.5246.xml"?>
         <?rfc include="reference.RFC.6241.xml"?>
         <?rfc include="reference.RFC.8040.xml"?>
         <?rfc include="reference.RFC.8071.xml"?>
@@ -500,7 +479,26 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
             </list>
           </t>
         </section>
+        <section title="06 to 07">
+          <t>
+            <list style="symbols">
+              <t>factored the tls-[client|server]-groupings into more reusable groupings.</t>
+              <t>added if-feature statements for the new "x509-certificates" feature
+                 defined in draft-ietf-netconf-trust-anchors.</t>
+            </list>
+          </t>
+        </section>
       </section>
+
+      <section title="Acknowledgements" numbered="no">
+        <t>The authors would like to thank for following for
+        lively discussions on list and in the halls (ordered
+        by last name): Andy Bierman, Martin Bjorklund, Benoit Claise,
+        Mehmet Ersue, Balázs Kovács, David Lamparter, Alan Luchuk, Ladislav Lhotka,
+        Radek Krejci, Tom Petch, Juergen Schoenwaelder, Phil Shafer,
+        Sean Turner, and Bert Wijnen.</t>
+     </section>
+
     </back>
 </rfc>
 
