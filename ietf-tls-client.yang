@@ -93,7 +93,7 @@ module ietf-tls-client {
         description
           "The authentication type.";
         container certificate {
-          uses ks:local-or-keystore-end-entity-certificate-grouping;
+          uses ks:local-or-keystore-end-entity-cert-with-key-grouping;
           description
             "A locally-defined or referenced certificate
              to be used for client authentication.";

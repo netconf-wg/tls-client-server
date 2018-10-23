@@ -97,7 +97,7 @@ module ietf-tls-server {
            The Transport Layer Security (TLS) Protocol Version 1.2
          RFC ZZZZ:
            YANG Data Model for a 'Keystore' Mechanism";
-      uses ks:local-or-keystore-end-entity-certificate-grouping;
+      uses ks:local-or-keystore-end-entity-cert-with-key-grouping;
     }
   } // end server-identity-grouping
 

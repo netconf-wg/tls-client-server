@@ -1,6 +1,5 @@
-<?xml version='1.0'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
-
 <?rfc toc="yes"?>
 <?rfc symrefs="yes"?>
 <?rfc sortrefs="yes" ?>
@@ -14,339 +13,631 @@
 <?rfc-ext allow-markup-in-artwork="yes" ?>
 <?rfc-ext include-index="no" ?>
 <!--<?rfc strict="no"?> -->
+<rfc category="std" docName="draft-ietf-netconf-tls-client-server-latest"
+     ipr="trust200902">
+  <front>
+    <title abbrev="Groupings for TLS Clients and Servers">YANG Groupings for
+    TLS Clients and TLS Servers</title>
 
-<rfc category="std"
-     ipr="trust200902"
-     docName="draft-ietf-netconf-tls-client-server-latest" >
-    <front>
-        <title abbrev="Groupings for TLS Clients and Servers">YANG Groupings for TLS Clients and TLS Servers</title>
-        <author initials="K.W." surname="Watsen" fullname="Kent Watsen">
-            <organization>Juniper Networks</organization>
-            <address>
-                <email>kwatsen@juniper.net</email>
-            </address>
-        </author>
-        <author initials="G.W." surname="Wu" fullname="Gary Wu">
-            <organization>Cisco Systems</organization>
-            <address>
-                <email>garywu@cisco.com</email>
-            </address>
-        </author>
-        <date/>
-        <area>Operations</area>
-        <workgroup>NETCONF Working Group</workgroup>
-        <abstract>
-            <t>This document defines three YANG modules: the first defines
-            groupings for a generic TLS client, the second defines groupings
-            for a generic TLS server, and the third defines common identities
-            and groupings used by both the client and the server.  It is
-            intended that these groupings will be used by applications using
-            the TLS protocol.</t>
-        </abstract>
-        <note title="Editorial Note (To be removed by RFC Editor)">
-          <t>This draft contains many placeholder values that need to be replaced
-          with finalized values at the time of publication.  This note summarizes
-          all of the substitutions that are needed.  No other RFC Editor
-          instructions are specified elsewhere in this document.</t>
+    <author fullname="Kent Watsen" initials="K.W." surname="Watsen">
+      <organization>Juniper Networks</organization>
 
-          <t>This document contains references to other drafts in progress, both in
-          the Normative References section, as well as in body text throughout.  
-          Please update the following references to reflect their final RFC assignments:
-            <list style="symbols">
-              <t>I-D.ietf-netconf-trust-anchors</t>
-              <t>I-D.ietf-netconf-keystore</t>
-            </list>
-          </t>
-          <t>Artwork in this document contains shorthand references to drafts in 
-          progress.  Please apply the following replacements:
-            <list  style="symbols">
-              <t><spanx style="verb">XXXX</spanx> --&gt; the assigned RFC value for this draft</t>
-              <t><spanx style="verb">YYYY</spanx> --&gt; the assigned RFC value for I-D.ietf-netconf-trust-anchors</t>
-              <t><spanx style="verb">ZZZZ</spanx> --&gt; the assigned RFC value for I-D.ietf-netconf-keystore</t>
-            </list>
-          </t>
-          <t>Artwork in this document contains placeholder values for the date of 
-          publication of this draft.  Please apply the following replacement:
-            <list  style="symbols">
-              <t><spanx style="verb">YYYY-MM-DD</spanx> --&gt; the publication date of this draft</t>
-            </list>
-          </t>
-          <t>The following Appendix section is to be removed prior to publication:
-            <list  style="symbols">
-              <t>Appendix A.  Change Log</t>
-            </list>
-          </t>
-        </note>
-    </front>
-    <middle>
+      <address>
+        <email>kwatsen@juniper.net</email>
+      </address>
+    </author>
 
-      <section title="Introduction">
-        <t>This document defines three YANG 1.1 <xref target="RFC7950"/>
-        modules: the first defines a grouping for a generic TLS client, the
-        second defines a grouping for a generic TLS server, and the third
-        defines identities and groupings common to both the client and the
-        server (TLS is defined in <xref target="RFC5246"/>).  It is
-        intended that these groupings will be used by applications using
-        the TLS protocol.  For instance, these groupings could be used to
-        help define the data model for an HTTPS <xref target="RFC2818"/>
-        server or a NETCONF over TLS <xref target="RFC7589"/> based
-        server.</t>
+    <author fullname="Gary Wu" initials="G.W." surname="Wu">
+      <organization>Cisco Systems</organization>
 
-        <t>The client and server YANG modules in this document each define one grouping,
-        which is focused on just TLS-specific configuration, and specifically
-        avoids any transport-level configuration, such as what ports to
-        listen-on or connect-to.  This affords applications the opportunity
-        to define their own strategy for how the underlying TCP connection
-        is established.  For instance, applications supporting NETCONF Call
-        Home <xref target="RFC8071"/> could use the "ssh-server-grouping"
-        grouping for the TLS parts it provides, while adding data nodes
-        for the TCP-level call-home configuration.</t>
+      <address>
+        <email>garywu@cisco.com</email>
+      </address>
+    </author>
 
-        <t>The modules defined in this document uses groupings defined
-        in <xref target="I-D.ietf-netconf-keystore"/> <!-- and
+    <author fullname="Liang Xia" initials="L.X." surname="Xia">
+      <organization>Huawei</organization>
+
+      <address>
+        <email>frank.xialiang@huawei.com</email>
+      </address>
+    </author>
+
+    <date/>
+
+    <area>Operations</area>
+
+    <workgroup>NETCONF Working Group</workgroup>
+
+    <abstract>
+      <t>This document defines three YANG modules: the first defines groupings
+      for a generic TLS client, the second defines groupings for a generic TLS
+      server, and the third defines common identities and groupings used by
+      both the client and the server. It is intended that these groupings will
+      be used by applications using the TLS protocol.</t>
+    </abstract>
+
+    <note title="Editorial Note (To be removed by RFC Editor)">
+      <t>This draft contains many placeholder values that need to be replaced
+      with finalized values at the time of publication. This note summarizes
+      all of the substitutions that are needed. No other RFC Editor
+      instructions are specified elsewhere in this document.</t>
+
+      <t>This document contains references to other drafts in progress, both
+      in the Normative References section, as well as in body text throughout.
+      Please update the following references to reflect their final RFC
+      assignments: <list style="symbols">
+          <t>I-D.ietf-netconf-trust-anchors</t>
+
+          <t>I-D.ietf-netconf-keystore</t>
+        </list></t>
+
+      <t>Artwork in this document contains shorthand references to drafts in
+      progress. Please apply the following replacements: <list style="symbols">
+          <t><spanx style="verb">XXXX</spanx> --&gt; the assigned RFC value
+          for this draft</t>
+
+          <t><spanx style="verb">YYYY</spanx> --&gt; the assigned RFC value
+          for I-D.ietf-netconf-trust-anchors</t>
+
+          <t><spanx style="verb">ZZZZ</spanx> --&gt; the assigned RFC value
+          for I-D.ietf-netconf-keystore</t>
+        </list></t>
+
+      <t>Artwork in this document contains placeholder values for the date of
+      publication of this draft. Please apply the following replacement: <list
+          style="symbols">
+          <t><spanx style="verb">YYYY-MM-DD</spanx> --&gt; the publication
+          date of this draft</t>
+        </list></t>
+
+      <t>The following Appendix section is to be removed prior to publication:
+      <list style="symbols">
+          <t>Appendix A. Change Log</t>
+        </list></t>
+    </note>
+  </front>
+
+  <middle>
+    <section title="Introduction">
+      <t>This document defines three YANG 1.1 <xref target="RFC7950"/>
+      modules: the first defines a grouping for a generic TLS client, the
+      second defines a grouping for a generic TLS server, and the third
+      defines identities and groupings common to both the client and the
+      server (TLS is defined in <xref target="RFC5246"/>). It is intended that
+      these groupings will be used by applications using the TLS protocol. For
+      instance, these groupings could be used to help define the data model
+      for an HTTPS <xref target="RFC2818"/> server or a NETCONF over TLS <xref
+      target="RFC7589"/> based server.</t>
+
+      <t>The client and server YANG modules in this document each define one
+      grouping, which is focused on just TLS-specific configuration, and
+      specifically avoids any transport-level configuration, such as what
+      ports to listen-on or connect-to. This affords applications the
+      opportunity to define their own strategy for how the underlying TCP
+      connection is established. For instance, applications supporting NETCONF
+      Call Home <xref target="RFC8071"/> could use the "ssh-server-grouping"
+      grouping for the TLS parts it provides, while adding data nodes for the
+      TCP-level call-home configuration.</t>
+
+      <t>The modules defined in this document uses groupings defined in <xref
+      target="I-D.ietf-netconf-keystore"/> <!-- and
         <xref target="I-D.kwatsen-netconf-trust-anchors"/> --> enabling keys
-        <!-- and trust anchors, respectively,--> to be either locally defined
-        or a reference to globally configured values.</t>
+      <!-- and trust anchors, respectively,--> to be either locally defined or
+      a reference to globally configured values.</t>
+    </section>
 
-      </section>
+    <section title="Terminology">
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+      "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+      "OPTIONAL" in this document are to be interpreted as described in BCP 14
+      <xref target="RFC2119"/> <xref target="RFC8174"/> when, and only when,
+      they appear in all capitals, as shown here.</t>
+    </section>
 
-      <section title="Terminology">
-       <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
-       NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
-       "MAY", and "OPTIONAL" in this document are to be interpreted as
-       described in BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/>
-       when, and only when, they appear in all capitals, as shown here.</t>
-      </section>
+    <section anchor="tls-client-model" title="The TLS Client Model">
+      <section title="Tree Diagram">
+        <t>This section provides a tree diagram <xref target="RFC8340"/> for
+        the "ietf-tls-client" module that does not have groupings
+        expanded.</t>
 
-      <section title="The TLS Client Model" anchor="tls-client-model">
-
-        <section title="Tree Diagram">
-          <t>This section provides a tree diagram <xref target="RFC8340"/> for
-          the "ietf-tls-client" module that does not have groupings expanded.</t>
-          <t>
-            <figure>
-              <artwork><![CDATA[
+        <t><figure>
+            <artwork><![CDATA[
 INSERT_TEXT_FROM_FILE(refs/ietf-tls-client-tree-no-expand.txt)
 ]]></artwork>
-            </figure>
-          </t>
-        </section>
-
-        <section title="Example Usage">
-          <t>This section presents two examples showing the tls-client-grouping
-          populated with some data.  These examples are effectively the same
-          except the first configures the client identity using a local key
-          while the second uses a key configured in a keystore.  Both examples
-          are consistent with the examples presented in Section 3 of
-          <xref target="I-D.ietf-netconf-trust-anchors"/> and Section 3.2
-          of <xref target="I-D.ietf-netconf-keystore"/>.</t>
-          <t>The following example configures the client identity using a local key:
-            <figure>
-              <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(refs/ex-tls-client-local.xml)
-]]></artwork>
-            </figure>
-          </t>
-          <t>The following example configures the client identity using a key from the keystore:
-            <figure>
-              <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(refs/ex-tls-client-keystore.xml)
-]]></artwork>
-            </figure>
-          </t>
-        </section>
-
-        <section title="YANG Module" anchor="tls-client-yang-module">
-          <t>This YANG module has normative references to
-          <xref target="I-D.ietf-netconf-trust-anchors"/> and
-          <xref target="I-D.ietf-netconf-keystore"/>.</t>
-          <t>
-            <figure>
-              <artwork><![CDATA[
-<CODE BEGINS> file "ietf-tls-client@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(ietf-tls-client@YYYY-MM-DD.yang)
-<CODE ENDS>
-]]></artwork>
-            </figure>
-          </t>
-        </section>
+          </figure></t>
       </section>
 
-      <section title="The TLS Server Model" anchor="tls-server-model">
+      <section title="Example Usage">
+        <t>This section presents two examples showing the tls-client-grouping
+        populated with some data. These examples are effectively the same
+        except the first configures the client identity using a local key
+        while the second uses a key configured in a keystore. Both examples
+        are consistent with the examples presented in Section 3 of <xref
+        target="I-D.ietf-netconf-trust-anchors"/> and Section 3.2 of <xref
+        target="I-D.ietf-netconf-keystore"/>.</t>
 
-        <section title="Tree Diagram">
-          <t>This section provides a tree diagram <xref target="RFC8340"/> for
-          the "ietf-tls-server" module that does not have groupings expanded.</t>
-          <t>
-            <figure>
-              <artwork><![CDATA[
+        <t>The following example configures the client identity using a local
+        key: <figure>
+            <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(refs/ex-tls-client-local.xml)
+]]></artwork>
+          </figure></t>
+
+        <t>The following example configures the client identity using a key
+        from the keystore: <figure>
+            <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(refs/ex-tls-client-keystore.xml)
+]]></artwork>
+          </figure></t>
+      </section>
+
+      <section anchor="tls-client-yang-module" title="YANG Module">
+        <t>This YANG module has normative references to <xref
+        target="I-D.ietf-netconf-trust-anchors"/> and <xref
+        target="I-D.ietf-netconf-keystore"/>.</t>
+
+        <t><figure>
+            <artwork><![CDATA[
+<CODE BEGINS> file "ietf-tls-client@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(ietf-tls-client@YYYY-MM-DD.yang,71)
+<CODE ENDS>
+]]></artwork>
+          </figure></t>
+      </section>
+    </section>
+
+    <section anchor="tls-server-model" title="The TLS Server Model">
+      <section title="Tree Diagram">
+        <t>This section provides a tree diagram <xref target="RFC8340"/> for
+        the "ietf-tls-server" module that does not have groupings
+        expanded.</t>
+
+        <t><figure>
+            <artwork><![CDATA[
 INSERT_TEXT_FROM_FILE(refs/ietf-tls-server-tree-no-expand.txt)
 ]]></artwork>
-            </figure>
-          </t>
-        </section>
+          </figure></t>
+      </section>
 
-        <section title="Example Usage">
-          <t>This section presents two examples showing the tls-server-grouping
-          populated with some data.  These examples are effectively the same
-          except the first configures the server identity using a local key
-          while the second uses a key configured in a keystore.  Both examples
-          are consistent with the examples presented in Section 3 of
-          <xref target="I-D.ietf-netconf-trust-anchors"/> and Section 3.2
-          of <xref target="I-D.ietf-netconf-keystore"/>.</t>
-          <t>The following example configures the server identity using a local key:
-            <figure>
-              <artwork><![CDATA[
+      <section title="Example Usage">
+        <t>This section presents two examples showing the tls-server-grouping
+        populated with some data. These examples are effectively the same
+        except the first configures the server identity using a local key
+        while the second uses a key configured in a keystore. Both examples
+        are consistent with the examples presented in Section 3 of <xref
+        target="I-D.ietf-netconf-trust-anchors"/> and Section 3.2 of <xref
+        target="I-D.ietf-netconf-keystore"/>.</t>
+
+        <t>The following example configures the server identity using a local
+        key: <figure>
+            <artwork><![CDATA[
 INSERT_TEXT_FROM_FILE(refs/ex-tls-server-local.xml)
 ]]></artwork>
-            </figure>
-          </t>
-          <t>The following example configures the server identity using a key from the keystore:
-            <figure>
-              <artwork><![CDATA[
+          </figure></t>
+
+        <t>The following example configures the server identity using a key
+        from the keystore: <figure>
+            <artwork><![CDATA[
 INSERT_TEXT_FROM_FILE(refs/ex-tls-server-keystore.xml)
 ]]></artwork>
-            </figure>
-          </t>
-        </section>
+          </figure></t>
+      </section>
 
-        <section title="YANG Module" anchor="tls-server-yang-module">
-          <t>This YANG module has a normative references to <xref target="RFC5246"/>,
-          <xref target="I-D.ietf-netconf-trust-anchors"/> and <xref target="I-D.ietf-netconf-keystore"/>.</t>
-          <t>
-            <figure>
-              <artwork><![CDATA[
+      <section anchor="tls-server-yang-module" title="YANG Module">
+        <t>This YANG module has a normative references to <xref
+        target="RFC5246"/>, <xref target="I-D.ietf-netconf-trust-anchors"/>
+        and <xref target="I-D.ietf-netconf-keystore"/>.</t>
+
+        <t><figure>
+            <artwork><![CDATA[
 <CODE BEGINS> file "ietf-tls-server@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
 <CODE ENDS>
 ]]></artwork>
-            </figure>
-          </t>
-        </section>
+          </figure></t>
       </section>
+    </section>
 
-      <section title="The TLS Common Model" anchor="tls-common-model">
+    <section anchor="tls-common-model" title="The TLS Common Model">
+      <t>The TLS common model presented in this section contains identities
+      and groupings common to both TLS clients and TLS servers. The
+      hello-params-grouping can be used to configure the list of TLS
+      algorithms permitted by the TLS client or TLS server. The lists of
+      algorithms are ordered such that, if multiple algorithms are permitted
+      by the client, the algorithm that appears first in its list that is also
+      permitted by the server is used for the TLS transport layer connection.
+      The ability to restrict the the algorithms allowed is provided in this
+      grouping for TLS clients and TLS servers that are capable of doing so
+      and may serve to make TLS clients and TLS servers compliant with local
+      security policies. This model supports both TLS1.2 <xref
+      target="RFC5246"/> and TLS 1.3 <xref target="RFC8446"/>.</t>
 
-        <t>The TLS common model presented in this section contains identities
-        and groupings common to both TLS clients and TLS servers.  The
-        hello-params-grouping can be used to configure the list of TLS
-        algorithms permitted by the TLS client or TLS server.  The lists of
-        algorithms are ordered such that, if multiple algorithms are permitted
-        by the client, the algorithm that appears first in its list that is
-        also permitted by the server is used for the TLS transport layer
-        connection.  The ability to restrict the the algorithms allowed is
-        provided in this grouping for TLS clients and TLS servers that are
-        capable of doing so and may serve to make TLS clients and TLS servers
-        compliant with security policies.</t>
+      <t>TLS 1.2 and TLS 1.3 have different ways defining their own supported
+      cryptographic algorithms, see TLS and DTLS IANA registries page
+      (https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml):</t>
 
-        <t>Features are defined for algorithms that are OPTIONAL or are not
-        widely supported by popular implementations.  Note that the list of
-        algorithms is not exhaustive.</t>
+      <t><list style="symbols">
+          <t>TLS 1.2 defines four categories of registries for cryptographic
+          algorithms: TLS Cipher Suites, TLS SignatureAlgorithm, TLS
+          HashAlgorithm, TLS Supported Groups. TLS Cipher Suites plays the
+          role of combining all of them into one set, as each value of the set
+          represents a unique and feasible combination of all the
+          cryptographic algorithms, and thus the other three registry
+          categories do not need to be considered here. In this document, the
+          TLS common model only chooses those TLS1.2 algorithms in TLS Cipher
+          Suites which are marked as recommended:
+          TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,
+          TLS_DHE_RSA_WITH_AES_256_GCM_SHA384,
+          TLS_DHE_PSK_WITH_AES_128_GCM_SHA256,
+          TLS_DHE_PSK_WITH_AES_256_GCM_SHA384, and so on. All chosen
+          algorithms are enumerated in Table 1-1 below;</t>
 
-        <section title="Tree Diagram">
-          <t>The following tree diagram <xref target="RFC8340"/>
-          provides an overview of the data model for the "ietf-tls-common" module.</t>
-          <t>
-            <figure>
-              <artwork><![CDATA[
+          <t>TLS 1.3 defines its supported algorithms differently. Firstly, it
+          defines three categories of registries for cryptographic algorithms:
+          TLS Cipher Suites, TLS SignatureScheme, TLS Supported Groups.
+          Secondly, all three of these categories are useful, since they
+          represent different parts of all the supported algorithms
+          respectively. Thus, all of these registries categories are
+          considered here. In this draft, the TLS common model chooses only
+          those TLS1.3 algorithms specified in B.4, 4.2.3, 4.2.7 of <xref
+          target="RFC8446"/>.</t>
+        </list></t>
+
+      <t>Thus, in order to support both TLS1.2 and TLS1.3, the cipher-suites
+      part of the hello-params-grouping should include three parameters for
+      configuring its permitted TLS algorithms, which are: TLS Cipher Suites,
+      TLS SignatureScheme, TLS Supported Groups. Note that TLS1.2 only uses
+      TLS Cipher Suites.</t>
+
+      <t><xref target="I-D.ietf-netconf-crypto-types"/> defines six categories
+      of cryptographic algorithms (hash-algorithm,
+      symmetric-key-encryption-algorithm, mac-algorithm,
+      asymmetric-key-encryption-algorithm, signature-algorithm,
+      key-negotiation-algorithm) and lists several widely accepted algorithms
+      for each of them. The TLS client and server models use one or more of
+      these algorithms. The following tables are provided, in part to define
+      the subset of algorithms defined in the crypto-types model used by TLS,
+      and in part to ensure compatibility of configured TLS cryptographic
+      parameters for configuring its permitted TLS algorithms:<figure
+          title="Table 1-1   TLS 1.2 Compatibility Matrix Part 1: ciper-suites mapping to hash-algorithm">
+          <artwork align="center">+-----------------------------------------------+---------+
+| ciper-suites in hello-params-grouping         |  HASH   |
++-----------------------------------------------+---------+
+| TLS_DHE_RSA_WITH_AES_128_GCM_SHA256           | sha-256 |
+| TLS_DHE_RSA_WITH_AES_256_GCM_SHA384           | sha-384 |
+| TLS_DHE_PSK_WITH_AES_128_GCM_SHA256           | sha-256 |
+| TLS_DHE_PSK_WITH_AES_256_GCM_SHA384           | sha-384 |
+| TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256       | sha-256 |
+| TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384       | sha-384 |
+| TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256         | sha-256 |
+| TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384         | sha-384 |
+| TLS_DHE_RSA_WITH_AES_128_CCM                  | sha-256 |
+| TLS_DHE_RSA_WITH_AES_256_CCM                  | sha-256 |
+| TLS_DHE_PSK_WITH_AES_128_CCM                  | sha-256 |
+| TLS_DHE_PSK_WITH_AES_256_CCM                  | sha-256 |
+| TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256   | sha-256 |
+| TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 | sha-256 |
+| TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256     | sha-256 |
+| TLS_ECDHE_PSK_WITH_CHACHA20_POLY1305_SHA256   | sha-256 |
+| TLS_DHE_PSK_WITH_CHACHA20_POLY1305_SHA256     | sha-256 |
+| TLS_ECDHE_PSK_WITH_AES_128_GCM_SHA256         | sha-256 |
+| TLS_ECDHE_PSK_WITH_AES_256_GCM_SHA384         | sha-384 |
+| TLS_ECDHE_PSK_WITH_AES_128_CCM_SHA256         | sha-256 |
++-----------------------------------------------+---------+</artwork>
+        </figure><figure
+          title="Table 1-2   TLS 1.2 Compatibility Matrix Part 2: ciper-suites mapping to symmetric-key-encryption-algorithm">
+          <artwork align="center">+--------------------------------------------- +---------------------+
+|  ciper-suites in hello-params-grouping       |      symmetric      |
+|                                              |                     |
++--------------------------------------------- +---------------------+
+| TLS_DHE_RSA_WITH_AES_128_GCM_SHA256          |   enc-aes-128-gcm   |
+| TLS_DHE_RSA_WITH_AES_256_GCM_SHA384          |   enc-aes-256-gcm   |
+| TLS_DHE_PSK_WITH_AES_128_GCM_SHA256          |   enc-aes-128-gcm   |
+| TLS_DHE_PSK_WITH_AES_256_GCM_SHA384          |   enc-aes-256-gcm   |
+| TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256      |   enc-aes-128-gcm   |
+| TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384      |   enc-aes-256-gcm   |
+| TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256        |   enc-aes-128-gcm   |
+| TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384        |   enc-aes-256-gcm   |
+| TLS_DHE_RSA_WITH_AES_128_CCM                 |   enc-aes-128-ccm   |
+| TLS_DHE_RSA_WITH_AES_256_CCM                 |   enc-aes-256-ccm   |
+| TLS_DHE_PSK_WITH_AES_128_CCM                 |   enc-aes-128-ccm   |
+| TLS_DHE_PSK_WITH_AES_256_CCM                 |   enc-aes-256-ccm   |
+| TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256  |enc-chacha20-poly1305|
+| TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256|enc-chacha20-poly1305|
+| TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256    |enc-chacha20-poly1305|
+| TLS_ECDHE_PSK_WITH_CHACHA20_POLY1305_SHA256  |enc-chacha20-poly1305|
+| TLS_DHE_PSK_WITH_CHACHA20_POLY1305_SHA256    |enc-chacha20-poly1305|
+| TLS_ECDHE_PSK_WITH_AES_128_GCM_SHA256        |   enc-aes-128-gcm   |
+| TLS_ECDHE_PSK_WITH_AES_256_GCM_SHA384        |   enc-aes-256-gcm   |
+| TLS_ECDHE_PSK_WITH_AES_128_CCM_SHA256        |   enc-aes-128-ccm   |
++--------------------------------------------- +---------------------+</artwork>
+        </figure><figure
+          title="Table 1-3   TLS 1.2 Compatibility Matrix Part 3: ciper-suites mapping to MAC-algorithm">
+          <artwork align="center">+--------------------------------------------- +---------------------+
+|  ciper-suites in hello-params-grouping       |         MAC         |
+|                                              |                     |
++--------------------------------------------- +---------------------+
+| TLS_DHE_RSA_WITH_AES_128_GCM_SHA256          |   mac-aes-128-gcm   |
+| TLS_DHE_RSA_WITH_AES_256_GCM_SHA384          |   mac-aes-256-gcm   |
+| TLS_DHE_PSK_WITH_AES_128_GCM_SHA256          |   mac-aes-128-gcm   |
+| TLS_DHE_PSK_WITH_AES_256_GCM_SHA384          |   mac-aes-256-gcm   |
+| TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256      |   mac-aes-128-gcm   |
+| TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384      |   mac-aes-256-gcm   |
+| TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256        |   mac-aes-128-gcm   |
+| TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384        |   mac-aes-256-gcm   |
+| TLS_DHE_RSA_WITH_AES_128_CCM                 |   mac-aes-128-ccm   |
+| TLS_DHE_RSA_WITH_AES_256_CCM                 |   mac-aes-256-ccm   |
+| TLS_DHE_PSK_WITH_AES_128_CCM                 |   mac-aes-128-ccm   |
+| TLS_DHE_PSK_WITH_AES_256_CCM                 |   mac-aes-256-ccm   |
+| TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256  |mac-chacha20-poly1305|
+| TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256|mac-chacha20-poly1305|
+| TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256    |mac-chacha20-poly1305|
+| TLS_ECDHE_PSK_WITH_CHACHA20_POLY1305_SHA256  |mac-chacha20-poly1305|
+| TLS_DHE_PSK_WITH_CHACHA20_POLY1305_SHA256    |mac-chacha20-poly1305|
+| TLS_ECDHE_PSK_WITH_AES_128_GCM_SHA256        |   mac-aes-128-gcm   |
+| TLS_ECDHE_PSK_WITH_AES_256_GCM_SHA384        |   mac-aes-256-gcm   |
+| TLS_ECDHE_PSK_WITH_AES_128_CCM_SHA256        |   mac-aes-128-ccm   |
++--------------------------------------------- +---------------------+</artwork>
+        </figure><figure
+          title="Table 1-4   TLS 1.2 Compatibility Matrix Part 4: ciper-suites mapping to signature-algorithm">
+          <artwork align="center">+----------------------------------------------+----------------------+
+|ciper-suites in hello-params-grouping         |        signature     |
++--------------------------------------------- +----------------------+
+| TLS_DHE_RSA_WITH_AES_128_GCM_SHA256          | rsa-pkcs1-sha256     |
+| TLS_DHE_RSA_WITH_AES_256_GCM_SHA384          | rsa-pkcs1-sha384     |
+| TLS_DHE_PSK_WITH_AES_128_GCM_SHA256          |         N/A          |
+| TLS_DHE_PSK_WITH_AES_256_GCM_SHA384          |         N/A          |
+| TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256      |ecdsa-secp256r1-sha256|
+| TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384      |ecdsa-secp384r1-sha384|
+| TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256        | rsa-pkcs1-sha256     |
+| TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384        | rsa-pkcs1-sha384     |
+| TLS_DHE_RSA_WITH_AES_128_CCM                 | rsa-pkcs1-sha256     |
+| TLS_DHE_RSA_WITH_AES_256_CCM                 | rsa-pkcs1-sha256     |
+| TLS_DHE_PSK_WITH_AES_128_CCM                 |         N/A          |
+| TLS_DHE_PSK_WITH_AES_256_CCM                 |         N/A          |
+| TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256  | rsa-pkcs1-sha256     |
+| TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256|ecdsa-secp256r1-sha256|
+| TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256    | rsa-pkcs1-sha256     |
+| TLS_ECDHE_PSK_WITH_CHACHA20_POLY1305_SHA256  |         N/A          |
+| TLS_DHE_PSK_WITH_CHACHA20_POLY1305_SHA256    |         N/A          |
+| TLS_ECDHE_PSK_WITH_AES_128_GCM_SHA256        |         N/A          |
+| TLS_ECDHE_PSK_WITH_AES_256_GCM_SHA384        |         N/A          |
+| TLS_ECDHE_PSK_WITH_AES_128_CCM_SHA256        |         N/A          |
++----------------------------------------------+----------------------+</artwork>
+        </figure><figure
+          title="Table 1-5   TLS 1.2 Compatibility Matrix Part 5: ciper-suites mapping to key-negotiation-algorithm">
+          <artwork align="center">+----------------------------------------------+-----------------------+
+|ciper-suites in hello-params-grouping         |     key-negotiation   |
++----------------------------------------------+-----------------------+
+| TLS_DHE_RSA_WITH_AES_128_GCM_SHA256          | dhe-ffdhe2048, ...    |
+| TLS_DHE_RSA_WITH_AES_256_GCM_SHA384          | dhe-ffdhe2048, ...    |
+| TLS_DHE_PSK_WITH_AES_128_GCM_SHA256          | psk-dhe-ffdhe2048, ...|
+| TLS_DHE_PSK_WITH_AES_256_GCM_SHA384          | psk-dhe-ffdhe2048, ...|
+| TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256      | ecdhe-secp256r1, ...  |
+| TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384      | ecdhe-secp256r1, ...  |
+| TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256        | ecdhe-secp256r1, ...  |
+| TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384        | ecdhe-secp256r1, ...  |
+| TLS_DHE_RSA_WITH_AES_128_CCM                 | dhe-ffdhe2048, ...    |
+| TLS_DHE_RSA_WITH_AES_256_CCM                 | dhe-ffdhe2048, ...    |
+| TLS_DHE_PSK_WITH_AES_128_CCM                 | psk-dhe-ffdhe2048, ...|
+| TLS_DHE_PSK_WITH_AES_256_CCM                 | psk-dhe-ffdhe2048, ...|
+| TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256  | ecdhe-secp256r1, ...  |
+| TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256| ecdhe-secp256r1, ...  |
+| TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256    | dhe-ffdhe2048, ...    |
+| TLS_ECDHE_PSK_WITH_CHACHA20_POLY1305_SHA256  |psk-ecdhe-secp256r1,...|
+| TLS_DHE_PSK_WITH_CHACHA20_POLY1305_SHA256    | psk-dhe-ffdhe2048, ...|
+| TLS_ECDHE_PSK_WITH_AES_128_GCM_SHA256        |psk-ecdhe-secp256r1,...|
+| TLS_ECDHE_PSK_WITH_AES_256_GCM_SHA384        |psk-ecdhe-secp256r1,...|
+| TLS_ECDHE_PSK_WITH_AES_128_CCM_SHA256        |psk-ecdhe-secp256r1,...|
++----------------------------------------------+-----------------------+</artwork>
+        </figure><figure
+          title="Table 2-1   TLS 1.3 Compatibility Matrix Part 1: ciper-suites mapping to hash-algorithm">
+          <artwork align="center">+------------------------------+---------+
+|    ciper-suites in hello     |   HASH  |
+|      -params-grouping        |         |
++------------------------------+---------+
+| TLS_AES_128_GCM_SHA256       | sha-256 |
+| TLS_AES_256_GCM_SHA384       | sha-384 |
+| TLS_CHACHA20_POLY1305_SHA256 | sha-256 |
+| TLS_AES_128_CCM_SHA256       | sha-256 |
++------------------------------+---------+</artwork>
+        </figure><figure
+          title="Table 2-2   TLS 1.3 Compatibility Matrix Part 2: ciper-suites mapping to symmetric-key--encryption-algorithm">
+          <artwork align="center">+------------------------------+-----------------------+
+|    ciper-suites in hello     |    symmetric          |
+|      -params-grouping        |                       |
++------------------------------+-----------------------+
+| TLS_AES_128_GCM_SHA256       | enc-aes-128-gcm       |
+| TLS_AES_256_GCM_SHA384       | enc-aes-128-gcm       |
+| TLS_CHACHA20_POLY1305_SHA256 | enc-chacha20-poly1305 |
+| TLS_AES_128_CCM_SHA256       | enc-aes-128-ccm       |
++------------------------------+-----------------------+</artwork>
+        </figure><figure
+          title="Table 2-3   TLS 1.3 Compatibility Matrix Part 3: ciper-suites mapping to MAC-algorithm">
+          <artwork align="center">+------------------------------+-----------------------+
+|    ciper-suites in hello     |    symmetric          |
+|      -params-grouping        |                       |
++------------------------------+-----------------------+
+| TLS_AES_128_GCM_SHA256       | mac-aes-128-gcm       |
+| TLS_AES_256_GCM_SHA384       | mac-aes-128-gcm       |
+| TLS_CHACHA20_POLY1305_SHA256 | mac-chacha20-poly1305 |
+| TLS_AES_128_CCM_SHA256       | mac-aes-128-ccm       |
++------------------------------+-----------------------+</artwork>
+        </figure><figure
+          title="Table 2-4   TLS 1.3 Compatibility Matrix Part 4: SignatureScheme mapping to signature-algorithm">
+          <artwork align="center">+----------------------------+-------------------------+
+|signatureScheme in hello    |  signature              |
+|   -params-grouping         |                         |
++----------------------------+-------------------------+
+| rsa-pkcs1-sha256           |  rsa-pkcs1-sha256       |
+| rsa-pkcs1-sha384           |  rsa-pkcs1-sha384       |
+| rsa-pkcs1-sha512           |  rsa-pkcs1-sha512       |
+| rsa-pss-rsae-sha256        |  rsa-pss-rsae-sha256    |
+| rsa-pss-rsae-sha384        |  rsa-pss-rsae-sha384    |
+| rsa-pss-rsae-sha512        |  rsa-pss-rsae-sha512    |
+| rsa-pss-pss-sha256         |  rsa-pss-pss-sha256     |
+| rsa-pss-pss-sha384         |  rsa-pss-pss-sha384     |
+| rsa-pss-pss-sha512         |  rsa-pss-pss-sha512     |
+| ecdsa-secp256r1-sha256     |  ecdsa-secp256r1-sha256 |
+| ecdsa-secp384r1-sha384     |  ecdsa-secp384r1-sha384 |
+| ecdsa-secp521r1-sha512     |  ecdsa-secp521r1-sha512 |
+| ed25519                    |  ed25519                |
+| ed448                      |  ed448                  |
++----------------------------+-------------------------+</artwork>
+        </figure><figure
+          title="Table 2-5   TLS 1.3 Compatibility Matrix Part 5: Supported Groups mapping to key-negotiation-algorithm">
+          <artwork align="center">+----------------------------+-------------------------+
+|supported Groups in hello   |     key-negotiation     |
+|   -params-grouping         |                         |
++----------------------------+-------------------------+
+| dhe-ffdhe2048              | dhe-ffdhe2048           |
+| dhe-ffdhe3072              | dhe-ffdhe3072           |
+| dhe-ffdhe4096              | dhe-ffdhe4096           |
+| dhe-ffdhe6144              | dhe-ffdhe6144           |
+| dhe-ffdhe8192              | dhe-ffdhe8192           |
+| psk-dhe-ffdhe2048          | psk-dhe-ffdhe2048       |
+| psk-dhe-ffdhe3072          | psk-dhe-ffdhe3072       |
+| psk-dhe-ffdhe4096          | psk-dhe-ffdhe4096       |
+| psk-dhe-ffdhe6144          | psk-dhe-ffdhe6144       |
+| psk-dhe-ffdhe8192          | psk-dhe-ffdhe8192       |
+| ecdhe-secp256r1            | ecdhe-secp256r1         |
+| ecdhe-secp384r1            | ecdhe-secp384r1         |
+| ecdhe-secp521r1            | ecdhe-secp521r1         |
+| ecdhe-x25519               | ecdhe-x25519            |
+| ecdhe-x448                 | ecdhe-x448              |
+| psk-ecdhe-secp256r1        | psk-ecdhe-secp256r1     |
+| psk-ecdhe-secp384r1        | psk-ecdhe-secp384r1     |
+| psk-ecdhe-secp521r1        | psk-ecdhe-secp521r1     |
+| psk-ecdhe-x25519           | psk-ecdhe-x25519        |
+| psk-ecdhe-x448             | psk-ecdhe-x448          |
++----------------------------+-------------------------+
+</artwork>
+        </figure></t>
+
+      <t>Note that in Table 1-5:<list style="symbols">
+          <t>dhe-ffdhe2048, ... is the abbreviation of dhe-ffdhe2048,
+          dhe-ffdhe3072, dhe-ffdhe4096, dhe-ffdhe6144, dhe-ffdhe8192;</t>
+
+          <t>psk-dhe-ffdhe2048, ... is the abbreviation of psk-dhe-ffdhe2048,
+          psk-dhe-ffdhe3072, psk-dhe-ffdhe4096, psk-dhe-ffdhe6144,
+          psk-dhe-ffdhe8192;</t>
+
+          <t>ecdhe-secp256r1, ... is the abbreviation of ecdhe-secp256r1,
+          ecdhe-secp384r1, ecdhe-secp521r1, ecdhe-x25519, ecdhe-x448;</t>
+
+          <t>psk-ecdhe-secp256r1, ... is the abbreviation of
+          psk-ecdhe-secp256r1, psk-ecdhe-secp384r1, psk-ecdhe-secp521r1,
+          psk-ecdhe-x25519, psk-ecdhe-x448.</t>
+        </list></t>
+
+      <t>Features are defined for algorithms that are OPTIONAL or are not
+      widely supported by popular implementations. Note that the list of
+      algorithms is not exhaustive.</t>
+
+      <section title="Tree Diagram">
+        <t>The following tree diagram <xref target="RFC8340"/> provides an
+        overview of the data model for the "ietf-tls-common" module.</t>
+
+        <t><figure>
+            <artwork><![CDATA[
 INSERT_TEXT_FROM_FILE(refs/ietf-tls-common-tree.txt)
 ]]></artwork>
-            </figure>
-          </t>
-        </section>
+          </figure></t>
+      </section>
 
-        <section title="Example Usage">
-          <t>This section shows how it would appear if the
-          transport-params-grouping were populated with some data.</t>
-          <t>
-            <figure>
-              <artwork><![CDATA[
+      <section title="Example Usage">
+        <t>This section shows how it would appear if the
+        transport-params-grouping were populated with some data.</t>
+
+        <t><figure>
+            <artwork><![CDATA[
 INSERT_TEXT_FROM_FILE(refs/ex-tls-common.xml)
 ]]></artwork>
-            </figure>
-          </t>
-        </section>
+          </figure></t>
+      </section>
 
-        <section title="YANG Module" anchor="tls-common-yang-module">
-          <t>This YANG module has a normative references to
-          <xref target="RFC2246"/>,
-          <xref target="RFC4346"/>,
-          <xref target="RFC5246"/>,
-          <xref target="RFC5288"/>,
-          <xref target="RFC5289"/>,
-          and <xref target="RFC8422"/>.</t>
-          <t>This YANG module has a informative references to
-          <xref target="RFC2246"/>,
-          <xref target="RFC4346"/>,
-          and <xref target="RFC5246"/>.</t>
-          <t>
-            <figure>
-              <artwork><![CDATA[
+      <section anchor="tls-common-yang-module" title="YANG Module">
+        <t>This YANG module has a normative references to <xref
+        target="RFC2246"/>, <xref target="RFC4346"/>, <xref
+        target="RFC5246"/>, <xref target="RFC5288"/>, <xref
+        target="RFC5289"/>, and <xref target="RFC8422"/>.</t>
+
+        <t>This YANG module has a informative references to <xref
+        target="RFC2246"/>, <xref target="RFC4346"/>, and <xref
+        target="RFC5246"/>.</t>
+
+        <t><figure>
+            <artwork><![CDATA[
 <CODE BEGINS> file "ietf-tls-common@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
 <CODE ENDS>
 ]]></artwork>
-            </figure>
-          </t>
-        </section>
+          </figure></t>
       </section>
+    </section>
 
-      <section title="Security Considerations">
-        <t>The YANG modules defined in this document are designed to be accessed via YANG
-        based management protocols, such as NETCONF <xref target="RFC6241"/> and
-        RESTCONF <xref target="RFC8040"/>.  Both of these protocols have mandatory-to-implement
-        secure transport layers (e.g., SSH, TLS) with mutual authentication.</t>
+    <section title="Security Considerations">
+      <t>The YANG modules defined in this document are designed to be accessed
+      via YANG based management protocols, such as NETCONF <xref
+      target="RFC6241"/> and RESTCONF <xref target="RFC8040"/>. Both of these
+      protocols have mandatory-to-implement secure transport layers (e.g.,
+      SSH, TLS) with mutual authentication.</t>
 
-        <t>The NETCONF access control model (NACM) <xref target="RFC8341"/> provides the means
-        to restrict access for particular users to a pre-configured subset of all available
-        protocol operations and content.</t>
+      <t>The NETCONF access control model (NACM) <xref target="RFC8341"/>
+      provides the means to restrict access for particular users to a
+      pre-configured subset of all available protocol operations and
+      content.</t>
 
-        <t>Since the modules defined in this document only define groupings, these
-        considerations are primarily for the designers of other modules that use
-        these groupings.</t>
+      <t>Since the modules defined in this document only define groupings,
+      these considerations are primarily for the designers of other modules
+      that use these groupings.</t>
 
-        <t>There are a number of data nodes defined in the YANG modules that are
-        writable/creatable/deletable (i.e., config true, which is the default). These data
-        nodes may be considered sensitive or vulnerable in some network environments. Write
-        operations (e.g., edit-config) to these data nodes without proper protection can
-        have a negative effect on network operations. These are the subtrees and data nodes
-        and their sensitivity/vulnerability:
-          <list style="hanging" hangIndent="6">
-            <t hangText="   /:">The entire data tree of all the groupings defined in
-              this draft is sensitive to write operations.  For instance, the addition or
-              removal of references to keys, certificates, trusted anchors, etc., can 
-              dramatically alter the implemented security policy.  However, no NACM 
-              annotations are applied as the data SHOULD be editable by users other than 
-              a designated 'recovery session'.</t> <!-- KENT, FIXME -->
-          </list>
-        </t>
+      <t>There are a number of data nodes defined in the YANG modules that are
+      writable/creatable/deletable (i.e., config true, which is the default).
+      These data nodes may be considered sensitive or vulnerable in some
+      network environments. Write operations (e.g., edit-config) to these data
+      nodes without proper protection can have a negative effect on network
+      operations. These are the subtrees and data nodes and their
+      sensitivity/vulnerability: <list hangIndent="6" style="hanging">
+          <t hangText="   /:">The entire data tree of all the groupings
+          defined in this draft is sensitive to write operations. For
+          instance, the addition or removal of references to keys,
+          certificates, trusted anchors, etc., can dramatically alter the
+          implemented security policy. However, no NACM annotations are
+          applied as the data SHOULD be editable by users other than a
+          designated 'recovery session'.</t>
 
-        <t>Some of the readable data nodes in the YANG modules may be considered sensitive
-        or vulnerable in some network environments. It is thus important to control read
-        access (e.g., via get, get-config, or notification) to these data nodes. These are
-        the subtrees and data nodes and their sensitivity/vulnerability:
-          <list style="hanging" hangIndent="6">
-            <t hangText="   NONE"></t>
-          </list>
-        </t>
+          <!-- KENT, FIXME -->
+        </list></t>
 
-        <t>Some of the RPC operations in this YANG module may be considered sensitive or
-        vulnerable in some network environments. It is thus important to control access
-        to these operations. These are the operations and their sensitivity/vulnerability:
-          <list style="hanging" hangIndent="6">
-            <t hangText="   NONE"></t>
-          </list>
-        </t>
-      </section>
+      <t>Some of the readable data nodes in the YANG modules may be considered
+      sensitive or vulnerable in some network environments. It is thus
+      important to control read access (e.g., via get, get-config, or
+      notification) to these data nodes. These are the subtrees and data nodes
+      and their sensitivity/vulnerability: <list hangIndent="6"
+          style="hanging">
+          <t hangText="   NONE"/>
+        </list></t>
 
-      <section title="IANA Considerations">
-        <section title="The IETF XML Registry">
-          <t>This document registers three URIs in the "ns" subregistry of the
-          IETF XML Registry <xref target="RFC3688"/>.  Following the format in 
-          <xref target="RFC3688"/>, the following registrations are requested:</t>
-          <t>
-            <figure>
-                <artwork><![CDATA[
+      <t>Some of the RPC operations in this YANG module may be considered
+      sensitive or vulnerable in some network environments. It is thus
+      important to control access to these operations. These are the
+      operations and their sensitivity/vulnerability: <list hangIndent="6"
+          style="hanging">
+          <t hangText="   NONE"/>
+        </list></t>
+    </section>
+
+    <section title="IANA Considerations">
+      <section title="The IETF XML Registry">
+        <t>This document registers three URIs in the "ns" subregistry of the
+        IETF XML Registry <xref target="RFC3688"/>. Following the format in
+        <xref target="RFC3688"/>, the following registrations are
+        requested:</t>
+
+        <t><figure>
+            <artwork>
    URI: urn:ietf:params:xml:ns:yang:ietf-tls-client
    Registrant Contact: The NETCONF WG of the IETF.
    XML: N/A, the requested URI is an XML namespace.
@@ -358,19 +649,17 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
    URI: urn:ietf:params:xml:ns:yang:ietf-tls-common
    Registrant Contact: The NETCONF WG of the IETF.
    XML: N/A, the requested URI is an XML namespace.
-]]></artwork>
-            </figure>
-          </t>
-        </section>
+</artwork>
+          </figure></t>
+      </section>
 
-        <section title="The YANG Module Names Registry">
-          <t>This document registers three YANG modules in the
-          YANG Module Names registry <xref target="RFC6020"/>.
-          Following the format in <xref target="RFC6020"/>, the
-          the following registrations are requested:</t>
-          <t>
-            <figure>
-                <artwork><![CDATA[
+      <section title="The YANG Module Names Registry">
+        <t>This document registers three YANG modules in the YANG Module Names
+        registry <xref target="RFC6020"/>. Following the format in <xref
+        target="RFC6020"/>, the the following registrations are requested:</t>
+
+        <t><figure>
+            <artwork>
    name:         ietf-tls-client
    namespace:    urn:ietf:params:xml:ns:yang:ietf-tls-client
    prefix:       tlsc
@@ -385,120 +674,160 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
    namespace:    urn:ietf:params:xml:ns:yang:ietf-tls-common
    prefix:       tlscmn
    reference:    RFC XXXX
-]]></artwork>
-            </figure>
-          </t>
-        </section>
+</artwork>
+          </figure></t>
+      </section>
+    </section>
+  </middle>
+
+  <back>
+    <references title="Normative References">
+      <?rfc include="reference.RFC.2119.xml"?>
+
+      <?rfc include="reference.RFC.5288.xml"?>
+
+      <?rfc include="reference.RFC.5289.xml"?>
+
+      <?rfc include="reference.RFC.6020.xml"?>
+
+      <?rfc include="reference.RFC.7589.xml"?>
+
+      <?rfc include="reference.RFC.7950.xml"?>
+
+      <?rfc include="reference.RFC.8174.xml"?>
+
+      <?rfc include="reference.RFC.8341.xml"?>
+
+      <?rfc include="reference.RFC.8422.xml"?>
+
+      <?rfc include="reference.RFC.8446.xml"?>
+
+      <?rfc include="reference.I-D.ietf-netconf-trust-anchors"?>
+
+      <?rfc include="reference.I-D.ietf-netconf-keystore"?>
+
+      <?rfc include="reference.I-D.ietf-netconf-crypto-types"?>
+    </references>
+
+    <references title="Informative References">
+      <?rfc include="reference.RFC.2818.xml"?>
+
+      <?rfc include="reference.RFC.2246.xml"?>
+
+      <?rfc include="reference.RFC.3688.xml"?>
+
+      <?rfc include="reference.RFC.4346.xml"?>
+
+      <?rfc include="reference.RFC.5246.xml"?>
+
+      <?rfc include="reference.RFC.6241.xml"?>
+
+      <?rfc include="reference.RFC.8040.xml"?>
+
+      <?rfc include="reference.RFC.8071.xml"?>
+
+      <?rfc include="reference.RFC.8340.xml"?>
+    </references>
+
+    <section title="Change Log">
+      <section title="00 to 01">
+        <t><list style="symbols">
+            <t>Noted that '0.0.0.0' and '::' might have special meanings.</t>
+
+            <t>Renamed "keychain" to "keystore".</t>
+          </list></t>
       </section>
 
-    </middle>
+      <section title="01 to 02">
+        <t><list style="symbols">
+            <t>Removed the groupings containing transport-level configuration.
+            Now modules contain only the transport-independent groupings.</t>
 
-    <back>
-      <references title="Normative References">
-        <?rfc include="reference.RFC.2119.xml"?>
-        <?rfc include="reference.RFC.5288.xml"?>
-        <?rfc include="reference.RFC.5289.xml"?>
-        <?rfc include="reference.RFC.6020.xml"?>
-        <?rfc include="reference.RFC.7589.xml"?>
-        <?rfc include="reference.RFC.7950.xml"?>
-        <?rfc include="reference.RFC.8174.xml"?>
-        <?rfc include="reference.RFC.8341.xml"?>
-        <?rfc include="reference.RFC.8422.xml"?>
-        <?rfc include="reference.I-D.ietf-netconf-trust-anchors"?>
-        <?rfc include="reference.I-D.ietf-netconf-keystore"?>
-      </references>
+            <t>Filled in previously incomplete 'ietf-tls-client' module.</t>
 
-      <references title="Informative References">
-        <?rfc include="reference.RFC.2818.xml"?>
-        <?rfc include="reference.RFC.2246.xml"?>
-        <?rfc include="reference.RFC.3688.xml"?>
-        <?rfc include="reference.RFC.4346.xml"?>
-        <?rfc include="reference.RFC.5246.xml"?>
-        <?rfc include="reference.RFC.6241.xml"?>
-        <?rfc include="reference.RFC.8040.xml"?>
-        <?rfc include="reference.RFC.8071.xml"?>
-        <?rfc include="reference.RFC.8340.xml"?>
-      </references>
-
-      <section title="Change Log">
-        <section title="00 to 01">
-          <t>
-            <list style="symbols">
-              <t>Noted that '0.0.0.0' and '::' might have special meanings.</t>
-              <t>Renamed "keychain" to "keystore".</t>
-            </list>
-          </t>
-        </section>
-        <section title="01 to 02">
-          <t>
-            <list style="symbols">
-              <t>Removed the groupings containing transport-level configuration.
-              Now modules contain only the transport-independent groupings.</t>
-              <t>Filled in previously incomplete 'ietf-tls-client' module.</t>
-              <t>Added cipher suites for various algorithms into new 
-              'ietf-tls-common' module.</t>
-            </list>
-          </t>
-        </section>
-        <section title="02 to 03">
-          <t>
-            <list style="symbols">
-              <t>Added a 'must' statement to container 'server-auth' asserting
-                 that at least one of the various auth mechanisms must be specified.</t>
-              <t>Fixed description statement for leaf 'trusted-ca-certs'.</t>
-            </list>
-          </t>
-        </section>
-        <section title="03 to 04">
-          <t>
-            <list style="symbols">
-              <t>Updated title to "YANG Groupings for TLS Clients and TLS Servers"</t>
-              <t>Updated leafref paths to point to new keystore path</t>
-              <t>Changed the YANG prefix for ietf-tls-common from 'tlscom' to 'tlscmn'.</t>
-              <t>Added TLS protocol verions 1.0 and 1.1.</t>
-              <t>Made author lists consistent</t>
-              <t>Now tree diagrams reference ietf-netmod-yang-tree-diagrams</t>
-              <t>Updated YANG to use typedefs around leafrefs to common keystore paths</t>
-              <t>Now inlines key and certificates (no longer a leafref to keystore)</t>
-            </list>
-          </t>
-        </section>
-        <section title="04 to 05">
-          <t>
-            <list style="symbols">
-              <t>Merged changes from co-author.</t>
-            </list>
-          </t>
-        </section>
-        <section title="05 to 06">
-          <t>
-            <list style="symbols">
-              <t>Updated to use trust anchors from trust-anchors draft (was keystore draft)</t>
-              <t>Now Uses new keystore grouping enabling asymmetric key to be either locally
-                 defined or a reference to the keystore.</t>
-            </list>
-          </t>
-        </section>
-        <section title="06 to 07">
-          <t>
-            <list style="symbols">
-              <t>factored the tls-[client|server]-groupings into more reusable groupings.</t>
-              <t>added if-feature statements for the new "x509-certificates" feature
-                 defined in draft-ietf-netconf-trust-anchors.</t>
-            </list>
-          </t>
-        </section>
+            <t>Added cipher suites for various algorithms into new
+            'ietf-tls-common' module.</t>
+          </list></t>
       </section>
 
-      <section title="Acknowledgements" numbered="no">
-        <t>The authors would like to thank for following for
-        lively discussions on list and in the halls (ordered
-        by last name): Andy Bierman, Martin Bjorklund, Benoit Claise,
-        Mehmet Ersue, Balázs Kovács, David Lamparter, Alan Luchuk, Ladislav Lhotka,
-        Radek Krejci, Tom Petch, Juergen Schoenwaelder, Phil Shafer,
-        Sean Turner, and Bert Wijnen.</t>
-     </section>
+      <section title="02 to 03">
+        <t><list style="symbols">
+            <t>Added a 'must' statement to container 'server-auth' asserting
+            that at least one of the various auth mechanisms must be
+            specified.</t>
 
-    </back>
+            <t>Fixed description statement for leaf 'trusted-ca-certs'.</t>
+          </list></t>
+      </section>
+
+      <section title="03 to 04">
+        <t><list style="symbols">
+            <t>Updated title to "YANG Groupings for TLS Clients and TLS
+            Servers"</t>
+
+            <t>Updated leafref paths to point to new keystore path</t>
+
+            <t>Changed the YANG prefix for ietf-tls-common from 'tlscom' to
+            'tlscmn'.</t>
+
+            <t>Added TLS protocol verions 1.0 and 1.1.</t>
+
+            <t>Made author lists consistent</t>
+
+            <t>Now tree diagrams reference ietf-netmod-yang-tree-diagrams</t>
+
+            <t>Updated YANG to use typedefs around leafrefs to common keystore
+            paths</t>
+
+            <t>Now inlines key and certificates (no longer a leafref to
+            keystore)</t>
+          </list></t>
+      </section>
+
+      <section title="04 to 05">
+        <t><list style="symbols">
+            <t>Merged changes from co-author.</t>
+          </list></t>
+      </section>
+
+      <section title="05 to 06">
+        <t><list style="symbols">
+            <t>Updated to use trust anchors from trust-anchors draft (was
+            keystore draft)</t>
+
+            <t>Now Uses new keystore grouping enabling asymmetric key to be
+            either locally defined or a reference to the keystore.</t>
+          </list></t>
+      </section>
+
+      <section title="06 to 07">
+        <t><list style="symbols">
+            <t>factored the tls-[client|server]-groupings into more reusable
+            groupings.</t>
+
+            <t>added if-feature statements for the new "x509-certificates"
+            feature defined in draft-ietf-netconf-trust-anchors.</t>
+          </list></t>
+      </section>
+
+      <section title="07 to 08">
+        <t>
+          <list style="symbols">
+            <t>Added a number of compatibility matricies to Section 5 (thanks Frank!)</t>
+            <t>Claified that any configured "cipher-suite" values need to be 
+               compatible with the configured private key.</t>
+          </list>
+        </t>
+      </section>
+
+    </section>
+
+    <section numbered="no" title="Acknowledgements">
+      <t>The authors would like to thank for following for lively discussions
+      on list and in the halls (ordered by last name): Andy Bierman, Martin
+      Bjorklund, Benoit Claise, Mehmet Ersue, Balázs Kovács, David Lamparter,
+      Alan Luchuk, Ladislav Lhotka, Radek Krejci, Tom Petch, Juergen
+      Schoenwaelder, Phil Shafer, Sean Turner, and Bert Wijnen.</t>
+    </section>
+  </back>
 </rfc>
-
