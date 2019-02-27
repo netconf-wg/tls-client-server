@@ -70,15 +70,8 @@ $(next).xml: $(draft).xml ietf-tls-client.yang ietf-tls-server.yang ietf-tls-com
 %.txt: %.xml
 	$(xml2rfc) $< -o $@ --text
 
-ifeq "$(shell uname -s 2>/dev/null)" "Darwin"
-sed_i := sed -i ''
-else
-sed_i := sed -i
-endif
-
 %.html: %.xml
 	$(xml2rfc) $< -o $@ --html
-	$(sed_i) -f .addstyle.sed $@
 
 
 ### Below this deals with updating gh-pages
