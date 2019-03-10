@@ -1,6 +1,5 @@
 module ietf-tls-client {
   yang-version 1.1;
-
   namespace "urn:ietf:params:xml:ns:yang:ietf-tls-client";
   prefix "tlsc";
 
@@ -29,16 +28,11 @@ module ietf-tls-client {
   contact
    "WG Web:   <http://datatracker.ietf.org/wg/netconf/>
     WG List:  <mailto:netconf@ietf.org>
-
-    Author:   Kent Watsen
-              <mailto:kent+ietf@watsen.net>
-
-    Author:   Gary Wu
-              <mailto:garywu@cisco.com>";
-
+    Author:   Kent Watsen <mailto:kent+ietf@watsen.net>
+    Author:   Gary Wu <mailto:garywu@cisco.com>";
 
   description
-   "This module defines a reusable grouping for a TLS client that
+   "This module defines reusable groupings for TLS clients that
     can be used as a basis for specific TLS client instances.
 
     The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL',
@@ -68,7 +62,7 @@ module ietf-tls-client {
      "RFC XXXX: YANG Groupings for TLS Clients and TLS Servers";
   }
 
-  // features
+  // Features
 
   feature tls-client-hello-params-config {
     description
@@ -76,7 +70,13 @@ module ietf-tls-client {
        client.";
   }
 
-  // groupings
+  feature tls-client-keepalives {
+    description
+      "Per socket TLS keepalive parameters are configurable for
+       TLS clients on the server implementing this feature.";
+  }
+
+  // Groupings
 
   grouping tls-client-grouping {
     description
@@ -86,12 +86,13 @@ module ietf-tls-client {
     uses client-identity-grouping;
     uses server-auth-grouping;
     uses hello-params-grouping;
+    uses keepalives-grouping;
   }
 
   grouping client-identity-grouping {
     description
       "A reusable grouping for configuring a TLS client identity.";
-    container client-identity {
+    container tls-client-identity {
       description
         "The credentials used by the client to authenticate to
          the TLS server.";
@@ -100,7 +101,8 @@ module ietf-tls-client {
         description
           "The authentication type.";
         container certificate {
-          uses ks:local-or-keystore-end-entity-cert-with-key-grouping;
+          uses
+            ks:local-or-keystore-end-entity-cert-with-key-grouping;
           description
             "A locally-defined or referenced certificate
              to be used for client authentication.";
@@ -108,14 +110,14 @@ module ietf-tls-client {
             "RFC ZZZZ: YANG Data Model for a 'Keystore' Mechanism";
         }
       }
-    } // end client-identity
-  } // end client-identity-grouping
+    }
+  }
 
   grouping server-auth-grouping {
     description
       "A reusable grouping for configuring TLS server
        authentication.";
-    container server-auth {
+    container tls-server-auth {
       must 'pinned-ca-certs or pinned-server-certs';
       description
         "Trusted server identities.";
@@ -139,18 +141,50 @@ module ietf-tls-client {
            exact match to a configured pinned server certificate.";
       }
     }
-  } // end server-auth-grouping
+  }
 
   grouping hello-params-grouping {
     description
       "A reusable grouping for configuring a TLS transport
        parameters.";
-    container hello-params {
+    container tls-hello-params {
       if-feature tls-client-hello-params-config;
       uses tlscmn:hello-params-grouping;
       description
         "Configurable parameters for the TLS hello message.";
     }
-  } // end transport-params-grouping
+  }
 
+  grouping keepalives-grouping {
+    description
+      "A reusable grouping for configuring TLS client keepalive
+       parameters.";
+    container tls-keepalives {
+      if-feature "tls-client-keepalives";
+      description
+        "Configures the keep-alive policy, to proactively test
+         the aliveness of the TLS server.  An unresponsive
+         TLS server is dropped after approximately max-wait
+         * max-attempts seconds.";
+      leaf max-wait {
+        type uint16 {
+          range "1..max";
+        }
+        units seconds;
+        default 30;
+        description
+         "Sets the amount of time in seconds after which if no data
+          has been received from the TLS server, a TLS-level message
+          will be sent to test the aliveness of the TLS server.";
+      }
+      leaf max-attempts {
+        type uint8;
+        default 3;
+        description
+         "Sets the maximum number of sequential keep-alive messages
+         that can fail to obtain a response from the TLS server
+         before assuming the TLS server is no longer alive.";
+      }
+    }
+  }
 }

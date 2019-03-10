@@ -1,19 +1,19 @@
 <tls-server xmlns="urn:ietf:params:xml:ns:yang:ietf-tls-server">
 
   <!-- how this server will authenticate itself to the client -->
-  <server-identity>
+  <tls-server-identity>
     <local-definition>
       <algorithm xmlns:ct="urn:ietf:params:xml:ns:yang:ietf-crypto-types">ct:rsa2048</algorithm>
       <private-key>base64encodedvalue==</private-key>
       <public-key>base64encodedvalue==</public-key>
       <cert>base64encodedvalue==</cert>
     </local-definition>
-  </server-identity>
+  </tls-server-identity>
 
   <!-- which certificates will this server trust -->
-  <client-auth>
+  <tls-client-auth>
     <pinned-ca-certs>explicitly-trusted-client-ca-certs</pinned-ca-certs>
     <pinned-client-certs>explicitly-trusted-client-certs</pinned-client-certs>
-  </client-auth>
+  </tls-client-auth>
 
 </tls-server>

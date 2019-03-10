@@ -1,7 +1,7 @@
 <tls-client xmlns="urn:ietf:params:xml:ns:yang:ietf-tls-client">
 
   <!-- how this client will authenticate itself to the server -->
-  <client-identity>
+  <tls-client-identity>
     <certificate>
       <local-definition>
         <algorithm xmlns:ct="urn:ietf:params:xml:ns:yang:ietf-crypto-types">ct:rsa2048</algorithm>
@@ -10,12 +10,17 @@
         <cert>base64encodedvalue==</cert>
       </local-definition>
     </certificate>
-  </client-identity>
+  </tls-client-identity>
 
   <!-- which certificates will this client trust -->
-  <server-auth>
+  <tls-server-auth>
     <pinned-ca-certs>explicitly-trusted-server-ca-certs</pinned-ca-certs>
     <pinned-server-certs>explicitly-trusted-server-certs</pinned-server-certs>
-  </server-auth>
+  </tls-server-auth>
+
+  <tls-keepalives>
+    <max-wait>30</max-wait>
+    <max-attempts>3</max-attempts>
+  </tls-keepalives>
 
 </tls-client>

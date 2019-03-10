@@ -1,6 +1,5 @@
 module ietf-tls-server {
   yang-version 1.1;
-
   namespace "urn:ietf:params:xml:ns:yang:ietf-tls-server";
   prefix "tlss";
 
@@ -29,16 +28,11 @@ module ietf-tls-server {
   contact
    "WG Web:   <http://datatracker.ietf.org/wg/netconf/>
     WG List:  <mailto:netconf@ietf.org>
-
-    Author:   Kent Watsen
-              <mailto:kent+ietf@watsen.net>
-
-    Author:   Gary Wu
-              <mailto:garywu@cisco.com>";
-
+    Author:   Kent Watsen <mailto:kent+ietf@watsen.net>
+    Author:   Gary Wu <mailto:garywu@cisco.com>";
 
   description
-   "This module defines a reusable grouping for a TLS server that
+   "This module defines reusable groupings for TLS servers that
     can be used as a basis for specific TLS server instances.
 
     The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL',
@@ -68,7 +62,7 @@ module ietf-tls-server {
      "RFC XXXX: YANG Groupings for TLS Clients and TLS Servers";
   }
 
-  // features
+  // Features
 
   feature tls-server-hello-params-config {
     description
@@ -76,8 +70,14 @@ module ietf-tls-server {
        server.";
   }
 
+  feature tls-server-keepalives {
+    description
+      "Per socket TLS keepalive parameters are configurable for
+       TLS servers on the server implementing this feature.";
+  }
+
   
-  // groupings
+  // Groupings
 
   grouping tls-server-grouping {
     description
@@ -87,12 +87,13 @@ module ietf-tls-server {
     uses server-identity-grouping;
     uses client-auth-grouping;
     uses hello-params-grouping;
+    uses keepalives-grouping;
   }
 
   grouping server-identity-grouping {
     description
       "A reusable grouping for configuring a TLS server identity.";
-    container server-identity {
+    container tls-server-identity {
       description
         "A locally-defined or referenced end-entity certificate,
          including any configured intermediate certificates, the
@@ -106,13 +107,13 @@ module ietf-tls-server {
            YANG Data Model for a 'Keystore' Mechanism";
       uses ks:local-or-keystore-end-entity-cert-with-key-grouping;
     }
-  } // end server-identity-grouping
+  }
 
   grouping client-auth-grouping {
     description
       "A reusable grouping for configuring a TLS client
        authentication.";
-    container client-auth {
+    container tls-client-auth {
       description
         "A reference to a list of pinned certificate authority (CA)
          certificates and a reference to a list of pinned client
@@ -141,19 +142,50 @@ module ietf-tls-server {
           "RFC YYYY: YANG Data Model for Global Trust Anchors";
       }
     }
-  } // end client-auth-grouping
+  }
 
   grouping hello-params-grouping {
     description
       "A reusable grouping for configuring a TLS transport
        parameters.";
-    container hello-params {
+    container tls-hello-params {
       if-feature tls-server-hello-params-config;
       uses tlscmn:hello-params-grouping;
       description
         "Configurable parameters for the TLS hello message.";
     }
+  }
 
-  } // end tls-server-grouping
-
+  grouping keepalives-grouping {
+    description
+      "A reusable grouping for configuring TLS server keepalive
+       parameters.";
+    container tls-keepalives {
+      if-feature "tls-server-keepalives";
+      description
+        "Configures the keep-alive policy, to proactively test
+         the aliveness of the TLS client.  An unresponsive
+         TLS client is dropped after approximately max-wait
+         * max-attempts seconds.";
+      leaf max-wait {
+        type uint16 {
+          range "1..max";
+        }
+        units seconds;
+        default 30;
+        description
+         "Sets the amount of time in seconds after which if no data
+          has been received from the TLS client, a TLS-level message
+          will be sent to test the aliveness of the TLS client.";
+      }
+      leaf max-attempts {
+        type uint8;
+        default 3;
+        description
+         "Sets the maximum number of sequential keep-alive messages
+         that can fail to obtain a response from the TLS client
+         before assuming the TLS client is no longer alive.";
+      }
+    }
+  }
 }
