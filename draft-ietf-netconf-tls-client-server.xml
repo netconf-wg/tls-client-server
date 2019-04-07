@@ -588,7 +588,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
       pre-configured subset of all available protocol operations and
       content.</t>
 
-      <t>Since the modules defined in this document only define groupings,
+      <t>Since the modules in this document only define groupings,
       these considerations are primarily for the designers of other modules
       that use these groupings.</t>
 
@@ -598,34 +598,57 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
       network environments. Write operations (e.g., edit-config) to these data
       nodes without proper protection can have a negative effect on network
       operations. These are the subtrees and data nodes and their
-      sensitivity/vulnerability: <list hangIndent="6" style="hanging">
-          <t hangText="   /:">The entire data tree of all the groupings
-          defined in this draft is sensitive to write operations. For
-          instance, the addition or removal of references to keys,
-          certificates, trusted anchors, etc., can dramatically alter the
-          implemented security policy. However, no NACM annotations are
-          applied as the data SHOULD be editable by users other than a
-          designated 'recovery session'.</t>
-
-          <!-- KENT, FIXME -->
-        </list></t>
+      sensitivity/vulnerability:
+        <list hangIndent="6" style="hanging">
+          <t hangText="   *:">The entire subtree defined by the grouping 
+            statement in both the "ietf-ssh-client" and "ietf-ssh-server"
+            modules is sensitive to write operations. For instance, the 
+            addition or removal of references to keys, certificates, 
+            trusted anchors, etc., or even the modification of transport 
+            or keepalive parameters can dramatically alter the implemented 
+            security policy.  For this reason, this node is protected the 
+            NACM extension "default-deny-write".</t>
+        </list>
+      </t>
 
       <t>Some of the readable data nodes in the YANG modules may be considered
       sensitive or vulnerable in some network environments. It is thus
       important to control read access (e.g., via get, get-config, or
       notification) to these data nodes. These are the subtrees and data nodes
-      and their sensitivity/vulnerability: <list hangIndent="6"
-          style="hanging">
-          <t hangText="   NONE"/>
-        </list></t>
+      and their sensitivity/vulnerability:
+        <list hangIndent="6" style="hanging">
+          <t hangText="   /tls-client-parameters/client-identity/:">This
+          subtree in the "ietf-tls-client" module contains nodes that are
+          additionally sensitive to read operations such that, in normal use
+          cases, they should never be returned to a client.  Some of these
+          nodes (i.e., public-key/local-definition/private-key and
+          certificate/local-definition/private-key) are already protected
+          by the NACM extension "default-deny-all" set in the "grouping"
+          statements defined in <xref target="I-D.ietf-netconf-crypto-types"/>.</t>
+          <t hangText="   /tls-server-parameters/server-identity/:">This
+          subtree in the "ietf-tls-server" module contains nodes that are
+          additionally sensitive to read operations such that, in normal use
+          cases, they should never be returned to a client.  All of these
+          nodes (i.e., host-key/public-key/local-definition/private-key and
+          host-key/certificate/local-definition/private-key) are already
+          protected by the NACM extension "default-deny-all" set in the "grouping"
+          statements defined in <xref target="I-D.ietf-netconf-crypto-types"/>.</t>
+        </list>
+      </t>
 
-      <t>Some of the RPC operations in this YANG module may be considered
-      sensitive or vulnerable in some network environments. It is thus
-      important to control access to these operations. These are the
-      operations and their sensitivity/vulnerability: <list hangIndent="6"
-          style="hanging">
-          <t hangText="   NONE"/>
-        </list></t>
+      <t>Some of the operations in this YANG module may be considered
+        sensitive or vulnerable in some network environments. It is
+        thus important to control access to these operations. These
+        are the operations and their sensitivity/vulnerability:
+        <list style="hanging" hangIndent="6">
+          <t hangText="   *:">The groupings defined in this document
+            include "action" statements that come from groupings defined
+            in <xref target="I-D.ietf-netconf-crypto-types"/>.  Please
+            consult that document for the security considerations of
+            the "action" statements defined by the "grouping"
+            statements defined in this document.</t>
+        </list>
+      </t>
     </section>
 
     <section title="IANA Considerations">
@@ -711,64 +734,48 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
     <section title="Change Log">
       <section title="00 to 01">
         <t><list style="symbols">
-            <t>Noted that '0.0.0.0' and '::' might have special meanings.</t>
-
-            <t>Renamed "keychain" to "keystore".</t>
-          </list></t>
+          <t>Noted that '0.0.0.0' and '::' might have special meanings.</t>
+          <t>Renamed "keychain" to "keystore".</t>
+        </list></t>
       </section>
-
       <section title="01 to 02">
         <t><list style="symbols">
-            <t>Removed the groupings containing transport-level configuration.
-            Now modules contain only the transport-independent groupings.</t>
-
-            <t>Filled in previously incomplete 'ietf-tls-client' module.</t>
-
-            <t>Added cipher suites for various algorithms into new
-            'ietf-tls-common' module.</t>
-          </list></t>
+          <t>Removed the groupings containing transport-level configuration.
+          Now modules contain only the transport-independent groupings.</t>
+          <t>Filled in previously incomplete 'ietf-tls-client' module.</t>
+          <t>Added cipher suites for various algorithms into new
+          'ietf-tls-common' module.</t>
+        </list></t>
       </section>
-
       <section title="02 to 03">
         <t><list style="symbols">
-            <t>Added a 'must' statement to container 'server-auth' asserting
-            that at least one of the various auth mechanisms must be
-            specified.</t>
-
-            <t>Fixed description statement for leaf 'trusted-ca-certs'.</t>
-          </list></t>
+          <t>Added a 'must' statement to container 'server-auth' asserting
+          that at least one of the various auth mechanisms must be
+          specified.</t>
+          <t>Fixed description statement for leaf 'trusted-ca-certs'.</t>
+        </list></t>
       </section>
-
       <section title="03 to 04">
         <t><list style="symbols">
             <t>Updated title to "YANG Groupings for TLS Clients and TLS
             Servers"</t>
-
             <t>Updated leafref paths to point to new keystore path</t>
-
             <t>Changed the YANG prefix for ietf-tls-common from 'tlscom' to
             'tlscmn'.</t>
-
             <t>Added TLS protocol verions 1.0 and 1.1.</t>
-
             <t>Made author lists consistent</t>
-
             <t>Now tree diagrams reference ietf-netmod-yang-tree-diagrams</t>
-
             <t>Updated YANG to use typedefs around leafrefs to common keystore
             paths</t>
-
             <t>Now inlines key and certificates (no longer a leafref to
             keystore)</t>
           </list></t>
       </section>
-
       <section title="04 to 05">
         <t><list style="symbols">
             <t>Merged changes from co-author.</t>
           </list></t>
       </section>
-
       <section title="05 to 06">
         <t><list style="symbols">
             <t>Updated to use trust anchors from trust-anchors draft (was
@@ -778,7 +785,6 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
             either locally defined or a reference to the keystore.</t>
           </list></t>
       </section>
-
       <section title="06 to 07">
         <t><list style="symbols">
             <t>factored the tls-[client|server]-groupings into more reusable
@@ -788,7 +794,6 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
             feature defined in draft-ietf-netconf-trust-anchors.</t>
           </list></t>
       </section>
-
       <section title="07 to 08">
         <t>
           <list style="symbols">
@@ -798,7 +803,6 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
           </list>
         </t>
       </section>
-
       <section title="08 to 09">
         <t>
           <list style="symbols">
@@ -809,7 +813,6 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
           </list>
         </t>
       </section>
-
       <section title="09 to 10">
         <t>
           <list style="symbols">
@@ -817,7 +820,20 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
           </list>
         </t>
       </section>
-
+      <section title="10 to 11">
+        <t>
+          <list style="symbols">
+            <t>Collapsed all the inner groupings into the top-level grouping.</t>
+            <t>Added a top-level "demux container" inside the top-level grouping.</t>
+            <t>Added NACM statements and updated the Security Considerations section.</t>
+            <t>Added "presence" statements on the "keepalive" containers, as was 
+              needed to address a validation error that appeared after adding the 
+              "must" statements into the NETCONF/RESTCONF client/server modules.</t>
+            <t>Updated the boilerplate text in module-level "description" statement
+              to match copyeditor convention.</t>
+          </list>
+        </t>
+      </section>
     </section>
 
     <section numbered="no" title="Acknowledgements">
