@@ -89,95 +89,101 @@ module ietf-tls-client {
     description
       "A reusable grouping for configuring a TLS client without
        any consideration for how an underlying TCP session is
-       established.";
+       established.
+       
+       Note that this grouping uses fairly typical descendent
+       node names such that a stack of 'uses' statements will
+       have name conflicts.  It is intended that the consuming
+       data model will resolve the issue (e.g., by wrapping
+       the 'uses' statement in a container called 
+       'tls-client-parameters').  This model purposely does
+       not do this itself so as to provide maximum flexibility
+       to consuming models.";
 
-    container tls-client-parameters {
+    container client-identity {
       nacm:default-deny-write;
-
       description
-        "A container to hold TLS client configuration.";
-
-      container client-identity {
+        "The credentials used by the client to authenticate to
+         the TLS server.";
+      choice auth-type {
         description
-          "The credentials used by the client to authenticate to
-           the TLS server.";
-        choice auth-type {
+          "The authentication type.";
+        container certificate {
+          uses
+            ks:local-or-keystore-end-entity-cert-with-key-grouping;
           description
-            "The authentication type.";
-          container certificate {
-            uses
-              ks:local-or-keystore-end-entity-cert-with-key-grouping;
-            description
-              "A locally-defined or referenced certificate
-               to be used for client authentication.";
-            reference
-              "RFC ZZZZ: YANG Data Model for a 'Keystore' Mechanism";
-          }
+            "A locally-defined or referenced certificate
+             to be used for client authentication.";
+          reference
+            "RFC ZZZZ: YANG Data Model for a 'Keystore' Mechanism";
         }
-      } // container client-identity
+      }
+    } // container client-identity
 
-      container server-authentication {
-        must 'pinned-ca-certs or pinned-server-certs';
+    container server-authentication {
+      nacm:default-deny-write;
+      must 'pinned-ca-certs or pinned-server-certs';
+      description
+        "Trusted server identities.";
+      leaf pinned-ca-certs {
+        if-feature "ta:x509-certificates";
+        type ta:pinned-certificates-ref;
         description
-          "Trusted server identities.";
-        leaf pinned-ca-certs {
-          if-feature "ta:x509-certificates";
-          type ta:pinned-certificates-ref;
-          description
-            "A reference to a list of certificate authority (CA)
-             certificates used by the TLS client to authenticate
-             TLS server certificates.  A server certificate is
-             authenticated if it has a valid chain of trust to
-             a configured pinned CA certificate.";
-        }
-        leaf pinned-server-certs {
-          if-feature "ta:x509-certificates";
-          type ta:pinned-certificates-ref;
-          description
-            "A reference to a list of server certificates used by
-             the TLS client to authenticate TLS server certificates.
-             A server certificate is authenticated if it is an
-             exact match to a configured pinned server certificate.";
-        }
-      } // container server-authentication
+          "A reference to a list of certificate authority (CA)
+           certificates used by the TLS client to authenticate
+           TLS server certificates.  A server certificate is
+           authenticated if it has a valid chain of trust to
+           a configured pinned CA certificate.";
+      }
+      leaf pinned-server-certs {
+        if-feature "ta:x509-certificates";
+        type ta:pinned-certificates-ref;
+        description
+          "A reference to a list of server certificates used by
+           the TLS client to authenticate TLS server certificates.
+           A server certificate is authenticated if it is an
+           exact match to a configured pinned server certificate.";
+      }
+    } // container server-authentication
 
-      container hello-params {
-        if-feature "tls-client-hello-params-config";
-        uses tlscmn:hello-params-grouping;
-        description
-          "Configurable parameters for the TLS hello message.";
-      } // container hello-params
+    container hello-params {
+      nacm:default-deny-write;
+      if-feature "tls-client-hello-params-config";
+      uses tlscmn:hello-params-grouping;
+      description
+        "Configurable parameters for the TLS hello message.";
+    } // container hello-params
 
-      container keepalives {
-        if-feature "tls-client-keepalives";
-        presence "Indicates that keepalives are enabled.";
+    container keepalives {
+      nacm:default-deny-write;
+      if-feature "tls-client-keepalives";
+      presence "Indicates that keepalives are enabled.";
+      description
+        "Configures the keep-alive policy, to proactively test
+         the aliveness of the TLS server.  An unresponsive
+         TLS server is dropped after approximately max-wait
+         * max-attempts seconds.";
+      leaf max-wait {
+        type uint16 {
+          range "1..max";
+        }
+        units "seconds";
+        default "30";
         description
-          "Configures the keep-alive policy, to proactively test
-           the aliveness of the TLS server.  An unresponsive
-           TLS server is dropped after approximately max-wait
-           * max-attempts seconds.";
-        leaf max-wait {
-          type uint16 {
-            range "1..max";
-          }
-          units "seconds";
-          default "30";
-          description
-            "Sets the amount of time in seconds after which if
-             no data has been received from the TLS server, a
-             TLS-level message will be sent to test the
-             aliveness of the TLS server.";
-        }
-        leaf max-attempts {
-          type uint8;
-          default "3";
-          description
-            "Sets the maximum number of sequential keep-alive
-             messages that can fail to obtain a response from
-             the TLS server before assuming the TLS server is
-             no longer alive.";
-        }
-      } // container keepalives
-    } // container tls-client-parameters
+          "Sets the amount of time in seconds after which if
+           no data has been received from the TLS server, a
+           TLS-level message will be sent to test the
+           aliveness of the TLS server.";
+      }
+      leaf max-attempts {
+        type uint8;
+        default "3";
+        description
+          "Sets the maximum number of sequential keep-alive
+           messages that can fail to obtain a response from
+           the TLS server before assuming the TLS server is
+           no longer alive.";
+      }
+    } // container keepalives
   } // grouping tls-client-grouping
 }

@@ -153,7 +153,7 @@ INSERT_TEXT_FROM_FILE(refs/ietf-tls-client-tree-no-expand.txt)
         populated with some data. These examples are effectively the same
         except the first configures the client identity using a local key
         while the second uses a key configured in a keystore. Both examples
-        are consistent with the examples presented in Section 3 of <xref
+        are consistent with the examples presented in Section 2 of <xref
         target="I-D.ietf-netconf-trust-anchors"/> and Section 3.2 of <xref
         target="I-D.ietf-netconf-keystore"/>.</t>
 
@@ -205,7 +205,7 @@ INSERT_TEXT_FROM_FILE(refs/ietf-tls-server-tree-no-expand.txt)
         populated with some data. These examples are effectively the same
         except the first configures the server identity using a local key
         while the second uses a key configured in a keystore. Both examples
-        are consistent with the examples presented in Section 3 of <xref
+        are consistent with the examples presented in Section 2 of <xref
         target="I-D.ietf-netconf-trust-anchors"/> and Section 3.2 of <xref
         target="I-D.ietf-netconf-keystore"/>.</t>
 
@@ -831,6 +831,26 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
               "must" statements into the NETCONF/RESTCONF client/server modules.</t>
             <t>Updated the boilerplate text in module-level "description" statement
               to match copyeditor convention.</t>
+          </list>
+        </t>
+      </section>
+      <section title="11 to 12">
+        <t>
+          <list style="symbols">
+            <t>In server model, made 'client-authentication' a 'presence' node
+              indicating that the server supports client authentication.</t>
+            <t>In the server model, added a 'required-or-optional' choice to
+              'client-authentication' to better support protocols such as
+              RESTCONF.</t>
+            <t>In the server model, added a 'local-or-external' choice to
+              'client-authentication' to better support consuming data models
+              that prefer to keep client auth with client definitions than in
+              a model principally concerned with the "transport".</t>
+            <t>In both models, removed the "demux containers", floating the
+              nacm:default-deny-write to each descendent node, and
+              adding a note to model designers regarding the potential
+              need to add their own demux containers.</t>
+            <t>Fixed a couple references (section 2 --> section 3)</t>
           </list>
         </t>
       </section>

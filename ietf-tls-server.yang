@@ -83,102 +83,183 @@ module ietf-tls-server {
        TLS servers on the server implementing this feature.";
   }
 
+  feature local-client-auth-supported {
+    description
+      "Indicates that the TLS server supports local
+       configuration of client credentials.";
+  }
+
+
+  feature external-client-auth-supported {
+    description
+      "Indicates that the TLS server supports external
+       configuration of client credentials.";
+  }
+
+
+
   // Groupings
 
   grouping tls-server-grouping {
     description
       "A reusable grouping for configuring a TLS server without
        any consideration for how underlying TCP sessions are
-       established.";
+       established.
+       
+       Note that this grouping uses fairly typical descendent
+       node names such that a stack of 'uses' statements will
+       have name conflicts.  It is intended that the consuming
+       data model will resolve the issue (e.g., by wrapping
+       the 'uses' statement in a container called 
+       'tls-server-parameters').  This model purposely does
+       not do this itself so as to provide maximum flexibility
+       to consuming models.";
 
-    container tls-server-parameters {
+
+    container server-identity {  // FIXME: what about PSKs?
       nacm:default-deny-write;
-
       description
-        "A container to hold TLS server configuration.";
+        "A locally-defined or referenced end-entity certificate,
+         including any configured intermediate certificates, the
+         TLS server will present when establishing a TLS connection
+         in its Certificate message, as defined in Section 7.4.2
+         in RFC 5246.";
+      reference
+        "RFC 5246:
+           The Transport Layer Security (TLS) Protocol Version 1.2
+         RFC ZZZZ:
+           YANG Data Model for a 'Keystore' Mechanism";
+      uses ks:local-or-keystore-end-entity-cert-with-key-grouping;
+    } // container server-identity
 
-      container server-identity {
+    container client-authentication {  // FIXME: what about PSKs?
+      nacm:default-deny-write;
+      presence
+        "Indicates that certificate based client authentication
+         is supported (i.e., the server will request that the
+         client send a certificate).";
+      description
+        "Specifies if TLS client authentication is required or
+         optional, and specifies if the certificates needed to
+         authenticate the TLS client are configured locally or
+         externally.  If configured locally, the data model
+         enables both trust anchors and end-entity certificate
+         to be set.";
+      choice required-or-optional {
+        mandatory true;  // or default to 'required' ?
         description
-          "A locally-defined or referenced end-entity certificate,
-           including any configured intermediate certificates, the
-           TLS server will present when establishing a TLS connection
-           in its Certificate message, as defined in Section 7.4.2
-           in RFC 5246.";
-        reference
-          "RFC 5246:
-             The Transport Layer Security (TLS) Protocol Version 1.2
-           RFC ZZZZ:
-             YANG Data Model for a 'Keystore' Mechanism";
-        uses ks:local-or-keystore-end-entity-cert-with-key-grouping;
-      } // container server-identity
-
-      container client-authentication {
+          "Indicates if TLS-level client authentication is required
+           or optional.  This is necessary for some protocols (e.g.,
+           RESTCONF) the may optionally authenticate a client via
+           TLS-level authentication, HTTP-level authentication, or
+           both simultaneously).";
+         leaf required {
+           type empty;
+           description
+             "Indicates that TLS-level client authentication is
+              required.";
+         }
+         leaf optional {
+           type empty;
+           description
+             "Indicates that TLS-level client authentication is
+              optional.";
+         }
+      }
+      choice local-or-external {
+        mandatory true;
         description
-          "A reference to a list of pinned certificate authority (CA)
-           certificates and a reference to a list of pinned client
-           certificates.";
-        leaf pinned-ca-certs {
-          if-feature "ta:x509-certificates";
-          type ta:pinned-certificates-ref;
+          "Indicates if the certificates needed to authenticate
+           the client are configured locally or externally.  The
+           need to support external configuration for client
+           authentication stems from the desire to support
+           consuming data models that prefer to place client
+           authentication with client definitions, rather then
+           in a data model principally concerned with configuring
+           the transport.";
+        case local {
+          if-feature "local-client-auth-supported";
           description
-            "A reference to a list of certificate authority (CA)
-             certificates used by the TLS server to authenticate
-             TLS client certificates.  A client certificate is
-             authenticated if it has a valid chain of trust to
-             a configured pinned CA certificate.";
-          reference
-            "RFC YYYY: YANG Data Model for Global Trust Anchors";
-        }
-        leaf pinned-client-certs {
-          if-feature "ta:x509-certificates";
-          type ta:pinned-certificates-ref;
-          description
-            "A reference to a list of client certificates used by
-             the TLS server to authenticate TLS client certificates.
-             A clients certificate is authenticated if it is an
-             exact match to a configured pinned client certificate.";
-          reference
-            "RFC YYYY: YANG Data Model for Global Trust Anchors";
-        }
-      } // container client-authentication
-
-      container hello-params {
-        if-feature "tls-server-hello-params-config";
-        uses tlscmn:hello-params-grouping;
-        description
-          "Configurable parameters for the TLS hello message.";
-      } // container hello-params
-
-      container keepalives {
-        if-feature "tls-server-keepalives";
-        presence "Indicates that keepalives are enabled.";
-        description
-          "Configures the keep-alive policy, to proactively test
-           the aliveness of the TLS client.  An unresponsive
-           TLS client is dropped after approximately max-wait
-           * max-attempts seconds.";
-        leaf max-wait {
-          type uint16 {
-            range "1..max";
+            "The certificates needed to authenticate the clients
+             are configured locally.";
+          leaf pinned-ca-certs {
+            if-feature "ta:x509-certificates";
+            type ta:pinned-certificates-ref;//FIXME: local-or-remote?
+            description
+              "A reference to a list of certificate authority (CA)
+               certificates used by the TLS server to authenticate
+               TLS client certificates.  A client certificate is
+               authenticated if it has a valid chain of trust to
+               a configured pinned CA certificate.";
+            reference
+              "RFC YYYY: YANG Data Model for Global Trust Anchors";
           }
-          units "seconds";
-          default "30";
-          description
-            "Sets the amount of time in seconds after which if
-             no data has been received from the TLS client, a
-             TLS-level message will be sent to test the
-             aliveness of the TLS client.";
+          leaf pinned-client-certs {
+            if-feature "ta:x509-certificates";
+            type ta:pinned-certificates-ref;//FIXME: local-or-remote?
+            description
+              "A reference to a list of client certificates
+               used by the TLS server to authenticate TLS
+               client certificates.  A clients certificate
+               is authenticated if it is an exact match to
+               a configured pinned client certificate.";
+            reference
+              "RFC YYYY: YANG Data Model for Global Trust Anchors";
+          }
         }
-        leaf max-attempts {
-          type uint8;
-          default "3";
+        case external {
+          if-feature "external-client-auth-supported";
           description
-            "Sets the maximum number of sequential keep-alive
-             messages that can fail to obtain a response from
-             the TLS client before assuming the TLS client is
-             no longer alive.";
+            "The certificates needed to authenticate the clients
+             are configured externally.";
+          leaf client-auth-defined-elsewhere {
+            type empty;
+            description
+              "Indicates that certificates needed to authenticate
+               clients are configured elsewhere.";
+          }
         }
-      } // container keepalives
-    } // container tls-server-parameters
+      } // choice local-or-external
+    } // container client-authentication
+
+    container hello-params {
+      nacm:default-deny-write;
+      if-feature "tls-server-hello-params-config";
+      uses tlscmn:hello-params-grouping;
+      description
+        "Configurable parameters for the TLS hello message.";
+    } // container hello-params
+
+    container keepalives {
+      nacm:default-deny-write;
+      if-feature "tls-server-keepalives";
+      presence "Indicates that keepalives are enabled.";
+      description
+        "Configures the keep-alive policy, to proactively test
+         the aliveness of the TLS client.  An unresponsive
+         TLS client is dropped after approximately max-wait
+         * max-attempts seconds.";
+      leaf max-wait {
+        type uint16 {
+          range "1..max";
+        }
+        units "seconds";
+        default "30";
+        description
+          "Sets the amount of time in seconds after which if
+           no data has been received from the TLS client, a
+           TLS-level message will be sent to test the
+           aliveness of the TLS client.";
+      }
+      leaf max-attempts {
+        type uint8;
+        default "3";
+        description
+          "Sets the maximum number of sequential keep-alive
+           messages that can fail to obtain a response from
+           the TLS client before assuming the TLS client is
+           no longer alive.";
+      }
+    } // container keepalives
   } // grouping tls-server-grouping 
 }
