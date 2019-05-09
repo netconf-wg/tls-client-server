@@ -119,12 +119,6 @@
       Call Home <xref target="RFC8071"/> could use the "ssh-server-grouping"
       grouping for the TLS parts it provides, while adding data nodes for the
       TCP-level call-home configuration.</t>
-
-      <t>The modules defined in this document use groupings defined in <xref
-      target="I-D.ietf-netconf-keystore"/> <!-- and
-        <xref target="I-D.kwatsen-netconf-trust-anchors"/> --> enabling keys
-      <!-- and trust anchors, respectively,--> to be either locally defined or
-      a reference to globally configured values.</t>
     </section>
 
     <section title="Terminology">
@@ -851,6 +845,14 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
               adding a note to model designers regarding the potential
               need to add their own demux containers.</t>
             <t>Fixed a couple references (section 2 --> section 3)</t>
+          </list>
+        </t>
+      </section>
+      <section title="12 to 13">
+        <t>
+          <list style="symbols">
+            <t>Updated to reflect changes in trust-anchors drafts
+              (e.g., s/trust-anchors/truststore/g + s/pinned.//)</t>
           </list>
         </t>
       </section>

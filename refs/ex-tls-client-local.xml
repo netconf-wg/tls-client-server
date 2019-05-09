@@ -14,8 +14,8 @@
 
   <!-- which certificates will this client trust -->
   <server-authentication>
-    <pinned-ca-certs>explicitly-trusted-server-ca-certs</pinned-ca-certs>
-    <pinned-server-certs>explicitly-trusted-server-certs</pinned-server-certs>
+    <ca-certs>explicitly-trusted-server-ca-certs</ca-certs>
+    <server-certs>explicitly-trusted-server-certs</server-certs>
   </server-authentication>
 
   <keepalives>
