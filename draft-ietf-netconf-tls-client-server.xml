@@ -856,6 +856,24 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
           </list>
         </t>
       </section>
+      <section title="12 to 13">
+        <t>
+          <list style="symbols">
+            <t>Removed 'container' under 'client-identity' to match server model.</t>
+            <t>Updated examples to reflect change grouping in keystore module.</t>
+          </list>
+        </t>
+      </section>
+      <section title="13 to 14">
+        <t>
+          <list style="symbols">
+            <t>Removed the "certificate" container from "client-identity" in the ietf-tls-client module.</t>
+            <t>Updated examples to reflect ietf-crypto-types change
+              (e.g., identities --&gt; enumerations)</t>
+          </list>
+        </t>
+      </section>
+
     </section>
 
     <section numbered="no" title="Acknowledgements">

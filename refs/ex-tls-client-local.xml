@@ -2,14 +2,12 @@
 
   <!-- how this client will authenticate itself to the server -->
   <client-identity>
-    <certificate>
-      <local-definition>
-        <algorithm xmlns:ct="urn:ietf:params:xml:ns:yang:ietf-crypto-types">ct:rsa2048</algorithm>
-        <private-key>base64encodedvalue==</private-key>
-        <public-key>base64encodedvalue==</public-key>
-        <cert>base64encodedvalue==</cert>
-      </local-definition>
-    </certificate>
+    <local-definition>
+      <algorithm>rsa2048</algorithm>
+      <public-key>base64encodedvalue==</public-key>
+      <private-key>base64encodedvalue==</private-key>
+      <cert>base64encodedvalue==</cert>
+    </local-definition>
   </client-identity>
 
   <!-- which certificates will this client trust -->
