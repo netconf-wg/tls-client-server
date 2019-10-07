@@ -171,13 +171,15 @@ INSERT_TEXT_FROM_FILE(refs/ex-tls-client-keystore.xml)
         target="I-D.ietf-netconf-trust-anchors"/> and <xref
         target="I-D.ietf-netconf-keystore"/>.</t>
 
-        <t><figure>
+        <t>
+          <figure>
+            <preamble>&lt;CODE BEGINS&gt; file "ietf-tls-client@YYYY-MM-DD.yang"</preamble>
             <artwork><![CDATA[
-<CODE BEGINS> file "ietf-tls-client@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(ietf-tls-client@YYYY-MM-DD.yang,71)
-<CODE ENDS>
 ]]></artwork>
-          </figure></t>
+            <postamble>&lt;CODE ENDS&gt;</postamble>
+          </figure>
+        </t>
       </section>
     </section>
 
@@ -223,13 +225,15 @@ INSERT_TEXT_FROM_FILE(refs/ex-tls-server-keystore.xml)
         target="RFC5246"/>, <xref target="I-D.ietf-netconf-trust-anchors"/>
         and <xref target="I-D.ietf-netconf-keystore"/>.</t>
 
-        <t><figure>
+        <t>
+          <figure>
+            <preamble>&lt;CODE BEGINS&gt; file "ietf-tls-server@YYYY-MM-DD.yang"</preamble>
             <artwork><![CDATA[
-<CODE BEGINS> file "ietf-tls-server@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
-<CODE ENDS>
 ]]></artwork>
-          </figure></t>
+            <postamble>&lt;CODE ENDS&gt;</postamble>
+          </figure>
+        </t>
       </section>
     </section>
 
@@ -560,13 +564,15 @@ INSERT_TEXT_FROM_FILE(refs/ex-tls-common.xml)
         target="RFC2246"/>, <xref target="RFC4346"/>, <xref
         target="RFC5246"/>, and <xref target="RFC8446"/>.</t>
 
-        <t><figure>
+        <t>
+          <figure>
+            <preamble>&lt;CODE BEGINS&gt; file "ietf-tls-common@YYYY-MM-DD.yang"</preamble>
             <artwork><![CDATA[
-<CODE BEGINS> file "ietf-tls-common@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
-<CODE ENDS>
 ]]></artwork>
-          </figure></t>
+            <postamble>&lt;CODE ENDS&gt;</postamble>
+          </figure>
+        </t>
       </section>
     </section>
 
@@ -873,7 +879,15 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
           </list>
         </t>
       </section>
-
+      <section title="14 to 15">
+        <t>
+          <list style="symbols">
+            <t>Updated "server-authentication" and "client-authentication" nodes from
+              being a leaf of type "ts:certificates-ref" to a container that uses 
+              "ts:local-or-truststore-certs-grouping".</t>
+          </list>
+        </t>
+      </section>
     </section>
 
     <section numbered="no" title="Acknowledgements">

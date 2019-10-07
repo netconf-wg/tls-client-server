@@ -121,24 +121,23 @@ module ietf-tls-client {
       must 'ca-certs or server-certs';
       description
         "Trusted server identities.";
-      leaf ca-certs {
+      container ca-certs { 
         if-feature "ts:x509-certificates";
-        type ts:certificates-ref;
         description
-          "A reference to a list of certificate authority (CA)
-           certificates used by the TLS client to authenticate
-           TLS server certificates.  A server certificate is
-           authenticated if it has a valid chain of trust to
-           a configured CA certificate.";
-      }
-      leaf server-certs {
-        if-feature "ts:x509-certificates";
-        type ts:certificates-ref;
-        description
-          "A reference to a list of server certificates used by
+          "A list of certificate authority (CA) certificates used by
            the TLS client to authenticate TLS server certificates.
-           A server certificate is authenticated if it is an
-           exact match to a configured server certificate.";
+           A server certificate is authenticated if it has a valid
+           chain of trust to a configured CA certificate.";
+        uses ts:local-or-truststore-certs-grouping;
+      }
+      container server-certs { 
+        if-feature "ts:x509-certificates";
+        description
+          "A list of server certificates used by the TLS client to
+           authenticate TLS server certificates.  A server certificate
+           is authenticated if it is an exact match to a configured
+           server certificate.";
+        uses ts:local-or-truststore-certs-grouping;
       }
     } // container server-authentication
 
