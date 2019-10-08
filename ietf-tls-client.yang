@@ -123,6 +123,9 @@ module ietf-tls-client {
         "Trusted server identities.";
       container ca-certs { 
         if-feature "ts:x509-certificates";
+        presence
+          "Indicates that the client can authenticate servers
+           using the configured trust anchor certificates.";
         description
           "A list of certificate authority (CA) certificates used by
            the TLS client to authenticate TLS server certificates.
@@ -132,6 +135,9 @@ module ietf-tls-client {
       }
       container server-certs { 
         if-feature "ts:x509-certificates";
+        presence
+          "Indicates that the client can authenticate servers
+           using the configured server certificates.";
         description
           "A list of server certificates used by the TLS client to
            authenticate TLS server certificates.  A server certificate
