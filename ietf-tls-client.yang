@@ -139,10 +139,10 @@ module ietf-tls-client {
           "Indicates that the client can authenticate servers
            using the configured server certificates.";
         description
-          "A list of server certificates used by the TLS client to
-           authenticate TLS server certificates.  A server certificate
-           is authenticated if it is an exact match to a configured
-           server certificate.";
+          "A list of server certificates used by the TLS client
+           to authenticate TLS server certificates.  A server
+           certificate is authenticated if it is an exact match
+           to a configured server certificate.";
         uses ts:local-or-truststore-certs-grouping;
       }
     } // container server-authentication
