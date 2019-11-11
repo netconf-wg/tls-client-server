@@ -2,12 +2,14 @@
 
   <!-- how this server will authenticate itself to the client -->
   <server-identity>
-    <local-definition>
-      <algorithm>rsa2048</algorithm>
-      <private-key>base64encodedvalue==</private-key>
-      <public-key>base64encodedvalue==</public-key>
-      <cert>base64encodedvalue==</cert>
-    </local-definition>
+    <certificate>
+      <local-definition>
+        <algorithm>rsa2048</algorithm>
+        <public-key>base64encodedvalue==</public-key>
+        <private-key>base64encodedvalue==</private-key>
+        <cert>base64encodedvalue==</cert>
+      </local-definition>
+    </certificate>
   </server-identity>
 
   <!-- which certificates will this server trust -->

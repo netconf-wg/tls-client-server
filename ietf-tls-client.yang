@@ -53,7 +53,7 @@ module ietf-tls-client {
 
      This version of this YANG module is part of RFC XXXX
      (https://www.rfc-editor.org/info/rfcXXXX); see the RFC
-     itself for full legal notices.;
+     itself for full legal notices.
 
      The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL',
      'SHALL NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED',
@@ -83,6 +83,26 @@ module ietf-tls-client {
        TLS clients on the server implementing this feature.";
   }
 
+  feature x509-certificate-auth {
+    description
+      "Indicates that the client supports authenticating servers
+       using X.509 certificates.";
+  }
+
+  feature raw-public-key-auth {
+    description
+      "Indicates that the client supports authenticating servers
+       using ray public keys.";
+  }
+
+  feature psk-auth {
+    description
+      "Indicates that the client supports authenticating servers
+       using PSKs (pre-shared or pairwise-symmetric keys).";
+  }
+
+
+
   // Groupings
 
   grouping tls-client-grouping {
@@ -100,7 +120,7 @@ module ietf-tls-client {
        not do this itself so as to provide maximum flexibility
        to consuming models.";
 
-    container client-identity { // FIXME: what about PSKs?
+    container client-identity {
       nacm:default-deny-write;
       description
         "A locally-defined or referenced end-entity certificate,
@@ -113,37 +133,73 @@ module ietf-tls-client {
            The Transport Layer Security (TLS) Protocol Version 1.2
          RFC ZZZZ:
            YANG Data Model for a 'Keystore' Mechanism";
-      uses ks:local-or-keystore-end-entity-cert-with-key-grouping;
+      choice auth-type {
+        mandatory true;
+        description
+          "A choice amongst available authentication types.";
+        container certificate {
+          if-feature x509-certificate-auth;
+          description
+            "Specifies the client identity using a certificate.";
+          uses ks:local-or-keystore-end-entity-cert-with-key-grouping;
+        }
+        container raw-public-key {
+          if-feature raw-public-key-auth;
+          description
+            "Specifies the client identity using a raw private key.";
+          uses ks:local-or-keystore-asymmetric-key-grouping;
+        }
+        container psk {
+          if-feature psk-auth;
+          description
+            "Specifies the client identity using a PSK.";
+          uses ks:local-or-keystore-symmetric-key-grouping;
+        }
+      }
     } // container client-identity
 
-    container server-authentication {  // FIXME: what about PSKs?
+    container server-authentication {
       nacm:default-deny-write;
       must 'ca-certs or server-certs';
       description
-        "Trusted server identities.";
-      container ca-certs { 
-        if-feature "ts:x509-certificates";
-        presence
-          "Indicates that the client can authenticate servers
-           using the configured trust anchor certificates.";
+        "Trusted server identities.  Any combination of trusted
+         server identities is additive and unordered.";
+      choice auth-type {
         description
-          "A list of certificate authority (CA) certificates used by
-           the TLS client to authenticate TLS server certificates.
-           A server certificate is authenticated if it has a valid
-           chain of trust to a configured CA certificate.";
-        uses ts:local-or-truststore-certs-grouping;
-      }
-      container server-certs { 
-        if-feature "ts:x509-certificates";
-        presence
-          "Indicates that the client can authenticate servers
-           using the configured server certificates.";
-        description
-          "A list of server certificates used by the TLS client
-           to authenticate TLS server certificates.  A server
-           certificate is authenticated if it is an exact match
-           to a configured server certificate.";
-        uses ts:local-or-truststore-certs-grouping;
+          "A choice amongst available authentication types.";
+        case certificate {
+          if-feature x509-certificate-auth;
+          container ca-certs { 
+            presence
+              "Indicates that the client can authenticate servers
+               using the configured trust anchor certificates.";
+            description
+              "A list of certificate authority (CA) certificates used by
+               the TLS client to authenticate TLS server certificates.
+               A server certificate is authenticated if it has a valid
+               chain of trust to a configured CA certificate.";
+            uses ts:local-or-truststore-certs-grouping;
+          }
+          container server-certs { 
+            presence
+              "Indicates that the client can authenticate servers
+               using the configured server certificates.";
+            description
+              "A list of server certificates used by the TLS client
+               to authenticate TLS server certificates.  A server
+               certificate is authenticated if it is an exact match
+               to a configured server certificate.";
+            uses ts:local-or-truststore-certs-grouping;
+          }
+        }
+        case raw-public-key {
+          if-feature raw-public-key-auth;
+          uses ts:local-or-truststore-raw-pub-keys-grouping;
+        }
+        case psk {
+          // no configuration required since it
+          // is the same as in client-identity!
+        }
       }
     } // container server-authentication
 
