@@ -177,11 +177,11 @@ module ietf-tls-server {
     } // container server-identity
 
     container client-authentication {
+      if-feature "client-auth-config-supported";
       nacm:default-deny-write;
       presence
-        "Indicates that client authentication
-         is supported (i.e., the server will request that the
-         client send a certificate).";
+        "Indicates that client authentication is supported (i.e., 
+         the server will request that the client send a certificate).";
       description
         "Specifies how the TLS server can authenticate TLS clients.
          Any combination of credentials is additive and unordered.
@@ -190,29 +190,7 @@ module ietf-tls-server {
          or pairwise-symmetric key) based authentication as the key
          is necessarily the same as configured in the '../server-
          identity' node.";
-      choice required-or-optional {
-        mandatory true;  // or default to 'required' ?
-        description
-          "Indicates if TLS-level client authentication is required
-           or optional.  This is necessary for some protocols (e.g.,
-           RESTCONF) the may optionally authenticate a client via
-           TLS-level authentication, HTTP-level authentication, or
-           both simultaneously).";
-         leaf required {
-           type empty;
-           description
-             "Indicates that TLS-level client authentication is
-              required.";
-         }
-         leaf optional {
-           type empty;
-           description
-             "Indicates that TLS-level client authentication is
-              optional.";
-         }
-      }
       container ca-certs {  
-        if-feature "client-auth-config-supported";
         if-feature "x509-certificate-auth";
         presence
           "Indicates that the TLS server can authenticate TLS clients
@@ -227,7 +205,6 @@ module ietf-tls-server {
         uses ts:local-or-truststore-certs-grouping;
       }
       container client-certs {   // FIXME: plural too much?
-        if-feature "client-auth-config-supported";
         if-feature "x509-certificate-auth";
         presence
           "Indicates that the TLS server can authenticate TLS clients
@@ -242,7 +219,6 @@ module ietf-tls-server {
         uses ts:local-or-truststore-certs-grouping;
       }
       container raw-public-keys {
-        if-feature "client-auth-config-supported";
         if-feature "raw-public-key-auth";
         presence
           "Indicates that the TLS server can authenticate TLS clients
