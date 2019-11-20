@@ -10,16 +10,22 @@ module ietf-tls-client {
       "RFC XXXX: YANG Groupings for TLS Clients and TLS Servers";
   }
 
+  import ietf-crypto-types {
+    prefix ct;
+    reference
+      "RFC AAAA: Common YANG Data Types for Cryptography";
+  }
+
   import ietf-truststore {
     prefix ts;
     reference
-      "RFC YYYY: A YANG Data Model for a Truststore";
+      "RFC BBBB: A YANG Data Model for a Truststore";
   }
 
   import ietf-keystore {
     prefix ks;
     reference
-      "RFC ZZZZ: A YANG Data Model for a Keystore";
+      "RFC CCCC: A YANG Data Model for a Keystore";
   }
 
   import ietf-netconf-acm {
@@ -141,19 +147,30 @@ module ietf-tls-client {
           if-feature x509-certificate-auth;
           description
             "Specifies the client identity using a certificate.";
-          uses ks:local-or-keystore-end-entity-cert-with-key-grouping;
+          uses ks:local-or-keystore-end-entity-cert-with-key-grouping
+            {
+            refine "local-or-keystore/local/local-definition" {
+              must 'public-key-format =
+                                "ct:subject-public-key-info-format"';
+            }
+            // FIXME: also need a must expression to ensure the
+            //        *referenced* key's public-key-format is
+            //        "ct:subject-public-key-info-format"
+          }
         }
         container raw-public-key {
           if-feature raw-public-key-auth;
           description
             "Specifies the client identity using a raw private key.";
           uses ks:local-or-keystore-asymmetric-key-grouping;
+          // FIXME: add a must expression contraining key-formats?
         }
         container psk {
           if-feature psk-auth;
           description
             "Specifies the client identity using a PSK.";
           uses ks:local-or-keystore-symmetric-key-grouping;
+          // FIXME: add a must expression contraining key-formats?
         }
       }
     } // container client-identity
@@ -173,11 +190,11 @@ module ietf-tls-client {
         if-feature "x509-certificate-auth";
         presence
           "Indicates that the TLS client can authenticate TLS servers
-           using configured certificate authority (CA) certificates.";
+           using configured certificate authority certificates.";
         description
           "A set of certificate authority (CA) certificates used by
-           the TLS client to authenticate TLS server certificates. A
-           server certificate is authenticated if it has a valid
+           the TLS client to authenticate TLS server certificates.
+           A server certificate is authenticated if it has a valid
            chain of trust to a configured CA certificate.";
         reference
           "RFC YYYY: YANG Data Model for a Truststore";
@@ -189,10 +206,11 @@ module ietf-tls-client {
           "Indicates that the TLS client can authenticate TLS servers
            using configured server certificates.";
         description
-          "A set of server certificates (i.e., end entity certificates)
-           used by the TLS client to authenticate certificates presented
-           by the TLS server. A server certificate is authenticated if
-           it is an exact match to a configured server certificate.";
+          "A set of server certificates (i.e., end entity
+           certificates) used by the TLS client to authenticate
+           certificates presented by TLS servers.  A server
+           certificate is authenticated if it is an exact
+           match to a configured server certificate.";
         reference
           "RFC YYYY: YANG Data Model for a Truststore";
         uses ts:local-or-truststore-certs-grouping;
@@ -210,6 +228,17 @@ module ietf-tls-client {
         reference
           "RFC YYYY: YANG Data Model for a Truststore";
         uses ts:local-or-truststore-raw-pub-keys-grouping;
+      }
+      container psks {
+        if-feature "psk-auth";
+        presence
+          "Indicates that the TLS client can authenticate TLS servers
+           using a configure PSK (pre-shared or pairwise-symmetric
+           key).";
+        description
+          "No configuration is required since the PSK value would be
+           the same as PSK value configured in the 'client-identity'
+           node.";
       }
     } // container server-authentication
 

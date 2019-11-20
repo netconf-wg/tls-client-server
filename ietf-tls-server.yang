@@ -10,16 +10,22 @@ module ietf-tls-server {
       "RFC XXXX: YANG Groupings for TLS Clients and TLS Servers";
   }
 
+  import ietf-crypto-types {
+    prefix ct;
+    reference
+      "RFC AAAA: Common YANG Data Types for Cryptography";
+  }
+
   import ietf-truststore {
     prefix ts;
     reference
-      "RFC YYYY: A YANG Data Model for a Truststore";
+      "RFC BBBB: A YANG Data Model for a Truststore";
   }
 
   import ietf-keystore {
     prefix ks;
     reference
-      "RFC ZZZZ: A YANG Data Model for a Keystore";
+      "RFC CCCC: A YANG Data Model for a Keystore";
   }
 
   import ietf-netconf-acm {
@@ -159,19 +165,30 @@ module ietf-tls-server {
           if-feature x509-certificate-auth;
           description
             "Specifies the server identity using a certificate.";
-          uses ks:local-or-keystore-end-entity-cert-with-key-grouping;
+          uses ks:local-or-keystore-end-entity-cert-with-key-grouping
+            {
+            refine "local-or-keystore/local/local-definition" {
+              must 'public-key-format =
+                                "ct:subject-public-key-info-format"';
+            }
+            // FIXME: also need a must expression to ensure the
+            //        *referenced* key's public-key-format is
+            //        "ct:subject-public-key-info-format"
+          }
         }
         container raw-private-key {
           if-feature raw-public-key-auth;
           description
             "Specifies the server identity using a raw private key.";
           uses ks:local-or-keystore-asymmetric-key-grouping;
+          // FIXME: add a must expression contraining key-formats?
         }
         container psk {
           if-feature psk-auth;
           description
             "Specifies the server identity using a PSK.";
           uses ks:local-or-keystore-symmetric-key-grouping;
+          // FIXME: add a must expression contraining key-formats?
         }
       }
     } // container server-identity
@@ -181,7 +198,7 @@ module ietf-tls-server {
       nacm:default-deny-write;
       presence
         "Indicates that client authentication is supported (i.e., 
-         the server will request that the client send a certificate).";
+         that the server will request clients send certificates).";
       description
         "Specifies how the TLS server can authenticate TLS clients.
          Any combination of credentials is additive and unordered.
@@ -194,7 +211,7 @@ module ietf-tls-server {
         if-feature "x509-certificate-auth";
         presence
           "Indicates that the TLS server can authenticate TLS clients
-           using configured certificate authority (CA) certificates.";
+           using configured certificate authority certificates.";
         description
           "A set of certificate authority (CA) certificates used by
            the TLS server to authenticate TLS client certificates. A
@@ -210,10 +227,11 @@ module ietf-tls-server {
           "Indicates that the TLS server can authenticate TLS clients
            using configured client certificates.";
         description
-          "A set of client certificates (i.e., end entity certificates)
-           used by the TLS server to authenticate certificates presented
-           by the TLS client. A client certificate is authenticated if
-           it is an exact match to a configured client certificate.";
+          "A set of client certificates (i.e., end entity
+           certificates) used by the TLS server to authenticate
+           certificates presented by TLS clients. A client
+           certificate is authenticated if it is an exact match
+           to a configured client certificate.";
         reference
           "RFC YYYY: YANG Data Model for a Truststore";
         uses ts:local-or-truststore-certs-grouping;
