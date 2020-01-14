@@ -131,7 +131,7 @@ module ietf-tls-client {
       description
         "A locally-defined or referenced end-entity certificate,
          including any configured intermediate certificates, the
-         TLS client will present when establishing a TLS connection
+         TLS client may present when establishing a TLS connection
          in its Certificate message, as defined in Section 7.4.2
          in RFC 5246.";
       reference
@@ -140,7 +140,6 @@ module ietf-tls-client {
          RFC ZZZZ:
            YANG Data Model for a 'Keystore' Mechanism";
       choice auth-type {
-        mandatory true;
         description
           "A choice amongst available authentication types.";
         container certificate {
