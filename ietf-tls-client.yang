@@ -129,11 +129,14 @@ module ietf-tls-client {
     container client-identity {
       nacm:default-deny-write;
       description
-        "A locally-defined or referenced end-entity certificate,
-         including any configured intermediate certificates, the
-         TLS client may present when establishing a TLS connection
-         in its Certificate message, as defined in Section 7.4.2
-         in RFC 5246.";
+        "Identity credentials the TLS client MAY present when
+         establishing a connection to a TLS server.  If not
+         configured, then client authentication is presumed to
+         occur a protocol layer above TLS.  When configured,
+         and requested by the TLS server when establishing a
+         TLS session, these credentials are passed in the
+         Certificate message defined in Section 7.4.2 of
+         RFC 5246.";
       reference
         "RFC 5246:
            The Transport Layer Security (TLS) Protocol Version 1.2
@@ -167,9 +170,24 @@ module ietf-tls-client {
         container psk {
           if-feature psk-auth;
           description
-            "Specifies the client identity using a PSK.";
-          uses ks:local-or-keystore-symmetric-key-grouping;
+            "Specifies the client identity using a PSK (pre-shared
+            or pairwise-symmetric key).  Note that, when the PSK is
+            configured as a Keystore reference, the key's 'name'
+            node MAY be used as the PSK's ID when used by the TLS
+            protocol.";
+          uses ks:local-or-keystore-symmetric-key-grouping {
+            augment "local-or-keystore/local/local-definition" {
+              if-feature "ks:local-definitions-supported";
+              description
+                "Adds an 'id' value when the PSK is used by TLS.";
+              leaf id {
+                type string;  // is this the right type?
+                description
+                  "The key id used in the TLS protocol for PSKs.";
+              }
+            }
           // FIXME: add a must expression contraining key-formats?
+          }
         }
       }
     } // container client-identity
@@ -235,8 +253,8 @@ module ietf-tls-client {
            using a configure PSK (pre-shared or pairwise-symmetric
            key).";
         description
-          "No configuration is required since the PSK value would be
-           the same as PSK value configured in the 'client-identity'
+          "No configuration is required since the PSK value is the
+           same as PSK value configured in the 'client-identity'
            node.";
       }
     } // container server-authentication
@@ -279,6 +297,6 @@ module ietf-tls-client {
            the TLS server before assuming the TLS server is
            no longer alive.";
       }
-    } // container keepalives
-  } // grouping tls-client-grouping
-}
+    }
+  } // container tls-client-grouping
+} // module ietf-tls-client

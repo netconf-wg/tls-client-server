@@ -100,12 +100,6 @@ module ietf-tls-server {
        the transport.";
   }
 
-  feature external-client-auth-supported {
-    description
-      "Indicates that the TLS server supports external
-       configuration of client credentials.";
-  }
-
   feature x509-certificate-auth {
     description
       "Indicates that the server supports authenticating clients
@@ -186,8 +180,23 @@ module ietf-tls-server {
         container psk {
           if-feature psk-auth;
           description
-            "Specifies the server identity using a PSK.";
-          uses ks:local-or-keystore-symmetric-key-grouping;
+            "Specifies the server identity using a PSK (pre-shared
+            or pairwise-symmetric key).  Note that, when the PSK is
+            configured as a Keystore reference, the key's 'name'
+            node MAY be used as the PSK's ID when used by the TLS
+            protocol.";
+          uses ks:local-or-keystore-symmetric-key-grouping {
+            augment "local-or-keystore/local/local-definition" {
+              if-feature "ks:local-definitions-supported";
+              description
+                "An 'id' value for when the PSK is used by TLS.";
+              leaf id {
+                type string;  // is this the right type?
+                description
+                  "The key id used in the TLS protocol for PSKs.";
+              }
+            }
+          }
           // FIXME: add a must expression contraining key-formats?
         }
       }
@@ -198,7 +207,9 @@ module ietf-tls-server {
       nacm:default-deny-write;
       presence
         "Indicates that client authentication is supported (i.e., 
-         that the server will request clients send certificates).";
+         that the server will request clients send certificates).
+         If not configured, the TLS server SHOULD NOT request the
+         TLS clients provide authentication credentials.";
       description
         "Specifies how the TLS server can authenticate TLS clients.
          Any combination of credentials is additive and unordered.
@@ -218,7 +229,7 @@ module ietf-tls-server {
            client certificate is authenticated if it has a valid
            chain of trust to a configured CA certificate.";
         reference
-          "RFC YYYY: YANG Data Model for a Truststore";
+          "RFC CCCC: YANG Data Model for a Truststore";
         uses ts:local-or-truststore-certs-grouping;
       }
       container client-certs {   // FIXME: plural too much?
@@ -233,22 +244,33 @@ module ietf-tls-server {
            certificate is authenticated if it is an exact match
            to a configured client certificate.";
         reference
-          "RFC YYYY: YANG Data Model for a Truststore";
+          "RFC CCCC: YANG Data Model for a Truststore";
         uses ts:local-or-truststore-certs-grouping;
       }
       container raw-public-keys {
         if-feature "raw-public-key-auth";
         presence
           "Indicates that the TLS server can authenticate TLS clients
-           using configured client certificates.";
+           using raw public keys.";
         description
           "A set of raw public keys used by the TLS server to
            authenticate raw public keys presented by the TLS client.
            A raw public key is authenticated if it is an exact match
            to a configured raw public key.";
         reference
-          "RFC YYYY: YANG Data Model for a Truststore";
+          "RFC CCCC: YANG Data Model for a Truststore";
         uses ts:local-or-truststore-raw-pub-keys-grouping;
+      }
+      container psks {
+        if-feature "psk-auth";
+        presence
+          "Indicates that the TLS server can authenticate the TLS
+           client using its PSK (pre-shared or pairwise-symmetric
+           key).";
+        description
+          "No configuration is required since the PSK value is the
+           same as PSK value configured in the 'client-identity'
+           node.";
       }
     } // container client-authentication
 
