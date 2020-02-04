@@ -19,10 +19,18 @@
   <!-- which certificates will this client trust -->
   <server-authentication>
     <ca-certs>
-      <truststore-reference>explicitly-trusted-server-ca-certs</truststore-reference>
+      <local-definition>
+        <cert>base64encodedvalue==</cert>
+        <cert>base64encodedvalue==</cert>
+        <cert>base64encodedvalue==</cert>
+      </local-definition>
     </ca-certs>
     <server-certs>
-      <truststore-reference>explicitly-trusted-server-certs</truststore-reference>
+      <local-definition>
+        <cert>base64encodedvalue==</cert>
+        <cert>base64encodedvalue==</cert>
+        <cert>base64encodedvalue==</cert>
+      </local-definition>
     </server-certs>
   </server-authentication>
 
