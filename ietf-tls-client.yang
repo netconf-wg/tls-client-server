@@ -145,48 +145,56 @@ module ietf-tls-client {
       choice auth-type {
         description
           "A choice amongst available authentication types.";
-        container certificate {
+        case certificate {
           if-feature x509-certificate-auth;
-          description
-            "Specifies the client identity using a certificate.";
-          uses ks:local-or-keystore-end-entity-cert-with-key-grouping
-            {
-            refine "local-or-keystore/local/local-definition" {
-              must 'public-key-format =
-                                "ct:subject-public-key-info-format"';
+          container certificate {
+            description
+              "Specifies the client identity using a certificate.";
+            uses 
+              ks:local-or-keystore-end-entity-cert-with-key-grouping
+              {
+              refine "local-or-keystore/local/local-definition" {
+                must 'public-key-format =
+                               "ct:subject-public-key-info-format"';
+              }
+              // FIXME: also need a must expression to ensure the
+              //        *referenced* key's public-key-format is
+              //        "ct:subject-public-key-info-format"
             }
-            // FIXME: also need a must expression to ensure the
-            //        *referenced* key's public-key-format is
-            //        "ct:subject-public-key-info-format"
           }
         }
-        container raw-public-key {
+        case raw-public-key {
           if-feature raw-public-key-auth;
-          description
-            "Specifies the client identity using a raw private key.";
-          uses ks:local-or-keystore-asymmetric-key-grouping;
-          // FIXME: add a must expression contraining key-formats?
+          container raw-public-key {
+            description
+              "Specifies the client identity using a raw
+               private key.";
+            uses ks:local-or-keystore-asymmetric-key-grouping;
+            // FIXME: add a must expression contraining key-formats?
+          }
         }
-        container psk {
+        case psk {
           if-feature psk-auth;
-          description
-            "Specifies the client identity using a PSK (pre-shared
-            or pairwise-symmetric key).  Note that, when the PSK is
-            configured as a Keystore reference, the key's 'name'
-            node MAY be used as the PSK's ID when used by the TLS
-            protocol.";
-          uses ks:local-or-keystore-symmetric-key-grouping {
-            augment "local-or-keystore/local/local-definition" {
-              if-feature "ks:local-definitions-supported";
-              description
-                "Adds an 'id' value when the PSK is used by TLS.";
-              leaf id {
-                type string;  // is this the right type?
+          container psk {
+            description
+              "Specifies the client identity using a PSK (pre-shared
+              or pairwise-symmetric key).  Note that, when the PSK is
+              configured as a Keystore reference, the key's 'name'
+              node MAY be used as the PSK's ID when used by the TLS
+              protocol.";
+            uses ks:local-or-keystore-symmetric-key-grouping {
+              augment "local-or-keystore/local/local-definition" {
+                if-feature "ks:local-definitions-supported";
                 description
-                  "The key id used in the TLS protocol for PSKs.";
+                  "Adds an 'id' value when the PSK is used by TLS.";
+                leaf id {
+                  type string;  // is this the right type?
+                  description
+                    "The key id used in the TLS protocol for PSKs.";
+                }
               }
+            // FIXME: add a must expression contraining key-formats?
             }
-          // FIXME: add a must expression contraining key-formats?
           }
         }
       }

@@ -917,6 +917,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
             <t>Added augment to uses of local-or-keystore-symmetric-key-grouping for a psk "id" node.</t>
             <t>Added missing presence container "psks" to ietf-tls-server's "client-authentication" container.</t>
             <t>Updated examples to reflect new "bag" addition to truststore.</t>
+            <t>Removed feature-limited caseless 'case' statements to improve tree diagram rendering.</t>
           </list>
         </t>
       </section>
