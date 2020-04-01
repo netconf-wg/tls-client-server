@@ -175,7 +175,7 @@ INSERT_TEXT_FROM_FILE(refs/ex-tls-client-keystore.xml)
           <figure>
             <preamble>&lt;CODE BEGINS&gt; file "ietf-tls-client@YYYY-MM-DD.yang"</preamble>
             <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(ietf-tls-client@YYYY-MM-DD.yang,71)
+INSERT_TEXT_FROM_FILE(ietf-tls-client@YYYY-MM-DD.yang)
 ]]></artwork>
             <postamble>&lt;CODE ENDS&gt;</postamble>
           </figure>
@@ -918,6 +918,10 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
             <t>Added missing presence container "psks" to ietf-tls-server's "client-authentication" container.</t>
             <t>Updated examples to reflect new "bag" addition to truststore.</t>
             <t>Removed feature-limited caseless 'case' statements to improve tree diagram rendering.</t>
+            <t>Refined truststore/keystore groupings to ensure the key formats "must" be particular values.</t>
+            <t>Switched to using truststore's new "public-key" bag (instead of separate "ssh-public-key"
+              and "raw-public-key" bags.</t>
+            <t>Updated client/server examples to cover ALL cases (local/ref x cert/raw-key/psk).</t>
           </list>
         </t>
       </section>

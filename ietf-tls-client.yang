@@ -151,26 +151,36 @@ module ietf-tls-client {
             description
               "Specifies the client identity using a certificate.";
             uses 
-              ks:local-or-keystore-end-entity-cert-with-key-grouping
-              {
+              ks:local-or-keystore-end-entity-cert-with-key-grouping{
               refine "local-or-keystore/local/local-definition" {
-                must 'public-key-format =
-                               "ct:subject-public-key-info-format"';
+                must 'public-key-format'
+                     + ' = "ct:subject-public-key-info-format"';
               }
-              // FIXME: also need a must expression to ensure the
-              //        *referenced* key's public-key-format is
-              //        "ct:subject-public-key-info-format"
+              refine "local-or-keystore/keystore/keystore-reference"
+                     + "/asymmetric-key" {
+                must 'deref(.)/../ks:public-key-format'
+                     + ' = "ct:subject-public-key-info-format"';
+              }
             }
           }
         }
         case raw-public-key {
           if-feature raw-public-key-auth;
-          container raw-public-key {
+          container raw-private-key {
             description
               "Specifies the client identity using a raw
                private key.";
-            uses ks:local-or-keystore-asymmetric-key-grouping;
-            // FIXME: add a must expression contraining key-formats?
+            uses ks:local-or-keystore-asymmetric-key-grouping {
+              refine "local-or-keystore/local/local-definition" {
+                must 'public-key-format'
+                     + ' = "ct:subject-public-key-info-format"';
+              }
+              refine "local-or-keystore/keystore"
+                     + "/keystore-reference" {
+                must 'deref(.)/../ks:public-key-format'
+                     + ' = "ct:subject-public-key-info-format"';
+              }
+            }
           }
         }
         case psk {
@@ -193,7 +203,6 @@ module ietf-tls-client {
                     "The key id used in the TLS protocol for PSKs.";
                 }
               }
-            // FIXME: add a must expression contraining key-formats?
             }
           }
         }
@@ -224,12 +233,14 @@ module ietf-tls-client {
         reference
           "RFC YYYY: YANG Data Model for a Truststore";
         uses ts:local-or-truststore-certs-grouping;
+          // Note: TS certs don't have a key-format...no test needed
       }
-      container server-certs {   // FIXME: plural too much?
+      container server-certs {
+        // FIXME: plural too much?  rename to ee-certs?
         if-feature "x509-certificate-auth";
         presence
-          "Indicates that the TLS client can authenticate TLS servers
-           using configured server certificates.";
+          "Indicates that the TLS client can authenticate TLS
+           servers using configured server certificates.";
         description
           "A set of server certificates (i.e., end entity
            certificates) used by the TLS client to authenticate
@@ -239,20 +250,32 @@ module ietf-tls-client {
         reference
           "RFC YYYY: YANG Data Model for a Truststore";
         uses ts:local-or-truststore-certs-grouping;
+          // Note: TS certs don't have a key-format...no test needed
       }
       container raw-public-keys {
         if-feature "raw-public-key-auth";
         presence
-          "Indicates that the TLS client can authenticate TLS servers
-           using configured server certificates.";
+          "Indicates that the TLS client can authenticate TLS
+           servers using configured server certificates.";
         description
           "A set of raw public keys used by the TLS client to
-           authenticate raw public keys presented by the TLS server.
-           A raw public key is authenticated if it is an exact match
-           to a configured raw public key.";
+           authenticate raw public keys presented by the TLS
+           server.  A raw public key is authenticated if it
+           is an exact match to a configured raw public key.";
         reference
           "RFC YYYY: YANG Data Model for a Truststore";
-        uses ts:local-or-truststore-raw-pub-keys-grouping;
+        uses ts:local-or-truststore-public-keys-grouping {
+          refine "local-or-truststore/local/local-definition"
+                 + "/public-key" {
+            must 'public-key-format'
+                 + ' = "ct:subject-public-key-info-format"';
+          }
+          refine "local-or-truststore/truststore"
+                 + "/truststore-reference" {
+            must 'deref(.)/../*/ts:public-key-format'
+                 + ' = "ct:subject-public-key-info-format"';
+          }
+        }
       }
       container psks {
         if-feature "psk-auth";
@@ -306,5 +329,5 @@ module ietf-tls-client {
            no longer alive.";
       }
     }
-  } // container tls-client-grouping
+  } // grouping tls-client-grouping
 } // module ietf-tls-client
