@@ -69,4 +69,7 @@
     <psks/>
   </client-authentication>
 
+  <keepalives>
+    <peer-allowed-to-send/>
+  </keepalives>
 </tls-server>

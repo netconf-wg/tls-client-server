@@ -315,32 +315,48 @@ module ietf-tls-server {
     container keepalives {
       nacm:default-deny-write;
       if-feature "tls-server-keepalives";
-      presence "Indicates that keepalives are enabled.";
       description
-        "Configures the keep-alive policy, to proactively test
-         the aliveness of the TLS client.  An unresponsive
-         TLS client is dropped after approximately max-wait
-         * max-attempts seconds.";
-      leaf max-wait {
-        type uint16 {
-          range "1..max";
-        }
-        units "seconds";
-        default "30";
+        "Configures the keepalive policy for the TLS server.";
+      leaf peer-allowed-to-send {
+        type empty;
         description
-          "Sets the amount of time in seconds after which if
-           no data has been received from the TLS client, a
-           TLS-level message will be sent to test the
-           aliveness of the TLS client.";
+          "Indicates that the remote TLS client is allowed to send
+           HeartbeatRequest messages, as defined by RFC 6520
+           to this TLS server.";
+        reference
+          "RFC 6520: Transport Layer Security (TLS) and Datagram
+           Transport Layer Security (DTLS) Heartbeat Extension";
       }
-      leaf max-attempts {
-        type uint8;
-        default "3";
+      container test-peer-aliveness {
+        presence
+          "Indicates that the TLS server proactively tests the
+           aliveness of the remote TLS client.";
         description
-          "Sets the maximum number of sequential keep-alive
-           messages that can fail to obtain a response from
-           the TLS client before assuming the TLS client is
-           no longer alive.";
+          "Configures the keep-alive policy to proactively test
+           the aliveness of the TLS client.  An unresponsive
+           TLS client is dropped after approximately max-wait
+           * max-attempts seconds.";
+        leaf max-wait {
+          type uint16 {
+            range "1..max";
+          }
+          units "seconds";
+          default "30";
+          description
+            "Sets the amount of time in seconds after which if
+             no data has been received from the TLS client, a
+             TLS-level message will be sent to test the
+             aliveness of the TLS client.";
+        }
+        leaf max-attempts {
+          type uint8;
+          default "3";
+          description
+            "Sets the maximum number of sequential keep-alive
+             messages that can fail to obtain a response from
+             the TLS client before assuming the TLS client is
+             no longer alive.";
+        }
       }
     } // container keepalives
   } // grouping tls-server-grouping 
