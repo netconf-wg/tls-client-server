@@ -6,7 +6,6 @@
   <server-identity>
     <certificate>
       <local-definition>
-        <algorithm>rsa2048</algorithm>
         <public-key-format>ct:subject-public-key-info-format</public-key-format>
         <public-key>base64encodedvalue==</public-key>
         <private-key-format>ct:rsa-private-key-format</private-key-format>
@@ -17,7 +16,6 @@
     <!-- TESTED, BUT COMMENTED OUT DUE TO ONLY ONE ALLOWED AT A TIME
     <raw-private-key>
       <local-definition>
-        <algorithm>rsa2048</algorithm>
         <public-key-format>ct:subject-public-key-info-format</public-key-format>
         <public-key>base64encodedvalue==</public-key>
         <private-key-format>ct:rsa-private-key-format</private-key-format>
@@ -26,7 +24,6 @@
     </raw-private-key>
     <psk>
       <local-definition>
-        <algorithm>aes-256-cbc</algorithm>
         <key-format>ct:octet-string-key-format</key-format>
         <key>base64encodedvalue==</key>
       </local-definition>
@@ -54,13 +51,11 @@
       <local-definition>
         <public-key>
           <name>User A</name>
-          <algorithm>secp256r1</algorithm>
           <public-key-format>ct:subject-public-key-info-format</public-key-format>
           <public-key>base64encodedvalue==</public-key>
         </public-key>
         <public-key>
           <name>User B</name>
-          <algorithm>secp256r1</algorithm>
           <public-key-format>ct:subject-public-key-info-format</public-key-format>
           <public-key>base64encodedvalue==</public-key>
         </public-key>
