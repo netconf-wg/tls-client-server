@@ -3,11 +3,10 @@ module ietf-tls-server {
   namespace "urn:ietf:params:xml:ns:yang:ietf-tls-server";
   prefix tlss;
 
-  import ietf-tls-common {
-    prefix tlscmn;
-    revision-date YYYY-MM-DD; // stable grouping definitions
+  import ietf-netconf-acm {
+    prefix nacm;
     reference
-      "RFC XXXX: YANG Groupings for TLS Clients and TLS Servers";
+      "RFC 8341: Network Configuration Access Control Model";
   }
 
   import ietf-crypto-types {
@@ -28,10 +27,11 @@ module ietf-tls-server {
       "RFC CCCC: A YANG Data Model for a Keystore";
   }
 
-  import ietf-netconf-acm {
-    prefix nacm;
+  import ietf-tls-common {
+    prefix tlscmn;
+    revision-date YYYY-MM-DD; // stable grouping definitions
     reference
-      "RFC 8341: Network Configuration Access Control Model";
+      "RFC FFFF: YANG Groupings for TLS Clients and TLS Servers";
   }
 
   organization
@@ -47,7 +47,7 @@ module ietf-tls-server {
     "This module defines reusable groupings for TLS servers that
      can be used as a basis for specific TLS server instances.
 
-     Copyright (c) 2019 IETF Trust and the persons identified
+     Copyright (c) 2020 IETF Trust and the persons identified
      as authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with
@@ -57,8 +57,8 @@ module ietf-tls-server {
      Legal Provisions Relating to IETF Documents
      (https://trustee.ietf.org/license-info).
 
-     This version of this YANG module is part of RFC XXXX
-     (https://www.rfc-editor.org/info/rfcXXXX); see the RFC
+     This version of this YANG module is part of RFC FFFF
+     (https://www.rfc-editor.org/info/rfcFFFF); see the RFC
      itself for full legal notices.
 
      The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL',
@@ -72,7 +72,7 @@ module ietf-tls-server {
     description
       "Initial version";
     reference
-      "RFC XXXX: YANG Groupings for TLS Clients and TLS Servers";
+      "RFC FFFF: YANG Groupings for TLS Clients and TLS Servers";
   }
 
   // Features
@@ -302,7 +302,6 @@ module ietf-tls-server {
            node.";
       }
     } // container client-authentication
-
 
     container hello-params {
       nacm:default-deny-write;

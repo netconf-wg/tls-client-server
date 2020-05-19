@@ -17,74 +17,55 @@
      ipr="trust200902">
   <front>
     <title abbrev="Groupings for TLS Clients and Servers">YANG Groupings for
-    TLS Clients and TLS Servers</title>
-
+      TLS Clients and TLS Servers</title>
     <author fullname="Kent Watsen" initials="K." surname="Watsen">
       <organization>Watsen Networks</organization>
-
       <address>
         <email>kent+ietf@watsen.net</email>
       </address>
     </author>
-
     <author fullname="Gary Wu" initials="G." surname="Wu">
       <organization>Cisco Systems</organization>
-
       <address>
         <email>garywu@cisco.com</email>
       </address>
     </author>
-
     <date/>
     <area>Operations</area>
     <workgroup>NETCONF Working Group</workgroup>
-
     <abstract>
       <t>This document defines three YANG modules: the first defines groupings
-      for a generic TLS client, the second defines groupings for a generic TLS
-      server, and the third defines common identities and groupings used by
-      both the client and the server. It is intended that these groupings will
-      be used by applications using the TLS protocol.</t>
+        for a generic TLS client, the second defines groupings for a generic TLS
+        server, and the third defines common identities and groupings used by
+        both the client and the server. It is intended that these groupings will
+        be used by applications using the TLS protocol.</t>
     </abstract>
-
     <note title="Editorial Note (To be removed by RFC Editor)">
-      <t>This draft contains many placeholder values that need to be replaced
-      with finalized values at the time of publication. This note summarizes
-      all of the substitutions that are needed. No other RFC Editor
-      instructions are specified elsewhere in this document.</t>
-
-      <t>This document contains references to other drafts in progress, both
-      in the Normative References section, as well as in body text throughout.
-      Please update the following references to reflect their final RFC
-      assignments: <list style="symbols">
-          <t>I-D.ietf-netconf-trust-anchors</t>
-
-          <t>I-D.ietf-netconf-keystore</t>
-        </list></t>
-
+      <t>This draft contains placeholder values that need to be replaced
+        with finalized values at the time of publication. This note summarizes
+        all of the substitutions that are needed. No other RFC Editor
+        instructions are specified elsewhere in this document.</t>
       <t>Artwork in this document contains shorthand references to drafts in
-      progress. Please apply the following replacements: <list style="symbols">
-          <t><spanx style="verb">XXXX</spanx> --&gt; the assigned RFC value
-          for this draft</t>
-
-          <t><spanx style="verb">YYYY</spanx> --&gt; the assigned RFC value
-          for I-D.ietf-netconf-trust-anchors</t>
-
-          <t><spanx style="verb">ZZZZ</spanx> --&gt; the assigned RFC value
-          for I-D.ietf-netconf-keystore</t>
-        </list></t>
-
+        progress.  Please apply the following replacements:
+        <list style="symbols">
+          <t><spanx style="verb">AAAA</spanx> --&gt; the assigned RFC value for draft-ietf-netconf-crypto-types</t>
+          <t><spanx style="verb">BBBB</spanx> --&gt; the assigned RFC value for draft-ietf-netconf-trust-anchors</t>
+          <t><spanx style="verb">CCCC</spanx> --&gt; the assigned RFC value for draft-ietf-netconf-keystore</t>
+          <t><spanx style="verb">DDDD</spanx> --&gt; the assigned RFC value for draft-ietf-netconf-tcp-client-server</t>
+          <t><spanx style="verb">FFFF</spanx> --&gt; the assigned RFC value for this draft</t>
+        </list>
+      </t>
       <t>Artwork in this document contains placeholder values for the date of
-      publication of this draft. Please apply the following replacement: <list
-          style="symbols">
-          <t><spanx style="verb">YYYY-MM-DD</spanx> --&gt; the publication
-          date of this draft</t>
-        </list></t>
-
+        publication of this draft. Please apply the following replacement:
+        <list style="symbols">
+          <t><spanx style="verb">YYYY-MM-DD</spanx> --&gt; the publication date of this draft</t>
+        </list>
+      </t>
       <t>The following Appendix section is to be removed prior to publication:
-      <list style="symbols">
+        <list style="symbols">
           <t>Appendix A. Change Log</t>
-        </list></t>
+        </list>
+      </t>
     </note>
   </front>
 
@@ -278,247 +259,6 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
       TLS SignatureScheme, TLS Supported Groups. Note that TLS1.2 only uses
       TLS Cipher Suites.</t>
 
-      <t><xref target="I-D.ietf-netconf-crypto-types"/> defines six categories
-      of cryptographic algorithms (hash-algorithm,
-      symmetric-key-encryption-algorithm, mac-algorithm,
-      asymmetric-key-encryption-algorithm, signature-algorithm,
-      key-negotiation-algorithm) and lists several widely accepted algorithms
-      for each of them. The TLS client and server models use one or more of
-      these algorithms. The following tables are provided, in part to define
-      the subset of algorithms defined in the crypto-types model used by TLS,
-      and in part to ensure compatibility of configured TLS cryptographic
-      parameters for configuring its permitted TLS algorithms:<figure
-          title="Table 1-1   TLS 1.2 Compatibility Matrix Part 1: ciper-suites mapping to hash-algorithm">
-          <artwork align="center">+-----------------------------------------------+---------+
-| ciper-suites in hello-params-grouping         |  HASH   |
-+-----------------------------------------------+---------+
-| TLS_DHE_RSA_WITH_AES_128_GCM_SHA256           | sha-256 |
-| TLS_DHE_RSA_WITH_AES_256_GCM_SHA384           | sha-384 |
-| TLS_DHE_PSK_WITH_AES_128_GCM_SHA256           | sha-256 |
-| TLS_DHE_PSK_WITH_AES_256_GCM_SHA384           | sha-384 |
-| TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256       | sha-256 |
-| TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384       | sha-384 |
-| TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256         | sha-256 |
-| TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384         | sha-384 |
-| TLS_DHE_RSA_WITH_AES_128_CCM                  | sha-256 |
-| TLS_DHE_RSA_WITH_AES_256_CCM                  | sha-256 |
-| TLS_DHE_PSK_WITH_AES_128_CCM                  | sha-256 |
-| TLS_DHE_PSK_WITH_AES_256_CCM                  | sha-256 |
-| TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256   | sha-256 |
-| TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 | sha-256 |
-| TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256     | sha-256 |
-| TLS_ECDHE_PSK_WITH_CHACHA20_POLY1305_SHA256   | sha-256 |
-| TLS_DHE_PSK_WITH_CHACHA20_POLY1305_SHA256     | sha-256 |
-| TLS_ECDHE_PSK_WITH_AES_128_GCM_SHA256         | sha-256 |
-| TLS_ECDHE_PSK_WITH_AES_256_GCM_SHA384         | sha-384 |
-| TLS_ECDHE_PSK_WITH_AES_128_CCM_SHA256         | sha-256 |
-+-----------------------------------------------+---------+</artwork>
-        </figure><figure
-          title="Table 1-2   TLS 1.2 Compatibility Matrix Part 2: ciper-suites mapping to symmetric-key-encryption-algorithm">
-          <artwork align="center">+--------------------------------------------- +---------------------+
-|  ciper-suites in hello-params-grouping       |      symmetric      |
-|                                              |                     |
-+--------------------------------------------- +---------------------+
-| TLS_DHE_RSA_WITH_AES_128_GCM_SHA256          |   enc-aes-128-gcm   |
-| TLS_DHE_RSA_WITH_AES_256_GCM_SHA384          |   enc-aes-256-gcm   |
-| TLS_DHE_PSK_WITH_AES_128_GCM_SHA256          |   enc-aes-128-gcm   |
-| TLS_DHE_PSK_WITH_AES_256_GCM_SHA384          |   enc-aes-256-gcm   |
-| TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256      |   enc-aes-128-gcm   |
-| TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384      |   enc-aes-256-gcm   |
-| TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256        |   enc-aes-128-gcm   |
-| TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384        |   enc-aes-256-gcm   |
-| TLS_DHE_RSA_WITH_AES_128_CCM                 |   enc-aes-128-ccm   |
-| TLS_DHE_RSA_WITH_AES_256_CCM                 |   enc-aes-256-ccm   |
-| TLS_DHE_PSK_WITH_AES_128_CCM                 |   enc-aes-128-ccm   |
-| TLS_DHE_PSK_WITH_AES_256_CCM                 |   enc-aes-256-ccm   |
-| TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256  |enc-chacha20-poly1305|
-| TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256|enc-chacha20-poly1305|
-| TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256    |enc-chacha20-poly1305|
-| TLS_ECDHE_PSK_WITH_CHACHA20_POLY1305_SHA256  |enc-chacha20-poly1305|
-| TLS_DHE_PSK_WITH_CHACHA20_POLY1305_SHA256    |enc-chacha20-poly1305|
-| TLS_ECDHE_PSK_WITH_AES_128_GCM_SHA256        |   enc-aes-128-gcm   |
-| TLS_ECDHE_PSK_WITH_AES_256_GCM_SHA384        |   enc-aes-256-gcm   |
-| TLS_ECDHE_PSK_WITH_AES_128_CCM_SHA256        |   enc-aes-128-ccm   |
-+--------------------------------------------- +---------------------+</artwork>
-        </figure><figure
-          title="Table 1-3   TLS 1.2 Compatibility Matrix Part 3: ciper-suites mapping to MAC-algorithm">
-          <artwork align="center">+--------------------------------------------- +---------------------+
-|  ciper-suites in hello-params-grouping       |         MAC         |
-|                                              |                     |
-+--------------------------------------------- +---------------------+
-| TLS_DHE_RSA_WITH_AES_128_GCM_SHA256          |   mac-aes-128-gcm   |
-| TLS_DHE_RSA_WITH_AES_256_GCM_SHA384          |   mac-aes-256-gcm   |
-| TLS_DHE_PSK_WITH_AES_128_GCM_SHA256          |   mac-aes-128-gcm   |
-| TLS_DHE_PSK_WITH_AES_256_GCM_SHA384          |   mac-aes-256-gcm   |
-| TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256      |   mac-aes-128-gcm   |
-| TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384      |   mac-aes-256-gcm   |
-| TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256        |   mac-aes-128-gcm   |
-| TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384        |   mac-aes-256-gcm   |
-| TLS_DHE_RSA_WITH_AES_128_CCM                 |   mac-aes-128-ccm   |
-| TLS_DHE_RSA_WITH_AES_256_CCM                 |   mac-aes-256-ccm   |
-| TLS_DHE_PSK_WITH_AES_128_CCM                 |   mac-aes-128-ccm   |
-| TLS_DHE_PSK_WITH_AES_256_CCM                 |   mac-aes-256-ccm   |
-| TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256  |mac-chacha20-poly1305|
-| TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256|mac-chacha20-poly1305|
-| TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256    |mac-chacha20-poly1305|
-| TLS_ECDHE_PSK_WITH_CHACHA20_POLY1305_SHA256  |mac-chacha20-poly1305|
-| TLS_DHE_PSK_WITH_CHACHA20_POLY1305_SHA256    |mac-chacha20-poly1305|
-| TLS_ECDHE_PSK_WITH_AES_128_GCM_SHA256        |   mac-aes-128-gcm   |
-| TLS_ECDHE_PSK_WITH_AES_256_GCM_SHA384        |   mac-aes-256-gcm   |
-| TLS_ECDHE_PSK_WITH_AES_128_CCM_SHA256        |   mac-aes-128-ccm   |
-+--------------------------------------------- +---------------------+</artwork>
-        </figure><figure
-          title="Table 1-4   TLS 1.2 Compatibility Matrix Part 4: ciper-suites mapping to signature-algorithm">
-          <artwork align="center">+----------------------------------------------+----------------------+
-|ciper-suites in hello-params-grouping         |        signature     |
-+--------------------------------------------- +----------------------+
-| TLS_DHE_RSA_WITH_AES_128_GCM_SHA256          | rsa-pkcs1-sha256     |
-| TLS_DHE_RSA_WITH_AES_256_GCM_SHA384          | rsa-pkcs1-sha384     |
-| TLS_DHE_PSK_WITH_AES_128_GCM_SHA256          |         N/A          |
-| TLS_DHE_PSK_WITH_AES_256_GCM_SHA384          |         N/A          |
-| TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256      |ecdsa-secp256r1-sha256|
-| TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384      |ecdsa-secp384r1-sha384|
-| TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256        | rsa-pkcs1-sha256     |
-| TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384        | rsa-pkcs1-sha384     |
-| TLS_DHE_RSA_WITH_AES_128_CCM                 | rsa-pkcs1-sha256     |
-| TLS_DHE_RSA_WITH_AES_256_CCM                 | rsa-pkcs1-sha256     |
-| TLS_DHE_PSK_WITH_AES_128_CCM                 |         N/A          |
-| TLS_DHE_PSK_WITH_AES_256_CCM                 |         N/A          |
-| TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256  | rsa-pkcs1-sha256     |
-| TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256|ecdsa-secp256r1-sha256|
-| TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256    | rsa-pkcs1-sha256     |
-| TLS_ECDHE_PSK_WITH_CHACHA20_POLY1305_SHA256  |         N/A          |
-| TLS_DHE_PSK_WITH_CHACHA20_POLY1305_SHA256    |         N/A          |
-| TLS_ECDHE_PSK_WITH_AES_128_GCM_SHA256        |         N/A          |
-| TLS_ECDHE_PSK_WITH_AES_256_GCM_SHA384        |         N/A          |
-| TLS_ECDHE_PSK_WITH_AES_128_CCM_SHA256        |         N/A          |
-+----------------------------------------------+----------------------+</artwork>
-        </figure><figure
-          title="Table 1-5   TLS 1.2 Compatibility Matrix Part 5: ciper-suites mapping to key-negotiation-algorithm">
-          <artwork align="center">+----------------------------------------------+-----------------------+
-|ciper-suites in hello-params-grouping         |     key-negotiation   |
-+----------------------------------------------+-----------------------+
-| TLS_DHE_RSA_WITH_AES_128_GCM_SHA256          | dhe-ffdhe2048, ...    |
-| TLS_DHE_RSA_WITH_AES_256_GCM_SHA384          | dhe-ffdhe2048, ...    |
-| TLS_DHE_PSK_WITH_AES_128_GCM_SHA256          | psk-dhe-ffdhe2048, ...|
-| TLS_DHE_PSK_WITH_AES_256_GCM_SHA384          | psk-dhe-ffdhe2048, ...|
-| TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256      | ecdhe-secp256r1, ...  |
-| TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384      | ecdhe-secp256r1, ...  |
-| TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256        | ecdhe-secp256r1, ...  |
-| TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384        | ecdhe-secp256r1, ...  |
-| TLS_DHE_RSA_WITH_AES_128_CCM                 | dhe-ffdhe2048, ...    |
-| TLS_DHE_RSA_WITH_AES_256_CCM                 | dhe-ffdhe2048, ...    |
-| TLS_DHE_PSK_WITH_AES_128_CCM                 | psk-dhe-ffdhe2048, ...|
-| TLS_DHE_PSK_WITH_AES_256_CCM                 | psk-dhe-ffdhe2048, ...|
-| TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256  | ecdhe-secp256r1, ...  |
-| TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256| ecdhe-secp256r1, ...  |
-| TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256    | dhe-ffdhe2048, ...    |
-| TLS_ECDHE_PSK_WITH_CHACHA20_POLY1305_SHA256  |psk-ecdhe-secp256r1,...|
-| TLS_DHE_PSK_WITH_CHACHA20_POLY1305_SHA256    | psk-dhe-ffdhe2048, ...|
-| TLS_ECDHE_PSK_WITH_AES_128_GCM_SHA256        |psk-ecdhe-secp256r1,...|
-| TLS_ECDHE_PSK_WITH_AES_256_GCM_SHA384        |psk-ecdhe-secp256r1,...|
-| TLS_ECDHE_PSK_WITH_AES_128_CCM_SHA256        |psk-ecdhe-secp256r1,...|
-+----------------------------------------------+-----------------------+</artwork>
-        </figure><figure
-          title="Table 2-1   TLS 1.3 Compatibility Matrix Part 1: ciper-suites mapping to hash-algorithm">
-          <artwork align="center">+------------------------------+---------+
-|    ciper-suites in hello     |   HASH  |
-|      -params-grouping        |         |
-+------------------------------+---------+
-| TLS_AES_128_GCM_SHA256       | sha-256 |
-| TLS_AES_256_GCM_SHA384       | sha-384 |
-| TLS_CHACHA20_POLY1305_SHA256 | sha-256 |
-| TLS_AES_128_CCM_SHA256       | sha-256 |
-+------------------------------+---------+</artwork>
-        </figure><figure
-          title="Table 2-2   TLS 1.3 Compatibility Matrix Part 2: ciper-suites mapping to symmetric-key--encryption-algorithm">
-          <artwork align="center">+------------------------------+-----------------------+
-|    ciper-suites in hello     |    symmetric          |
-|      -params-grouping        |                       |
-+------------------------------+-----------------------+
-| TLS_AES_128_GCM_SHA256       | enc-aes-128-gcm       |
-| TLS_AES_256_GCM_SHA384       | enc-aes-128-gcm       |
-| TLS_CHACHA20_POLY1305_SHA256 | enc-chacha20-poly1305 |
-| TLS_AES_128_CCM_SHA256       | enc-aes-128-ccm       |
-+------------------------------+-----------------------+</artwork>
-        </figure><figure
-          title="Table 2-3   TLS 1.3 Compatibility Matrix Part 3: ciper-suites mapping to MAC-algorithm">
-          <artwork align="center">+------------------------------+-----------------------+
-|    ciper-suites in hello     |    symmetric          |
-|      -params-grouping        |                       |
-+------------------------------+-----------------------+
-| TLS_AES_128_GCM_SHA256       | mac-aes-128-gcm       |
-| TLS_AES_256_GCM_SHA384       | mac-aes-128-gcm       |
-| TLS_CHACHA20_POLY1305_SHA256 | mac-chacha20-poly1305 |
-| TLS_AES_128_CCM_SHA256       | mac-aes-128-ccm       |
-+------------------------------+-----------------------+</artwork>
-        </figure><figure
-          title="Table 2-4   TLS 1.3 Compatibility Matrix Part 4: SignatureScheme mapping to signature-algorithm">
-          <artwork align="center">+----------------------------+-------------------------+
-|signatureScheme in hello    |  signature              |
-|   -params-grouping         |                         |
-+----------------------------+-------------------------+
-| rsa-pkcs1-sha256           |  rsa-pkcs1-sha256       |
-| rsa-pkcs1-sha384           |  rsa-pkcs1-sha384       |
-| rsa-pkcs1-sha512           |  rsa-pkcs1-sha512       |
-| rsa-pss-rsae-sha256        |  rsa-pss-rsae-sha256    |
-| rsa-pss-rsae-sha384        |  rsa-pss-rsae-sha384    |
-| rsa-pss-rsae-sha512        |  rsa-pss-rsae-sha512    |
-| rsa-pss-pss-sha256         |  rsa-pss-pss-sha256     |
-| rsa-pss-pss-sha384         |  rsa-pss-pss-sha384     |
-| rsa-pss-pss-sha512         |  rsa-pss-pss-sha512     |
-| ecdsa-secp256r1-sha256     |  ecdsa-secp256r1-sha256 |
-| ecdsa-secp384r1-sha384     |  ecdsa-secp384r1-sha384 |
-| ecdsa-secp521r1-sha512     |  ecdsa-secp521r1-sha512 |
-| ed25519                    |  ed25519                |
-| ed448                      |  ed448                  |
-+----------------------------+-------------------------+</artwork>
-        </figure><figure
-          title="Table 2-5   TLS 1.3 Compatibility Matrix Part 5: Supported Groups mapping to key-negotiation-algorithm">
-          <artwork align="center">+----------------------------+-------------------------+
-|supported Groups in hello   |     key-negotiation     |
-|   -params-grouping         |                         |
-+----------------------------+-------------------------+
-| dhe-ffdhe2048              | dhe-ffdhe2048           |
-| dhe-ffdhe3072              | dhe-ffdhe3072           |
-| dhe-ffdhe4096              | dhe-ffdhe4096           |
-| dhe-ffdhe6144              | dhe-ffdhe6144           |
-| dhe-ffdhe8192              | dhe-ffdhe8192           |
-| psk-dhe-ffdhe2048          | psk-dhe-ffdhe2048       |
-| psk-dhe-ffdhe3072          | psk-dhe-ffdhe3072       |
-| psk-dhe-ffdhe4096          | psk-dhe-ffdhe4096       |
-| psk-dhe-ffdhe6144          | psk-dhe-ffdhe6144       |
-| psk-dhe-ffdhe8192          | psk-dhe-ffdhe8192       |
-| ecdhe-secp256r1            | ecdhe-secp256r1         |
-| ecdhe-secp384r1            | ecdhe-secp384r1         |
-| ecdhe-secp521r1            | ecdhe-secp521r1         |
-| ecdhe-x25519               | ecdhe-x25519            |
-| ecdhe-x448                 | ecdhe-x448              |
-| psk-ecdhe-secp256r1        | psk-ecdhe-secp256r1     |
-| psk-ecdhe-secp384r1        | psk-ecdhe-secp384r1     |
-| psk-ecdhe-secp521r1        | psk-ecdhe-secp521r1     |
-| psk-ecdhe-x25519           | psk-ecdhe-x25519        |
-| psk-ecdhe-x448             | psk-ecdhe-x448          |
-+----------------------------+-------------------------+
-</artwork>
-        </figure></t>
-
-      <t>Note that in Table 1-5:<list style="symbols">
-          <t>dhe-ffdhe2048, ... is the abbreviation of dhe-ffdhe2048,
-          dhe-ffdhe3072, dhe-ffdhe4096, dhe-ffdhe6144, dhe-ffdhe8192;</t>
-
-          <t>psk-dhe-ffdhe2048, ... is the abbreviation of psk-dhe-ffdhe2048,
-          psk-dhe-ffdhe3072, psk-dhe-ffdhe4096, psk-dhe-ffdhe6144,
-          psk-dhe-ffdhe8192;</t>
-
-          <t>ecdhe-secp256r1, ... is the abbreviation of ecdhe-secp256r1,
-          ecdhe-secp384r1, ecdhe-secp521r1, ecdhe-x25519, ecdhe-x448;</t>
-
-          <t>psk-ecdhe-secp256r1, ... is the abbreviation of
-          psk-ecdhe-secp256r1, psk-ecdhe-secp384r1, psk-ecdhe-secp521r1,
-          psk-ecdhe-x25519, psk-ecdhe-x448.</t>
-        </list></t>
-
       <t>Features are defined for algorithms that are OPTIONAL or are not
       widely supported by popular implementations. Note that the list of
       algorithms is not exhaustive.</t>
@@ -675,17 +415,17 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
    name:         ietf-tls-client
    namespace:    urn:ietf:params:xml:ns:yang:ietf-tls-client
    prefix:       tlsc
-   reference:    RFC XXXX
+   reference:    RFC FFFF
 
    name:         ietf-tls-server
    namespace:    urn:ietf:params:xml:ns:yang:ietf-tls-server
    prefix:       tlss
-   reference:    RFC XXXX
+   reference:    RFC FFFF
 
    name:         ietf-tls-common
    namespace:    urn:ietf:params:xml:ns:yang:ietf-tls-common
    prefix:       tlscmn
-   reference:    RFC XXXX
+   reference:    RFC FFFF
 </artwork>
           </figure></t>
       </section>
@@ -920,6 +660,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
           <list style="symbols">
             <t>Updated the "keepalives" containers in part to address Michal Vasko's request to
               align with RFC 8071, and in part to better align to RFC 6520.</t>
+            <t>Removed algorithm-mapping tables from the "TLS Common Model" section</t>
             <t>Removed the 'algorithm' node from the examples.</t>
           </list>
         </t>
