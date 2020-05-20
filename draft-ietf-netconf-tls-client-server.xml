@@ -115,8 +115,8 @@ INSERT_TEXT_FROM_FILE(refs/ietf-tls-client-tree-no-expand.txt)
       </section>
 
       <section title="Example Usage">
-        <t>This section presents two examples showing the tls-client-grouping
-        populated with some data. These examples are effectively the same
+        <t>This section presents two examples showing the "tls-client-grouping"
+        grouping populated with some data. These examples are effectively the same
         except the first configures the client identity using a local key
         while the second uses a key configured in a keystore. Both examples
         are consistent with the examples presented in Section 2 of <xref
@@ -169,8 +169,8 @@ INSERT_TEXT_FROM_FILE(refs/ietf-tls-server-tree-no-expand.txt)
       </section>
 
       <section title="Example Usage">
-        <t>This section presents two examples showing the tls-server-grouping
-        populated with some data. These examples are effectively the same
+        <t>This section presents two examples showing the "tls-server-grouping"
+        grouping populated with some data. These examples are effectively the same
         except the first configures the server identity using a local key
         while the second uses a key configured in a keystore. Both examples
         are consistent with the examples presented in Section 2 of <xref
@@ -212,7 +212,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
     <section anchor="tls-common-model" title="The TLS Common Model">
       <t>The TLS common model presented in this section contains identities
       and groupings common to both TLS clients and TLS servers. The
-      hello-params-grouping can be used to configure the list of TLS
+      "hello-params-grouping" grouping can be used to configure the list of TLS
       algorithms permitted by the TLS client or TLS server. The lists of
       algorithms are ordered such that, if multiple algorithms are permitted
       by the client, the algorithm that appears first in its list that is also
@@ -255,7 +255,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
         </list></t>
 
       <t>Thus, in order to support both TLS1.2 and TLS1.3, the cipher-suites
-      part of the hello-params-grouping should include three parameters for
+      part of the "hello-params-grouping" grouping should include three parameters for
       configuring its permitted TLS algorithms, which are: TLS Cipher Suites,
       TLS SignatureScheme, TLS Supported Groups. Note that TLS1.2 only uses
       TLS Cipher Suites.</t>
@@ -277,7 +277,7 @@ INSERT_TEXT_FROM_FILE(refs/ietf-tls-common-tree.txt)
 
       <section title="Example Usage">
         <t>This section shows how it would appear if the
-        transport-params-grouping were populated with some data.</t>
+        "hello-params-grouping" grouping were populated with some data.</t>
 
         <t><figure>
             <artwork><![CDATA[

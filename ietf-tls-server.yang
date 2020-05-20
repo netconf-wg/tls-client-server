@@ -206,7 +206,7 @@ module ietf-tls-server {
                 description
                   "An 'id' value for when the PSK is used by TLS.";
                 leaf id {
-                  type string;  // is this the right type?
+                  type string;  // FIXME: is this the right type?
                   description
                     "The key id used in the TLS protocol for PSKs.";
                 }
@@ -246,7 +246,6 @@ module ietf-tls-server {
         reference
           "RFC BBBB: A YANG Data Model for a Truststore";
         uses ts:local-or-truststore-certs-grouping;
-          // Note: TS certs don't have a key-format...no test needed
       }
       container ee-certs {   // FIXME: plural too much?
         if-feature "x509-certificate-auth";
@@ -262,7 +261,6 @@ module ietf-tls-server {
         reference
           "RFC BBBB: A YANG Data Model for a Truststore";
         uses ts:local-or-truststore-certs-grouping;
-          // Note: TS certs don't have a key-format...no test needed
       }
       container raw-public-keys {
         if-feature "raw-public-key-auth";
