@@ -147,10 +147,9 @@ module ietf-tls-server {
          in its Certificate message, as defined in Section 7.4.2
          in RFC 5246.";
       reference
-        "RFC 5246:
-           The Transport Layer Security (TLS) Protocol Version 1.2
-         RFC ZZZZ:
-           YANG Data Model for a 'Keystore' Mechanism";
+        "RFC 5246: The Transport Layer Security (TLS) Protocol
+                   Version 1.2
+         RFC CCCC: A YANG Data Model for a Keystore";
       choice auth-type {
         mandatory true;
         description
@@ -245,11 +244,11 @@ module ietf-tls-server {
            client certificate is authenticated if it has a valid
            chain of trust to a configured CA certificate.";
         reference
-          "RFC CCCC: YANG Data Model for a Truststore";
+          "RFC BBBB: A YANG Data Model for a Truststore";
         uses ts:local-or-truststore-certs-grouping;
           // Note: TS certs don't have a key-format...no test needed
       }
-      container client-certs {   // FIXME: plural too much?
+      container ee-certs {   // FIXME: plural too much?
         if-feature "x509-certificate-auth";
         presence
           "Indicates that the TLS server can authenticate TLS
@@ -261,7 +260,7 @@ module ietf-tls-server {
            certificate is authenticated if it is an exact
            match to a configured client certificate.";
         reference
-          "RFC CCCC: YANG Data Model for a Truststore";
+          "RFC BBBB: A YANG Data Model for a Truststore";
         uses ts:local-or-truststore-certs-grouping;
           // Note: TS certs don't have a key-format...no test needed
       }
@@ -276,7 +275,7 @@ module ietf-tls-server {
            client.  A raw public key is authenticated if it
            is an exact match to a configured raw public key.";
         reference
-          "RFC CCCC: YANG Data Model for a Truststore";
+          "RFC BBBB: A YANG Data Model for a Truststore";
         uses ts:local-or-truststore-public-keys-grouping {
           refine "local-or-truststore/local/local-definition"
                  + "/public-key" {

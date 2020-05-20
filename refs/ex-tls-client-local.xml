@@ -40,13 +40,13 @@
         <cert>base64encodedvalue==</cert>
       </local-definition>
     </ca-certs>
-    <server-certs>
+    <ee-certs>
       <local-definition>
         <cert>base64encodedvalue==</cert>
         <cert>base64encodedvalue==</cert>
         <cert>base64encodedvalue==</cert>
       </local-definition>
-    </server-certs>
+    </ee-certs>
     <raw-public-keys>
       <local-definition>
         <public-key>

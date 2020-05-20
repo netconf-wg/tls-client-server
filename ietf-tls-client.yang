@@ -138,10 +138,9 @@ module ietf-tls-client {
          Certificate message defined in Section 7.4.2 of
          RFC 5246.";
       reference
-        "RFC 5246:
-           The Transport Layer Security (TLS) Protocol Version 1.2
-         RFC ZZZZ:
-           YANG Data Model for a 'Keystore' Mechanism";
+        "RFC 5246: The Transport Layer Security (TLS) Protocol
+                   Version 1.2
+         RFC CCCC: A YANG Data Model for a Keystore";
       choice auth-type {
         description
           "A choice amongst available authentication types.";
@@ -231,12 +230,11 @@ module ietf-tls-client {
            A server certificate is authenticated if it has a valid
            chain of trust to a configured CA certificate.";
         reference
-          "RFC YYYY: YANG Data Model for a Truststore";
+          "RFC BBBB: A YANG Data Model for a Truststore";
         uses ts:local-or-truststore-certs-grouping;
           // Note: TS certs don't have a key-format...no test needed
       }
-      container server-certs {
-        // FIXME: plural too much?  rename to ee-certs?
+      container ee-certs { // FIXME: plural too much?
         if-feature "x509-certificate-auth";
         presence
           "Indicates that the TLS client can authenticate TLS
@@ -248,7 +246,7 @@ module ietf-tls-client {
            certificate is authenticated if it is an exact
            match to a configured server certificate.";
         reference
-          "RFC YYYY: YANG Data Model for a Truststore";
+          "RFC BBBB: A YANG Data Model for a Truststore";
         uses ts:local-or-truststore-certs-grouping;
           // Note: TS certs don't have a key-format...no test needed
       }
@@ -263,7 +261,7 @@ module ietf-tls-client {
            server.  A raw public key is authenticated if it
            is an exact match to a configured raw public key.";
         reference
-          "RFC YYYY: YANG Data Model for a Truststore";
+          "RFC BBBB: A YANG Data Model for a Truststore";
         uses ts:local-or-truststore-public-keys-grouping {
           refine "local-or-truststore/local/local-definition"
                  + "/public-key" {
