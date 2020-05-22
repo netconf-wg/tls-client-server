@@ -210,7 +210,7 @@ module ietf-tls-client {
 
     container server-authentication {
       nacm:default-deny-write;
-      must 'ca-certs or server-certs';
+      must 'ca-certs or ee-certs or raw-public-keys or psks';
       description
         "Specifies how the TLS client can authenticate TLS servers.
          Any combination of credentials is additive and unordered.

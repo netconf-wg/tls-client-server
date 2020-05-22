@@ -668,6 +668,18 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
           </list>
         </t>
       </section>
+      <section title="19 to 20">
+        <t>
+          <list style="symbols">
+            <t>Modified the 'must' expression in the "ietf-tls-client:server-authention" node to 
+              cover the "raw-public-keys" and "psks" nodes also.</t>
+            <t>Added a "must 'ca-certs or ee-certs or raw-public-keys or psks'" statement to the
+              ietf-tls-server:client-authentication" node.</t>
+            <t>
+          </list>
+        </t>
+      </section>
+
     </section>
 
     <section numbered="no" title="Acknowledgements">

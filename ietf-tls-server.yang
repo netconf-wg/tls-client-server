@@ -225,6 +225,7 @@ module ietf-tls-server {
          that the server will request clients send certificates).
          If not configured, the TLS server SHOULD NOT request the
          TLS clients provide authentication credentials.";
+      must 'ca-certs or ee-certs or raw-public-keys or psks';
       description
         "Specifies how the TLS server can authenticate TLS clients.
          Any combination of credentials is additive and unordered.
