@@ -675,7 +675,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
               cover the "raw-public-keys" and "psks" nodes also.</t>
             <t>Added a "must 'ca-certs or ee-certs or raw-public-keys or psks'" statement to the
               ietf-tls-server:client-authentication" node.</t>
-            <t>
+            <t>Added "mandatory true" to "choice auth-type" and a "presence" statement to its ancestor.</t>
           </list>
         </t>
       </section>

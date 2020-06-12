@@ -128,6 +128,11 @@ module ietf-tls-client {
 
     container client-identity {
       nacm:default-deny-write;
+      presence
+        "Indicates that TLS-level client authentication
+         is sent.  Present so that the 'choice' node's
+         mandatory true doesn't imply that a client
+         identity must be configured.";
       description
         "Identity credentials the TLS client MAY present when
          establishing a connection to a TLS server.  If not
@@ -142,8 +147,13 @@ module ietf-tls-client {
                    Version 1.2
          RFC CCCC: A YANG Data Model for a Keystore";
       choice auth-type {
+        mandatory true;
         description
           "A choice amongst available authentication types.";
+          /* FIXME: delete now?
+           Not mandatory as client identity MAY be provided
+           by another layer in the protocol stack (e.g., an
+           HTTP authentication mechanism).";*/
         case certificate {
           if-feature x509-certificate-auth;
           container certificate {
