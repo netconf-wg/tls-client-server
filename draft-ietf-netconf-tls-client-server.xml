@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+
 <?rfc toc="yes"?>
 <?rfc symrefs="yes"?>
 <?rfc sortrefs="yes" ?>
@@ -13,7 +14,11 @@
 <?rfc-ext allow-markup-in-artwork="yes" ?>
 <?rfc-ext include-index="no" ?>
 <!--<?rfc strict="no"?> -->
-<rfc category="std" docName="draft-ietf-netconf-tls-client-server-latest"
+
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude"
+     category="std"
+     consensus="true"
+     docName="draft-ietf-netconf-tls-client-server-latest"
      ipr="trust200902">
   <front>
     <title abbrev="Groupings for TLS Clients and Servers">YANG Groupings for
@@ -63,11 +68,10 @@
       </t>
       <t>The following Appendix section is to be removed prior to publication:
         <list style="symbols">
-          <t>Appendix A. Change Log</t>
+          <t><xref target="change-log"/>.  Change Log</t>
         </list>
       </t>
     </note>
-INSERT_TEXT_FROM_FILE(../client-server-overview-snippet.xml,148)
   </front>
 
   <middle>
@@ -91,125 +95,21 @@ INSERT_TEXT_FROM_FILE(../client-server-overview-snippet.xml,148)
       Call Home <xref target="RFC8071"/> could use the "ssh-server-grouping"
       grouping for the TLS parts it provides, while adding data nodes for the
       TCP-level call-home configuration.</t>
+
+INSERT_TEXT_FROM_FILE(../common-intro-snippet.xml,150)
+
+      <section title="Adherence to the NMDA">
+        <t>This document in compliant with the Network Management Datastore 
+          Architecture (NMDA) <xref target="RFC8342"/>.  For instance, as 
+          described in <xref target="I-D.ietf-netconf-trust-anchors"/> and
+          <xref target="I-D.ietf-netconf-keystore"/>, trust anchors and keys
+          installed during manufacturing are expected to appear
+          in &lt;operational&gt;.</t>
+      </section>
+
     </section>
 
-    <section title="Terminology">
-      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-      "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-      "OPTIONAL" in this document are to be interpreted as described in BCP 14
-      <xref target="RFC2119"/> <xref target="RFC8174"/> when, and only when,
-      they appear in all capitals, as shown here.</t>
-    </section>
-
-    <section anchor="tls-client-model" title="The TLS Client Model">
-      <section title="Tree Diagram">
-        <t>This section provides a tree diagram <xref target="RFC8340"/> for
-        the "ietf-tls-client" module that does not have groupings
-        expanded.</t>
-
-        <t><figure>
-            <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(refs/ietf-tls-client-tree-no-expand.txt)
-]]></artwork>
-          </figure></t>
-      </section>
-
-      <section title="Example Usage">
-        <t>This section presents two examples showing the "tls-client-grouping"
-        grouping populated with some data. These examples are effectively the same
-        except the first configures the client identity using a local key
-        while the second uses a key configured in a keystore. Both examples
-        are consistent with the examples presented in Section 2 of <xref
-        target="I-D.ietf-netconf-trust-anchors"/> and Section 3.2 of <xref
-        target="I-D.ietf-netconf-keystore"/>.</t>
-
-        <t>The following example configures the client identity using a local
-        key: <figure>
-            <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(refs/ex-tls-client-local.xml)
-]]></artwork>
-          </figure></t>
-
-        <t>The following example configures the client identity using a key
-        from the keystore: <figure>
-            <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(refs/ex-tls-client-keystore.xml)
-]]></artwork>
-          </figure></t>
-      </section>
-
-      <section anchor="tls-client-yang-module" title="YANG Module">
-        <t>This YANG module has normative references to <xref
-        target="I-D.ietf-netconf-trust-anchors"/> and <xref
-        target="I-D.ietf-netconf-keystore"/>.</t>
-
-        <t>
-          <figure>
-            <preamble>&lt;CODE BEGINS&gt; file "ietf-tls-client@YYYY-MM-DD.yang"</preamble>
-            <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(ietf-tls-client@YYYY-MM-DD.yang)
-]]></artwork>
-            <postamble>&lt;CODE ENDS&gt;</postamble>
-          </figure>
-        </t>
-      </section>
-    </section>
-
-    <section anchor="tls-server-model" title="The TLS Server Model">
-      <section title="Tree Diagram">
-        <t>This section provides a tree diagram <xref target="RFC8340"/> for
-        the "ietf-tls-server" module that does not have groupings
-        expanded.</t>
-
-        <t><figure>
-            <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(refs/ietf-tls-server-tree-no-expand.txt)
-]]></artwork>
-          </figure></t>
-      </section>
-
-      <section title="Example Usage">
-        <t>This section presents two examples showing the "tls-server-grouping"
-        grouping populated with some data. These examples are effectively the same
-        except the first configures the server identity using a local key
-        while the second uses a key configured in a keystore. Both examples
-        are consistent with the examples presented in Section 2 of <xref
-        target="I-D.ietf-netconf-trust-anchors"/> and Section 3.2 of <xref
-        target="I-D.ietf-netconf-keystore"/>.</t>
-
-        <t>The following example configures the server identity using a local
-        key: <figure>
-            <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(refs/ex-tls-server-local.xml)
-]]></artwork>
-          </figure></t>
-
-        <t>The following example configures the server identity using a key
-        from the keystore: <figure>
-            <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(refs/ex-tls-server-keystore.xml)
-]]></artwork>
-          </figure></t>
-      </section>
-
-      <section anchor="tls-server-yang-module" title="YANG Module">
-        <t>This YANG module has a normative references to <xref
-        target="RFC5246"/>, <xref target="I-D.ietf-netconf-trust-anchors"/>
-        and <xref target="I-D.ietf-netconf-keystore"/>.</t>
-
-        <t>
-          <figure>
-            <preamble>&lt;CODE BEGINS&gt; file "ietf-tls-server@YYYY-MM-DD.yang"</preamble>
-            <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
-]]></artwork>
-            <postamble>&lt;CODE ENDS&gt;</postamble>
-          </figure>
-        </t>
-      </section>
-    </section>
-
-    <section anchor="tls-common-model" title="The TLS Common Model">
+    <section anchor="tls-common-model" title="The &quot;ietf-tls-common&quot; Module">
       <t>The TLS common model presented in this section contains identities
       and groupings common to both TLS clients and TLS servers. The
       "hello-params-grouping" grouping can be used to configure the list of TLS
@@ -264,15 +164,117 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
       widely supported by popular implementations. Note that the list of
       algorithms is not exhaustive.</t>
 
-      <section title="Tree Diagram">
-        <t>The following tree diagram <xref target="RFC8340"/> provides an
-        overview of the data model for the "ietf-tls-common" module.</t>
+      <section title="Data Model Overview">
 
-        <t><figure>
-            <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(refs/ietf-tls-common-tree.txt)
+        <section title="Features" anchor="common-features" toc="exclude">
+          <t>The following diagram lists all the "feature" statements
+            defined in the "ietf-tls-common" module:</t>
+          <t>
+            <figure>
+              <artwork><![CDATA[
+Features:
+  +-- tls-1_0
+  +-- tls-1_1
+  +-- tls-1_2
+  +-- tls-1_3
+  +-- tls-ecc
+  +-- tls-dhe
+  +-- tls-3des
+  +-- tls-gcm
+  +-- tls-sha2
 ]]></artwork>
-          </figure></t>
+            </figure>
+          </t>
+        </section>
+
+        <section title="Identities" anchor="identities" toc="exclude">
+          <t>The following diagram illustrates the relationship amongst the
+            "identity" statements defined in the "ietf-tls-common" module:</t>
+          <t>
+            <figure>
+             <artwork><![CDATA[
+Identities:               
+  +-- tls-version-base
+  |  +-- tls-1.0
+  |  +-- tls-1.1
+  |  +-- tls-1.2
+  +-- cipher-suite-base
+     +-- rsa-with-aes-128-cbc-sha
+     +-- rsa-with-aes-256-cbc-sha
+     +-- rsa-with-aes-128-cbc-sha256
+     +-- rsa-with-aes-256-cbc-sha256
+     +-- dhe-rsa-with-aes-128-cbc-sha
+     +-- dhe-rsa-with-aes-256-cbc-sha
+     +-- dhe-rsa-with-aes-128-cbc-sha256
+     +-- dhe-rsa-with-aes-256-cbc-sha256
+     +-- ecdhe-ecdsa-with-aes-128-cbc-sha256
+     +-- ecdhe-ecdsa-with-aes-256-cbc-sha384
+     +-- ecdhe-rsa-with-aes-128-cbc-sha256
+     +-- ecdhe-rsa-with-aes-256-cbc-sha384
+     +-- ecdhe-ecdsa-with-aes-128-gcm-sha256
+     +-- ecdhe-ecdsa-with-aes-256-gcm-sha384
+     +-- ecdhe-rsa-with-aes-128-gcm-sha256
+     +-- ecdhe-rsa-with-aes-256-gcm-sha384
+     +-- rsa-with-3des-ede-cbc-sha
+     +-- ecdhe-rsa-with-3des-ede-cbc-sha
+     +-- ecdhe-rsa-with-aes-128-cbc-sha
+     +-- ecdhe-rsa-with-aes-256-cbc-sha
+]]></artwork>
+            </figure>
+          </t>
+          <t>Comments:</t>
+          <ul spacing="compact">
+            <li>The diagram shows that there are two base identities.</li>
+            <li>One base identity is used to specific TLS versions, while
+              the other is used to specify cipher-suites.</li>
+            <li>These base identities are "abstract", in the object orientied
+              programming sense, in that they only define a "class" of things,
+              rather than a specific thing.</li>
+          </ul>
+        </section>
+
+        <section title="Groupings" toc="exclude">
+          <t>The following diagram lists all the "grouping" statements
+            defined in the "ietf-tls-common" module:</t>
+          <t>
+            <figure>
+              <artwork><![CDATA[
+Groupings:
+  +-- hello-params-grouping
+]]></artwork>
+            </figure>
+          </t>
+          <t>Each of these groupings are presented in the following subsections.</t>
+
+          <section title="The &quot;hello-params-grouping&quot; Grouping" anchor="hello-params-grouping">
+            <t>The following tree diagram <xref target="RFC8340"/> illustrates the
+              "hello-params-grouping" grouping:</t>
+            <t>
+              <figure>
+               <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(refs/tree-hello-params-grouping.no-expand.txt)
+]]></artwork>
+              </figure>
+            </t>
+            <t>Comments:</t>
+            <ul>
+              <li>This grouping is used by both the "tls-client-grouping" and the
+                "tls-server-grouping" groupings defined in <xref target="tls-client-grouping"/> 
+                and <xref target="tls-server-grouping"/>, respectively.</li>
+              <li>This grouping enables client and server configurations to
+                specify the TLS versions and cipher suites that are to be used
+                when establishing TLS sessions.</li>
+              <li>The "cipher-suites" list is "ordered-by user".</li>
+            </ul>
+          </section>
+        </section>
+
+        <section title="Protocol-accessible Nodes" toc="exclude">
+          <t>The "ietf-tls-common" module does not contain any protocol-accessible nodes,
+            but the module needs to be "implemented", as described in <relref
+            section="5.6.5" target="RFC7950"/>, in order for the identities in
+            <xref target="identities"/> to be defined.</t>
+        </section>
       </section>
 
       <section title="Example Usage">
@@ -307,79 +309,371 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
       </section>
     </section>
 
+    <section anchor="tls-client-model" title="The &quot;ietf-tls-client&quot; Module">
+      <section title="Data Model Overview">
+        <section title="Features" anchor="client-features" toc="exclude">
+          <t>The following diagram lists all the "feature" statements
+            defined in the "ietf-tls-client" module:</t>
+          <t>
+            <figure>
+              <artwork><![CDATA[
+Features:
+  +-- tls-client-hello-params-config
+  +-- tls-client-keepalives
+  +-- x509-certificate-auth
+  +-- raw-public-key-auth
+  +-- psk-auth
+]]></artwork>
+            </figure>
+          </t>
+        </section>
+
+        <section title="Groupings" toc="exclude">
+          <t>The following diagram lists all the "grouping" statements
+            defined in the "ietf-tls-client" module:</t>
+          <t>
+            <figure>
+              <artwork><![CDATA[
+Groupings:
+  +-- tls-client-grouping
+]]></artwork>
+            </figure>
+          </t>
+          <t>Each of these groupings are presented in the following subsections.</t>
+
+          <section title="The &quot;tls-client-grouping&quot; Grouping" anchor="tls-client-grouping">
+            <t>The following tree diagram <xref target="RFC8340"/> illustrates the
+              "tls-client-grouping" grouping:</t>
+            <t>
+              <figure>
+               <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(refs/tree-tls-client-grouping.no-expand.txt)
+]]></artwork>
+              </figure>
+            </t>
+            <t>Comments:</t>
+            <ul>
+              <li>The "client-identity" node, which is optionally configured (as client
+                authentication MAY occur at a higher protocol layer), configures
+                identity credentials, each enabled by a "feature" statement defined in
+                <xref target="client-features"/>.</li>
+              <li>The "server-authentication" node configures trust anchors for
+                authenticating the TLS server, with each option enabled by a "feature" statement.</li>
+              <li>The "hello-params" node , which must be enabled by a feature, configures
+                parameters for the TLS sessions established by this configuration.</li>
+              <li>The "keepalives" node, which must be enabled by a feature, configures
+                a "presence" container for testing the aliveness of the TLS server.  The
+                aliveness-test occurs at the TLS protocol layer.</li>
+              <li>For the referenced grouping statement(s):
+                <ul spacing="compact">
+                  <li>The "local-or-keystore-end-entity-cert-with-key-grouping" grouping is
+                    discussed in <relref section="2.1.3.6" target="I-D.ietf-netconf-keystore"/>.</li>
+                  <li>The "local-or-keystore-asymmetric-key-grouping" grouping is
+                    discussed in <relref section="2.1.3.4" target="I-D.ietf-netconf-keystore"/>.</li>
+                  <li>The "local-or-keystore-symmetric-key-grouping" grouping is
+                    discussed in <relref section="2.1.3.3" target="I-D.ietf-netconf-keystore"/>.</li>
+                  <li>The "local-or-truststore-certs-grouping" grouping is
+                    discussed in <relref section="2.1.3.1" target="I-D.ietf-netconf-trust-anchors"/>.</li>
+                  <li>The "local-or-truststore-public-keys-grouping" grouping is
+                    discussed in <relref section="2.1.3.2" target="I-D.ietf-netconf-trust-anchors"/>.</li>
+                  <li>The "hello-params-grouping" grouping is discussed in 
+                  <xref target="hello-params-grouping"/> in this document.</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+        </section>
+
+        <section title="Protocol-accessible Nodes" toc="exclude">
+          <t>The "ietf-tls-client" module does not contain any protocol-accessible nodes.</t>
+        </section>
+      </section>
+
+      <section title="Example Usage">
+        <t>This section presents two examples showing the "tls-client-grouping"
+        grouping populated with some data. These examples are effectively the same
+        except the first configures the client identity using a local key
+        while the second uses a key configured in a keystore. Both examples
+        are consistent with the examples presented in Section 2 of <xref
+        target="I-D.ietf-netconf-trust-anchors"/> and Section 3.2 of <xref
+        target="I-D.ietf-netconf-keystore"/>.</t>
+
+        <t>The following configuration example uses local-definitions for the
+          client identity and server authentication:
+          <figure>
+            <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(refs/ex-tls-client-local.xml)
+]]></artwork>
+          </figure>
+        </t>
+
+        <t>The following configuration example uses keystore-references for the
+          client identity and truststore-references for server authentication:
+          from the keystore:
+          <figure>
+            <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(refs/ex-tls-client-keystore.xml)
+]]></artwork>
+          </figure>
+        </t>
+      </section>
+
+      <section anchor="tls-client-yang-module" title="YANG Module">
+        <t>This YANG module has normative references to <xref
+        target="I-D.ietf-netconf-trust-anchors"/> and <xref
+        target="I-D.ietf-netconf-keystore"/>.</t>
+
+        <t>
+          <figure>
+            <preamble>&lt;CODE BEGINS&gt; file "ietf-tls-client@YYYY-MM-DD.yang"</preamble>
+            <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(ietf-tls-client@YYYY-MM-DD.yang)
+]]></artwork>
+            <postamble>&lt;CODE ENDS&gt;</postamble>
+          </figure>
+        </t>
+      </section>
+    </section>
+
+    <section anchor="tls-server-model" title="The &quot;ietf-tls-server&quot; Module">
+      <section title="Data Model Overview">
+
+        <section title="Features" anchor="server-features" toc="exclude">
+          <t>The following diagram lists all the "feature" statements
+            defined in the "ietf-tls-server" module:</t>
+          <t>
+            <figure>
+              <artwork><![CDATA[
+Features:
+  +-- tls-server-hello-params-config
+  +-- tls-server-keepalives
+  +-- client-auth-config-supported
+  +-- x509-certificate-auth
+  +-- raw-public-key-auth
+  +-- psk-auth
+]]></artwork>
+            </figure>
+          </t>
+        </section>
+
+        <section title="Groupings" toc="exclude">
+          <t>The following diagram lists all the "grouping" statements
+            defined in the "ietf-tls-server" module:</t>
+          <t>
+            <figure>
+              <artwork><![CDATA[
+Groupings:
+  +-- tls-server-grouping
+]]></artwork>
+            </figure>
+          </t>
+          <t>Each of these groupings are presented in the following subsections.</t>
+          <section title="The &quot;tls-server-grouping&quot; Grouping" anchor="tls-server-grouping">
+            <t>The following tree diagram <xref target="RFC8340"/> illustrates the
+              "tls-server-grouping" grouping:</t>
+            <t>
+              <figure>
+               <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(refs/tree-tls-server-grouping.no-expand.txt)
+]]></artwork>
+              </figure>
+            </t>
+            <t>Comments:</t>
+            <ul>
+              <li>The "server-identity" node configures identity credentials, each of
+                which is enabled by a "feature".</li>
+              <li>The "client-authentication" node, which is optionally configured (as client
+                authentication MAY occur at a higher protocol layer), configures trust
+                anchors for authenticating the TLS client, with each option enabled
+                by a "feature" statement.</li>
+              <li>The "hello-params" node, which must be enabled by a feature, configures
+                parameters for the TLS sessions established by this configuration.</li>
+              <li>The "keepalives" node, which must be enabled by a feature, configures
+                a flag enabling the TLS client to test the aliveness of the TLS server,
+                as well as a "presence" container for testing the aliveness of the TLSi
+                client.  The aliveness-tests occurs at the TLS protocol layer.</li>
+              <li>For the referenced grouping statement(s):
+                <ul spacing="compact">
+                  <li>The "local-or-keystore-end-entity-cert-with-key-grouping" grouping is
+                    discussed in <relref section="2.1.3.6" target="I-D.ietf-netconf-keystore"/>.</li>
+                  <li>The "local-or-keystore-asymmetric-key-grouping" grouping is
+                    discussed in <relref section="2.1.3.4" target="I-D.ietf-netconf-keystore"/>.</li>
+                  <li>The "local-or-keystore-symmetric-key-grouping" grouping is
+                    discussed in <relref section="2.1.3.3" target="I-D.ietf-netconf-keystore"/>.</li>
+                  <li>The "local-or-truststore-public-keys-grouping" grouping is
+                    discussed in <relref section="2.1.3.2" target="I-D.ietf-netconf-trust-anchors"/>.</li>
+                  <li>The "local-or-truststore-certs-grouping" grouping is
+                    discussed in <relref section="2.1.3.1" target="I-D.ietf-netconf-trust-anchors"/>.</li>
+                  <li>The "hello-params-grouping" grouping is discussed in
+                  <xref target="hello-params-grouping"/> in this document.</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+        </section>
+
+        <section title="Protocol-accessible Nodes" toc="exclude">
+          <t>The "ietf-tls-server" module does not contain any protocol-accessible nodes.</t>
+        </section>
+      </section>
+
+      <section title="Example Usage">
+        <t>This section presents two examples showing the "tls-server-grouping"
+        grouping populated with some data. These examples are effectively the same
+        except the first configures the server identity using a local key
+        while the second uses a key configured in a keystore. Both examples
+        are consistent with the examples presented in Section 2 of <xref
+        target="I-D.ietf-netconf-trust-anchors"/> and Section 3.2 of <xref
+        target="I-D.ietf-netconf-keystore"/>.</t>
+
+        <t>The following configuration example uses local-definitions for the
+          server identity and client authentication:
+          <figure>
+            <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(refs/ex-tls-server-local.xml)
+]]></artwork>
+          </figure>
+        </t>
+
+        <t>The following configuration example uses keystore-references for the
+          server identity and truststore-references for client authentication:
+          from the keystore:
+          <figure>
+            <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(refs/ex-tls-server-keystore.xml)
+]]></artwork>
+          </figure>
+        </t>
+      </section>
+
+      <section anchor="tls-server-yang-module" title="YANG Module">
+        <t>This YANG module has a normative references to <xref
+        target="RFC5246"/>, <xref target="I-D.ietf-netconf-trust-anchors"/>
+        and <xref target="I-D.ietf-netconf-keystore"/>.</t>
+
+        <t>
+          <figure>
+            <preamble>&lt;CODE BEGINS&gt; file "ietf-tls-server@YYYY-MM-DD.yang"</preamble>
+            <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
+]]></artwork>
+            <postamble>&lt;CODE ENDS&gt;</postamble>
+          </figure>
+        </t>
+      </section>
+    </section>
+
     <section title="Security Considerations">
-      <t>The YANG modules defined in this document are designed to be accessed
-      via YANG based management protocols, such as NETCONF <xref
-      target="RFC6241"/> and RESTCONF <xref target="RFC8040"/>. Both of these
-      protocols have mandatory-to-implement secure transport layers (e.g.,
-      SSH, TLS) with mutual authentication.</t>
 
-      <t>The NETCONF access control model (NACM) <xref target="RFC8341"/>
-      provides the means to restrict access for particular users to a
-      pre-configured subset of all available protocol operations and
-      content.</t>
+      <section title="The &quot;ietf-tls-common&quot; YANG Module">
+        <t>The "ietf-tls-common" YANG module defines "grouping" statements
+          that are designed to be accessed via YANG based management
+          protocols, such as NETCONF <xref target="RFC6241"/> and RESTCONF
+          <xref target="RFC8040"/>.  Both of these protocols have
+          mandatory-to-implement secure transport layers (e.g., SSH, TLS)
+          with mutual authentication.</t>
 
-      <t>Since the modules in this document only define groupings,
-      these considerations are primarily for the designers of other modules
-      that use these groupings.</t>
+        <t>The NETCONF access control model (NACM) <xref target="RFC8341"/>
+          provides the means to restrict access for particular users to a
+          pre-configured subset of all available protocol operations and
+          content.</t>
 
-      <t>There are a number of data nodes defined in the YANG modules that are
-      writable/creatable/deletable (i.e., config true, which is the default).
-      These data nodes may be considered sensitive or vulnerable in some
-      network environments. Write operations (e.g., edit-config) to these data
-      nodes without proper protection can have a negative effect on network
-      operations. These are the subtrees and data nodes and their
-      sensitivity/vulnerability:
-        <list hangIndent="6" style="hanging">
-          <t hangText="   *:">The entire subtree defined by the grouping 
-            statement in both the "ietf-ssh-client" and "ietf-ssh-server"
-            modules is sensitive to write operations. For instance, the 
-            addition or removal of references to keys, certificates, 
-            trusted anchors, etc., or even the modification of transport 
-            or keepalive parameters can dramatically alter the implemented 
-            security policy.  For this reason, this node is protected the 
-            NACM extension "default-deny-write".</t>
-        </list>
-      </t>
+        <t>Since the module in this document only define groupings,
+          these considerations are primarily for the designers of other
+          modules that use these groupings.</t>
 
-      <t>Some of the readable data nodes in the YANG modules may be considered
-      sensitive or vulnerable in some network environments. It is thus
-      important to control read access (e.g., via get, get-config, or
-      notification) to these data nodes. These are the subtrees and data nodes
-      and their sensitivity/vulnerability:
-        <list hangIndent="6" style="hanging">
-          <t hangText="   /tls-client-parameters/client-identity/:">This
-          subtree in the "ietf-tls-client" module contains nodes that are
-          additionally sensitive to read operations such that, in normal use
-          cases, they should never be returned to a client.  Some of these
-          nodes (i.e., public-key/local-definition/private-key and
-          certificate/local-definition/private-key) are already protected
-          by the NACM extension "default-deny-all" set in the "grouping"
-          statements defined in <xref target="I-D.ietf-netconf-crypto-types"/>.</t>
-          <t hangText="   /tls-server-parameters/server-identity/:">This
-          subtree in the "ietf-tls-server" module contains nodes that are
-          additionally sensitive to read operations such that, in normal use
-          cases, they should never be returned to a client.  All of these
-          nodes (i.e., host-key/public-key/local-definition/private-key and
-          host-key/certificate/local-definition/private-key) are already
-          protected by the NACM extension "default-deny-all" set in the "grouping"
-          statements defined in <xref target="I-D.ietf-netconf-crypto-types"/>.</t>
-        </list>
-      </t>
+        <t>None of the readable data nodes defined in this YANG module are
+          considered sensitive or vulnerable in network environments.
+          The NACM "default-deny-all" extension has not been set for
+          any data nodes defined in this module.</t>
 
-      <t>Some of the operations in this YANG module may be considered
-        sensitive or vulnerable in some network environments. It is
-        thus important to control access to these operations. These
-        are the operations and their sensitivity/vulnerability:
-        <list style="hanging" hangIndent="6">
-          <t hangText="   *:">The groupings defined in this document
-            include "action" statements that come from groupings defined
-            in <xref target="I-D.ietf-netconf-crypto-types"/>.  Please
-            consult that document for the security considerations of
-            the "action" statements defined by the "grouping"
-            statements defined in this document.</t>
-        </list>
-      </t>
+        <t>None of the writable data nodes defined in this YANG module are
+          considered sensitive or vulnerable in network environments.
+          The NACM "default-deny-write" extension has not been set for
+          any data nodes defined in this module.</t>
+
+        <t>This module does not define any RPCs, actions, or notifications,
+          and thus the security consideration for such is not provided here.</t>
+      </section>
+
+      <section title="The &quot;ietf-tls-client&quot; YANG Module">
+        <t>The "ietf-tls-client" YANG module defines "grouping" statements
+          that are designed to be accessed via YANG based management
+          protocols, such as NETCONF <xref target="RFC6241"/> and RESTCONF
+          <xref target="RFC8040"/>.  Both of these protocols have
+          mandatory-to-implement secure transport layers (e.g., SSH, TLS)
+          with mutual authentication.</t>
+
+        <t>The NETCONF access control model (NACM) <xref target="RFC8341"/>
+          provides the means to restrict access for particular users to a
+          pre-configured subset of all available protocol operations and
+          content.</t>
+
+        <t>Since the module in this document only define groupings,
+          these considerations are primarily for the designers of other
+          modules that use these groupings.</t>
+
+        <t>None of the readable data nodes defined in this YANG module
+          are considered sensitive or vulnerable in network environments.
+          The NACM "default-deny-all" extension has not been set for any
+          data nodes defined in this module.</t>
+
+        <aside>
+          <t>Please be aware that this module uses the "key" and "private-key"
+            nodes from the "ietf-crypto-types" module <xref target="I-D.ietf-netconf-crypto-types"/>,
+            where said nodes have the NACM extension "default-deny-all" set, thus
+            preventing unrestricted read-access to the cleartext key values.</t>
+        </aside>
+
+        <t>All of the writable data nodes defined by this module may be
+          considered sensitive or vulnerable in some network environments.
+          For instance, any modification to a key or reference to a key
+          may dramatically alter the implemented security policy.  For
+          this reason, the NACM extension "default-deny-write" has been
+          set for all data nodes defined in this module.</t>
+
+        <t>This module does not define any RPCs, actions, or notifications,
+          and thus the security consideration for such is not provided here.</t>
+      </section>
+
+      <section title="The &quot;ietf-tls-server&quot; YANG Module">
+        <t>The "ietf-tls-server" YANG module defines "grouping" statements
+          that are designed to be accessed via YANG based management
+          protocols, such as NETCONF <xref target="RFC6241"/> and RESTCONF
+          <xref target="RFC8040"/>.  Both of these protocols have
+          mandatory-to-implement secure transport layers (e.g., SSH, TLS)
+          with mutual authentication.</t>
+
+        <t>The NETCONF access control model (NACM) <xref target="RFC8341"/>
+          provides the means to restrict access for particular users to a
+          pre-configured subset of all available protocol operations and
+          content.</t>
+
+        <t>Since the module in this document only define groupings,
+          these considerations are primarily for the designers of other
+          modules that use these groupings.</t>
+
+        <t>None of the readable data nodes defined in this YANG module are considered sensitive
+          or vulnerable in network environments. The NACM "default-deny-all" extension
+          has not been set for any data nodes defined in this module.</t>
+
+        <aside>
+          <t>Please be aware that this module uses the "key" and "private-key"
+            nodes from the "ietf-crypto-types" module <xref target="I-D.ietf-netconf-crypto-types"/>,
+            where said nodes have the NACM extension "default-deny-all" set, thus
+            preventing unrestricted read-access to the cleartext key values.</t>
+        </aside>
+
+        <t>All of the writable data nodes defined by this module may be
+          considered sensitive or vulnerable in some network environments.
+          For instance, any modification to a key or reference to a key
+          may dramatically alter the implemented security policy.  For
+          this reason, the NACM extension "default-deny-write" has been
+          set for all data nodes defined in this module.</t>
+
+        <t>This module does not define any RPCs, actions, or notifications,
+          and thus the security consideration for such is not provided here.</t>
+      </section>
     </section>
 
     <section title="IANA Considerations">
@@ -391,15 +685,15 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
 
         <t><figure>
             <artwork>
+   URI: urn:ietf:params:xml:ns:yang:ietf-tls-common
+   Registrant Contact: The NETCONF WG of the IETF.
+   XML: N/A, the requested URI is an XML namespace.
+
    URI: urn:ietf:params:xml:ns:yang:ietf-tls-client
    Registrant Contact: The NETCONF WG of the IETF.
    XML: N/A, the requested URI is an XML namespace.
 
    URI: urn:ietf:params:xml:ns:yang:ietf-tls-server
-   Registrant Contact: The NETCONF WG of the IETF.
-   XML: N/A, the requested URI is an XML namespace.
-
-   URI: urn:ietf:params:xml:ns:yang:ietf-tls-common
    Registrant Contact: The NETCONF WG of the IETF.
    XML: N/A, the requested URI is an XML namespace.
 </artwork>
@@ -413,6 +707,11 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
 
         <t><figure>
             <artwork>
+   name:         ietf-tls-common
+   namespace:    urn:ietf:params:xml:ns:yang:ietf-tls-common
+   prefix:       tlscmn
+   reference:    RFC FFFF
+
    name:         ietf-tls-client
    namespace:    urn:ietf:params:xml:ns:yang:ietf-tls-client
    prefix:       tlsc
@@ -421,11 +720,6 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
    name:         ietf-tls-server
    namespace:    urn:ietf:params:xml:ns:yang:ietf-tls-server
    prefix:       tlss
-   reference:    RFC FFFF
-
-   name:         ietf-tls-common
-   namespace:    urn:ietf:params:xml:ns:yang:ietf-tls-common
-   prefix:       tlscmn
    reference:    RFC FFFF
 </artwork>
           </figure></t>
@@ -445,9 +739,9 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
       <?rfc include="reference.RFC.8341.xml"?>
       <?rfc include="reference.RFC.8422.xml"?>
       <?rfc include="reference.RFC.8446.xml"?>
-      <?rfc include="reference.I-D.ietf-netconf-trust-anchors"?>
-      <?rfc include="reference.I-D.ietf-netconf-keystore"?>
-      <?rfc include="reference.I-D.ietf-netconf-crypto-types"?>
+      <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-netconf-crypto-types.xml"/>
+      <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-netconf-trust-anchors.xml"/>
+      <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-netconf-keystore.xml"/>
     </references>
 
     <references title="Informative References">
@@ -460,9 +754,16 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
       <?rfc include="reference.RFC.8040.xml"?>
       <?rfc include="reference.RFC.8071.xml"?>
       <?rfc include="reference.RFC.8340.xml"?>
+      <?rfc include="reference.RFC.8342.xml"?>
+      <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-netconf-tcp-client-server.xml"/>
+      <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-netconf-ssh-client-server.xml"/>
+      <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-netconf-tls-client-server.xml"/>
+      <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-netconf-http-client-server.xml"/>
+      <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-netconf-netconf-client-server.xml"/>
+      <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-netconf-restconf-client-server.xml"/>
     </references>
 
-    <section title="Change Log">
+    <section title="Change Log" removeInRFC="true" anchor="change-log">
       <section title="00 to 01">
         <t><list style="symbols">
           <t>Noted that '0.0.0.0' and '::' might have special meanings.</t>
@@ -676,13 +977,16 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
             <t>Added a "must 'ca-certs or ee-certs or raw-public-keys or psks'" statement to the
               ietf-tls-server:client-authentication" node.</t>
             <t>Added "mandatory true" to "choice auth-type" and a "presence" statement to its ancestor.</t>
+            <t>Expanded "Data Model Overview section(s) [remove "wall" of tree diagrams].</t>
+            <t>Moved the "ietf-ssh-common" module section to proceed the other two module sections.</t>
+            <t>Updated the Security Considerations section.</t>
           </list>
         </t>
       </section>
 
     </section>
 
-    <section numbered="no" title="Acknowledgements">
+    <section title="Acknowledgements" numbered="no">
       <t>The authors would like to thank for following for lively discussions
         on list and in the halls (ordered by last name):
         Andy Bierman,
