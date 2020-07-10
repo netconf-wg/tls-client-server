@@ -26,8 +26,8 @@ module ietf-tls-common {
      Legal Provisions Relating to IETF Documents
      (https://trustee.ietf.org/license-info).
 
-     This version of this YANG module is part of RFC XXXX
-     (https://www.rfc-editor.org/info/rfcXXXX); see the RFC
+     This version of this YANG module is part of RFC FFFF
+     (https://www.rfc-editor.org/info/rfcFFFF); see the RFC
      itself for full legal notices.
 
      The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL',
@@ -41,7 +41,7 @@ module ietf-tls-common {
     description
       "Initial version";
     reference
-      "RFC XXXX: YANG Groupings for TLS Clients and TLS Servers";
+      "RFC FFFF: YANG Groupings for TLS Clients and TLS Servers";
   }
 
   // Features
@@ -392,14 +392,14 @@ module ietf-tls-common {
           "Acceptable cipher suites in order of descending
            preference.  The configured host key algorithms should
            be compatible with the algorithm used by the configured
-           private key.  Please see Section 5 of RFC XXXX for
+           private key.  Please see Section 5 of RFC FFFF for
            valid combinations.
 
            If this leaf-list is not configured (has zero elements)
            the acceptable cipher suites are implementation-
            defined.";
         reference
-          "RFC XXXX: YANG Groupings for TLS Clients and TLS Servers";
+          "RFC FFFF: YANG Groupings for TLS Clients and TLS Servers";
       }
     }
   }
