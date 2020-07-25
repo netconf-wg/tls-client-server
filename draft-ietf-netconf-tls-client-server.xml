@@ -990,6 +990,17 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
           </list>
         </t>
       </section>
+      <section title="21 to 22">
+        <t>
+          <list style="symbols">
+            <t>In both the "client-authentication" and "server-authentication" subtrees,
+              replaced the "psks" node from being a P-container to a leaf of type "empty".</t>
+            <t>Cleaned up examples (e.g., removed FIXMEs)</t>
+
+            <t>SUBMISSION PENDING!...</t>
+          </list>
+        </t>
+      </section>
     </section>
 
     <section title="Acknowledgements" numbered="no">

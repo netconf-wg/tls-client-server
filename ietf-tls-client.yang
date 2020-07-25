@@ -150,10 +150,6 @@ module ietf-tls-client {
         mandatory true;
         description
           "A choice amongst available authentication types.";
-          /* FIXME: delete now?
-           Not mandatory as client identity MAY be provided
-           by another layer in the protocol stack (e.g., an
-           HTTP authentication mechanism).";*/
         case certificate {
           if-feature x509-certificate-auth;
           container certificate {
@@ -197,10 +193,7 @@ module ietf-tls-client {
           container psk {
             description
               "Specifies the client identity using a PSK (pre-shared
-              or pairwise-symmetric key).  Note that, when the PSK is
-              configured as a Keystore reference, the key's 'name'
-              node MAY be used as the PSK's ID when used by the TLS
-              protocol.";
+              or pairwise-symmetric key).";
             uses ks:local-or-keystore-symmetric-key-grouping {
               augment "local-or-keystore/local/local-definition" {
                 if-feature "ks:local-definitions-supported";
@@ -243,7 +236,7 @@ module ietf-tls-client {
           "RFC BBBB: A YANG Data Model for a Truststore";
         uses ts:local-or-truststore-certs-grouping;
       }
-      container ee-certs { // FIXME: plural too much?
+      container ee-certs {
         if-feature "x509-certificate-auth";
         presence
           "Indicates that the TLS client can authenticate TLS
@@ -283,14 +276,15 @@ module ietf-tls-client {
           }
         }
       }
-      container psks {
+      leaf psks {
         if-feature "psk-auth";
-        presence
-          "Indicates that the TLS client can authenticate TLS servers
-           using a configure PSK (pre-shared or pairwise-symmetric
-           key).";
+        type empty;
         description
-          "No configuration is required since the PSK value is the
+          "Indicates that the TLS client can authenticate TLS servers
+           using configure PSKs (pre-shared or pairwise-symmetric
+           keys).
+
+           No configuration is required since the PSK value is the
            same as PSK value configured in the 'client-identity'
            node.";
       }
