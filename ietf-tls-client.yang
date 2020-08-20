@@ -194,17 +194,15 @@ module ietf-tls-client {
             description
               "Specifies the client identity using a PSK (pre-shared
               or pairwise-symmetric key).";
-            uses ks:local-or-keystore-symmetric-key-grouping {
-              augment "local-or-keystore/local/local-definition" {
-                if-feature "ks:local-definitions-supported";
-                description
-                  "Adds an 'id' value when the PSK is used by TLS.";
-                leaf id {
-                  type string;  // FIXME: is this the right type?
-                  description
-                    "The key id used in the TLS protocol for PSKs.";
-                }
-              }
+            uses ks:local-or-keystore-symmetric-key-grouping;
+            leaf id {
+              type string;
+              description
+                "The key 'psk_identity' value used in the TLS
+                 'ClientKeyExchange' message.";
+              reference
+                "RFC 4279: Pre-Shared Key Ciphersuites for
+                           Transport Layer Security (TLS)";
             }
           }
         }
