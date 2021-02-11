@@ -239,21 +239,11 @@ Identities:
         </section>
 
         <section title="Groupings" toc="exclude">
-          <t>The following diagram lists all the "grouping" statements
-            defined in the "ietf-tls-common" module:</t>
-          <t>
-            <figure>
-              <artwork><![CDATA[
-Groupings:
-  +-- hello-params-grouping
-]]></artwork>
-            </figure>
-          </t>
-          <aside>
-            <t>The diagram above uses syntax that is similar to but not
-              defined in <xref target="RFC8340"/>.</t>
-          </aside>
-          <t>Each of these groupings are presented in the following subsections.</t>
+          <t>The "ietf-tls-common" module defines the following "grouping" statement:</t>
+          <ul spacing="compact">
+            <li>hello-params-grouping</li>
+          </ul>
+          <t>This grouping is presented in the following subsection.</t>
 
           <section title="The &quot;hello-params-grouping&quot; Grouping" anchor="hello-params-grouping">
             <t>The following tree diagram <xref target="RFC8340"/> illustrates the
@@ -353,21 +343,11 @@ Features:
         </section>
 
         <section title="Groupings" toc="exclude">
-          <t>The following diagram lists all the "grouping" statements
-            defined in the "ietf-tls-client" module:</t>
-          <t>
-            <figure>
-              <artwork><![CDATA[
-Groupings:
-  +-- tls-client-grouping
-]]></artwork>
-            </figure>
-          </t>
-          <aside>
-            <t>The diagram above uses syntax that is similar to but not
-              defined in <xref target="RFC8340"/>.</t>
-          </aside>
-          <t>Each of these groupings are presented in the following subsections.</t>
+          <t>The "ietf-tls-client" module defines the following "grouping" statement:</t>
+          <ul spacing="compact">
+            <li>tls-client-grouping</li>
+          </ul>
+          <t>This grouping is presented in the following subsection.</t>
 
           <section title="The &quot;tls-client-grouping&quot; Grouping" anchor="tls-client-grouping">
             <t>The following tree diagram <xref target="RFC8340"/> illustrates the
@@ -499,21 +479,12 @@ Features:
         </section>
 
         <section title="Groupings" toc="exclude">
-          <t>The following diagram lists all the "grouping" statements
-            defined in the "ietf-tls-server" module:</t>
-          <t>
-            <figure>
-              <artwork><![CDATA[
-Groupings:
-  +-- tls-server-grouping
-]]></artwork>
-            </figure>
-          </t>
-          <aside>
-            <t>The diagram above uses syntax that is similar to but not
-              defined in <xref target="RFC8340"/>.</t>
-          </aside>
-          <t>Each of these groupings are presented in the following subsections.</t>
+          <t>The "ietf-tls-server" module defines the following "grouping" statement:</t>
+          <ul spacing="compact">
+            <li>tls-server-grouping</li>
+          </ul>
+          <t>This grouping is presented in the following subsection.</t>
+
           <section title="The &quot;tls-server-grouping&quot; Grouping" anchor="tls-server-grouping">
             <t>The following tree diagram <xref target="RFC8340"/> illustrates the
               "tls-server-grouping" grouping:</t>
@@ -732,15 +703,15 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
         <t><figure>
             <artwork>
    URI: urn:ietf:params:xml:ns:yang:ietf-tls-common
-   Registrant Contact: The NETCONF WG of the IETF.
+   Registrant Contact: The IESG
    XML: N/A, the requested URI is an XML namespace.
 
    URI: urn:ietf:params:xml:ns:yang:ietf-tls-client
-   Registrant Contact: The NETCONF WG of the IETF.
+   Registrant Contact: The IESG
    XML: N/A, the requested URI is an XML namespace.
 
    URI: urn:ietf:params:xml:ns:yang:ietf-tls-server
-   Registrant Contact: The NETCONF WG of the IETF.
+   Registrant Contact: The IESG
    XML: N/A, the requested URI is an XML namespace.
 </artwork>
           </figure></t>
@@ -1048,6 +1019,22 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
           </list>
         </t>
       </section>
+      <section title="22 to 23">
+        <t>
+          <list style="symbols">
+            <t>Addressed comments raised by YANG Doctor in the ct/ts/ks drafts.</t>
+          </list>
+        </t>
+      </section>
+      <!--
+      <section title="23 to 24">
+        <t>
+          <list style="symbols">
+            <t>SUBMISSION PENDING</t>
+          </list>
+        </t>
+      </section>
+      -->
     </section>
 
     <section title="Acknowledgements" numbered="no">
