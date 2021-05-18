@@ -33,11 +33,10 @@
     <area>Operations</area>
     <workgroup>NETCONF Working Group</workgroup>
     <abstract>
-      <t>This document defines three YANG modules: the first defines groupings
-        for a generic TLS client, the second defines groupings for a generic TLS
-        server, and the third defines common identities and groupings used by
-        both the client and the server. It is intended that these groupings will
-        be used by applications using the TLS protocol.</t>
+      <t>This document defines three YANG 1.1
+        modules: the first defines identities and groupings common to both TLS
+        clients and TLS servers, the second defines a grouping for a generic
+        TLS client, and the third defines a grouping for a generic TLS server.</t>
     </abstract>
     <note title="Editorial Note (To be removed by RFC Editor)">
       <t>This draft contains placeholder values that need to be replaced
@@ -71,14 +70,14 @@
   <middle>
     <section title="Introduction">
       <t>This document defines three YANG 1.1 <xref target="RFC7950"/>
-      modules: the first defines a grouping for a generic TLS client, the
-      second defines a grouping for a generic TLS server, and the third
-      defines identities and groupings common to both the client and the
-      server (TLS is defined in <xref target="RFC5246"/>). It is intended that
-      these groupings will be used by applications using the TLS protocol. For
-      instance, these groupings could be used to help define the data model
-      for an HTTPS <xref target="RFC2818"/> server or a NETCONF over TLS <xref
-      target="RFC7589"/> based server.</t>
+        modules: the first defines identities and groupings common to both TLS
+        clients and TLS servers, the second defines a grouping for a generic
+        TLS client, and the third defines a grouping for a generic TLS server.
+        It is intended that these groupings will be used by applications using
+        the TLS protocol <xref target="RFC5246"/>. For instance, these groupings
+        could be used to help define the data model for an HTTPS
+        <xref target="RFC2818"/> server or a NETCONF over TLS <xref
+        target="RFC7589"/> based server.</t>
 
       <t>The client and server YANG modules in this document each define one
       grouping, which is focused on just TLS-specific configuration, and
@@ -93,7 +92,7 @@
 INSERT_TEXT_FROM_FILE(../common-intro-snippet.xml,150)
 
       <section title="Adherence to the NMDA">
-        <t>This document in compliant with the Network Management Datastore 
+        <t>This document is compliant with the Network Management Datastore 
           Architecture (NMDA) <xref target="RFC8342"/>.  For instance, as 
           described in <xref target="I-D.ietf-netconf-trust-anchors"/> and
           <xref target="I-D.ietf-netconf-keystore"/>, trust anchors and keys
@@ -199,6 +198,7 @@ Identities:
   |  +-- tls-1.0
   |  +-- tls-1.1
   |  +-- tls-1.2
+  |  +-- tls-1.3
   +-- cipher-suite-base
      +-- rsa-with-aes-128-cbc-sha
      +-- rsa-with-aes-256-cbc-sha
@@ -232,7 +232,7 @@ Identities:
             <li>The diagram shows that there are two base identities.</li>
             <li>One base identity is used to specific TLS versions, while
               the other is used to specify cipher-suites.</li>
-            <li>These base identities are "abstract", in the object orientied
+            <li>These base identities are "abstract", in the object oriented
               programming sense, in that they only define a "class" of things,
               rather than a specific thing.</li>
           </ul>
@@ -269,11 +269,10 @@ INSERT_TEXT_FROM_FILE(refs/tree-hello-params-grouping.no-expand.txt)
         </section>
 
         <section title="Protocol-accessible Nodes" toc="exclude">
-          <t>The "ietf-tls-common" module does not contain any protocol-accessible nodes,
-            but the module needs to be "implemented", as described in <relref
-            section="5.6.5" target="RFC7950"/>, in order for the identities in
-            <xref target="identities"/> to be defined.</t>
+          <t>The "ietf-tls-common" module defines only "grouping" statements that are
+            used by other modules to instantiate protocol-accessible nodes.</t>
         </section>
+
       </section>
 
       <section title="Example Usage">
@@ -290,7 +289,7 @@ INSERT_TEXT_FROM_FILE(refs/ex-tls-common.xml)
       <section anchor="tls-common-yang-module" title="YANG Module">
         <t>This YANG module has a normative references to <xref target="RFC4346"/>, <xref
         target="RFC5246"/>, <xref target="RFC5288"/>, <xref
-        target="RFC5289"/>, and <xref target="RFC8422"/>.</t>
+        target="RFC5289"/>, <xref target="RFC8422"/>, and FIPS PUB 180-4.</t>
 
         <t>This YANG module has a informative references to <xref
         target="RFC2246"/>, <xref target="RFC4346"/>, <xref
@@ -312,7 +311,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
 
       <t>This section defines a YANG 1.1 <xref target="RFC7950"/> module called
         "ietf-tls-client".  A high-level overview of the module is provided in
-        <xref target="client-overview"/>. Examples illustatrating the module's use
+        <xref target="client-overview"/>. Examples illustrating the module's use
         are provided in <xref target="client-examples">Examples</xref>. The YANG
         module itself is defined in <xref target="client-yang-module"/>.</t>
 
@@ -330,9 +329,12 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
 Features:
   +-- tls-client-hello-params-config
   +-- tls-client-keepalives
-  +-- x509-certificate-auth
-  +-- raw-public-key-auth
-  +-- psk-auth
+  +-- client-ident-x509-cert
+  +-- client-ident-raw-public-key
+  +-- client-ident-psk
+  +-- server-auth-x509-cert
+  +-- server-auth-raw-public-key
+  +-- server-auth-psk
 ]]></artwork>
             </figure>
           </t>
@@ -393,8 +395,10 @@ INSERT_TEXT_FROM_FILE(refs/tree-tls-client-grouping.no-expand.txt)
         </section>
 
         <section title="Protocol-accessible Nodes" toc="exclude">
-          <t>The "ietf-tls-client" module does not contain any protocol-accessible nodes.</t>
+          <t>The "ietf-tls-client" module defines only "grouping" statements that are
+            used by other modules to instantiate protocol-accessible nodes.</t>
         </section>
+
       </section>
 
       <section title="Example Usage" anchor="client-examples">
@@ -445,9 +449,9 @@ INSERT_TEXT_FROM_FILE(ietf-tls-client@YYYY-MM-DD.yang)
 
     <section anchor="tls-server-model" title="The &quot;ietf-tls-server&quot; Module">
 
-      <t>This section defines a YANG 1.1 <xref target="RFC7950"/> module called
+      <t>This section defines a YANG 1.1 module called
         "ietf-tls-server".  A high-level overview of the module is provided in
-        <xref target="server-overview"/>. Examples illustatrating the module's use
+        <xref target="server-overview"/>. Examples illustrating the module's use
         are provided in <xref target="server-examples">Examples</xref>. The YANG
         module itself is defined in <xref target="server-yang-module"/>.</t>
 
@@ -465,10 +469,13 @@ INSERT_TEXT_FROM_FILE(ietf-tls-client@YYYY-MM-DD.yang)
 Features:
   +-- tls-server-hello-params-config
   +-- tls-server-keepalives
-  +-- client-auth-config-supported
-  +-- x509-certificate-auth
-  +-- raw-public-key-auth
-  +-- psk-auth
+  +-- server-ident-x509-cert
+  +-- server-ident-raw-public-key
+  +-- server-ident-psk
+  +-- client-auth-supported
+  +-- client-auth-x509-cert
+  +-- client-auth-raw-public-key
+  +-- client-auth-psk
 ]]></artwork>
             </figure>
           </t>
@@ -530,8 +537,10 @@ INSERT_TEXT_FROM_FILE(refs/tree-tls-server-grouping.no-expand.txt)
         </section>
 
         <section title="Protocol-accessible Nodes" toc="exclude">
-          <t>The "ietf-tls-server" module does not contain any protocol-accessible nodes.</t>
+          <t>The "ietf-tls-server" module defines only "grouping" statements that are
+            used by other modules to instantiate protocol-accessible nodes.</t>
         </section>
+
       </section>
 
       <section title="Example Usage" anchor="server-examples">
@@ -950,7 +959,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
         <t>
           <list style="symbols">
             <t>Removed choice local-or-external by removing the 'external' case and flattening
-              the 'local' case and adding a "client-auth-config-supported" feature.</t>
+              the 'local' case and adding a "client-auth-supported" feature.</t>
             <t>Removed choice required-or-optional.</t>
             <t>Updated examples to include the "*-key-format" nodes.</t>
             <t>Augmented-in "must" expressions ensuring that locally-defined public-key-format
@@ -1026,8 +1035,21 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
           </list>
         </t>
       </section>
-      <!--
       <section title="23 to 24">
+        <t>
+          <list style="symbols">
+            <t>Added missing reference to "FIPS PUB 180-4".</t>
+            <t>Added identity "tls-1.3" and updated description statement in other identities indicating that the protocol version is obsolete and enabling the feature is NOT RECOMMENDED.</t>
+            <t>Added XML-comment above examples explaining the reason for the unexpected top-most element's presence.</t>
+            <t>Added missing "client-ident-raw-public-key" and "client-ident-psk" featutes.</t>
+            <t>Aligned modules with `pyang -f` formatting.</t>
+            <t>Fixed nits found by YANG Doctor reviews.</t>
+            <t>Added a 'Contributors' section.</t>
+          </list>
+        </t>
+      </section>
+      <!--
+      <section title="24 to 25">
         <t>
           <list style="symbols">
             <t>SUBMISSION PENDING</t>
@@ -1046,19 +1068,22 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
         Benoit Claise,
         Bert Wijnen,
         David Lamparter,
+        Dhruv Dhody,
         Gary Wu,
         Henk Birkholz,
         Juergen Schoenwaelder,
         Ladislav Lhotka,
         Liang Xia,
-        Martin Bjorklund,
+        Martin Björklund,
         Mehmet Ersue,
         Michal Vaško,
         Phil Shafer,
         Radek Krejci,
         Sean Turner,
         and Tom Petch.</t>
+    </section>
         
+    <section title="Contributors" numbered="no">
       <t>Special acknowledgement goes to Gary Wu who contributed the
         "ietf-tls-common" module.</t>
 
