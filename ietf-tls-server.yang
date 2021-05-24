@@ -93,18 +93,30 @@ module ietf-tls-server {
     description
       "Indicates that the server supports identifying itself
        using X.509 certificates.";
+    reference
+      "RFC 5280:
+         Internet X.509 Public Key Infrastructure Certificate
+         and Certificate Revocation List (CRL) Profile";
   }
 
   feature server-ident-raw-public-key {
     description
       "Indicates that the server supports identifying itself
        using raw public keys.";
+    reference
+      "RFC 7250:
+         Using Raw Public Keys in Transport Layer Security (TLS)
+         and Datagram Transport Layer Security (DTLS)";
   }
 
   feature server-ident-psk {
     description
       "Indicates that the server supports identifying itself
        using PSKs (pre-shared or pairwise-symmetric keys).";
+    reference
+      "RFC 4279:
+         Pre-Shared Key Ciphersuites for Transport Layer Security
+         (TLS)";
   }
 
   feature client-auth-supported {
@@ -119,18 +131,30 @@ module ietf-tls-server {
     description
       "Indicates that the server supports authenticating clients
        using X.509 certificates.";
+    reference
+      "RFC 5280:
+         Internet X.509 Public Key Infrastructure Certificate
+         and Certificate Revocation List (CRL) Profile";
   }
 
   feature client-auth-raw-public-key {
     description
       "Indicates that the server supports authenticating clients
        using raw public keys.";
+    reference
+      "RFC 7250:
+         Using Raw Public Keys in Transport Layer Security (TLS)
+         and Datagram Transport Layer Security (DTLS)";
   }
 
   feature client-auth-psk {
     description
       "Indicates that the server supports authenticating clients
        using PSKs (pre-shared or pairwise-symmetric keys).";
+    reference
+      "RFC 4279:
+         Pre-Shared Key Ciphersuites for Transport Layer Security
+         (TLS)";
   }
 
   // Groupings
@@ -157,10 +181,12 @@ module ietf-tls-server {
          including any configured intermediate certificates, the
          TLS server will present when establishing a TLS connection
          in its Certificate message, as defined in Section 7.4.2
-         in RFC 5246.";
+         in RFC 5246 and Section 4.4.2 in RFC 8446.";
       reference
         "RFC 5246: The Transport Layer Security (TLS) Protocol
                    Version 1.2
+         RFC 8446: The Transport Layer Security (TLS) Protocol
+                   Version 1.3
          RFC CCCC: A YANG Data Model for a Keystore";
       choice auth-type {
         mandatory true;

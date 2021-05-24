@@ -51,6 +51,8 @@
           <t><spanx style="verb">CCCC</spanx> --&gt; the assigned RFC value for draft-ietf-netconf-keystore</t>
           <t><spanx style="verb">DDDD</spanx> --&gt; the assigned RFC value for draft-ietf-netconf-tcp-client-server</t>
           <t><spanx style="verb">FFFF</spanx> --&gt; the assigned RFC value for this draft</t>
+          <t><spanx style="verb">GGGG</spanx> --&gt; the assigned RFC value for draft-ietf-netconf-http-client-server</t>
+          <t><spanx style="verb">HHHH</spanx> --&gt; the assigned RFC value for draft-ietf-netconf-netconf-client-server</t>
         </list>
       </t>
       <t>Artwork in this document contains placeholder values for the date of
@@ -72,12 +74,19 @@
       <t>This document defines three YANG 1.1 <xref target="RFC7950"/>
         modules: the first defines identities and groupings common to both TLS
         clients and TLS servers, the second defines a grouping for a generic
-        TLS client, and the third defines a grouping for a generic TLS server.
-        It is intended that these groupings will be used by applications using
-        the TLS protocol <xref target="RFC5246"/>. For instance, these groupings
-        could be used to help define the data model for an HTTPS
-        <xref target="RFC2818"/> server or a NETCONF over TLS <xref
-        target="RFC7589"/> based server.</t>
+        TLS client, and the third defines a grouping for a generic TLS server.</t>
+
+      <t>Any version of TLS may be configured, including <xref target="RFC2246"/>,
+        <xref target="RFC4346"/>, <xref target="RFC5246"/>, and <xref target="RFC8446"/>.
+        Configuring obsolete protocol versions for use in production networks
+        is NOT RECOMMENDED.</t>
+
+      <t>It is intended that the YANG groupings will be used by applications
+        needing to configure TLS client and server protocol stacks.  For
+        instance, these groupings are used to help define the data model
+        for HTTPS <xref target="RFC2818"/> and NETCONF over TLS
+        <xref target="RFC7589"/> based clients and servers in <xref target="RFCGGGG"/>
+        and <xref target="RFCHHHH"/> respectively.</t>
 
       <t>The client and server YANG modules in this document each define one
       grouping, which is focused on just TLS-specific configuration, and
@@ -1048,8 +1057,16 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
           </list>
         </t>
       </section>
-      <!--
       <section title="24 to 25">
+        <t>
+          <list style="symbols">
+            <t>Clarified support for various TLS protocol versions.</t>
+            <t>Fixed many references.</t>
+          </list>
+        </t>
+      </section>
+      <!--
+      <section title="25 to 26">
         <t>
           <list style="symbols">
             <t>SUBMISSION PENDING</t>
@@ -1085,8 +1102,8 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
         
     <section title="Contributors" numbered="no">
       <t>Special acknowledgement goes to Gary Wu who contributed the
-        "ietf-tls-common" module.</t>
-
+        "ietf-tls-common" module, and Tom Petch who carefully ensured
+        that references were set correctly throughout.</t>
     </section>
   </back>
 </rfc>
