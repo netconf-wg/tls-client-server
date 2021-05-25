@@ -51,8 +51,6 @@
           <t><spanx style="verb">CCCC</spanx> --&gt; the assigned RFC value for draft-ietf-netconf-keystore</t>
           <t><spanx style="verb">DDDD</spanx> --&gt; the assigned RFC value for draft-ietf-netconf-tcp-client-server</t>
           <t><spanx style="verb">FFFF</spanx> --&gt; the assigned RFC value for this draft</t>
-          <t><spanx style="verb">GGGG</spanx> --&gt; the assigned RFC value for draft-ietf-netconf-http-client-server</t>
-          <t><spanx style="verb">HHHH</spanx> --&gt; the assigned RFC value for draft-ietf-netconf-netconf-client-server</t>
         </list>
       </t>
       <t>Artwork in this document contains placeholder values for the date of
@@ -76,17 +74,21 @@
         clients and TLS servers, the second defines a grouping for a generic
         TLS client, and the third defines a grouping for a generic TLS server.</t>
 
-      <t>Any version of TLS may be configured, including <xref target="RFC2246"/>,
-        <xref target="RFC4346"/>, <xref target="RFC5246"/>, and <xref target="RFC8446"/>.
-        Configuring obsolete protocol versions for use in production networks
-        is NOT RECOMMENDED.</t>
+      <t>Any version of TLS may be configured.  TLS 1.0 <xref target="RFC2246"/>
+        and TLS 1.1 <xref target="RFC4346"/> are historic and hence the YANG
+        "feature" statements enabling them are marked "status obsolete".  TLS 1.2
+        <xref target="RFC5246"/> is obsoleted by TLS 1.3 <xref target="RFC8446"/>
+        but still is common use, and hence its "feature" statement is marked
+        "status obsolete".  All the "feature" statements for 1.0, 1.1, and 1.3
+        have "description" statements stating that it is NOT RECOMMENDED to
+        enable obsolete protocol versions.</t>
 
       <t>It is intended that the YANG groupings will be used by applications
         needing to configure TLS client and server protocol stacks.  For
         instance, these groupings are used to help define the data model
         for HTTPS <xref target="RFC2818"/> and NETCONF over TLS
-        <xref target="RFC7589"/> based clients and servers in <xref target="RFCGGGG"/>
-        and <xref target="RFCHHHH"/> respectively.</t>
+        <xref target="RFC7589"/> based clients and servers in <xref target="I-D.ietf-netconf-http-client-server"/>
+        and <xref target="I-D.ietf-netconf-netconf-client-server"/> respectively.</t>
 
       <t>The client and server YANG modules in this document each define one
       grouping, which is focused on just TLS-specific configuration, and
@@ -296,13 +298,13 @@ INSERT_TEXT_FROM_FILE(refs/ex-tls-common.xml)
       </section>
 
       <section anchor="tls-common-yang-module" title="YANG Module">
-        <t>This YANG module has a normative references to <xref target="RFC4346"/>, <xref
-        target="RFC5246"/>, <xref target="RFC5288"/>, <xref
-        target="RFC5289"/>, <xref target="RFC8422"/>, and FIPS PUB 180-4.</t>
+        <t>This YANG module has a normative references to <xref target="RFC4346"/>,
+          <xref target="RFC5288"/>, <xref target="RFC5289"/>, <xref target="RFC8422"/>,
+          and FIPS PUB 180-4.</t>
 
-        <t>This YANG module has a informative references to <xref
-        target="RFC2246"/>, <xref target="RFC4346"/>, <xref
-        target="RFC5246"/>, and <xref target="RFC8446"/>.</t>
+        <t>This YANG module has a informative references to
+          <xref target="RFC2246"/>, <xref target="RFC4346"/>,
+          <xref target="RFC5246"/>, and <xref target="RFC8446"/>.</t>
 
         <t>
           <figure>
@@ -440,9 +442,10 @@ INSERT_TEXT_FROM_FILE(refs/ex-tls-client-keystore.xml)
       </section>
 
       <section anchor="client-yang-module" title="YANG Module">
-        <t>This YANG module has normative references to <xref
-        target="I-D.ietf-netconf-trust-anchors"/> and <xref
-        target="I-D.ietf-netconf-keystore"/>.</t>
+        <t>This YANG module has normative references to <xref target="I-D.ietf-netconf-trust-anchors"/>
+          and <xref target="I-D.ietf-netconf-keystore"/>, and Informative references to
+          <xref target="RFC5246"/>, <xref target="RFC8446"/>, <xref target="I-D.ietf-tls-external-psk-importer"/> and
+          <xref target="I-D.ietf-tls-external-psk-guidance"/>.</t>
 
         <t>
           <figure>
@@ -582,10 +585,10 @@ INSERT_TEXT_FROM_FILE(refs/ex-tls-server-keystore.xml)
       </section>
 
       <section anchor="server-yang-module" title="YANG Module">
-        <t>This YANG module has a normative references to <xref
-        target="RFC5246"/>, <xref target="I-D.ietf-netconf-trust-anchors"/>
-        and <xref target="I-D.ietf-netconf-keystore"/>.</t>
-
+        <t>This YANG module has normative references to <xref target="I-D.ietf-netconf-trust-anchors"/>
+          and <xref target="I-D.ietf-netconf-keystore"/>, and Informative references to
+          <xref target="RFC5246"/>, <xref target="RFC8446"/>, <xref target="I-D.ietf-tls-external-psk-importer"/> and
+          <xref target="I-D.ietf-tls-external-psk-guidance"/>.</t>
         <t>
           <figure>
             <preamble>&lt;CODE BEGINS&gt; file "ietf-tls-server@YYYY-MM-DD.yang"</preamble>
@@ -796,6 +799,8 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
       <xi:include href="https://datatracker.ietf.org/doc/bibxml3/reference.I-D.ietf-netconf-http-client-server.xml"/>
       <xi:include href="https://datatracker.ietf.org/doc/bibxml3/reference.I-D.ietf-netconf-netconf-client-server.xml"/>
       <xi:include href="https://datatracker.ietf.org/doc/bibxml3/reference.I-D.ietf-netconf-restconf-client-server.xml"/>
+      <xi:include href="https://datatracker.ietf.org/doc/bibxml3/reference.I-D.ietf-tls-external-psk-importer.xml"/>
+      <xi:include href="https://datatracker.ietf.org/doc/bibxml3/reference.I-D.ietf-tls-external-psk-guidance.xml"/>
     </references>
 
     <section title="Change Log" removeInRFC="true" anchor="change-log">

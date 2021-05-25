@@ -243,7 +243,11 @@ module ietf-tls-client {
                  'ClientKeyExchange' message.";
               reference
                 "RFC 4279: Pre-Shared Key Ciphersuites for
-                           Transport Layer Security (TLS)";
+                           Transport Layer Security (TLS)
+                 I-D.ietf-tls-external-psk-importer:
+                           Importing External PSKs for TLS
+                 I-D.ietf-tls-external-psk-guidance:
+                           Guidance for External PSK Usage in TLS";
             }
           }
         }
