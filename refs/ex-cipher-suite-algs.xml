@@ -1,0 +1,15 @@
+<supported-algorithms
+  xmlns="urn:ietf:params:xml:ns:yang:iana-tls-cipher-suite-algs"
+  xmlns:tlscsa="urn:ietf:params:xml:ns:yang:iana-tls-cipher-suite-algs">
+  <supported-algorithm>tlscsa:tls-ecdhe-ecdsa-with-aes-256-cbc-sha</supported-algorithm>
+  <supported-algorithm>tlscsa:tls-dhe-rsa-with-aes-128-cbc-sha256</supported-algorithm>
+  <supported-algorithm>tlscsa:tls-rsa-with-3des-ede-cbc-sha</supported-algorithm>
+  <supported-algorithm>tlscsa:tls-ecdhe-psk-with-aes-256-gcm-sha384</supported-algorithm>
+  <supported-algorithm>tlscsa:tls-dhe-psk-with-chacha20-poly1305-sha256</supported-algorithm>
+  <supported-algorithm>tlscsa:tls-eccpwd-with-aes-256-gcm-sha384</supported-algorithm>
+  <supported-algorithm>tlscsa:tls-psk-with-aes-256-ccm</supported-algorithm>
+  <supported-algorithm>tlscsa:tls-dhe-psk-with-camellia-256-cbc-sha384</supported-algorithm>
+  <supported-algorithm>tlscsa:tls-ecdh-rsa-with-aes-256-cbc-sha384</supported-algorithm>
+  <supported-algorithm>tlscsa:tls-ecdh-rsa-with-3des-ede-cbc-sha</supported-algorithm>
+  <supported-algorithm>tlscsa:tls-dh-dss-with-aes-128-gcm-sha256</supported-algorithm>
+</supported-algorithms>

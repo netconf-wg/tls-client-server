@@ -77,12 +77,6 @@ module ietf-tls-server {
 
   // Features
 
-  feature tls-server-hello-params-config {
-    description
-      "TLS hello message parameters are configurable on a TLS
-       server.";
-  }
-
   feature tls-server-keepalives {
     description
       "Per socket TLS keepalive parameters are configurable for
@@ -191,7 +185,8 @@ module ietf-tls-server {
       choice auth-type {
         mandatory true;
         description
-          "A choice amongst authentication types.";
+          "A choice amongst authentication types, of which one must
+           be enabled (via its associated 'feature') and selected.";
         case certificate {
           if-feature "server-ident-x509-cert";
           container certificate {
@@ -344,7 +339,7 @@ module ietf-tls-server {
 
     container hello-params {
       nacm:default-deny-write;
-      if-feature "tls-server-hello-params-config";
+      if-feature "tlscmn:hello-params";
       uses tlscmn:hello-params-grouping;
       description
         "Configurable parameters for the TLS hello message.";

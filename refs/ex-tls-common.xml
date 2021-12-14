@@ -1,15 +1,17 @@
 <!-- The outermost element below doesn't exist in the data model. -->
 <!--  It simulates if the "grouping" were a "container" instead.  -->
+
 <hello-params
    xmlns="urn:ietf:params:xml:ns:yang:ietf-tls-common"
-   xmlns:tlscmn="urn:ietf:params:xml:ns:yang:ietf-tls-common">
+   xmlns:tlscmn="urn:ietf:params:xml:ns:yang:ietf-tls-common"
+   xmlns:tlscsa="urn:ietf:params:xml:ns:yang:iana-tls-cipher-suite-algs">
   <tls-versions>
     <tls-version>tlscmn:tls-1.1</tls-version>
     <tls-version>tlscmn:tls-1.2</tls-version>
   </tls-versions>
   <cipher-suites>
-    <cipher-suite>tlscmn:dhe-rsa-with-aes-128-cbc-sha</cipher-suite>
-    <cipher-suite>tlscmn:rsa-with-aes-128-cbc-sha</cipher-suite>
-    <cipher-suite>tlscmn:rsa-with-3des-ede-cbc-sha</cipher-suite>
+    <cipher-suite>tlscsa:tls-ecdhe-ecdsa-with-aes-256-cbc-sha</cipher-suite>
+    <cipher-suite>tlscsa:tls-dhe-rsa-with-aes-128-cbc-sha256</cipher-suite>
+    <cipher-suite>tlscsa:tls-rsa-with-3des-ede-cbc-sha</cipher-suite>
   </cipher-suites>
 </hello-params>

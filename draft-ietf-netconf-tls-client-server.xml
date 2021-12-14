@@ -34,7 +34,7 @@
     <workgroup>NETCONF Working Group</workgroup>
     <abstract>
       <t>This document defines three YANG 1.1
-        modules: the first defines identities and groupings common to both TLS
+        modules: the first defines features and groupings common to both TLS
         clients and TLS servers, the second defines a grouping for a generic
         TLS client, and the third defines a grouping for a generic TLS server.</t>
     </abstract>
@@ -70,7 +70,7 @@
   <middle>
     <section title="Introduction">
       <t>This document defines three YANG 1.1 <xref target="RFC7950"/>
-        modules: the first defines identities and groupings common to both TLS
+        modules: the first defines features and groupings common to both TLS
         clients and TLS servers, the second defines a grouping for a generic
         TLS client, and the third defines a grouping for a generic TLS server.</t>
 
@@ -78,8 +78,8 @@
         and TLS 1.1 <xref target="RFC4346"/> are historic and hence the YANG
         "feature" statements enabling them are marked "status obsolete".  TLS 1.2
         <xref target="RFC5246"/> is obsoleted by TLS 1.3 <xref target="RFC8446"/>
-        but still is common use, and hence its "feature" statement is marked
-        "status obsolete".  All the "feature" statements for 1.0, 1.1, and 1.3
+        but still in common use, and hence its "feature" statement is marked
+        "status deprecated".  All the feature statements for 1.0, 1.1, and 1.3
         have "description" statements stating that it is NOT RECOMMENDED to
         enable obsolete protocol versions.</t>
 
@@ -96,7 +96,7 @@
       ports to listen-on or connect-to. This affords applications the
       opportunity to define their own strategy for how the underlying TCP
       connection is established. For instance, applications supporting NETCONF
-      Call Home <xref target="RFC8071"/> could use the "ssh-server-grouping"
+      Call Home <xref target="RFC8071"/> could use the "tls-server-grouping"
       grouping for the TLS parts it provides, while adding data nodes for the
       TCP-level call-home configuration.</t>
 
@@ -111,10 +111,18 @@ INSERT_TEXT_FROM_FILE(../common-intro-snippet.xml,150)
           in &lt;operational&gt;.</t>
       </section>
 
+        <section title="Conventions">
+          <t>Various examples used in this document use a placeholder
+            value for binary data that has been base64 encoded (e.g.,
+            "BASE64VALUE=").  This placeholder value is used as real
+            base64 encoded structures are often many lines long and
+            hence distracting to the example being presented.</t>
+        </section>
+
     </section>
 
     <section anchor="tls-common-model" title="The &quot;ietf-tls-common&quot; Module">
-      <t>The TLS common model presented in this section contains identities
+      <t>The TLS common model presented in this section contains features
       and groupings common to both TLS clients and TLS servers. The
       "hello-params-grouping" grouping can be used to configure the list of TLS
       algorithms permitted by the TLS client or TLS server. The lists of
@@ -127,6 +135,7 @@ INSERT_TEXT_FROM_FILE(../common-intro-snippet.xml,150)
       security policies. This model supports both TLS1.2 <xref
       target="RFC5246"/> and TLS 1.3 <xref target="RFC8446"/>.</t>
 
+    <!--
       <t>TLS 1.2 and TLS 1.3 have different ways defining their own supported
       cryptographic algorithms, see TLS and DTLS IANA registries page
       (https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml):</t>
@@ -157,16 +166,20 @@ INSERT_TEXT_FROM_FILE(../common-intro-snippet.xml,150)
           those TLS1.3 algorithms specified in B.4, 4.2.3, 4.2.7 of <xref
           target="RFC8446"/>.</t>
         </list></t>
+     -->
 
+      <!-- FIXME - is there an open item below? -->
       <t>Thus, in order to support both TLS1.2 and TLS1.3, the cipher-suites
       part of the "hello-params-grouping" grouping should include three parameters for
       configuring its permitted TLS algorithms, which are: TLS Cipher Suites,
       TLS SignatureScheme, TLS Supported Groups. Note that TLS1.2 only uses
       TLS Cipher Suites.</t>
 
+    <!--
       <t>Features are defined for algorithms that are OPTIONAL or are not
       widely supported by popular implementations. Note that the list of
       algorithms is not exhaustive.</t>
+     -->
 
       <section title="Data Model Overview">
 
@@ -184,11 +197,7 @@ Features:
   +-- tls-1_1
   +-- tls-1_2
   +-- tls-1_3
-  +-- tls-ecc
-  +-- tls-dhe
-  +-- tls-3des
-  +-- tls-gcm
-  +-- tls-sha2
+  +-- hello-params
 ]]></artwork>
             </figure>
           </t>
@@ -338,7 +347,6 @@ INSERT_TEXT_FROM_FILE(ietf-tls-common@YYYY-MM-DD.yang)
             <figure>
               <artwork><![CDATA[
 Features:
-  +-- tls-client-hello-params-config
   +-- tls-client-keepalives
   +-- client-ident-x509-cert
   +-- client-ident-raw-public-key
@@ -380,7 +388,7 @@ INSERT_TEXT_FROM_FILE(refs/tree-tls-client-grouping.no-expand.txt)
                 <xref target="client-features"/>.</li>
               <li>The "server-authentication" node configures trust anchors for
                 authenticating the TLS server, with each option enabled by a "feature" statement.</li>
-              <li>The "hello-params" node , which must be enabled by a feature, configures
+              <li>The "hello-params" node, which must be enabled by a feature, configures
                 parameters for the TLS sessions established by this configuration.</li>
               <li>The "keepalives" node, which must be enabled by a feature, configures
                 a "presence" container for testing the aliveness of the TLS server.  The
@@ -479,7 +487,6 @@ INSERT_TEXT_FROM_FILE(ietf-tls-client@YYYY-MM-DD.yang)
             <figure>
               <artwork><![CDATA[
 Features:
-  +-- tls-server-hello-params-config
   +-- tls-server-keepalives
   +-- server-ident-x509-cert
   +-- server-ident-raw-public-key
@@ -602,6 +609,30 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
     </section>
 
     <section title="Security Considerations">
+      <section title='The "iana-tls-cipher-suite-algs" Module'>
+        <t>The "iana-tls-cipher-suite-algs" YANG module defines a data model
+          that is designed to be accessed via YANG based management
+          protocols, such as NETCONF <xref target="RFC6241"/> and RESTCONF
+          <xref target="RFC8040"/>.  Both of these protocols have
+          mandatory-to-implement secure transport layers (e.g., SSH, TLS)
+          with mutual authentication.</t>
+        <t>The NETCONF access control model (NACM) <xref target="RFC8341"/>
+          provides the means to restrict access for particular users to a
+          pre-configured subset of all available protocol operations and
+          content.</t>
+        <t>This YANG module defines YANG identities, for a public IANA-maintained
+          registry, and a single protocol-accessible read-only node for the subset
+          of those identities supported by a server.</t>
+        <t>YANG identities are not security-sensitive, as they are statically
+          defined in the publicly-accessible YANG module.</t>
+        <t>The protocol-accessible read-only node for the algorithms supported
+          by a server is mildly sensitive, but not to the extent that special
+          NACM annotations are needed to prevent read-access to regular
+          authenticated administrators.</t>
+        <t>This module does not define any writable-nodes, RPCs, actions,
+          or notifications, and thus the security consideration for such
+          is not provided here.</t>
+      </section>
 
       <section title="The &quot;ietf-tls-common&quot; YANG Module">
         <t>The "ietf-tls-common" YANG module defines "grouping" statements
@@ -663,7 +694,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
             preventing unrestricted read-access to the cleartext key values.</t>
         </aside>
 
-        <t>All of the writable data nodes defined by this module may be
+        <t>All the writable data nodes defined by this module may be
           considered sensitive or vulnerable in some network environments.
           For instance, any modification to a key or reference to a key
           may dramatically alter the implemented security policy.  For
@@ -702,7 +733,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
             preventing unrestricted read-access to the cleartext key values.</t>
         </aside>
 
-        <t>All of the writable data nodes defined by this module may be
+        <t>All the writable data nodes defined by this module may be
           considered sensitive or vulnerable in some network environments.
           For instance, any modification to a key or reference to a key
           may dramatically alter the implemented security policy.  For
@@ -716,52 +747,81 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
 
     <section title="IANA Considerations">
       <section title='The "IETF XML" Registry'>
-        <t>This document registers three URIs in the "ns" subregistry of the
+        <t>This document registers four URIs in the "ns" subregistry of the
         IETF XML Registry <xref target="RFC3688"/>. Following the format in
         <xref target="RFC3688"/>, the following registrations are
         requested:</t>
 
         <t><figure>
             <artwork>
-   URI: urn:ietf:params:xml:ns:yang:ietf-tls-common
-   Registrant Contact: The IESG
-   XML: N/A, the requested URI is an XML namespace.
+URI: urn:ietf:params:xml:ns:yang:iana-tls-cipher-suite-algs
+Registrant Contact: IANA
+XML: N/A, the requested URI is an XML namespace.
 
-   URI: urn:ietf:params:xml:ns:yang:ietf-tls-client
-   Registrant Contact: The IESG
-   XML: N/A, the requested URI is an XML namespace.
+URI: urn:ietf:params:xml:ns:yang:ietf-tls-common
+Registrant Contact: The IESG
+XML: N/A, the requested URI is an XML namespace.
 
-   URI: urn:ietf:params:xml:ns:yang:ietf-tls-server
-   Registrant Contact: The IESG
-   XML: N/A, the requested URI is an XML namespace.
+URI: urn:ietf:params:xml:ns:yang:ietf-tls-client
+Registrant Contact: The IESG
+XML: N/A, the requested URI is an XML namespace.
+
+URI: urn:ietf:params:xml:ns:yang:ietf-tls-server
+Registrant Contact: The IESG
+XML: N/A, the requested URI is an XML namespace.
 </artwork>
           </figure></t>
       </section>
 
       <section title='The "YANG Module Names" Registry'>
-        <t>This document registers three YANG modules in the YANG Module Names
+        <t>This document registers four YANG modules in the YANG Module Names
         registry <xref target="RFC6020"/>. Following the format in <xref
         target="RFC6020"/>, the following registrations are requested:</t>
 
         <t><figure>
             <artwork>
-   name:         ietf-tls-common
-   namespace:    urn:ietf:params:xml:ns:yang:ietf-tls-common
-   prefix:       tlscmn
-   reference:    RFC FFFF
+name:         iana-tls-cipher-suite-algs
+namespace:    urn:ietf:params:xml:ns:yang:iana-tls-cipher-suite-algs
+prefix:       tlscsa
+reference:    RFC FFFF
 
-   name:         ietf-tls-client
-   namespace:    urn:ietf:params:xml:ns:yang:ietf-tls-client
-   prefix:       tlsc
-   reference:    RFC FFFF
+name:         ietf-tls-common
+namespace:    urn:ietf:params:xml:ns:yang:ietf-tls-common
+prefix:       tlscmn
+reference:    RFC FFFF
 
-   name:         ietf-tls-server
-   namespace:    urn:ietf:params:xml:ns:yang:ietf-tls-server
-   prefix:       tlss
-   reference:    RFC FFFF
+name:         ietf-tls-client
+namespace:    urn:ietf:params:xml:ns:yang:ietf-tls-client
+prefix:       tlsc
+reference:    RFC FFFF
+
+name:         ietf-tls-server
+namespace:    urn:ietf:params:xml:ns:yang:ietf-tls-server
+prefix:       tlss
+reference:    RFC FFFF
 </artwork>
           </figure></t>
       </section>
+
+      <section title='The "iana-tls-cipher-suite-algs" Module'>
+        <t>IANA is requested to maintain a YANG module called "iana-tls-cipher-suite-algs"
+          that shadows the "TLS Cipher Suites" sub-registry of the
+          "Transport Layer Security (TLS) Parameters" registry <xref target="IANA-CIPHER-ALGS"/>.</t>
+        <t>This registry defines a YANG identity for each cipher suite algorithm, and a "base"
+          identity from which all of the other identities are derived.</t>
+        <t>An initial version of this module can be found in <xref target="iana-tls-csa-module"/>.</t>
+        <ul>
+          <li>Please note that this module was created on June 2st, 2021, and that additional
+            entries may have been added in the interim before this document's publication.
+            If this is that case, IANA may either publish just an updated module containing
+            the new entries, or publish the initial module as is immediately followed by a
+            "revision" containing the additional algorithm names.</li>
+          <li>Please also note that the "status" statement has been set to "deprecated", if the
+            "RECOMMENDED" column in the registry had the value 'N', and to "obsolete", if
+            the "References" column included <eref target="https://datatracker.ietf.org/doc/status-change-tls-des-idea-ciphers-to-historic">Moving single-DES and IDEA TLS ciphersuites to Historic</eref> reference.</li>
+        </ul>
+      </section>
+
     </section>
   </middle>
 
@@ -801,7 +861,88 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
       <xi:include href="https://datatracker.ietf.org/doc/bibxml3/reference.I-D.ietf-netconf-restconf-client-server.xml"/>
       <xi:include href="https://datatracker.ietf.org/doc/bibxml3/reference.I-D.ietf-tls-external-psk-importer.xml"/>
       <xi:include href="https://datatracker.ietf.org/doc/bibxml3/reference.I-D.ietf-tls-external-psk-guidance.xml"/>
+
+      <reference anchor="IANA-CIPHER-ALGS" target="https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-4">
+        <front>
+          <title>IANA "TLS Cipher Suites" Sub-registry of the "Transport Layer Security (TLS) Parameters" Registry</title>
+          <author fullname="Internet Assigned Numbers Authority (IANA)"/>
+        </front>
+      </reference>
+
     </references>
+
+    <section title='YANG Modules for IANA'>
+      <t>The module contained in this section was generated by scripts using the contents of the
+        associated sub-registry as they existed on June 2nd, 2021.</t>
+
+      <section title='Initial Module for the "TLS Cipher Suites" Registry' anchor="iana-tls-csa-module">
+        <section title="Data Model Overview">
+          <t>This section provides an overview of the "iana-tls-cipher-suite-algs" module
+            in terms of its identities and protocol-accessible nodes.</t>
+          <section title="Identities" toc="exclude">
+            <t>The following diagram lists the base "identity" statements defined in the
+              module, of which there is just one, and illustrates that all the derived identity
+              statements are generated from the associated IANA-maintained registry
+              <xref target="IANA-CIPHER-ALGS"/>.</t>
+            <t>
+              <figure>
+                <artwork><![CDATA[
+Identities:
+  +-- cipher-suite-alg-base
+    +-- <identity-name from IANA registry>
+]]></artwork>
+              </figure>
+            </t>
+            <aside>
+              <t>The diagram above uses syntax that is similar to but not
+                defined in <xref target="RFC8340"/>.</t>
+            </aside>
+          </section>
+          <section title="Protocol-accessible Nodes" toc="exclude">
+            <t>The following tree diagram <xref target="RFC8340"/> lists all the
+              protocol-accessible nodes defined in the "iana-tls-cipher-suite-alg"
+              module:</t>
+            <t>
+              <figure>
+                <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(refs/iana-tls-cipher-suite-algs-tree.txt)
+]]></artwork>
+              </figure>
+            </t>
+            <t>Comments:</t>
+            <ul>
+              <li>Protocol-accessible nodes are those nodes that are accessible
+                when the module is "implemented", as described in <relref
+                section="5.6.5" target="RFC7950"/>.</li>
+            </ul>
+          </section>
+        </section>
+        <section title="Example Usage">
+          <t>The following example illustrates operational state data indicating
+            the TLS cipher suite algorithms supported by the server:
+            <figure>
+              <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(refs/ex-cipher-suite-algs.xml)
+]]></artwork>
+            </figure>
+          </t>
+        </section>
+        <section title="YANG Module">
+          <t>Following are the complete contents to the initial IANA-maintained YANG module.
+            Please note that the date "2021-06-02" reflects the day on which the extraction
+            occurred.</t>
+          <t>
+            <figure>
+              <preamble>&lt;CODE BEGINS&gt; file "iana-tls-cipher-suite-algs@2021-06-02.yang"</preamble>
+              <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(iana-tls-cipher-suite-algs@2021-06-02.yang)
+]]></artwork>
+              <postamble>&lt;CODE ENDS&gt;</postamble>
+            </figure>
+          </t>
+        </section>
+      </section>
+    </section>
 
     <section title="Change Log" removeInRFC="true" anchor="change-log">
       <section title="00 to 01">
@@ -919,7 +1060,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
               that prefer to keep client auth with client definitions than in
               a model principally concerned with the "transport".</t>
             <t>In both models, removed the "demux containers", floating the
-              nacm:default-deny-write to each descendent node, and
+              nacm:default-deny-write to each descendant node, and
               adding a note to model designers regarding the potential
               need to add their own demux containers.</t>
             <t>Fixed a couple references (section 2 --> section 3)</t>
@@ -977,7 +1118,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
             <t>Removed choice required-or-optional.</t>
             <t>Updated examples to include the "*-key-format" nodes.</t>
             <t>Augmented-in "must" expressions ensuring that locally-defined public-key-format
-              are "ct:ssh-public-key-format" (must expr for ref'ed keys are TBD).</t>
+              are "ct:tls-public-key-format" (must expr for ref'ed keys are TBD).</t>
           </list>
         </t>
       </section>
@@ -992,7 +1133,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
             <t>Removed feature-limited caseless 'case' statements to improve tree diagram rendering.</t>
             <t>Refined truststore/keystore groupings to ensure the key formats "must" be particular values.</t>
             <t>Switched to using truststore's new "public-key" bag (instead of separate "ssh-public-key"
-              and "raw-public-key" bags.</t>
+              and "raw-public-key" bags).</t>
             <t>Updated client/server examples to cover ALL cases (local/ref x cert/raw-key/psk).</t>
           </list>
         </t>
@@ -1018,7 +1159,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
               ietf-tls-server:client-authentication" node.</t>
             <t>Added "mandatory true" to "choice auth-type" and a "presence" statement to its ancestor.</t>
             <t>Expanded "Data Model Overview section(s) [remove "wall" of tree diagrams].</t>
-            <t>Moved the "ietf-ssh-common" module section to proceed the other two module sections.</t>
+            <t>Moved the "ietf-tls-common" module section to proceed the other two module sections.</t>
             <t>Updated the Security Considerations section.</t>
           </list>
         </t>
@@ -1065,13 +1206,26 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
       <section title="24 to 25">
         <t>
           <list style="symbols">
+            <t>Added TLS 1.3 references.</t>
             <t>Clarified support for various TLS protocol versions.</t>
-            <t>Fixed many references.</t>
+            <t>Moved algorithms in ietf-tls-common (plus more) to IANA-maintained modules</t>
+            <t>Added "config false" lists for algorithms supported by the server.</t>
+            <t>Fixed issues found during YANG Doctor review.</t>
+          </list>
+        </t>
+      </section>
+      <section title="25 to 26">
+        <t>
+          <list style="symbols">
+            <t>Replaced "base64encodedvalue==" with "BASE64VALUE=" in examples.</t>
+            <t>Minor editorial nits</t>
+
+            <t>SUBMISSION PENDING</t>
           </list>
         </t>
       </section>
       <!--
-      <section title="25 to 26">
+      <section title="26 to 27">
         <t>
           <list style="symbols">
             <t>SUBMISSION PENDING</t>

@@ -19,6 +19,31 @@ run_unix_cmd() {
   fi
 }
 
+# IANA Modules
+
+printf "Testing iana-tls-cipher-suite-algs (pyang)..."
+command="pyang -Werror --max-line-length=69 -p ../ ../iana-tls-cipher-suite-algs\@*.yang"
+run_unix_cmd $LINENO "$command" 0
+printf "okay.\n"
+
+printf "Testing iana-tls-cipher-suite-algs (yanglint)..."
+command="yanglint -p ../ ../iana-tls-cipher-suite-algs\@*.yang"
+run_unix_cmd $LINENO "$command" 0
+printf "okay.\n"
+
+
+# IETF Modules
+
+printf "Testing ietf-tls-common (pyang)..."
+command="pyang -Werror --ietf --max-line-length=69 -p ../ ../ietf-tls-common\@*.yang"
+run_unix_cmd $LINENO "$command" 0
+printf "okay.\n"
+
+printf "Testing ietf-tls-common (yanglint)..."
+command="yanglint -p ../ ../ietf-tls-common\@*.yang"
+run_unix_cmd $LINENO "$command" 0
+printf "okay.\n"
+
 printf "Testing ietf-tls-client (pyang)..."
 command="pyang -Werror --ietf --max-line-length=69 -p ../ ../ietf-tls-client\@*.yang"
 run_unix_cmd $LINENO "$command" 0
@@ -39,20 +64,20 @@ command="yanglint -p ../ ../ietf-tls-server\@*.yang"
 run_unix_cmd $LINENO "$command" 0
 printf "okay.\n"
 
-printf "Testing ietf-tls-common (pyang)..."
-command="pyang -Werror --ietf --max-line-length=69 -p ../ ../ietf-tls-common\@*.yang"
+
+# IANA EXAMPLES
+printf "Testing ex-cipher-suite-algs.xml..."
+command="yanglint ../iana-tls-cipher-suite-algs\@*.yang ex-cipher-suite-algs.xml"
 run_unix_cmd $LINENO "$command" 0
 printf "okay.\n"
 
-printf "Testing ietf-tls-common (yanglint)..."
-command="yanglint -p ../ ../ietf-tls-common\@*.yang"
-run_unix_cmd $LINENO "$command" 0
-printf "okay.\n"
+
+# IETF EXAMPLES
 
 printf "Testing ex-tls-common.xml..."
 name=`ls -1 ../ietf-tls-common\@*.yang | sed 's/\.\.\///'`
 sed 's/^}/container hello-params { uses hello-params-grouping; }}/' ../ietf-tls-common\@*.yang > $name
-command="yanglint -s ../ietf-crypto-types\@*.yang ../ietf-truststore\@*.yang ../ietf-keystore\@*.yang $name ex-tls-common.xml"
+command="yanglint ../ietf-crypto-types\@*.yang ../ietf-truststore\@*.yang ../ietf-keystore\@*.yang ../iana-tls-cipher-suite-algs\@*.yang $name ex-tls-common.xml"
 run_unix_cmd $LINENO "$command" 0
 printf "okay.\n"
 rm $name
