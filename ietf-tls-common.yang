@@ -13,10 +13,11 @@ module ietf-tls-common {
     "IETF NETCONF (Network Configuration) Working Group";
 
   contact
-    "WG Web:   https://datatracker.ietf.org/wg/netconf
-     WG List:  NETCONF WG list <mailto:netconf@ietf.org>
+    "WG List:  NETCONF WG list <mailto:netconf@ietf.org>
+     WG Web:   https://datatracker.ietf.org/wg/netconf
      Author:   Kent Watsen <mailto:kent+ietf@watsen.net>
-     Author:   Gary Wu <mailto:garywu@cisco.com>";
+     Author:   Gary Wu <mailto:garywu@cisco.com>
+     Author:   Jeff Hartley <mailto:jeff.hartley@commscope.com>";
 
    description
     "This module defines a common features and groupings for
@@ -27,7 +28,7 @@ module ietf-tls-common {
 
      Redistribution and use in source and binary forms, with
      or without modification, is permitted pursuant to, and
-     subject to the license terms contained in, the Simplified
+     subject to the license terms contained in, the Revised
      BSD License set forth in Section 4.c of the IETF Trust's
      Legal Provisions Relating to IETF Documents
      (https://trustee.ietf.org/license-info).
@@ -52,7 +53,7 @@ module ietf-tls-common {
 
   // Features
 
-  feature tls-1_0 {
+  feature tls10 {
     status "obsolete";
     description
       "TLS Protocol Version 1.0 is supported.  TLS 1.0 is obsolete
@@ -61,7 +62,7 @@ module ietf-tls-common {
       "RFC 2246: The TLS Protocol Version 1.0";
   }
 
-  feature tls-1_1 {
+  feature tls11 {
     status "obsolete";
     description
       "TLS Protocol Version 1.1 is supported.  TLS 1.1 is obsolete
@@ -71,7 +72,7 @@ module ietf-tls-common {
                  Version 1.1";
   }
 
-  feature tls-1_2 {
+  feature tls12 {
     status "deprecated";
     description
       "TLS Protocol Version 1.2 is supported  TLS 1.2 is obsolete
@@ -81,12 +82,12 @@ module ietf-tls-common {
                  Version 1.2";
   }
 
-  feature tls-1_3 {
+  feature tls13 {
     description
       "TLS Protocol Version 1.3 is supported.";
     reference
-      "RFC 8446: The Transport Layer Security (TLS) Protocol
-                 Version 1.3";
+      "RFC 8446: The Transport Layer Security (TLS)
+                 Protocol Version 1.3";
   }
 
   feature hello-params {
@@ -101,8 +102,8 @@ module ietf-tls-common {
       "Base identity used to identify TLS protocol versions.";
   }
 
-  identity tls-1.0 {
-    if-feature "tls-1_0";
+  identity tls10 {
+    if-feature "tls10";
     base tls-version-base;
     status "obsolete";
     description
@@ -111,8 +112,8 @@ module ietf-tls-common {
       "RFC 2246: The TLS Protocol Version 1.0";
   }
 
-  identity tls-1.1 {
-    if-feature "tls-1_1";
+  identity tls11 {
+    if-feature "tls11";
     base tls-version-base;
     status "obsolete";
     description
@@ -122,8 +123,8 @@ module ietf-tls-common {
                  Version 1.1";
   }
 
-  identity tls-1.2 {
-    if-feature "tls-1_2";
+  identity tls12 {
+    if-feature "tls12";
     base tls-version-base;
     status "deprecated";
     description
@@ -133,14 +134,38 @@ module ietf-tls-common {
                  Version 1.2";
   }
 
-  identity tls-1.3 {
-    if-feature "tls-1_3";
+  identity tls13 {
+    if-feature "tls13";
     base tls-version-base;
     description
       "TLS Protocol Version 1.3.";
     reference
-      "RFC 8446: The Transport Layer Security (TLS) Protocol
-                 Version 1.3";
+      "RFC 8446: The Transport Layer Security (TLS)
+                 Protocol Version 1.3";
+  }
+
+  typedef epsk-supported-hash {
+    type enumeration {
+      enum sha-256 {
+        description
+          "The SHA-256 Hash.";
+      }
+      enum sha-384 {
+        description
+          "The SHA-384 Hash.";
+      }
+    }
+    description
+      "As per Section 4.2.11 of RFC 8446, the hash algorithm
+       supported by an instance of an External Pre-Shared
+       Key (EPSK).";
+    reference
+      "RFC 8446: The Transport Layer Security (TLS)
+                 Protocol Version 1.3
+       I-D.ietf-tls-external-psk-importer: Importing
+                 External PSKs for TLS
+       I-D.ietf-tls-external-psk-guidance: Guidance
+                 for External PSK Usage in TLS";
   }
 
 

@@ -38,10 +38,11 @@ module ietf-tls-client {
     "IETF NETCONF (Network Configuration) Working Group";
 
   contact
-    "WG Web:   https://datatracker.ietf.org/wg/netconf
-     WG List:  NETCONF WG list <mailto:netconf@ietf.org>
+    "WG List:  NETCONF WG list <mailto:netconf@ietf.org>
+     WG Web:   https://datatracker.ietf.org/wg/netconf
      Author:   Kent Watsen <mailto:kent+ietf@watsen.net>
-     Author:   Gary Wu <mailto:garywu@cisco.com>";
+     Author:   Gary Wu <mailto:garywu@cisco.com>
+     Author:   Jeff Hartley <mailto:jeff.hartley@commscope.com>";
 
   description
     "This module defines reusable groupings for TLS clients that
@@ -52,7 +53,7 @@ module ietf-tls-client {
 
      Redistribution and use in source and binary forms, with
      or without modification, is permitted pursuant to, and
-     subject to the license terms contained in, the Simplified
+     subject to the license terms contained in, the Revised
      BSD License set forth in Section 4.c of the IETF Trust's
      Legal Provisions Relating to IETF Documents
      (https://trustee.ietf.org/license-info).
@@ -103,14 +104,23 @@ module ietf-tls-client {
          and Datagram Transport Layer Security (DTLS)";
   }
 
-  feature client-ident-psk {
+  feature client-ident-tls12-psk {
     description
       "Indicates that the client supports identifying itself
-       using PSKs (pre-shared or pairwise-symmetric keys).";
+       using TLS-1.2 PSKs (pre-shared or pairwise-symmetric keys).";
     reference
       "RFC 4279:
          Pre-Shared Key Ciphersuites for Transport Layer Security
          (TLS)";
+  }
+
+  feature client-ident-tls13-epsk {
+    description
+      "Indicates that the client supports identifying itself
+       using TLS-1.3 External PSKs (pre-shared keys).";
+    reference
+      "RFC 8446:
+         The Transport Layer Security (TLS) Protocol Version 1.3";
   }
 
   feature server-auth-x509-cert {
@@ -133,7 +143,7 @@ module ietf-tls-client {
          and Datagram Transport Layer Security (DTLS)";
   }
 
-  feature server-auth-psk {
+  feature server-auth-tls12-psk {
     description
       "Indicates that the client supports authenticating servers
        using PSKs (pre-shared or pairwise-symmetric keys).";
@@ -141,6 +151,15 @@ module ietf-tls-client {
       "RFC 4279:
          Pre-Shared Key Ciphersuites for Transport Layer Security
          (TLS)";
+  }
+
+  feature server-auth-tls13-epsk {
+    description
+      "Indicates that the client supports authenticating servers
+       using TLS-1.3 External PSKs (pre-shared keys).";
+    reference
+      "RFC 8446:
+         The Transport Layer Security (TLS) Protocol Version 1.3";
   }
 
   // Groupings
@@ -176,10 +195,10 @@ module ietf-tls-client {
          Certificate message defined in Section 7.4.2 of
          RFC 5246 and Section 4.4.2 in RFC 8446.";
       reference
-        "RFC 5246: The Transport Layer Security (TLS) Protocol
-                   Version 1.2
-         RFC 8446: The Transport Layer Security (TLS) Protocol
-                   Version 1.3
+        "RFC 5246: The Transport Layer Security (TLS)
+                   Protocol Version 1.2
+         RFC 8446: The Transport Layer Security (TLS)
+                   Protocol Version 1.3
          RFC CCCC: A YANG Data Model for a Keystore";
       choice auth-type {
         mandatory true;
@@ -224,9 +243,9 @@ module ietf-tls-client {
             }
           }
         }
-        case psk {
-          if-feature "client-ident-psk";
-          container psk {
+        case tls12-psk {
+          if-feature "client-ident-tls12-psk";
+          container tls12-psk {
             description
               "Specifies the client identity using a PSK (pre-shared
                or pairwise-symmetric key).";
@@ -238,11 +257,108 @@ module ietf-tls-client {
                  'ClientKeyExchange' message.";
               reference
                 "RFC 4279: Pre-Shared Key Ciphersuites for
-                           Transport Layer Security (TLS)
-                 I-D.ietf-tls-external-psk-importer:
+                           Transport Layer Security (TLS)";
+            }
+          }
+        }
+        case tls13-epsk {
+          if-feature "client-ident-tls13-epsk";
+          container tls13-epsk {
+            description
+              "An External Pre-Shared Key (EPSK) is established
+              or provisioned out-of-band, i.e., not from a TLS
+              connection.  An EPSK is a tuple of (Base Key,
+              External Identity, Hash).  External PSKs MUST NOT
+              be imported for (D)TLS 1.2 or prior versions.  When
+              PSKs are provisioned out of band, the PSK identity
+              and the KDF hash algorithm to be used with the PSK
+              MUST also be provisioned.
+
+              The structure of this container is designed
+              to satisfy the requirements of RFC 8446
+              Section 4.2.11, the recommendations from I-D
+              ietf-tls-external-psk-guidance Section 6,
+              and the EPSK input fields detailed in I-D
+              draft-ietf-tls-external-psk-importer
+              Section 3.1.  The base-key is based upon
+              ks:local-or-keystore-symmetric-key-grouping
+              in order to provide users with flexible and
+              secure storage options.";
+            reference
+              "RFC 8446: The Transport Layer Security (TLS)
+                         Protocol Version 1.3
+               I-D.ietf-tls-external-psk-importer:
+                         Importing External PSKs for TLS
+               I-D.ietf-tls-external-psk-guidance:
+                         Guidance for External PSK Usage in TLS";
+            uses ks:local-or-keystore-symmetric-key-grouping;
+            leaf external-identity {
+              type string;
+              mandatory true;
+              description
+                "As per Section 4.2.11 of RFC 8446, and Section 4.1
+                 of I-D. ietf-tls-external-psk-guidance:
+                 A sequence of bytes used to identify an EPSK. A
+                 label for a pre-shared key established externally.";
+              reference
+                "RFC 8446: The Transport Layer Security (TLS)
+                           Protocol Version 1.3
+                 I-D.ietf-tls-external-psk-guidance:
+                           Guidance for External PSK Usage in TLS";
+            }
+            leaf hash {
+              type tlscmn:epsk-supported-hash;
+              mandatory true;
+              description
+                "As per Section 4.2.11 of RFC 8446, for externally
+                 established PSKs, the Hash algorithm MUST be set
+                 when the PSK is established or default to SHA-256
+                 if no such algorithm is defined.  The server MUST
+                 ensure that it selects a compatible PSK (if any)
+                 and cipher suite.  Each PSK MUST only be used with
+                 a single hash function.";
+              reference
+                "RFC 8446: The Transport Layer Security (TLS)
+                           Protocol Version 1.3";
+            }
+            leaf context {
+              type string;
+              description
+                "As per Section 4.1 of I-D.
+                 ietf-tls-external-psk-guidance: Context may include
+                 information about peer roles or identities to
+                 mitigate Selfie-style reflection attacks [Selfie].
+                 If the EPSK is a key derived from some other
+                 protocol or sequence of protocols, context
+                 MUST include a channel binding for the deriving
+                 protocols [RFC5056].  The details of this binding
+                 are protocol specific.";
+              reference
+                "I-D.ietf-tls-external-psk-importer:
                            Importing External PSKs for TLS
                  I-D.ietf-tls-external-psk-guidance:
                            Guidance for External PSK Usage in TLS";
+            }
+            leaf target-protocol {
+              type uint16;
+              description
+                "As per Section 3.1 of I-D.
+                 ietf-tls-external-psk-guidance:
+                 The protocol for which a PSK is imported for use.";
+              reference
+                "I-D.ietf-tls-external-psk-importer:
+                           Importing External PSKs for TLS";
+            }
+            leaf target-kdf {
+              type uint16;
+              description
+                "As per Section 3.1 of I-D.
+                 ietf-tls-external-psk-guidance:
+                 The specific Key Derivation Function (KDF) for which
+                 a PSK is imported for use.";
+              reference
+                "I-D.ietf-tls-external-psk-importer:
+                           Importing External PSKs for TLS";
             }
           }
         }
@@ -251,7 +367,8 @@ module ietf-tls-client {
 
     container server-authentication {
       nacm:default-deny-write;
-      must 'ca-certs or ee-certs or raw-public-keys or psks';
+      must 'ca-certs or ee-certs or raw-public-keys or tls12-psks
+        or tls13-epsks';
       description
         "Specifies how the TLS client can authenticate TLS servers.
          Any combination of credentials is additive and unordered.
@@ -317,13 +434,24 @@ module ietf-tls-client {
           }
         }
       }
-      leaf psks {
-        if-feature "client-ident-psk";
+      leaf tls12-psks {
+        if-feature "server-auth-tls12-psk";
         type empty;
         description
           "Indicates that the TLS client can authenticate TLS servers
            using configure PSKs (pre-shared or pairwise-symmetric
            keys).
+
+           No configuration is required since the PSK value is the
+           same as PSK value configured in the 'client-identity'
+           node.";
+      }
+      leaf tls13-epsks {
+        if-feature "server-auth-tls13-epsk";
+        type empty;
+        description
+          "Indicates that the TLS client can authenticate TLS servers
+           using configured external PSKs (pre-shared keys).
 
            No configuration is required since the PSK value is the
            same as PSK value configured in the 'client-identity'
