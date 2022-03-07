@@ -85,7 +85,7 @@ rm $name
 printf "Testing ex-tls-client-local.xml..."
 name=`ls -1 ../ietf-tls-client\@*.yang | sed 's/\.\.\///'`
 sed 's/^}/container tls-client { uses tls-client-grouping; }}/' ../ietf-tls-client\@*.yang > $name
-command="yanglint -m -s ../ietf-crypto-types\@*.yang ../ietf-truststore\@*.yang ../ietf-keystore\@*.yang ../ietf-tls-common\@*.yang ./ietf-origin.yang $name ex-tls-client-local.xml ../../trust-anchors/refs/ex-truststore.xml ../../keystore/refs/ex-keystore.xml"
+command="yanglint -m ../ietf-crypto-types\@*.yang ../ietf-truststore\@*.yang ../ietf-keystore\@*.yang ../ietf-tls-common\@*.yang ./ietf-origin.yang $name ex-tls-client-local.xml ../../trust-anchors/refs/ex-truststore.xml ../../keystore/refs/ex-keystore.xml"
 run_unix_cmd $LINENO "$command" 0
 printf "okay.\n"
 rm $name
@@ -93,7 +93,7 @@ rm $name
 printf "Testing ex-tls-client-keystore.xml..."
 name=`ls -1 ../ietf-tls-client\@*.yang | sed 's/\.\.\///'`
 sed 's/^}/container tls-client { uses tls-client-grouping; }}/' ../ietf-tls-client\@*.yang > $name
-command="yanglint -m -s ../ietf-crypto-types\@*.yang ../ietf-truststore\@*.yang ../ietf-keystore\@*.yang ../ietf-tls-common\@*.yang ./ietf-origin.yang $name ex-tls-client-keystore.xml ../../trust-anchors/refs/ex-truststore.xml ../../keystore/refs/ex-keystore.xml"
+command="yanglint -m ../ietf-crypto-types\@*.yang ../ietf-truststore\@*.yang ../ietf-keystore\@*.yang ../ietf-tls-common\@*.yang ./ietf-origin.yang $name ex-tls-client-keystore.xml ../../trust-anchors/refs/ex-truststore.xml ../../keystore/refs/ex-keystore.xml"
 run_unix_cmd $LINENO "$command" 0
 printf "okay.\n"
 rm $name
@@ -101,7 +101,7 @@ rm $name
 printf "Testing ex-tls-server-local.xml..."
 name=`ls -1 ../ietf-tls-server\@*.yang | sed 's/\.\.\///'`
 sed 's/^}/container tls-server { uses tls-server-grouping; }}/' ../ietf-tls-server\@*.yang > $name
-command="yanglint -m -s ../ietf-crypto-types\@*.yang ../ietf-truststore\@*.yang ../ietf-keystore\@*.yang ../ietf-tls-common\@*.yang ./ietf-origin.yang $name ex-tls-server-local.xml ../../trust-anchors/refs/ex-truststore.xml ../../keystore/refs/ex-keystore.xml"
+command="yanglint -m ../ietf-crypto-types\@*.yang ../ietf-truststore\@*.yang ../ietf-keystore\@*.yang ../ietf-tls-common\@*.yang ./ietf-origin.yang $name ex-tls-server-local.xml ../../trust-anchors/refs/ex-truststore.xml ../../keystore/refs/ex-keystore.xml"
 run_unix_cmd $LINENO "$command" 0
 printf "okay.\n"
 rm $name
@@ -109,7 +109,7 @@ rm $name
 printf "Testing ex-tls-server-keystore.xml..."
 name=`ls -1 ../ietf-tls-server\@*.yang | sed 's/\.\.\///'`
 sed 's/^}/container tls-server { uses tls-server-grouping; }}/' ../ietf-tls-server\@*.yang > $name
-command="yanglint -m -s ../ietf-crypto-types\@*.yang ../ietf-truststore\@*.yang ../ietf-keystore\@*.yang ../ietf-tls-common\@*.yang ./ietf-origin.yang $name ex-tls-server-keystore.xml ../../trust-anchors/refs/ex-truststore.xml ../../keystore/refs/ex-keystore.xml"
+command="yanglint -m ../ietf-crypto-types\@*.yang ../ietf-truststore\@*.yang ../ietf-keystore\@*.yang ../ietf-tls-common\@*.yang ./ietf-origin.yang $name ex-tls-server-keystore.xml ../../trust-anchors/refs/ex-truststore.xml ../../keystore/refs/ex-keystore.xml"
 run_unix_cmd $LINENO "$command" 0
 printf "okay.\n"
 rm $name

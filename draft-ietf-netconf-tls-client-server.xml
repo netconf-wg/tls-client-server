@@ -215,31 +215,10 @@ Features:
              <artwork><![CDATA[
 Identities:               
   +-- tls-version-base
-  |  +-- tls-1.0
-  |  +-- tls-1.1
-  |  +-- tls-1.2
-  |  +-- tls-1.3
-  +-- cipher-suite-base
-     +-- rsa-with-aes-128-cbc-sha
-     +-- rsa-with-aes-256-cbc-sha
-     +-- rsa-with-aes-128-cbc-sha256
-     +-- rsa-with-aes-256-cbc-sha256
-     +-- dhe-rsa-with-aes-128-cbc-sha
-     +-- dhe-rsa-with-aes-256-cbc-sha
-     +-- dhe-rsa-with-aes-128-cbc-sha256
-     +-- dhe-rsa-with-aes-256-cbc-sha256
-     +-- ecdhe-ecdsa-with-aes-128-cbc-sha256
-     +-- ecdhe-ecdsa-with-aes-256-cbc-sha384
-     +-- ecdhe-rsa-with-aes-128-cbc-sha256
-     +-- ecdhe-rsa-with-aes-256-cbc-sha384
-     +-- ecdhe-ecdsa-with-aes-128-gcm-sha256
-     +-- ecdhe-ecdsa-with-aes-256-gcm-sha384
-     +-- ecdhe-rsa-with-aes-128-gcm-sha256
-     +-- ecdhe-rsa-with-aes-256-gcm-sha384
-     +-- rsa-with-3des-ede-cbc-sha
-     +-- ecdhe-rsa-with-3des-ede-cbc-sha
-     +-- ecdhe-rsa-with-aes-128-cbc-sha
-     +-- ecdhe-rsa-with-aes-256-cbc-sha
+     +-- tls-1.0
+     +-- tls-1.1
+     +-- tls-1.2
+     +-- tls-1.3
 ]]></artwork>
             </figure>
           </t>
@@ -898,6 +877,28 @@ Identities:
                 defined in <xref target="RFC8340"/>.</t>
             </aside>
           </section>
+          <section title="Typedefs" toc="exclude">
+            <t>The following diagram illustrates the "typedef" statements
+              defined in the "iana-tls-cipher-suite-algs" module:</t>
+            <t>
+              <figure>
+               <artwork><![CDATA[
+Typedefs:
+  identityref
+    +-- cipher-suite-algorithm-ref
+]]></artwork>
+              </figure>
+            </t>
+            <aside>
+              <t>The diagram above uses syntax that is similar to but not
+                defined in <xref target="RFC8340"/>.</t>
+            </aside>
+            <t>Comments:</t>
+            <ul>
+              <li>The typedef defined in the "iana-tls-cipher-suite-algs" module
+                extends the "identityref" type defined in <xref target="RFC7950"/>.</li>
+            </ul>
+          </section>
           <section title="Protocol-accessible Nodes" toc="exclude">
             <t>The following tree diagram <xref target="RFC8340"/> lists all the
               protocol-accessible nodes defined in the "iana-tls-cipher-suite-alg"
@@ -1222,11 +1223,12 @@ INSERT_TEXT_FROM_FILE(iana-tls-cipher-suite-algs@2021-06-02.yang)
           </list>
         </t>
       </section>
+      <section title="26 to 27">
         <t>
           <list style="symbols">
             <t>Fixed up the 'WG Web' and 'WG List' lines in YANG module(s)</t>
             <t>Fixed up copyright (i.e., s/Simplified/Revised/) in YANG module(s)</t>
-            <t>SUBMISSION PENDING</t>
+            <t>Created identityref-based typedef for the IANA alg identity base.</t>
           </list>
         </t>
       </section>

@@ -378,7 +378,7 @@ module ietf-tls-client {
          is necessarily the same as configured in the '../client-
          identity' node.";
       container ca-certs {
-        if-feature "client-ident-x509-cert";
+        if-feature "server-auth-x509-cert";
         presence
           "Indicates that CA certificates have been configured.
            This statement is present so the mandatory descendant
@@ -393,7 +393,7 @@ module ietf-tls-client {
         uses ts:local-or-truststore-certs-grouping;
       }
       container ee-certs {
-        if-feature "client-ident-x509-cert";
+        if-feature "server-auth-x509-cert";
         presence
           "Indicates that EE certificates have been configured.
            This statement is present so the mandatory descendant
@@ -409,7 +409,7 @@ module ietf-tls-client {
         uses ts:local-or-truststore-certs-grouping;
       }
       container raw-public-keys {
-        if-feature "client-ident-raw-public-key";
+        if-feature "server-auth-raw-public-key";
         presence
           "Indicates that raw public keys have been configured.
            This statement is present so the mandatory descendant

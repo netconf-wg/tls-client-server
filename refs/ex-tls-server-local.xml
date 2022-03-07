@@ -1,6 +1,9 @@
 <!-- The outermost element below doesn't exist in the data model. -->
 <!--  It simulates if the "grouping" were a "container" instead.  -->
-<tls-server xmlns="urn:ietf:params:xml:ns:yang:ietf-tls-server" xmlns:ct="urn:ietf:params:xml:ns:yang:ietf-crypto-types">
+
+<tls-server
+  xmlns="urn:ietf:params:xml:ns:yang:ietf-tls-server"
+  xmlns:ct="urn:ietf:params:xml:ns:yang:ietf-crypto-types">
     <!-- how this server will authenticate itself to the client -->
     <server-identity>
         <certificate>
