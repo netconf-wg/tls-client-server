@@ -41,6 +41,19 @@ module iana-tls-cipher-suite-algs {
       "RFC FFFF: YANG Groupings for TLS Clients and TLS Servers";
   }
 
+  // Typedefs
+
+  typedef cipher-suite-algorithm-ref {
+    type identityref {
+      base "cipher-suite-alg-base";
+    }
+    description
+      "A reference to a TLS cipher suite algorithm identifier.";
+  }
+
+
+  // Identities
+
   identity cipher-suite-alg-base {
     description
       "Base identity used to identify TLS cipher suites.";
@@ -3709,9 +3722,7 @@ module iana-tls-cipher-suite-algs {
       "A container for a list of cipher suite algorithms supported
        by the server.";
     leaf-list supported-algorithm {
-      type identityref {
-        base "tlscsa:cipher-suite-alg-base";
-      }
+      type cipher-suite-algorithm-ref;
       description
         "A cipher suite algorithm supported by the server.";
     }
