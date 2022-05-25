@@ -82,6 +82,12 @@ run_unix_cmd $LINENO "$command" 0
 printf "okay.\n"
 rm $name
 
+printf "Testing ex-generate-public-key.xml..."
+command="yanglint  -t nc-rpc -O ../../keystore/refs/ex-keystore.xml ../ietf-crypto-types\@*.yang ../ietf-truststore\@*.yang ../ietf-keystore\@*.yang ../iana-tls-cipher-suite-algs\@*.yang ../ietf-tls-common\@*.yang ex-generate-public-key.xml"
+run_unix_cmd $LINENO "$command" 0
+printf "okay.\n"
+
+
 printf "Testing ex-tls-client-local.xml..."
 name=`ls -1 ../ietf-tls-client\@*.yang | sed 's/\.\.\///'`
 sed 's/^}/container tls-client { uses tls-client-grouping; }}/' ../ietf-tls-client\@*.yang > $name

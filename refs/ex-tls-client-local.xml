@@ -34,6 +34,7 @@
             <id>example_id_string</id>
         </tls12-psk>
         -->
+        <!-- USE ONLY ONE AT A TIME
         <tls13-epsk>
             <local-definition>
                 <key-format>ct:octet-string-key-format</key-format>
@@ -45,6 +46,7 @@
             <target-protocol>8443</target-protocol>
             <target-kdf>12345</target-kdf>
         </tls13-epsk>
+        -->
     </client-identity>
     <!-- which certificates will this client trust -->
     <server-authentication>
@@ -80,7 +82,7 @@
                     <public-key>BASE64VALUE=</public-key>
                 </public-key>
                 <public-key>
-                    <name>corp-fw1</name>
+                    <name>corp-fw2</name>
                     <public-key-format>ct:subject-public-key-info-format</public-key-format>
                     <public-key>BASE64VALUE=</public-key>
                 </public-key>

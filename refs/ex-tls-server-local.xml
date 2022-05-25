@@ -34,6 +34,7 @@
             <id_hint>example_id_hint</id_hint>
         </tls12-psk>
         -->
+        <!-- USE ONLY ONE AT A TIME  
         <tls13-epsk>
             <local-definition>
                 <key-format>ct:octet-string-key-format</key-format>
@@ -45,6 +46,7 @@
             <target-protocol>8443</target-protocol>
             <target-kdf>12345</target-kdf>
         </tls13-epsk>
+        -->
     </server-identity>
     <!-- which certificates will this server trust -->
     <client-authentication>

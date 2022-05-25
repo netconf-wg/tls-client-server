@@ -6,8 +6,8 @@
    xmlns:tlscmn="urn:ietf:params:xml:ns:yang:ietf-tls-common"
    xmlns:tlscsa="urn:ietf:params:xml:ns:yang:iana-tls-cipher-suite-algs">
   <tls-versions>
-    <tls-version>tlscmn:tls-1.1</tls-version>
-    <tls-version>tlscmn:tls-1.2</tls-version>
+    <tls-version>tlscmn:tls11</tls-version>
+    <tls-version>tlscmn:tls12</tls-version>
   </tls-versions>
   <cipher-suites>
     <cipher-suite>tlscsa:tls-ecdhe-ecdsa-with-aes-256-cbc-sha</cipher-suite>
