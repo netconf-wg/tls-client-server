@@ -973,13 +973,13 @@ INSERT_TEXT_FROM_FILE(refs/ex-cipher-suite-algs.xml)
         </section>
         <section title="YANG Module">
           <t>Following are the complete contents to the initial IANA-maintained YANG module.
-            Please note that the date "2021-06-02" reflects the day on which the extraction
+            Please note that the date "2022-06-16" reflects the day on which the extraction
             occurred.</t>
           <t>
             <figure>
-              <preamble>&lt;CODE BEGINS&gt; file "iana-tls-cipher-suite-algs@2021-06-02.yang"</preamble>
+              <preamble>&lt;CODE BEGINS&gt; file "iana-tls-cipher-suite-algs@2022-06-16.yang"</preamble>
               <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(iana-tls-cipher-suite-algs@2021-06-02.yang)
+INSERT_TEXT_FROM_FILE(iana-tls-cipher-suite-algs@2022-06-16.yang)
 ]]></artwork>
               <postamble>&lt;CODE ENDS&gt;</postamble>
             </figure>
