@@ -35,6 +35,12 @@ module iana-tls-cipher-suite-algs {
      itself for full legal notices.";
 
   revision 2022-06-16 {
+   description
+      "Updated to reflect contents of the public key algorithms
+       registry on June 16, 2022.";
+  }
+
+  revision 2021-06-02 {
     description
       "Initial version";
     reference
