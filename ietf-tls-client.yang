@@ -213,13 +213,14 @@ module ietf-tls-client {
             uses
               ks:local-or-keystore-end-entity-cert-with-key-grouping{
               refine "local-or-keystore/local/local-definition" {
-                must 'public-key-format'
-                   + ' = "ct:subject-public-key-info-format"';
+                must 'derived-from-or-self(public-key-format,'
+                   + ' "ct:subject-public-key-info-format")';
               }
               refine "local-or-keystore/keystore/keystore-reference"
                    + "/asymmetric-key" {
-                must 'deref(.)/../ks:public-key-format'
-                   + ' = "ct:subject-public-key-info-format"';
+                must 'derived-from-or-self(deref(.)/../ks:public-'
+                   + 'key-format, "ct:subject-public-key-info-'
+                   + 'format")';
               }
             }
           }
@@ -232,13 +233,13 @@ module ietf-tls-client {
                private key.";
             uses ks:local-or-keystore-asymmetric-key-grouping {
               refine "local-or-keystore/local/local-definition" {
-                must 'public-key-format'
-                   + ' = "ct:subject-public-key-info-format"';
+                must 'derived-from-or-self(public-key-format,'
+                   + ' "ct:subject-public-key-info-format")';
               }
-              refine "local-or-keystore/keystore"
-                   + "/keystore-reference" {
-                must 'deref(.)/../ks:public-key-format'
-                   + ' = "ct:subject-public-key-info-format"';
+              refine "local-or-keystore/keystore/keystore-reference"{
+                must 'derived-from-or-self(deref(.)/../ks:public-'
+                   + 'key-format, "ct:subject-public-key-info-'
+                   + 'format")';
               }
             }
           }
@@ -422,15 +423,16 @@ module ietf-tls-client {
         reference
           "RFC BBBB: A YANG Data Model for a Truststore";
         uses ts:local-or-truststore-public-keys-grouping {
-          refine "local-or-truststore/local/local-definition"
-               + "/public-key" {
-            must 'public-key-format'
-               + ' = "ct:subject-public-key-info-format"';
+          refine "local-or-truststore/local/local-definition/"
+               + "public-key" {
+            must 'derived-from-or-self(public-key-format,'
+               + ' "ct:subject-public-key-info-format")';
           }
-          refine "local-or-truststore/truststore"
-               + "/truststore-reference" {
-            must 'deref(.)/../*/ts:public-key-format'
-               + ' = "ct:subject-public-key-info-format"';
+          refine "local-or-truststore/truststore/truststore-"
+               + "reference" {
+            must 'not(deref(.)/../ts:public-key/ts:public-key-'
+               + 'format[not(derived-from-or-self(., "ct:subject-'
+               + 'public-key-info-format"))])';
           }
         }
       }
