@@ -38,6 +38,8 @@ module iana-tls-cipher-suite-algs {
    description
       "Updated to reflect contents of the public key algorithms
        registry on June 16, 2022.";
+    reference
+      "RFC FFFF: YANG Groupings for TLS Clients and TLS Servers";
   }
 
   revision 2021-06-02 {
