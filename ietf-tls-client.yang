@@ -29,7 +29,6 @@ module ietf-tls-client {
 
   import ietf-tls-common {
     prefix tlscmn;
-    revision-date YYYY-MM-DD; // stable grouping definitions
     reference
       "RFC FFFF: YANG Groupings for TLS Clients and TLS Servers";
   }
@@ -41,8 +40,7 @@ module ietf-tls-client {
     "WG List:  NETCONF WG list <mailto:netconf@ietf.org>
      WG Web:   https://datatracker.ietf.org/wg/netconf
      Author:   Kent Watsen <mailto:kent+ietf@watsen.net>
-     Author:   Jeff Hartley <mailto:jeff.hartley@commscope.com>
-     Author:   Gary Wu <mailto:garywu@cisco.com>";
+     Author:   Jeff Hartley <mailto:jeff.hartley@commscope.com>";
 
   description
     "This module defines reusable groupings for TLS clients that

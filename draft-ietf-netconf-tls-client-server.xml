@@ -59,6 +59,14 @@
           <t><spanx style="verb">YYYY-MM-DD</spanx> --&gt; the publication date of this draft</t>
         </list>
       </t>
+      <t>The "Relation to other RFCs" section <xref target="collective-effort"/> contains
+        the text "one or more YANG modules" and, later, "modules".  This text is sourced
+        from a file in a context where it is unknown how many modules a draft defines.
+        The text is not wrong as is, but it may be improved by stating more directly how
+        many modules are defined.</t>
+      <t>The "Relation to other RFCs" section <xref target="collective-effort"/> contains
+        a self-reference to this draft, along with a corresponding Informative Reference in
+        the Appendix.</t>
       <t>The following Appendix section is to be removed prior to publication:
         <list style="symbols">
           <t><xref target="change-log"/>.  Change Log</t>
@@ -638,7 +646,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
           <xref target="RFC8040"/>.  Both of these protocols have
           mandatory-to-implement secure transport layers (e.g., SSH, TLS)
           with mutual authentication.</t>
-        <t>The NETCONF access control model (NACM) <xref target="RFC8341"/>
+        <t>The Network Access Control Model (NACM) <xref target="RFC8341"/>
           provides the means to restrict access for particular users to a
           pre-configured subset of all available protocol operations and
           content.</t>
@@ -664,7 +672,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
           mandatory-to-implement secure transport layers (e.g., SSH, TLS)
           with mutual authentication.</t>
 
-        <t>The NETCONF access control model (NACM) <xref target="RFC8341"/>
+        <t>The Network Access Control Model (NACM) <xref target="RFC8341"/>
           provides the means to restrict access for particular users to a
           pre-configured subset of all available protocol operations and
           content.</t>
@@ -695,7 +703,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
           mandatory-to-implement secure transport layers (e.g., SSH, TLS)
           with mutual authentication.</t>
 
-        <t>The NETCONF access control model (NACM) <xref target="RFC8341"/>
+        <t>The Network Access Control Model (NACM) <xref target="RFC8341"/>
           provides the means to restrict access for particular users to a
           pre-configured subset of all available protocol operations and
           content.</t>
@@ -735,7 +743,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
           mandatory-to-implement secure transport layers (e.g., SSH, TLS)
           with mutual authentication.</t>
 
-        <t>The NETCONF access control model (NACM) <xref target="RFC8341"/>
+        <t>The Network Access Control Model (NACM) <xref target="RFC8341"/>
           provides the means to restrict access for particular users to a
           pre-configured subset of all available protocol operations and
           content.</t>
@@ -830,7 +838,8 @@ reference:    RFC FFFF
           that shadows the "TLS Cipher Suites" sub-registry of the
           "Transport Layer Security (TLS) Parameters" registry <xref target="IANA-CIPHER-ALGS"/>.</t>
         <t>This registry defines a YANG identity for each cipher suite algorithm, and a "base"
-          identity from which all of the other identities are derived.</t>
+          identity from which all of the other identities are derived.  Identities are chosen
+          over enumerations for extensibility reasons.</t>
         <t>An initial version of this module can be found in <xref target="iana-tls-csa-module"/>.</t>
         <ul>
           <li>Please note that this module was created on June 16th, 2022, and that additional
@@ -850,15 +859,36 @@ reference:    RFC FFFF
   <back>
     <references title="Normative References">
       <?rfc include="reference.RFC.2119.xml"?>
+      <?rfc include="reference.RFC.2712.xml"?>
+      <?rfc include="reference.RFC.4162.xml"?>
+      <?rfc include="reference.RFC.4279.xml"?>
+      <?rfc include="reference.RFC.4785.xml"?>
+      <?rfc include="reference.RFC.5054.xml"?>
       <?rfc include="reference.RFC.5288.xml"?>
       <?rfc include="reference.RFC.5289.xml"?>
+      <?rfc include="reference.RFC.5469.xml"?>
+      <?rfc include="reference.RFC.5487.xml"?>
+      <?rfc include="reference.RFC.5489.xml"?>
+      <?rfc include="reference.RFC.5746.xml"?>
+      <?rfc include="reference.RFC.5932.xml"?>
       <?rfc include="reference.RFC.6020.xml"?>
+      <?rfc include="reference.RFC.6209.xml"?>
+      <?rfc include="reference.RFC.6367.xml"?>
+      <?rfc include="reference.RFC.6655.xml"?>
+      <?rfc include="reference.RFC.7251.xml"?>
+      <?rfc include="reference.RFC.7507.xml"?>
       <?rfc include="reference.RFC.7589.xml"?>
+      <?rfc include="reference.RFC.7905.xml"?>
       <?rfc include="reference.RFC.7950.xml"?>
       <?rfc include="reference.RFC.8174.xml"?>
       <?rfc include="reference.RFC.8341.xml"?>
       <?rfc include="reference.RFC.8422.xml"?>
+      <?rfc include="reference.RFC.8442.xml"?>
       <?rfc include="reference.RFC.8446.xml"?>
+      <?rfc include="reference.RFC.8492.xml"?>
+      <?rfc include="reference.RFC.8998.xml"?>
+      <?rfc include="reference.RFC.9150.xml"?>
+      <?rfc include="reference.RFC.9189.xml"?>
       <xi:include href="https://datatracker.ietf.org/doc/bibxml3/reference.I-D.ietf-netconf-crypto-types.xml"/>
       <xi:include href="https://datatracker.ietf.org/doc/bibxml3/reference.I-D.ietf-netconf-trust-anchors.xml"/>
       <xi:include href="https://datatracker.ietf.org/doc/bibxml3/reference.I-D.ietf-netconf-keystore.xml"/>
@@ -975,6 +1005,16 @@ INSERT_TEXT_FROM_FILE(refs/ex-cipher-suite-algs.xml)
           <t>Following are the complete contents to the initial IANA-maintained YANG module.
             Please note that the date "2022-06-16" reflects the day on which the extraction
             occurred.</t>
+          <t>This YANG module has normative references to <xref target="RFC2712"/>,
+          <xref target="RFC4162"/>, <xref target="RFC4279"/>, <xref target="RFC4346"/>,
+          <xref target="RFC4785"/>, <xref target="RFC5054"/>, <xref target="RFC5246"/>,
+          <xref target="RFC5288"/>, <xref target="RFC5289"/>, <xref target="RFC5469"/>,
+          <xref target="RFC5487"/>, <xref target="RFC5489"/>, <xref target="RFC5746"/>,
+          <xref target="RFC5932"/>, <xref target="RFC6209"/>, <xref target="RFC6367"/>,
+          <xref target="RFC6655"/>, <xref target="RFC7251"/>, <xref target="RFC7507"/>,
+          <xref target="RFC7905"/>, <xref target="RFC8422"/>, <xref target="RFC8442"/>,
+          <xref target="RFC8446"/>, <xref target="RFC8492"/>, <xref target="RFC8998"/>,
+          <xref target="RFC9150"/>, <xref target="RFC9189"/>, and <xref target="RFC8340"/>.</t>
           <t>
             <figure>
               <preamble>&lt;CODE BEGINS&gt; file "iana-tls-cipher-suite-algs@2022-06-16.yang"</preamble>
@@ -1299,6 +1339,13 @@ INSERT_TEXT_FROM_FILE(iana-tls-cipher-suite-algs@2022-06-16.yang)
           </list>
         </t>
       </section>
+      <section title="30 to 31">
+        <t>
+          <list style="symbols">
+            <t>Updated per Shepherd reviews.</t>
+          </list>
+        </t>
+      </section>
     </section>
 
     <section title="Acknowledgements" numbered="no">
@@ -1313,6 +1360,7 @@ INSERT_TEXT_FROM_FILE(iana-tls-cipher-suite-algs@2022-06-16.yang)
         Dhruv Dhody,
         Gary Wu,
         Henk Birkholz,
+        Jeff Hartley,
         Juergen Schoenwaelder,
         Ladislav Lhotka,
         Liang Xia,
