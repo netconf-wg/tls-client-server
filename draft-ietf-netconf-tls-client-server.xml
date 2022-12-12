@@ -210,10 +210,10 @@ Features:
 ]]></artwork>
             </figure>
           </t>
-          <aside>
+          <!--<aside>-->
             <t>The diagram above uses syntax that is similar to but not
               defined in <xref target="RFC8340"/>.</t>
-          </aside>
+          <!--</aside>-->
         </section>
 
         <section title="Identities" anchor="identities" toc="exclude">
@@ -231,10 +231,10 @@ Identities:
 ]]></artwork>
             </figure>
           </t>
-          <aside>
+          <!--<aside>-->
             <t>The diagram above uses syntax that is similar to but not
               defined in <xref target="RFC8340"/>.</t>
-          </aside>
+          <!--</aside>-->
           <t>Comments:</t>
           <ul spacing="compact">
             <li>The diagram shows that there are two base identities.</li>
@@ -387,10 +387,10 @@ Features:
 ]]></artwork>
             </figure>
           </t>
-          <aside>
+          <!--<aside>-->
             <t>The diagram above uses syntax that is similar to but not
               defined in <xref target="RFC8340"/>.</t>
-          </aside>
+          <!--</aside>-->
         </section>
 
         <section title="Groupings" toc="exclude">
@@ -528,10 +528,10 @@ Features:
 ]]></artwork>
             </figure>
           </t>
-          <aside>
+          <!--<aside>-->
             <t>The diagram above uses syntax that is similar to but not
               defined in <xref target="RFC8340"/>.</t>
-          </aside>
+          <!--</aside>-->
         </section>
 
         <section title="Groupings" toc="exclude">
@@ -717,12 +717,12 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
           The NACM "default-deny-all" extension has not been set for any
           data nodes defined in this module.</t>
 
-        <aside>
+        <!--<aside>-->
           <t>Please be aware that this module uses the "key" and "private-key"
             nodes from the "ietf-crypto-types" module <xref target="I-D.ietf-netconf-crypto-types"/>,
             where said nodes have the NACM extension "default-deny-all" set, thus
             preventing unrestricted read-access to the cleartext key values.</t>
-        </aside>
+        <!--</aside>-->
 
         <t>All the writable data nodes defined by this module may be
           considered sensitive or vulnerable in some network environments.
@@ -756,12 +756,12 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
           or vulnerable in network environments. The NACM "default-deny-all" extension
           has not been set for any data nodes defined in this module.</t>
 
-        <aside>
+        <!--<aside>-->
           <t>Please be aware that this module uses the "key" and "private-key"
             nodes from the "ietf-crypto-types" module <xref target="I-D.ietf-netconf-crypto-types"/>,
             where said nodes have the NACM extension "default-deny-all" set, thus
             preventing unrestricted read-access to the cleartext key values.</t>
-        </aside>
+        <!--</aside>-->
 
         <t>All the writable data nodes defined by this module may be
           considered sensitive or vulnerable in some network environments.
@@ -945,10 +945,10 @@ Identities:
 ]]></artwork>
               </figure>
             </t>
-            <aside>
+            <!--<aside>-->
               <t>The diagram above uses syntax that is similar to but not
                 defined in <xref target="RFC8340"/>.</t>
-            </aside>
+            <!--</aside>-->
           </section>
           <section title="Typedefs" toc="exclude">
             <t>The following diagram illustrates the "typedef" statements
@@ -962,10 +962,10 @@ Typedefs:
 ]]></artwork>
               </figure>
             </t>
-            <aside>
+            <!--<aside>-->
               <t>The diagram above uses syntax that is similar to but not
                 defined in <xref target="RFC8340"/>.</t>
-            </aside>
+            <!--</aside>-->
             <t>Comments:</t>
             <ul>
               <li>The typedef defined in the "iana-tls-cipher-suite-algs" module
@@ -1342,7 +1342,14 @@ INSERT_TEXT_FROM_FILE(iana-tls-cipher-suite-algs@2022-06-16.yang)
       <section title="30 to 31">
         <t>
           <list style="symbols">
-            <t>Updated per Shepherd reviews.</t>
+            <t>Updated per Shepherd reviews impacting the suite of drafts.</t>
+          </list>
+        </t>
+      </section>
+      <section title="31 to 32">
+        <t>
+          <list style="symbols">
+            <t>Updated per Shepherd reviews impacting the suite of drafts.</t>
           </list>
         </t>
       </section>
