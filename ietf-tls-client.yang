@@ -46,7 +46,7 @@ module ietf-tls-client {
     "This module defines reusable groupings for TLS clients that
      can be used as a basis for specific TLS client instances.
 
-     Copyright (c) 2022 IETF Trust and the persons identified
+     Copyright (c) 2023 IETF Trust and the persons identified
      as authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with
@@ -209,12 +209,13 @@ module ietf-tls-client {
             description
               "Specifies the client identity using a certificate.";
             uses
-              ks:local-or-keystore-end-entity-cert-with-key-grouping{
-              refine "local-or-keystore/local/local-definition" {
+              "ks:inline-or-keystore-end-entity-cert-with-key-"
+              + "grouping" {
+              refine "inline-or-keystore/inline/inline-definition" {
                 must 'derived-from-or-self(public-key-format,'
                    + ' "ct:subject-public-key-info-format")';
               }
-              refine "local-or-keystore/keystore/keystore-reference"
+              refine "inline-or-keystore/keystore/keystore-reference"
                    + "/asymmetric-key" {
                 must 'derived-from-or-self(deref(.)/../ks:public-'
                    + 'key-format, "ct:subject-public-key-info-'
@@ -229,12 +230,13 @@ module ietf-tls-client {
             description
               "Specifies the client identity using a raw
                private key.";
-            uses ks:local-or-keystore-asymmetric-key-grouping {
-              refine "local-or-keystore/local/local-definition" {
+            uses ks:inline-or-keystore-asymmetric-key-grouping {
+              refine "inline-or-keystore/inline/inline-definition" {
                 must 'derived-from-or-self(public-key-format,'
                    + ' "ct:subject-public-key-info-format")';
               }
-              refine "local-or-keystore/keystore/keystore-reference"{
+              refine
+                "inline-or-keystore/keystore/keystore-reference" {
                 must 'derived-from-or-self(deref(.)/../ks:public-'
                    + 'key-format, "ct:subject-public-key-info-'
                    + 'format")';
@@ -248,7 +250,7 @@ module ietf-tls-client {
             description
               "Specifies the client identity using a PSK (pre-shared
                or pairwise-symmetric key).";
-            uses ks:local-or-keystore-symmetric-key-grouping;
+            uses ks:inline-or-keystore-symmetric-key-grouping;
             leaf id {
               type string;
               description
@@ -280,7 +282,7 @@ module ietf-tls-client {
               and the EPSK input fields detailed in I-D
               draft-ietf-tls-external-psk-importer
               Section 3.1.  The base-key is based upon
-              ks:local-or-keystore-symmetric-key-grouping
+              ks:inline-or-keystore-symmetric-key-grouping
               in order to provide users with flexible and
               secure storage options.";
             reference
@@ -290,7 +292,7 @@ module ietf-tls-client {
                          Importing External PSKs for TLS
                I-D.ietf-tls-external-psk-guidance:
                          Guidance for External PSK Usage in TLS";
-            uses ks:local-or-keystore-symmetric-key-grouping;
+            uses ks:inline-or-keystore-symmetric-key-grouping;
             leaf external-identity {
               type string;
               mandatory true;
@@ -389,7 +391,7 @@ module ietf-tls-client {
            chain of trust to a configured CA certificate.";
         reference
           "RFC BBBB: A YANG Data Model for a Truststore";
-        uses ts:local-or-truststore-certs-grouping;
+        uses ts:inline-or-truststore-certs-grouping;
       }
       container ee-certs {
         if-feature "server-auth-x509-cert";
@@ -405,7 +407,7 @@ module ietf-tls-client {
            match to a configured server certificate.";
         reference
           "RFC BBBB: A YANG Data Model for a Truststore";
-        uses ts:local-or-truststore-certs-grouping;
+        uses ts:inline-or-truststore-certs-grouping;
       }
       container raw-public-keys {
         if-feature "server-auth-raw-public-key";
@@ -420,13 +422,13 @@ module ietf-tls-client {
            is an exact match to a configured raw public key.";
         reference
           "RFC BBBB: A YANG Data Model for a Truststore";
-        uses ts:local-or-truststore-public-keys-grouping {
-          refine "local-or-truststore/local/local-definition/"
+        uses ts:inline-or-truststore-public-keys-grouping {
+          refine "inline-or-truststore/inline/inline-definition/"
                + "public-key" {
             must 'derived-from-or-self(public-key-format,'
                + ' "ct:subject-public-key-info-format")';
           }
-          refine "local-or-truststore/truststore/truststore-"
+          refine "inline-or-truststore/truststore/truststore-"
                + "reference" {
             must 'not(deref(.)/../ts:public-key/ts:public-key-'
                + 'format[not(derived-from-or-self(., "ct:subject-'

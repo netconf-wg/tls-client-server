@@ -82,16 +82,22 @@ run_unix_cmd $LINENO "$command" 0
 printf "okay.\n"
 rm $name
 
-printf "Testing ex-generate-public-key.xml..."
-command="yanglint  -t nc-rpc -O ../../keystore/refs/ex-keystore.xml ../ietf-crypto-types\@*.yang ../ietf-truststore\@*.yang ../ietf-keystore\@*.yang ../iana-tls-cipher-suite-algs\@*.yang ../ietf-tls-common\@*.yang ex-generate-public-key.xml"
+printf "Testing ex-generate-public-key-rpc.xml..."
+command="yanglint -t nc-rpc -O ../../keystore/refs/ex-keystore.xml ../ietf-crypto-types\@*.yang ../ietf-truststore\@*.yang ../ietf-keystore\@*.yang ../iana-tls-cipher-suite-algs\@*.yang ../ietf-tls-common\@*.yang ex-generate-public-key-rpc.xml"
+run_unix_cmd $LINENO "$command" 0
+printf "okay.\n"
+
+printf "Testing ex-generate-public-key-rpc-reply.xml..."
+command="yanglint -t nc-reply -O ../../keystore/refs/ex-keystore.xml -R ex-generate-public-key-rpc.xml ../ietf-crypto-types\@*.yang ../ietf-truststore\@*.yang ../ietf-keystore\@*.yang ../iana-tls-cipher-suite-algs\@*.yang ../ietf-tls-common\@*.yang ex-generate-public-key-rpc-reply.xml"
 run_unix_cmd $LINENO "$command" 0
 printf "okay.\n"
 
 
-printf "Testing ex-tls-client-local.xml..."
+
+printf "Testing ex-tls-client-inline.xml..."
 name=`ls -1 ../ietf-tls-client\@*.yang | sed 's/\.\.\///'`
 sed 's/^}/container tls-client { uses tls-client-grouping; }}/' ../ietf-tls-client\@*.yang > $name
-command="yanglint -m ../ietf-crypto-types\@*.yang ../ietf-truststore\@*.yang ../ietf-keystore\@*.yang ../ietf-tls-common\@*.yang ./ietf-origin.yang $name ex-tls-client-local.xml ../../trust-anchors/refs/ex-truststore.xml ../../keystore/refs/ex-keystore.xml"
+command="yanglint -m ../ietf-crypto-types\@*.yang ../ietf-truststore\@*.yang ../ietf-keystore\@*.yang ../ietf-tls-common\@*.yang ./ietf-origin.yang $name ex-tls-client-inline.xml ../../trust-anchors/refs/ex-truststore.xml ../../keystore/refs/ex-keystore.xml"
 run_unix_cmd $LINENO "$command" 0
 printf "okay.\n"
 rm $name
@@ -104,10 +110,10 @@ run_unix_cmd $LINENO "$command" 0
 printf "okay.\n"
 rm $name
 
-printf "Testing ex-tls-server-local.xml..."
+printf "Testing ex-tls-server-inline.xml..."
 name=`ls -1 ../ietf-tls-server\@*.yang | sed 's/\.\.\///'`
 sed 's/^}/container tls-server { uses tls-server-grouping; }}/' ../ietf-tls-server\@*.yang > $name
-command="yanglint -m ../ietf-crypto-types\@*.yang ../ietf-truststore\@*.yang ../ietf-keystore\@*.yang ../ietf-tls-common\@*.yang ./ietf-origin.yang $name ex-tls-server-local.xml ../../trust-anchors/refs/ex-truststore.xml ../../keystore/refs/ex-keystore.xml"
+command="yanglint -m ../ietf-crypto-types\@*.yang ../ietf-truststore\@*.yang ../ietf-keystore\@*.yang ../ietf-tls-common\@*.yang ./ietf-origin.yang $name ex-tls-server-inline.xml ../../trust-anchors/refs/ex-truststore.xml ../../keystore/refs/ex-keystore.xml"
 run_unix_cmd $LINENO "$command" 0
 printf "okay.\n"
 rm $name

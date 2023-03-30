@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
 
 <?rfc toc="yes"?>
 <?rfc symrefs="yes"?>
@@ -18,6 +17,7 @@
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude"
      category="std"
      consensus="true"
+     submissionType="IETF"
      docName="draft-ietf-netconf-tls-client-server-latest"
      ipr="trust200902">
   <front>
@@ -329,8 +329,15 @@ INSERT_TEXT_FROM_FILE(refs/ex-tls-common.xml)
         <t>The following example illustrates the "generate-public-key" RPC.</t>
         <t>
           <figure>
+            <preamble>REQUEST</preamble>
             <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(refs/ex-generate-public-key.xml)
+INSERT_TEXT_FROM_FILE(refs/ex-generate-public-key-rpc.xml)
+]]></artwork>
+          </figure>
+          <figure>
+            <preamble>RESPONSE</preamble>
+            <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(refs/ex-generate-public-key-rpc-reply.xml)
 ]]></artwork>
           </figure>
         </t>
@@ -425,15 +432,15 @@ INSERT_TEXT_FROM_FILE(refs/tree-tls-client-grouping.no-expand.txt)
                 aliveness-test occurs at the TLS protocol layer.</li>
               <li>For the referenced grouping statement(s):
                 <ul spacing="compact">
-                  <li>The "local-or-keystore-end-entity-cert-with-key-grouping" grouping is
+                  <li>The "inline-or-keystore-end-entity-cert-with-key-grouping" grouping is
                     discussed in <relref section="2.1.3.6" target="I-D.ietf-netconf-keystore"/>.</li>
-                  <li>The "local-or-keystore-asymmetric-key-grouping" grouping is
+                  <li>The "inline-or-keystore-asymmetric-key-grouping" grouping is
                     discussed in <relref section="2.1.3.4" target="I-D.ietf-netconf-keystore"/>.</li>
-                  <li>The "local-or-keystore-symmetric-key-grouping" grouping is
+                  <li>The "inline-or-keystore-symmetric-key-grouping" grouping is
                     discussed in <relref section="2.1.3.3" target="I-D.ietf-netconf-keystore"/>.</li>
-                  <li>The "local-or-truststore-certs-grouping" grouping is
+                  <li>The "inline-or-truststore-certs-grouping" grouping is
                     discussed in <relref section="2.1.3.1" target="I-D.ietf-netconf-trust-anchors"/>.</li>
-                  <li>The "local-or-truststore-public-keys-grouping" grouping is
+                  <li>The "inline-or-truststore-public-keys-grouping" grouping is
                     discussed in <relref section="2.1.3.2" target="I-D.ietf-netconf-trust-anchors"/>.</li>
                   <li>The "hello-params-grouping" grouping is discussed in 
                   <xref target="hello-params-grouping"/> in this document.</li>
@@ -459,11 +466,11 @@ INSERT_TEXT_FROM_FILE(refs/tree-tls-client-grouping.no-expand.txt)
         target="I-D.ietf-netconf-trust-anchors"/> and Section 3.2 of <xref
         target="I-D.ietf-netconf-keystore"/>.</t>
 
-        <t>The following configuration example uses local-definitions for the
+        <t>The following configuration example uses inline-definitions for the
           client identity and server authentication:
           <figure>
             <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(refs/ex-tls-client-local.xml)
+INSERT_TEXT_FROM_FILE(refs/ex-tls-client-inline.xml)
 ]]></artwork>
           </figure>
         </t>
@@ -567,15 +574,15 @@ INSERT_TEXT_FROM_FILE(refs/tree-tls-server-grouping.no-expand.txt)
                 client.  The aliveness-tests occurs at the TLS protocol layer.</li>
               <li>For the referenced grouping statement(s):
                 <ul spacing="compact">
-                  <li>The "local-or-keystore-end-entity-cert-with-key-grouping" grouping is
+                  <li>The "inline-or-keystore-end-entity-cert-with-key-grouping" grouping is
                     discussed in <relref section="2.1.3.6" target="I-D.ietf-netconf-keystore"/>.</li>
-                  <li>The "local-or-keystore-asymmetric-key-grouping" grouping is
+                  <li>The "inline-or-keystore-asymmetric-key-grouping" grouping is
                     discussed in <relref section="2.1.3.4" target="I-D.ietf-netconf-keystore"/>.</li>
-                  <li>The "local-or-keystore-symmetric-key-grouping" grouping is
+                  <li>The "inline-or-keystore-symmetric-key-grouping" grouping is
                     discussed in <relref section="2.1.3.3" target="I-D.ietf-netconf-keystore"/>.</li>
-                  <li>The "local-or-truststore-public-keys-grouping" grouping is
+                  <li>The "inline-or-truststore-public-keys-grouping" grouping is
                     discussed in <relref section="2.1.3.2" target="I-D.ietf-netconf-trust-anchors"/>.</li>
-                  <li>The "local-or-truststore-certs-grouping" grouping is
+                  <li>The "inline-or-truststore-certs-grouping" grouping is
                     discussed in <relref section="2.1.3.1" target="I-D.ietf-netconf-trust-anchors"/>.</li>
                   <li>The "hello-params-grouping" grouping is discussed in
                   <xref target="hello-params-grouping"/> in this document.</li>
@@ -601,11 +608,11 @@ INSERT_TEXT_FROM_FILE(refs/tree-tls-server-grouping.no-expand.txt)
         target="I-D.ietf-netconf-trust-anchors"/> and Section 3.2 of <xref
         target="I-D.ietf-netconf-keystore"/>.</t>
 
-        <t>The following configuration example uses local-definitions for the
+        <t>The following configuration example uses inline-definitions for the
           server identity and client authentication:
           <figure>
             <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(refs/ex-tls-server-local.xml)
+INSERT_TEXT_FROM_FILE(refs/ex-tls-server-inline.xml)
 ]]></artwork>
           </figure>
         </t>
@@ -1139,7 +1146,7 @@ INSERT_TEXT_FROM_FILE(iana-tls-cipher-suite-algs@2022-06-16.yang)
             <t>In the server model, added a 'required-or-optional' choice to
               'client-authentication' to better support protocols such as
               RESTCONF.</t>
-            <t>In the server model, added a 'local-or-external' choice to
+            <t>In the server model, added a 'inline-or-external' choice to
               'client-authentication' to better support consuming data models
               that prefer to keep client auth with client definitions than in
               a model principally concerned with the "transport".</t>
@@ -1181,7 +1188,7 @@ INSERT_TEXT_FROM_FILE(iana-tls-cipher-suite-algs@2022-06-16.yang)
           <list style="symbols">
             <t>Updated "server-authentication" and "client-authentication" nodes from
               being a leaf of type "ts:certificates-ref" to a container that uses 
-              "ts:local-or-truststore-certs-grouping".</t>
+              "ts:inline-or-truststore-certs-grouping".</t>
           </list>
         </t>
       </section>
@@ -1197,7 +1204,7 @@ INSERT_TEXT_FROM_FILE(iana-tls-cipher-suite-algs@2022-06-16.yang)
       <section title="16 to 17">
         <t>
           <list style="symbols">
-            <t>Removed choice local-or-external by removing the 'external' case and flattening
+            <t>Removed choice inline-or-external by removing the 'external' case and flattening
               the 'local' case and adding a "client-auth-supported" feature.</t>
             <t>Removed choice required-or-optional.</t>
             <t>Updated examples to include the "*-key-format" nodes.</t>
@@ -1211,7 +1218,7 @@ INSERT_TEXT_FROM_FILE(iana-tls-cipher-suite-algs@2022-06-16.yang)
           <list style="symbols">
             <t>Removed the unused "external-client-auth-supported" feature.</t>
             <t>Made client-indentity optional, as there may be over-the-top auth instead.</t>
-            <t>Added augment to uses of local-or-keystore-symmetric-key-grouping for a psk "id" node.</t>
+            <t>Added augment to uses of inline-or-keystore-symmetric-key-grouping for a psk "id" node.</t>
             <t>Added missing presence container "psks" to ietf-tls-server's "client-authentication" container.</t>
             <t>Updated examples to reflect new "bag" addition to truststore.</t>
             <t>Removed feature-limited caseless 'case' statements to improve tree diagram rendering.</t>
@@ -1350,6 +1357,14 @@ INSERT_TEXT_FROM_FILE(iana-tls-cipher-suite-algs@2022-06-16.yang)
         <t>
           <list style="symbols">
             <t>Updated per Shepherd reviews impacting the suite of drafts.</t>
+          </list>
+        </t>
+      </section>
+      <section title="32 to 33">
+        <t>
+          <list style="symbols">
+            <t>Updated per Tom Petch review.</t>
+            <t>Added RPC-reply to 'generate-public-key" RPC example.</t>
           </list>
         </t>
       </section>
