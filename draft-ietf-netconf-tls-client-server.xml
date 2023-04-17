@@ -1317,7 +1317,7 @@ INSERT_TEXT_FROM_FILE(iana-tls-cipher-suite-algs@2022-06-16.yang)
         <t>
           <list style="symbols">
             <t>Fixed up the 'WG Web' and 'WG List' lines in YANG module(s)</t>
-            <t>Fixed up copyright (i.e., s/Simplified/Revised/) in YANG module(s)</t>
+            <t>Fixed up copyright (i.e., s/Simplified/Revised/) in YANG module(s).</t>
             <t>Created identityref-based typedef for the IANA alg identity base.</t>
             <t>Major update to support TLS 1.3.</t>
           </list>
