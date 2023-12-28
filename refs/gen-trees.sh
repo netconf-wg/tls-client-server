@@ -30,7 +30,7 @@ extract_grouping_with_params() {
 extract_grouping() {
   # $1 name of module
   # $2 name of groupin
-  #extract_grouping_with_params "$1" "$2" "" "tree-$2.expanded.txt"
+  extract_grouping_with_params "$1" "$2" "" "tree-$2.expanded.txt"
   extract_grouping_with_params "$1" "$2" "--tree-no-expand-uses" "tree-$2.no-expand.txt"
 }
 

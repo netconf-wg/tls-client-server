@@ -65,8 +65,15 @@
         The text is not wrong as is, but it may be improved by stating more directly how
         many modules are defined.</t>
       <t>The "Relation to other RFCs" section <xref target="collective-effort"/> contains
-        a self-reference to this draft, along with a corresponding Informative Reference in
-        the Appendix.</t>
+          a self-reference to this draft, along with a corresponding reference in
+          the Appendix.  Please replace the self-reference in this section with "This RFC"
+          (or similar) and remove the self-reference in the "Normative/Informative References"
+          section, whichever it is in.</t>
+        <t>Tree-diagrams in this draft may use the '/' line-folding mode defined in RFC 8792.
+          However, nicer-to-the-eye is when the '//' line-folding mode is used.  The AD suggested
+          suggested putting a request here for the RFC Editor to help convert "ugly" '/' folded
+          examples to use the '//' folding mode.  "Help convert" may be interpreted as, identify
+          what looks ugly and ask the authors to make the adjustment.</t>
       <t>The following Appendix section is to be removed prior to publication:
         <list style="symbols">
           <t><xref target="change-log"/>.  Change Log</t>
@@ -77,36 +84,54 @@
 
   <middle>
     <section title="Introduction">
-      <t>This document defines three YANG 1.1 <xref target="RFC7950"/>
-        modules: the first defines features and groupings common to both TLS
-        clients and TLS servers, the second defines a grouping for a generic
-        TLS client, and the third defines a grouping for a generic TLS server.</t>
 
-      <t>Any version of TLS may be configured.  TLS 1.0 <xref target="RFC2246"/>
-        and TLS 1.1 <xref target="RFC4346"/> are historic and hence the YANG
-        "feature" statements enabling them are marked "status obsolete".  TLS 1.2
-        <xref target="RFC5246"/> is obsoleted by TLS 1.3 <xref target="RFC8446"/>
-        but still in common use, and hence its "feature" statement is marked
-        "status deprecated".  All the feature statements for 1.0, 1.1, and 1.3
-        have "description" statements stating that it is NOT RECOMMENDED to
-        enable obsolete protocol versions.</t>
+      <t>This document defines four YANG 1.1 <xref target="RFC7950"/>
+          modules. Three "IETF" modules and one "IANA" module.</t> 
+        <t>The three IETF modules include:</t>
+      <ul>
+        <li>ietf-tls-common (<xref target="tls-common-model"/>)</li>
+        <li>ietf-tls-client (<xref target="tls-client-model"/>)</li>
+        <li>ietf-tls-server (<xref target="tls-server-model"/>)</li>
+      </ul>
+      <t>The one IANA module includes:</t>
+      <ul>
+        <li>iana-tls-encryption-algs (<xref target="tls-cipher-algs-model"/>)</li>
+      </ul>
 
-      <t>It is intended that the YANG groupings will be used by applications
-        needing to configure TLS client and server protocol stacks.  For
-        instance, these groupings are used to help define the data model
-        for HTTPS <xref target="RFC2818"/> and NETCONF over TLS
-        <xref target="RFC7589"/> based clients and servers in <xref target="I-D.ietf-netconf-http-client-server"/>
-        and <xref target="I-D.ietf-netconf-netconf-client-server"/> respectively.</t>
+      <section title="Regarding the IETF Modules">
+  
+        <t>The three IETF modules define features and groupings to model "generic" TLS
+          clients and TLS servers, where "generic" should be interpreted as "least
+          common denominator" more so than "complete."  Basic TLS protocol support
+          is afforded by these modules, leaving configuration of advance features
+          to augmentations made by consuming modules.</t>
 
-      <t>The client and server YANG modules in this document each define one
-      grouping, which is focused on just TLS-specific configuration, and
-      specifically avoids any transport-level configuration, such as what
-      ports to listen-on or connect-to. This affords applications the
-      opportunity to define their own strategy for how the underlying TCP
-      connection is established. For instance, applications supporting NETCONF
-      Call Home <xref target="RFC8071"/> could use the "tls-server-grouping"
-      grouping for the TLS parts it provides, while adding data nodes for the
-      TCP-level call-home configuration.</t>
+        <t>It is intended that the YANG groupings will be used by applications needing
+          to configure TLS client and server protocol stacks.  For instance, these
+          groupings are used to help define the data model for HTTPS <xref target="RFC2818"/>
+          and NETCONF over TLS <xref target="RFC7589"/> based clients and servers in
+          <xref target="I-D.ietf-netconf-http-client-server"/> and
+          <xref target="I-D.ietf-netconf-netconf-client-server"/> respectively.</t>
+
+        <t>The ietf-tls-client and ietf-tls-server YANG modules each define one
+          grouping, which is focused on just TLS-specific configuration, and
+          specifically avoids any transport-level configuration, such as what
+          ports to listen-on or connect-to. This affords applications the
+          opportunity to define their own strategy for how the underlying TCP
+          connection is established. For instance, applications supporting NETCONF
+          Call Home <xref target="RFC8071"/> could use the "tls-server-grouping"
+          grouping for the TLS parts it provides, while adding data nodes for the
+          TCP-level call-home configuration.</t>
+  
+        <t>Any version of TLS may be configured.  TLS 1.0 <xref target="RFC2246"/>
+          and TLS 1.1 <xref target="RFC4346"/> are historic and hence the YANG
+          "feature" statements enabling them are marked "status obsolete".  TLS 1.2
+          <xref target="RFC5246"/> is obsoleted by TLS 1.3 <xref target="RFC8446"/>
+          but still in common use, and hence its "feature" statement is marked
+          "status deprecated".  All the feature statements for 1.0, 1.1, and 1.2
+          have "description" statements stating that it is NOT RECOMMENDED to
+          enable obsolete protocol versions.</t>
+      </section>
 
 INSERT_TEXT_FROM_FILE(../common-intro-snippet.xml,150)
 
@@ -287,17 +312,6 @@ INSERT_TEXT_FROM_FILE(refs/ietf-tls-common-tree-no-expand.txt)
 ]]></artwork>
             </figure>
           </t>
-          <t>The following tree diagram <xref target="RFC8340"/> lists all the
-            protocol-accessible nodes defined in the "ietf-tls-common" module,
-            with all "grouping" statements expanded, enabling the module's full
-            structure to be seen:</t>
-          <t>
-            <figure>
-              <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(refs/ietf-tls-common-tree.txt)
-]]></artwork>
-            </figure>
-          </t>
           <t>Comments:</t>
           <ul>
             <li>Protocol-accessible nodes are those nodes that are accessible
@@ -306,7 +320,7 @@ INSERT_TEXT_FROM_FILE(refs/ietf-tls-common-tree.txt)
             <li>The protocol-accessible nodes for the "ietf-tls-common" module
               are limited to the RPC "generate-public-key", which is
               additionally constrained by the feature "public-key-generation".</li>
-            <li>The "encrypted-by-choice-grouping" grouping is discussed in
+            <li>The "encrypted-by-grouping" grouping is discussed in
               <relref section="2.1.3.1" target="I-D.ietf-netconf-keystore"/>.</li>
             <li>The "asymmetric-key-pair-grouping" grouping is discussed in
               <relref section="2.1.4.5" target="I-D.ietf-netconf-crypto-types"/>.</li>
@@ -439,9 +453,9 @@ INSERT_TEXT_FROM_FILE(refs/tree-tls-client-grouping.no-expand.txt)
                   <li>The "inline-or-keystore-symmetric-key-grouping" grouping is
                     discussed in <relref section="2.1.3.3" target="I-D.ietf-netconf-keystore"/>.</li>
                   <li>The "inline-or-truststore-certs-grouping" grouping is
-                    discussed in <relref section="2.1.3.1" target="I-D.ietf-netconf-trust-anchors"/>.</li>
+                    discussed in <relref section="2.1.3.3" target="I-D.ietf-netconf-trust-anchors"/>.</li>
                   <li>The "inline-or-truststore-public-keys-grouping" grouping is
-                    discussed in <relref section="2.1.3.2" target="I-D.ietf-netconf-trust-anchors"/>.</li>
+                    discussed in <relref section="2.1.3.4" target="I-D.ietf-netconf-trust-anchors"/>.</li>
                   <li>The "hello-params-grouping" grouping is discussed in 
                   <xref target="hello-params-grouping"/> in this document.</li>
                 </ul>
@@ -452,7 +466,8 @@ INSERT_TEXT_FROM_FILE(refs/tree-tls-client-grouping.no-expand.txt)
 
         <section title="Protocol-accessible Nodes" toc="exclude">
           <t>The "ietf-tls-client" module defines only "grouping" statements that are
-            used by other modules to instantiate protocol-accessible nodes.</t>
+          used by other modules to instantiate protocol-accessible nodes.  Thus this
+          module, when implemented, does not itself define any protocol-accessible nodes.</t>
         </section>
 
       </section>
@@ -475,8 +490,8 @@ INSERT_TEXT_FROM_FILE(refs/ex-tls-client-inline.xml)
           </figure>
         </t>
 
-        <t>The following configuration example uses keystore-references for the
-          client identity and truststore-references for server authentication:
+        <t>The following configuration example uses central-keystore-references for the
+          client identity and central-truststore-references for server authentication:
           from the keystore:
           <figure>
             <artwork><![CDATA[
@@ -489,8 +504,8 @@ INSERT_TEXT_FROM_FILE(refs/ex-tls-client-keystore.xml)
       <section anchor="client-yang-module" title="YANG Module">
         <t>This YANG module has normative references to <xref target="I-D.ietf-netconf-trust-anchors"/>
           and <xref target="I-D.ietf-netconf-keystore"/>, and Informative references to
-          <xref target="RFC5246"/>, <xref target="RFC8446"/>, <xref target="I-D.ietf-tls-external-psk-importer"/> and
-          <xref target="I-D.ietf-tls-external-psk-guidance"/>.</t>
+          <xref target="RFC5246"/>, <xref target="RFC8446"/>, <xref target="RFC9258"/> and
+          <xref target="RFC9257"/>.</t>
 
         <t>
           <figure>
@@ -570,7 +585,7 @@ INSERT_TEXT_FROM_FILE(refs/tree-tls-server-grouping.no-expand.txt)
                 parameters for the TLS sessions established by this configuration.</li>
               <li>The "keepalives" node, which must be enabled by a feature, configures
                 a flag enabling the TLS client to test the aliveness of the TLS server,
-                as well as a "presence" container for testing the aliveness of the TLSi
+                as well as a "presence" container for testing the aliveness of the TLS
                 client.  The aliveness-tests occurs at the TLS protocol layer.</li>
               <li>For the referenced grouping statement(s):
                 <ul spacing="compact">
@@ -581,9 +596,9 @@ INSERT_TEXT_FROM_FILE(refs/tree-tls-server-grouping.no-expand.txt)
                   <li>The "inline-or-keystore-symmetric-key-grouping" grouping is
                     discussed in <relref section="2.1.3.3" target="I-D.ietf-netconf-keystore"/>.</li>
                   <li>The "inline-or-truststore-public-keys-grouping" grouping is
-                    discussed in <relref section="2.1.3.2" target="I-D.ietf-netconf-trust-anchors"/>.</li>
+                    discussed in <relref section="2.1.3.4" target="I-D.ietf-netconf-trust-anchors"/>.</li>
                   <li>The "inline-or-truststore-certs-grouping" grouping is
-                    discussed in <relref section="2.1.3.1" target="I-D.ietf-netconf-trust-anchors"/>.</li>
+                    discussed in <relref section="2.1.3.3" target="I-D.ietf-netconf-trust-anchors"/>.</li>
                   <li>The "hello-params-grouping" grouping is discussed in
                   <xref target="hello-params-grouping"/> in this document.</li>
                 </ul>
@@ -594,7 +609,8 @@ INSERT_TEXT_FROM_FILE(refs/tree-tls-server-grouping.no-expand.txt)
 
         <section title="Protocol-accessible Nodes" toc="exclude">
           <t>The "ietf-tls-server" module defines only "grouping" statements that are
-            used by other modules to instantiate protocol-accessible nodes.</t>
+          used by other modules to instantiate protocol-accessible nodes.  Thus this
+          module, when implemented, does not itself define any protocol-accessible nodes.</t>
         </section>
 
       </section>
@@ -617,8 +633,8 @@ INSERT_TEXT_FROM_FILE(refs/ex-tls-server-inline.xml)
           </figure>
         </t>
 
-        <t>The following configuration example uses keystore-references for the
-          server identity and truststore-references for client authentication:
+        <t>The following configuration example uses central-keystore-references for the
+          server identity and central-truststore-references for client authentication:
           from the keystore:
           <figure>
             <artwork><![CDATA[
@@ -631,8 +647,8 @@ INSERT_TEXT_FROM_FILE(refs/ex-tls-server-keystore.xml)
       <section anchor="server-yang-module" title="YANG Module">
         <t>This YANG module has normative references to <xref target="I-D.ietf-netconf-trust-anchors"/>
           and <xref target="I-D.ietf-netconf-keystore"/>, and Informative references to
-          <xref target="RFC5246"/>, <xref target="RFC8446"/>, <xref target="I-D.ietf-tls-external-psk-importer"/> and
-          <xref target="I-D.ietf-tls-external-psk-guidance"/>.</t>
+          <xref target="RFC5246"/>, <xref target="RFC8446"/>, <xref target="RFC9258"/> and
+          <xref target="RFC9257"/>.</t>
         <t>
           <figure>
             <preamble>&lt;CODE BEGINS&gt; file "ietf-tls-server@YYYY-MM-DD.yang"</preamble>
@@ -661,7 +677,9 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
           registry, and a single protocol-accessible read-only node for the subset
           of those identities supported by a server.</t>
         <t>YANG identities are not security-sensitive, as they are statically
-          defined in the publicly-accessible YANG module.</t>
+          defined in the publicly-accessible YANG module.  IANA MAY deprecate
+          and/or obsolete identities over time as needed to address security
+          issues found in the algorithms.</t>
         <t>The protocol-accessible read-only node for the algorithms supported
           by a server is mildly sensitive, but not to the extent that special
           NACM annotations are needed to prevent read-access to regular
@@ -684,9 +702,16 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
           pre-configured subset of all available protocol operations and
           content.</t>
 
-        <t>Since the module in this document only define groupings,
+        <t>Since this module only defines groupings,
           these considerations are primarily for the designers of other
           modules that use these groupings.</t>
+
+        <t>Please be aware that this YANG module uses groupings from
+          other YANG modules that define nodes that may be considered
+          sensitive or vulnerable in network environments.  Please
+          review the Security Considerations for dependent YANG modules
+          for information as to which nodes may be considered sensitive
+          or vulnerable in network environments.</t>
 
         <t>None of the readable data nodes defined in this YANG module are
           considered sensitive or vulnerable in network environments.
@@ -698,7 +723,13 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
           The NACM "default-deny-write" extension has not been set for
           any data nodes defined in this module.</t>
 
-        <t>This module does not define any RPCs, actions, or notifications,
+        <t>This module defines the RPC "generate-public-key" that may, if
+          the "ct:cleartext-private-keys" feature is enabled, and the client
+          requests it, return the private clear in cleartext form.  It is
+          NOT RECOMMENDED for private keys to pass the server's security
+          perimeter.</t>
+
+        <t>This module does not define any actions or notifications,
           and thus the security consideration for such is not provided here.</t>
       </section>
 
@@ -715,9 +746,16 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
           pre-configured subset of all available protocol operations and
           content.</t>
 
-        <t>Since the module in this document only define groupings,
+        <t>Since this module only defines groupings,
           these considerations are primarily for the designers of other
           modules that use these groupings.</t>
+
+        <t>Please be aware that this YANG module uses groupings from
+          other YANG modules that define nodes that may be considered
+          sensitive or vulnerable in network environments.  Please
+          review the Security Considerations for dependent YANG modules
+          for information as to which nodes may be considered sensitive
+          or vulnerable in network environments.</t>
 
         <t>None of the readable data nodes defined in this YANG module
           are considered sensitive or vulnerable in network environments.
@@ -755,9 +793,16 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
           pre-configured subset of all available protocol operations and
           content.</t>
 
-        <t>Since the module in this document only define groupings,
+        <t>Since this module only defines groupings,
           these considerations are primarily for the designers of other
           modules that use these groupings.</t>
+
+        <t>Please be aware that this YANG module uses groupings from
+          other YANG modules that define nodes that may be considered
+          sensitive or vulnerable in network environments.  Please
+          review the Security Considerations for dependent YANG modules
+          for information as to which nodes may be considered sensitive
+          or vulnerable in network environments.</t>
 
         <t>None of the readable data nodes defined in this YANG module are considered sensitive
           or vulnerable in network environments. The NACM "default-deny-all" extension
@@ -847,7 +892,7 @@ reference:    RFC FFFF
         <t>This registry defines a YANG identity for each cipher suite algorithm, and a "base"
           identity from which all of the other identities are derived.  Identities are chosen
           over enumerations for extensibility reasons.</t>
-        <t>An initial version of this module can be found in <xref target="iana-tls-csa-module"/>.</t>
+        <t>An initial version of this module can be found in <xref target="tls-cipher-algs-model"/>.</t>
         <ul>
           <li>Please note that this module was created on June 16th, 2022, and that additional
             entries may have been added in the interim before this document's publication.
@@ -912,14 +957,14 @@ reference:    RFC FFFF
       <?rfc include="reference.RFC.8071.xml"?>
       <?rfc include="reference.RFC.8340.xml"?>
       <?rfc include="reference.RFC.8342.xml"?>
+      <?rfc include="reference.RFC.9257.xml"?>
+      <?rfc include="reference.RFC.9258.xml"?>
       <xi:include href="https://datatracker.ietf.org/doc/bibxml3/reference.I-D.ietf-netconf-tcp-client-server.xml"/>
       <xi:include href="https://datatracker.ietf.org/doc/bibxml3/reference.I-D.ietf-netconf-ssh-client-server.xml"/>
       <xi:include href="https://datatracker.ietf.org/doc/bibxml3/reference.I-D.ietf-netconf-tls-client-server.xml"/>
       <xi:include href="https://datatracker.ietf.org/doc/bibxml3/reference.I-D.ietf-netconf-http-client-server.xml"/>
       <xi:include href="https://datatracker.ietf.org/doc/bibxml3/reference.I-D.ietf-netconf-netconf-client-server.xml"/>
       <xi:include href="https://datatracker.ietf.org/doc/bibxml3/reference.I-D.ietf-netconf-restconf-client-server.xml"/>
-      <xi:include href="https://datatracker.ietf.org/doc/bibxml3/reference.I-D.ietf-tls-external-psk-importer.xml"/>
-      <xi:include href="https://datatracker.ietf.org/doc/bibxml3/reference.I-D.ietf-tls-external-psk-guidance.xml"/>
 
       <reference anchor="IANA-CIPHER-ALGS" target="https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-4">
         <front>
@@ -934,7 +979,7 @@ reference:    RFC FFFF
       <t>The module contained in this section was generated by scripts using the contents of the
         associated sub-registry as they existed on June 16th, 2022.</t>
 
-      <section title='Initial Module for the "TLS Cipher Suites" Registry' anchor="iana-tls-csa-module">
+      <section title='Initial Module for the "TLS Cipher Suites" Registry' anchor="tls-cipher-algs-model">
         <section title="Data Model Overview">
           <t>This section provides an overview of the "iana-tls-cipher-suite-algs" module
             in terms of its identities and protocol-accessible nodes.</t>
@@ -1011,7 +1056,8 @@ INSERT_TEXT_FROM_FILE(refs/ex-cipher-suite-algs.xml)
         <section title="YANG Module">
           <t>Following are the complete contents to the initial IANA-maintained YANG module.
             Please note that the date "2022-06-16" reflects the day on which the extraction
-            occurred.</t>
+            occurred.  Applications SHOULD use the IANA-maintained module, not the module
+            defined in this draft.</t>
           <t>This YANG module has normative references to <xref target="RFC2712"/>,
           <xref target="RFC4162"/>, <xref target="RFC4279"/>, <xref target="RFC4346"/>,
           <xref target="RFC4785"/>, <xref target="RFC5054"/>, <xref target="RFC5246"/>,
@@ -1365,6 +1411,28 @@ INSERT_TEXT_FROM_FILE(iana-tls-cipher-suite-algs@2022-06-16.yang)
           <list style="symbols">
             <t>Updated per Tom Petch review.</t>
             <t>Added RPC-reply to 'generate-public-key" RPC example.</t>
+          </list>
+        </t>
+      </section>
+      <section title="33 to 34">
+        <t>
+          <list style="symbols">
+              <t>Addresses AD review comments.</t>
+              <t>Added note to Editor to fix line foldings.</t>
+              <t>Introduction now more clearly identifies the "ietf-" and "iana-" modules defined.</t>
+              <t>Clarified that the modules, when implemented, do not define any protocol-accessible nodes.</t>
+              <t>Clarified that IANA may deprecate and/or obsolete identities over time.</t>
+              <t>Added Security Consideration for the "generate-public-key" RPC.</t>
+              <t>Added Security Considerations text to also look a SC-section from imported modules.</t>
+              <t>Added missing if-feature statements.</t>
+              <t>Fixed private-key "must" expressions to not require public-key nodes to be present.</t>
+              <t>Fixed ident-tls12-psk and ident-tls13-psk YANG and references.</t>
+              <t>Renamed leaf from "bits" to "num-bits".</t>
+              <t>Added missing "ordered-by user" statement.</t>
+              <t>Added container "private-key-encoding" to wrap existing choice.</t>
+              <t>Renamed container "encrypt-with" to "encrypted".</t>
+              <t>Renamed leaf from "hide" to "hidden".</t>
+              <t>Removed "public-key-format" and "public-key" nodes from examples.</t>
           </list>
         </t>
       </section>

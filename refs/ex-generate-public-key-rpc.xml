@@ -4,9 +4,11 @@
     xmlns="urn:ietf:params:xml:ns:yang:ietf-tls-common"
     xmlns:tlscsa="urn:ietf:params:xml:ns:yang:iana-tls-cipher-suite-algs">
     <algorithm>tlscsa:tls-ecdhe-psk-with-aes-128-gcm-sha256</algorithm>
-    <bits>521</bits>
-    <encrypt-with>
-      <asymmetric-key-ref>hidden-asymmetric-key</asymmetric-key-ref>
-    </encrypt-with>
+    <num-bits>521</num-bits>
+    <private-key-encoding>
+      <encrypted>
+        <asymmetric-key-ref>hidden-asymmetric-key</asymmetric-key-ref>
+      </encrypted>
+    </private-key-encoding>
   </generate-public-key>
 </rpc>

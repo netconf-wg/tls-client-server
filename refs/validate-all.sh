@@ -50,7 +50,7 @@ run_unix_cmd $LINENO "$command" 0
 printf "okay.\n"
 
 printf "Testing ietf-tls-client (yanglint)..."
-command="yanglint -p ../ ../ietf-tls-client\@*.yang"
+command="yanglint -ii -p ../ ../ietf-tls-client\@*.yang"
 run_unix_cmd $LINENO "$command" 0
 printf "okay.\n"
 
@@ -60,7 +60,7 @@ run_unix_cmd $LINENO "$command" 0
 printf "okay.\n"
 
 printf "Testing ietf-tls-server (yanglint)..."
-command="yanglint -p ../ ../ietf-tls-server\@*.yang"
+command="yanglint -ii -p ../ ../ietf-tls-server\@*.yang"
 run_unix_cmd $LINENO "$command" 0
 printf "okay.\n"
 

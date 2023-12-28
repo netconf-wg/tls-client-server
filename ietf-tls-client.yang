@@ -103,6 +103,7 @@ module ietf-tls-client {
   }
 
   feature client-ident-tls12-psk {
+    if-feature "tlscmn:tls12";
     description
       "Indicates that the client supports identifying itself
        using TLS-1.2 PSKs (pre-shared or pairwise-symmetric keys).";
@@ -113,6 +114,7 @@ module ietf-tls-client {
   }
 
   feature client-ident-tls13-epsk {
+    if-feature "tlscmn:tls13";
     description
       "Indicates that the client supports identifying itself
        using TLS-1.3 External PSKs (pre-shared keys).";
@@ -187,7 +189,7 @@ module ietf-tls-client {
         "Identity credentials the TLS client MAY present when
          establishing a connection to a TLS server.  If not
          configured, then client authentication is presumed to
-         occur a protocol layer above TLS.  When configured,
+         occur in a protocol layer above TLS.  When configured,
          and requested by the TLS server when establishing a
          TLS session, these credentials are passed in the
          Certificate message defined in Section 7.4.2 of
@@ -212,12 +214,14 @@ module ietf-tls-client {
               "ks:inline-or-keystore-end-entity-cert-with-key-"
               + "grouping" {
               refine "inline-or-keystore/inline/inline-definition" {
-                must 'derived-from-or-self(public-key-format,'
-                   + ' "ct:subject-public-key-info-format")';
+                must 'not(public-key-format) or derived-from-or-self'
+                   + '(public-key-format, "ct:subject-public-key-'
+                   + 'info-format")';
               }
-              refine "inline-or-keystore/keystore/keystore-reference"
-                   + "/asymmetric-key" {
-                must 'derived-from-or-self(deref(.)/../ks:public-'
+              refine "inline-or-keystore/central-keystore/"
+                   + "central-keystore-reference/asymmetric-key" {
+                must 'not(deref(.)/../ks:public-key-format) or '
+                   + 'derived-from-or-self(deref(.)/../ks:public-'
                    + 'key-format, "ct:subject-public-key-info-'
                    + 'format")';
               }
@@ -232,12 +236,14 @@ module ietf-tls-client {
                private key.";
             uses ks:inline-or-keystore-asymmetric-key-grouping {
               refine "inline-or-keystore/inline/inline-definition" {
-                must 'derived-from-or-self(public-key-format,'
-                   + ' "ct:subject-public-key-info-format")';
+                must 'not(public-key-format) or derived-from-or-self'
+                   + '(public-key-format, "ct:subject-public-key-'
+                   + 'info-format")';
               }
-              refine
-                "inline-or-keystore/keystore/keystore-reference" {
-                must 'derived-from-or-self(deref(.)/../ks:public-'
+              refine "inline-or-keystore/central-keystore/"
+                   + "central-keystore-reference" {
+                must 'not(deref(.)/../ks:public-key-format) or '
+                   + 'derived-from-or-self(deref(.)/../ks:public-'
                    + 'key-format, "ct:subject-public-key-info-'
                    + 'format")';
               }
@@ -275,41 +281,39 @@ module ietf-tls-client {
               and the KDF hash algorithm to be used with the PSK
               MUST also be provisioned.
 
-              The structure of this container is designed
-              to satisfy the requirements of RFC 8446
-              Section 4.2.11, the recommendations from I-D
-              ietf-tls-external-psk-guidance Section 6,
-              and the EPSK input fields detailed in I-D
-              draft-ietf-tls-external-psk-importer
-              Section 3.1.  The base-key is based upon
-              ks:inline-or-keystore-symmetric-key-grouping
+              The structure of this container is designed to
+              satisfy the requirements of RFC 8446 Section
+              4.2.11, the recommendations from Section 6 in
+              RFC 9257, and the EPSK input fields detailed in
+              Section 5.1 in RFC 9258.  The base-key is based
+              upon ks:inline-or-keystore-symmetric-key-grouping
               in order to provide users with flexible and
               secure storage options.";
             reference
               "RFC 8446: The Transport Layer Security (TLS)
                          Protocol Version 1.3
-               I-D.ietf-tls-external-psk-importer:
-                         Importing External PSKs for TLS
-               I-D.ietf-tls-external-psk-guidance:
-                         Guidance for External PSK Usage in TLS";
+               RFC 9257: Guidance for External Pre-Shared Key
+                         (PSK) Usage in TLS
+               RFC 9258: Importing External Pre-Shared Keys
+                         (PSKs) for TLS 1.3";
             uses ks:inline-or-keystore-symmetric-key-grouping;
             leaf external-identity {
               type string;
               mandatory true;
               description
                 "As per Section 4.2.11 of RFC 8446, and Section 4.1
-                 of I-D. ietf-tls-external-psk-guidance:
-                 A sequence of bytes used to identify an EPSK. A
-                 label for a pre-shared key established externally.";
+                 of RFC 9257, a sequence of bytes used to identify
+                 an EPSK. A label for a pre-shared key established
+                 externally.";
               reference
                 "RFC 8446: The Transport Layer Security (TLS)
                            Protocol Version 1.3
-                 I-D.ietf-tls-external-psk-guidance:
-                           Guidance for External PSK Usage in TLS";
+                 RFC 9257: Guidance for External Pre-Shared Key
+                           (PSK) Usage in TLS";
             }
             leaf hash {
               type tlscmn:epsk-supported-hash;
-              mandatory true;
+              default sha-256;
               description
                 "As per Section 4.2.11 of RFC 8446, for externally
                  established PSKs, the Hash algorithm MUST be set
@@ -325,41 +329,38 @@ module ietf-tls-client {
             leaf context {
               type string;
               description
-                "As per Section 4.1 of I-D.
-                 ietf-tls-external-psk-guidance: Context may include
-                 information about peer roles or identities to
-                 mitigate Selfie-style reflection attacks [Selfie].
-                 If the EPSK is a key derived from some other
-                 protocol or sequence of protocols, context
-                 MUST include a channel binding for the deriving
-                 protocols [RFC5056].  The details of this binding
-                 are protocol specific.";
+                "Per Section 5.1 of RFC 9258, context MUST include
+                 the context used to determine the EPSK, if
+                 any exists. For example, context may include
+                 information about peer roles or identities
+                 to mitigate Selfie-style reflection attacks.
+                 Since the EPSK is a key derived from an external
+                 protocol or sequence of protocols, context MUST
+                 include a channel binding for the deriving
+                 protocols [RFC5056].  The details of this
+                 binding are protocol specfic and out of scope
+                 for this document.";
               reference
-                "I-D.ietf-tls-external-psk-importer:
-                           Importing External PSKs for TLS
-                 I-D.ietf-tls-external-psk-guidance:
-                           Guidance for External PSK Usage in TLS";
+                "RFC 9258: Importing External Pre-Shared Keys
+                           (PSKs) for TLS 1.3";
             }
             leaf target-protocol {
               type uint16;
               description
-                "As per Section 3.1 of I-D.
-                 ietf-tls-external-psk-guidance:
-                 The protocol for which a PSK is imported for use.";
+                "As per Section 3 of RFC 9258, the protocol
+                 for which a PSK is imported for use.";
               reference
-                "I-D.ietf-tls-external-psk-importer:
-                           Importing External PSKs for TLS";
+                "RFC 9258: Importing External Pre-Shared Keys
+                           (PSKs) for TLS 1.3";
             }
             leaf target-kdf {
               type uint16;
               description
-                "As per Section 3.1 of I-D.
-                 ietf-tls-external-psk-guidance:
-                 The specific Key Derivation Function (KDF) for which
-                 a PSK is imported for use.";
+                "As per Section 3 of RFC 9258, the KDF for
+                 which a PSK is imported for use.";
               reference
-                "I-D.ietf-tls-external-psk-importer:
-                           Importing External PSKs for TLS";
+                "RFC 9258: Importing External Pre-Shared Keys
+                           (PSKs) for TLS 1.3";
             }
           }
         }
@@ -428,8 +429,8 @@ module ietf-tls-client {
             must 'derived-from-or-self(public-key-format,'
                + ' "ct:subject-public-key-info-format")';
           }
-          refine "inline-or-truststore/truststore/truststore-"
-               + "reference" {
+          refine "inline-or-truststore/central-truststore/"
+               + "central-truststore-reference" {
             must 'not(deref(.)/../ts:public-key/ts:public-key-'
                + 'format[not(derived-from-or-self(., "ct:subject-'
                + 'public-key-info-format"))])';
@@ -441,7 +442,7 @@ module ietf-tls-client {
         type empty;
         description
           "Indicates that the TLS client can authenticate TLS servers
-           using configure PSKs (pre-shared or pairwise-symmetric
+           using configured PSKs (pre-shared or pairwise-symmetric
            keys).
 
            No configuration is required since the PSK value is the
