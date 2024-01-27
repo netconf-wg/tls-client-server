@@ -1,6 +1,6 @@
 echo "Generating tree diagrams..."
 
-pyang -p ../ -f tree --tree-line-length 69 ../iana-tls-cipher-suite-algs\@*.yang > iana-tls-cipher-suite-algs-tree.txt
+#pyang -p ../ -f tree --tree-line-length 69 ../iana-tls-cipher-suite-algs\@*.yang > iana-tls-cipher-suite-algs-tree.txt
 pyang -p ../ -f tree --tree-line-length 69 ../ietf-tls-common\@*.yang > ietf-tls-common-tree.txt
 pyang -p ../ -f tree --tree-line-length 69 --tree-no-expand-uses ../ietf-tls-common\@*.yang > ietf-tls-common-tree-no-expand.txt
 

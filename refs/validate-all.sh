@@ -65,13 +65,6 @@ run_unix_cmd $LINENO "$command" 0
 printf "okay.\n"
 
 
-# IANA EXAMPLES
-printf "Testing ex-cipher-suite-algs.xml..."
-command="yanglint ../iana-tls-cipher-suite-algs\@*.yang ex-cipher-suite-algs.xml"
-run_unix_cmd $LINENO "$command" 0
-printf "okay.\n"
-
-
 # IETF EXAMPLES
 
 printf "Testing ex-tls-common.xml..."
@@ -82,13 +75,18 @@ run_unix_cmd $LINENO "$command" 0
 printf "okay.\n"
 rm $name
 
-printf "Testing ex-generate-public-key-rpc.xml..."
-command="yanglint -t nc-rpc -O ../../keystore/refs/ex-keystore.xml ../ietf-crypto-types\@*.yang ../ietf-truststore\@*.yang ../ietf-keystore\@*.yang ../iana-tls-cipher-suite-algs\@*.yang ../ietf-tls-common\@*.yang ex-generate-public-key-rpc.xml"
+printf "Testing ex-supported-algs.xml..."
+command="yanglint ../iana-tls-cipher-suite-algs\@*.yang ../ietf-tls-common\@*.yang ex-supported-algs.xml"
 run_unix_cmd $LINENO "$command" 0
 printf "okay.\n"
 
-printf "Testing ex-generate-public-key-rpc-reply.xml..."
-command="yanglint -t nc-reply -O ../../keystore/refs/ex-keystore.xml -R ex-generate-public-key-rpc.xml ../ietf-crypto-types\@*.yang ../ietf-truststore\@*.yang ../ietf-keystore\@*.yang ../iana-tls-cipher-suite-algs\@*.yang ../ietf-tls-common\@*.yang ex-generate-public-key-rpc-reply.xml"
+printf "Testing ex-generate-asymmetric-key-pair-rpc.xml..."
+command="yanglint -t nc-rpc -O ../../keystore/refs/ex-keystore.xml ../ietf-crypto-types\@*.yang ../ietf-truststore\@*.yang ../ietf-keystore\@*.yang ../iana-tls-cipher-suite-algs\@*.yang ../ietf-tls-common\@*.yang ex-generate-asymmetric-key-pair-rpc.xml"
+run_unix_cmd $LINENO "$command" 0
+printf "okay.\n"
+
+printf "Testing ex-generate-asymmetric-key-pair-rpc-reply.xml..."
+command="yanglint -t nc-reply -O ../../keystore/refs/ex-keystore.xml -R ex-generate-asymmetric-key-pair-rpc.xml ../ietf-crypto-types\@*.yang ../ietf-truststore\@*.yang ../ietf-keystore\@*.yang ../iana-tls-cipher-suite-algs\@*.yang ../ietf-tls-common\@*.yang ex-generate-asymmetric-key-pair-rpc-reply.xml"
 run_unix_cmd $LINENO "$command" 0
 printf "okay.\n"
 

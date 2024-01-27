@@ -42,6 +42,7 @@ module iana-tls-cipher-suite-algs {
       "RFC FFFF: YANG Groupings for TLS Clients and TLS Servers";
   }
 
+
   // Typedefs
 
   typedef cipher-suite-algorithm-ref {
@@ -3766,21 +3767,6 @@ module iana-tls-cipher-suite-algs {
     reference
       "RFC 8442:
          ECDHE_PSK with AES-GCM and AES-CCM Cipher Suites";
-  }
-
-
-  // Protocol-accessible Nodes
-
-  container supported-algorithms {
-    config false;
-    description
-      "A container for a list of cipher suite algorithms supported
-       by the server.";
-    leaf-list supported-algorithm {
-      type cipher-suite-algorithm-ref;
-      description
-        "A cipher suite algorithm supported by the server.";
-    }
   }
 
 }

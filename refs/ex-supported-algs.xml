@@ -1,5 +1,5 @@
 <supported-algorithms
-  xmlns="urn:ietf:params:xml:ns:yang:iana-tls-cipher-suite-algs"
+  xmlns="urn:ietf:params:xml:ns:yang:ietf-tls-common"
   xmlns:tlscsa="urn:ietf:params:xml:ns:yang:iana-tls-cipher-suite-algs">
   <supported-algorithm>tlscsa:tls-ecdhe-ecdsa-with-aes-256-cbc-sha</supported-algorithm>
   <supported-algorithm>tlscsa:tls-dhe-rsa-with-aes-128-cbc-sha256</supported-algorithm>
