@@ -28,7 +28,7 @@ module ietf-tls-common {
     "WG List:  NETCONF WG list <mailto:netconf@ietf.org>
      WG Web:   https://datatracker.ietf.org/wg/netconf
      Author:   Kent Watsen <mailto:kent+ietf@watsen.net>
-     Author:   Jeff Hartley <mailto:jeff.hartley@commscope.com>
+     Author:   Jeff Hartley <mailto:intensifysecurity@gmail.com>
      Author:   Gary Wu <mailto:garywu@cisco.com>";
 
    description

@@ -223,8 +223,6 @@ INSERT_TEXT_FROM_FILE(../common-intro-snippet.xml,150)
             <figure>
               <artwork><![CDATA[
 Features:
-  +-- tls10
-  +-- tls11
   +-- tls12
   +-- tls13
   +-- hello-params
@@ -247,8 +245,6 @@ Features:
              <artwork><![CDATA[
 Identities:               
   +-- tls-version-base
-     +-- tls10
-     +-- tls11
      +-- tls12
      +-- tls13
 ]]></artwork>
