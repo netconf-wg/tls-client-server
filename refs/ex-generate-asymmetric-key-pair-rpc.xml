@@ -3,7 +3,7 @@
   <generate-asymmetric-key-pair
     xmlns="urn:ietf:params:xml:ns:yang:ietf-tls-common"
     xmlns:tlscsa="urn:ietf:params:xml:ns:yang:iana-tls-cipher-suite-algs">
-    <algorithm>tlscsa:tls-ecdhe-psk-with-aes-128-gcm-sha256</algorithm>
+    <algorithm>tlscsa:TLS_ECDHE_PSK_WITH_AES_128_GCM_SHA256</algorithm>
     <num-bits>521</num-bits>
     <private-key-encoding>
       <encrypted>

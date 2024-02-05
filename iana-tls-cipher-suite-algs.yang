@@ -1,3 +1,4 @@
+
 module iana-tls-cipher-suite-algs {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:iana-tls-cipher-suite-algs";
@@ -20,7 +21,7 @@ module iana-tls-cipher-suite-algs {
      of the 'Transport Layer Security (TLS) Parameters' registry
      maintained by IANA.
 
-     Copyright (c) 2022 IETF Trust and the persons identified as
+     Copyright (c) 2024 IETF Trust and the persons identified as
      authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with
@@ -34,14 +35,12 @@ module iana-tls-cipher-suite-algs {
      (https://www.rfc-editor.org/info/rfcFFFF); see the RFC
      itself for full legal notices.";
 
-  revision 2022-06-16 {
-   description
-      "Reflect contents of the public key algorithms registry
-       on June 16, 2022.";
+  revision 2024-02-04 {
+    description
+      "Reflects contents of the cipher-suite algorithms registry.";
     reference
       "RFC FFFF: YANG Groupings for TLS Clients and TLS Servers";
   }
-
 
   // Typedefs
 
@@ -50,7 +49,7 @@ module iana-tls-cipher-suite-algs {
       base "cipher-suite-alg-base";
     }
     description
-      "A reference to a TLS cipher suite algorithm identifier.";
+      "A reference to a TLS cipher-suite algorithm identifier.";
   }
 
 
@@ -58,3715 +57,3684 @@ module iana-tls-cipher-suite-algs {
 
   identity cipher-suite-alg-base {
     description
-      "Base identity used to identify TLS cipher suites.";
+      "Base identity for TLS cipher-suite algorithms.";
   }
 
-  identity tls-null-with-null-null {
+  identity TLS_NULL_WITH_NULL_NULL {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-NULL-WITH-NULL-NULL";
+      "Identity for the 'TLS_NULL_WITH_NULL_NULL' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-rsa-with-null-md5 {
+  identity TLS_RSA_WITH_NULL_MD5 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-NULL-MD5";
+      "Identity for the 'TLS_RSA_WITH_NULL_MD5' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-rsa-with-null-sha {
+  identity TLS_RSA_WITH_NULL_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-NULL-SHA";
+      "Identity for the 'TLS_RSA_WITH_NULL_SHA' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-rsa-export-with-rc4-40-md5 {
+  identity TLS_RSA_EXPORT_WITH_RC4_40_MD5 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-EXPORT-WITH-RC4-40-MD5";
+      "Identity for the 'TLS_RSA_EXPORT_WITH_RC4_40_MD5' algorithm.";
     reference
       "RFC 4346:
-         The TLS Protocol Version 1.1
+         The Transport Layer Security (TLS) Protocol Version 1.1
        RFC 6347:
-         Datagram Transport Layer Security version 1.2";
+         Datagram Transport Layer Security Version 1.2";
   }
 
-  identity tls-rsa-with-rc4-128-md5 {
+  identity TLS_RSA_WITH_RC4_128_MD5 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-RC4-128-MD5";
+      "Identity for the 'TLS_RSA_WITH_RC4_128_MD5' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2
        RFC 6347:
-         Datagram Transport Layer Security version 1.2";
+         Datagram Transport Layer Security Version 1.2";
   }
 
-  identity tls-rsa-with-rc4-128-sha {
+  identity TLS_RSA_WITH_RC4_128_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-RC4-128-SHA";
+      "Identity for the 'TLS_RSA_WITH_RC4_128_SHA' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2
        RFC 6347:
-         Datagram Transport Layer Security version 1.2";
+         Datagram Transport Layer Security Version 1.2";
   }
 
-  identity tls-rsa-export-with-rc2-cbc-40-md5 {
+  identity TLS_RSA_EXPORT_WITH_RC2_CBC_40_MD5 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-EXPORT-WITH-RC2-CBC-40-MD5";
+      "Identity for the 'TLS_RSA_EXPORT_WITH_RC2_CBC_40_MD5' algorithm.";
     reference
       "RFC 4346:
-         The TLS Protocol Version 1.1";
+         The Transport Layer Security (TLS) Protocol Version 1.1";
   }
 
-  identity tls-rsa-with-idea-cbc-sha {
-    base cipher-suite-alg-base;
-    status obsolete;
-    description
-      "TLS-RSA-WITH-IDEA-CBC-SHA";
-    reference
-      "RFC 5469:
-         DES and IDEA Cipher Suites for
-         Transport Layer Security (TLS)
-       RFC 5469:
-         DES and IDEA Cipher Suites for
-         Transport Layer Security (TLS)";
-  }
-
-  identity tls-rsa-export-with-des40-cbc-sha {
+  identity TLS_RSA_WITH_IDEA_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-EXPORT-WITH-DES40-CBC-SHA";
+      "Identity for the 'TLS_RSA_WITH_IDEA_CBC_SHA' algorithm.";
+    reference
+      "RFC 8996:
+         Deprecating TLS 1.0 and TLS 1.1";
+  }
+
+  identity TLS_RSA_EXPORT_WITH_DES40_CBC_SHA {
+    base cipher-suite-alg-base;
+    status deprecated;
+    description
+      "Identity for the 'TLS_RSA_EXPORT_WITH_DES40_CBC_SHA' algorithm.";
     reference
       "RFC 4346:
-         The TLS Protocol Version 1.1";
+         The Transport Layer Security (TLS) Protocol Version 1.1";
   }
 
-  identity tls-rsa-with-des-cbc-sha {
-    base cipher-suite-alg-base;
-    status obsolete;
-    description
-      "TLS-RSA-WITH-DES-CBC-SHA";
-    reference
-      "RFC 5469:
-         DES and IDEA Cipher Suites for
-         Transport Layer Security (TLS)
-       RFC 5469:
-         DES and IDEA Cipher Suites for
-         Transport Layer Security (TLS)";
-  }
-
-  identity tls-rsa-with-3des-ede-cbc-sha {
+  identity TLS_RSA_WITH_DES_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-3DES-EDE-CBC-SHA";
+      "Identity for the 'TLS_RSA_WITH_DES_CBC_SHA' algorithm.";
+    reference
+      "RFC 8996:
+         Deprecating TLS 1.0 and TLS 1.1";
+  }
+
+  identity TLS_RSA_WITH_3DES_EDE_CBC_SHA {
+    base cipher-suite-alg-base;
+    status deprecated;
+    description
+      "Identity for the 'TLS_RSA_WITH_3DES_EDE_CBC_SHA' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-dh-dss-export-with-des40-cbc-sha {
+  identity TLS_DH_DSS_EXPORT_WITH_DES40_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-DSS-EXPORT-WITH-DES40-CBC-SHA";
+      "Identity for the 'TLS_DH_DSS_EXPORT_WITH_DES40_CBC_SHA' algorithm.";
     reference
       "RFC 4346:
-         The TLS Protocol Version 1.1";
+         The Transport Layer Security (TLS) Protocol Version 1.1";
   }
 
-  identity tls-dh-dss-with-des-cbc-sha {
-    base cipher-suite-alg-base;
-    status obsolete;
-    description
-      "TLS-DH-DSS-WITH-DES-CBC-SHA";
-    reference
-      "RFC 5469:
-         DES and IDEA Cipher Suites for
-         Transport Layer Security (TLS)
-       RFC 5469:
-         DES and IDEA Cipher Suites for
-         Transport Layer Security (TLS)";
-  }
-
-  identity tls-dh-dss-with-3des-ede-cbc-sha {
+  identity TLS_DH_DSS_WITH_DES_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-DSS-WITH-3DES-EDE-CBC-SHA";
+      "Identity for the 'TLS_DH_DSS_WITH_DES_CBC_SHA' algorithm.";
+    reference
+      "RFC 8996:
+         Deprecating TLS 1.0 and TLS 1.1";
+  }
+
+  identity TLS_DH_DSS_WITH_3DES_EDE_CBC_SHA {
+    base cipher-suite-alg-base;
+    status deprecated;
+    description
+      "Identity for the 'TLS_DH_DSS_WITH_3DES_EDE_CBC_SHA' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-dh-rsa-export-with-des40-cbc-sha {
+  identity TLS_DH_RSA_EXPORT_WITH_DES40_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-RSA-EXPORT-WITH-DES40-CBC-SHA";
+      "Identity for the 'TLS_DH_RSA_EXPORT_WITH_DES40_CBC_SHA' algorithm.";
     reference
       "RFC 4346:
-         The TLS Protocol Version 1.1";
+         The Transport Layer Security (TLS) Protocol Version 1.1";
   }
 
-  identity tls-dh-rsa-with-des-cbc-sha {
-    base cipher-suite-alg-base;
-    status obsolete;
-    description
-      "TLS-DH-RSA-WITH-DES-CBC-SHA";
-    reference
-      "RFC 5469:
-         DES and IDEA Cipher Suites for
-         Transport Layer Security (TLS)
-       RFC 5469:
-         DES and IDEA Cipher Suites for
-         Transport Layer Security (TLS)";
-  }
-
-  identity tls-dh-rsa-with-3des-ede-cbc-sha {
+  identity TLS_DH_RSA_WITH_DES_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-RSA-WITH-3DES-EDE-CBC-SHA";
+      "Identity for the 'TLS_DH_RSA_WITH_DES_CBC_SHA' algorithm.";
+    reference
+      "RFC 8996:
+         Deprecating TLS 1.0 and TLS 1.1";
+  }
+
+  identity TLS_DH_RSA_WITH_3DES_EDE_CBC_SHA {
+    base cipher-suite-alg-base;
+    status deprecated;
+    description
+      "Identity for the 'TLS_DH_RSA_WITH_3DES_EDE_CBC_SHA' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-dhe-dss-export-with-des40-cbc-sha {
+  identity TLS_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-DSS-EXPORT-WITH-DES40-CBC-SHA";
+      "Identity for the 'TLS_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA' algorithm.";
     reference
       "RFC 4346:
-         The TLS Protocol Version 1.1";
+         The Transport Layer Security (TLS) Protocol Version 1.1";
   }
 
-  identity tls-dhe-dss-with-des-cbc-sha {
-    base cipher-suite-alg-base;
-    status obsolete;
-    description
-      "TLS-DHE-DSS-WITH-DES-CBC-SHA";
-    reference
-      "RFC 5469:
-         DES and IDEA Cipher Suites for
-         Transport Layer Security (TLS)
-       RFC 5469:
-         DES and IDEA Cipher Suites for
-         Transport Layer Security (TLS)";
-  }
-
-  identity tls-dhe-dss-with-3des-ede-cbc-sha {
+  identity TLS_DHE_DSS_WITH_DES_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-DSS-WITH-3DES-EDE-CBC-SHA";
+      "Identity for the 'TLS_DHE_DSS_WITH_DES_CBC_SHA' algorithm.";
+    reference
+      "RFC 8996:
+         Deprecating TLS 1.0 and TLS 1.1";
+  }
+
+  identity TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA {
+    base cipher-suite-alg-base;
+    status deprecated;
+    description
+      "Identity for the 'TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-dhe-rsa-export-with-des40-cbc-sha {
+  identity TLS_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-RSA-EXPORT-WITH-DES40-CBC-SHA";
+      "Identity for the 'TLS_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA' algorithm.";
     reference
       "RFC 4346:
-         The TLS Protocol Version 1.1";
+         The Transport Layer Security (TLS) Protocol Version 1.1";
   }
 
-  identity tls-dhe-rsa-with-des-cbc-sha {
-    base cipher-suite-alg-base;
-    status obsolete;
-    description
-      "TLS-DHE-RSA-WITH-DES-CBC-SHA";
-    reference
-      "RFC 5469:
-         DES and IDEA Cipher Suites for
-         Transport Layer Security (TLS)
-       RFC 5469:
-         DES and IDEA Cipher Suites for
-         Transport Layer Security (TLS)";
-  }
-
-  identity tls-dhe-rsa-with-3des-ede-cbc-sha {
+  identity TLS_DHE_RSA_WITH_DES_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-RSA-WITH-3DES-EDE-CBC-SHA";
+      "Identity for the 'TLS_DHE_RSA_WITH_DES_CBC_SHA' algorithm.";
+    reference
+      "RFC 8996:
+         Deprecating TLS 1.0 and TLS 1.1";
+  }
+
+  identity TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA {
+    base cipher-suite-alg-base;
+    status deprecated;
+    description
+      "Identity for the 'TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-dh-anon-export-with-rc4-40-md5 {
+  identity TLS_DH_anon_EXPORT_WITH_RC4_40_MD5 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-ANON-EXPORT-WITH-RC4-40-MD5";
+      "Identity for the 'TLS_DH_anon_EXPORT_WITH_RC4_40_MD5' algorithm.";
     reference
       "RFC 4346:
-         The TLS Protocol Version 1.1
+         The Transport Layer Security (TLS) Protocol Version 1.1
        RFC 6347:
-         Datagram Transport Layer Security version 1.2";
+         Datagram Transport Layer Security Version 1.2";
   }
 
-  identity tls-dh-anon-with-rc4-128-md5 {
+  identity TLS_DH_anon_WITH_RC4_128_MD5 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-ANON-WITH-RC4-128-MD5";
+      "Identity for the 'TLS_DH_anon_WITH_RC4_128_MD5' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2
        RFC 6347:
-         Datagram Transport Layer Security version 1.2";
+         Datagram Transport Layer Security Version 1.2";
   }
 
-  identity tls-dh-anon-export-with-des40-cbc-sha {
+  identity TLS_DH_anon_EXPORT_WITH_DES40_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-ANON-EXPORT-WITH-DES40-CBC-SHA";
+      "Identity for the 'TLS_DH_anon_EXPORT_WITH_DES40_CBC_SHA' algorithm.";
     reference
       "RFC 4346:
-         The TLS Protocol Version 1.1";
+         The Transport Layer Security (TLS) Protocol Version 1.1";
   }
 
-  identity tls-dh-anon-with-des-cbc-sha {
-    base cipher-suite-alg-base;
-    status obsolete;
-    description
-      "TLS-DH-ANON-WITH-DES-CBC-SHA";
-    reference
-      "RFC 5469:
-         DES and IDEA Cipher Suites for
-         Transport Layer Security (TLS)
-       RFC 5469:
-         DES and IDEA Cipher Suites for
-         Transport Layer Security (TLS)";
-  }
-
-  identity tls-dh-anon-with-3des-ede-cbc-sha {
+  identity TLS_DH_anon_WITH_DES_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-ANON-WITH-3DES-EDE-CBC-SHA";
+      "Identity for the 'TLS_DH_anon_WITH_DES_CBC_SHA' algorithm.";
+    reference
+      "RFC 8996:
+         Deprecating TLS 1.0 and TLS 1.1";
+  }
+
+  identity TLS_DH_anon_WITH_3DES_EDE_CBC_SHA {
+    base cipher-suite-alg-base;
+    status deprecated;
+    description
+      "Identity for the 'TLS_DH_anon_WITH_3DES_EDE_CBC_SHA' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-krb5-with-des-cbc-sha {
+  identity TLS_KRB5_WITH_DES_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-KRB5-WITH-DES-CBC-SHA";
+      "Identity for the 'TLS_KRB5_WITH_DES_CBC_SHA' algorithm.";
     reference
       "RFC 2712:
-         Addition of Kerberos Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of Kerberos Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-krb5-with-3des-ede-cbc-sha {
+  identity TLS_KRB5_WITH_3DES_EDE_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-KRB5-WITH-3DES-EDE-CBC-SHA";
+      "Identity for the 'TLS_KRB5_WITH_3DES_EDE_CBC_SHA' algorithm.";
     reference
       "RFC 2712:
-         Addition of Kerberos Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of Kerberos Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-krb5-with-rc4-128-sha {
+  identity TLS_KRB5_WITH_RC4_128_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-KRB5-WITH-RC4-128-SHA";
+      "Identity for the 'TLS_KRB5_WITH_RC4_128_SHA' algorithm.";
     reference
       "RFC 2712:
-         Addition of Kerberos Cipher Suites to
-         Transport Layer Security (TLS)
+         Addition of Kerberos Cipher Suites to Transport Layer Security (TLS)
        RFC 6347:
-         Datagram Transport Layer Security version 1.2";
+         Datagram Transport Layer Security Version 1.2";
   }
 
-  identity tls-krb5-with-idea-cbc-sha {
+  identity TLS_KRB5_WITH_IDEA_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-KRB5-WITH-IDEA-CBC-SHA";
+      "Identity for the 'TLS_KRB5_WITH_IDEA_CBC_SHA' algorithm.";
     reference
       "RFC 2712:
-         Addition of Kerberos Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of Kerberos Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-krb5-with-des-cbc-md5 {
+  identity TLS_KRB5_WITH_DES_CBC_MD5 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-KRB5-WITH-DES-CBC-MD5";
+      "Identity for the 'TLS_KRB5_WITH_DES_CBC_MD5' algorithm.";
     reference
       "RFC 2712:
-         Addition of Kerberos Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of Kerberos Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-krb5-with-3des-ede-cbc-md5 {
+  identity TLS_KRB5_WITH_3DES_EDE_CBC_MD5 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-KRB5-WITH-3DES-EDE-CBC-MD5";
+      "Identity for the 'TLS_KRB5_WITH_3DES_EDE_CBC_MD5' algorithm.";
     reference
       "RFC 2712:
-         Addition of Kerberos Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of Kerberos Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-krb5-with-rc4-128-md5 {
+  identity TLS_KRB5_WITH_RC4_128_MD5 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-KRB5-WITH-RC4-128-MD5";
+      "Identity for the 'TLS_KRB5_WITH_RC4_128_MD5' algorithm.";
     reference
       "RFC 2712:
-         Addition of Kerberos Cipher Suites to
-         Transport Layer Security (TLS)
+         Addition of Kerberos Cipher Suites to Transport Layer Security (TLS)
        RFC 6347:
-         Datagram Transport Layer Security version 1.2";
+         Datagram Transport Layer Security Version 1.2";
   }
 
-  identity tls-krb5-with-idea-cbc-md5 {
+  identity TLS_KRB5_WITH_IDEA_CBC_MD5 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-KRB5-WITH-IDEA-CBC-MD5";
+      "Identity for the 'TLS_KRB5_WITH_IDEA_CBC_MD5' algorithm.";
     reference
       "RFC 2712:
-         Addition of Kerberos Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of Kerberos Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-krb5-export-with-des-cbc-40-sha {
+  identity TLS_KRB5_EXPORT_WITH_DES_CBC_40_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-KRB5-EXPORT-WITH-DES-CBC-40-SHA";
+      "Identity for the 'TLS_KRB5_EXPORT_WITH_DES_CBC_40_SHA' algorithm.";
     reference
       "RFC 2712:
-         Addition of Kerberos Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of Kerberos Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-krb5-export-with-rc2-cbc-40-sha {
+  identity TLS_KRB5_EXPORT_WITH_RC2_CBC_40_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-KRB5-EXPORT-WITH-RC2-CBC-40-SHA";
+      "Identity for the 'TLS_KRB5_EXPORT_WITH_RC2_CBC_40_SHA' algorithm.";
     reference
       "RFC 2712:
-         Addition of Kerberos Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of Kerberos Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-krb5-export-with-rc4-40-sha {
+  identity TLS_KRB5_EXPORT_WITH_RC4_40_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-KRB5-EXPORT-WITH-RC4-40-SHA";
+      "Identity for the 'TLS_KRB5_EXPORT_WITH_RC4_40_SHA' algorithm.";
     reference
       "RFC 2712:
-         Addition of Kerberos Cipher Suites to
-         Transport Layer Security (TLS)
+         Addition of Kerberos Cipher Suites to Transport Layer Security (TLS)
        RFC 6347:
-         Datagram Transport Layer Security version 1.2";
+         Datagram Transport Layer Security Version 1.2";
   }
 
-  identity tls-krb5-export-with-des-cbc-40-md5 {
+  identity TLS_KRB5_EXPORT_WITH_DES_CBC_40_MD5 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-KRB5-EXPORT-WITH-DES-CBC-40-MD5";
+      "Identity for the 'TLS_KRB5_EXPORT_WITH_DES_CBC_40_MD5' algorithm.";
     reference
       "RFC 2712:
-         Addition of Kerberos Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of Kerberos Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-krb5-export-with-rc2-cbc-40-md5 {
+  identity TLS_KRB5_EXPORT_WITH_RC2_CBC_40_MD5 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-KRB5-EXPORT-WITH-RC2-CBC-40-MD5";
+      "Identity for the 'TLS_KRB5_EXPORT_WITH_RC2_CBC_40_MD5' algorithm.";
     reference
       "RFC 2712:
-         Addition of Kerberos Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of Kerberos Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-krb5-export-with-rc4-40-md5 {
+  identity TLS_KRB5_EXPORT_WITH_RC4_40_MD5 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-KRB5-EXPORT-WITH-RC4-40-MD5";
+      "Identity for the 'TLS_KRB5_EXPORT_WITH_RC4_40_MD5' algorithm.";
     reference
       "RFC 2712:
-         Addition of Kerberos Cipher Suites to
-         Transport Layer Security (TLS)
+         Addition of Kerberos Cipher Suites to Transport Layer Security (TLS)
        RFC 6347:
-         Datagram Transport Layer Security version 1.2";
+         Datagram Transport Layer Security Version 1.2";
   }
 
-  identity tls-psk-with-null-sha {
+  identity TLS_PSK_WITH_NULL_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-WITH-NULL-SHA";
+      "Identity for the 'TLS_PSK_WITH_NULL_SHA' algorithm.";
     reference
       "RFC 4785:
-         Pre-Shared Key Cipher Suites with NULL Encryption for
-         Transport Layer Security (TLS)";
+         Pre-Shared Key (PSK) Ciphersuites with NULL Encryption for Transport
+         Layer Security (TLS)";
   }
 
-  identity tls-dhe-psk-with-null-sha {
+  identity TLS_DHE_PSK_WITH_NULL_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-PSK-WITH-NULL-SHA";
+      "Identity for the 'TLS_DHE_PSK_WITH_NULL_SHA' algorithm.";
     reference
       "RFC 4785:
-         Pre-Shared Key Cipher Suites with NULL Encryption for
-         Transport Layer Security (TLS)";
+         Pre-Shared Key (PSK) Ciphersuites with NULL Encryption for Transport
+         Layer Security (TLS)";
   }
 
-  identity tls-rsa-psk-with-null-sha {
+  identity TLS_RSA_PSK_WITH_NULL_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-PSK-WITH-NULL-SHA";
+      "Identity for the 'TLS_RSA_PSK_WITH_NULL_SHA' algorithm.";
     reference
       "RFC 4785:
-         Pre-Shared Key Cipher Suites with NULL Encryption for
-         Transport Layer Security (TLS)";
+         Pre-Shared Key (PSK) Ciphersuites with NULL Encryption for Transport
+         Layer Security (TLS)";
   }
 
-  identity tls-rsa-with-aes-128-cbc-sha {
+  identity TLS_RSA_WITH_AES_128_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-AES-128-CBC-SHA";
+      "Identity for the 'TLS_RSA_WITH_AES_128_CBC_SHA' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-dh-dss-with-aes-128-cbc-sha {
+  identity TLS_DH_DSS_WITH_AES_128_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-DSS-WITH-AES-128-CBC-SHA";
+      "Identity for the 'TLS_DH_DSS_WITH_AES_128_CBC_SHA' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-dh-rsa-with-aes-128-cbc-sha {
+  identity TLS_DH_RSA_WITH_AES_128_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-RSA-WITH-AES-128-CBC-SHA";
+      "Identity for the 'TLS_DH_RSA_WITH_AES_128_CBC_SHA' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-dhe-dss-with-aes-128-cbc-sha {
+  identity TLS_DHE_DSS_WITH_AES_128_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-DSS-WITH-AES-128-CBC-SHA";
+      "Identity for the 'TLS_DHE_DSS_WITH_AES_128_CBC_SHA' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-dhe-rsa-with-aes-128-cbc-sha {
+  identity TLS_DHE_RSA_WITH_AES_128_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-RSA-WITH-AES-128-CBC-SHA";
+      "Identity for the 'TLS_DHE_RSA_WITH_AES_128_CBC_SHA' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-dh-anon-with-aes-128-cbc-sha {
+  identity TLS_DH_anon_WITH_AES_128_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-ANON-WITH-AES-128-CBC-SHA";
+      "Identity for the 'TLS_DH_anon_WITH_AES_128_CBC_SHA' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-rsa-with-aes-256-cbc-sha {
+  identity TLS_RSA_WITH_AES_256_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-AES-256-CBC-SHA";
+      "Identity for the 'TLS_RSA_WITH_AES_256_CBC_SHA' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-dh-dss-with-aes-256-cbc-sha {
+  identity TLS_DH_DSS_WITH_AES_256_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-DSS-WITH-AES-256-CBC-SHA";
+      "Identity for the 'TLS_DH_DSS_WITH_AES_256_CBC_SHA' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-dh-rsa-with-aes-256-cbc-sha {
+  identity TLS_DH_RSA_WITH_AES_256_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-RSA-WITH-AES-256-CBC-SHA";
+      "Identity for the 'TLS_DH_RSA_WITH_AES_256_CBC_SHA' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-dhe-dss-with-aes-256-cbc-sha {
+  identity TLS_DHE_DSS_WITH_AES_256_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-DSS-WITH-AES-256-CBC-SHA";
+      "Identity for the 'TLS_DHE_DSS_WITH_AES_256_CBC_SHA' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-dhe-rsa-with-aes-256-cbc-sha {
+  identity TLS_DHE_RSA_WITH_AES_256_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-RSA-WITH-AES-256-CBC-SHA";
+      "Identity for the 'TLS_DHE_RSA_WITH_AES_256_CBC_SHA' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-dh-anon-with-aes-256-cbc-sha {
+  identity TLS_DH_anon_WITH_AES_256_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-ANON-WITH-AES-256-CBC-SHA";
+      "Identity for the 'TLS_DH_anon_WITH_AES_256_CBC_SHA' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-rsa-with-null-sha256 {
+  identity TLS_RSA_WITH_NULL_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-NULL-SHA256";
+      "Identity for the 'TLS_RSA_WITH_NULL_SHA256' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-rsa-with-aes-128-cbc-sha256 {
+  identity TLS_RSA_WITH_AES_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-AES-128-CBC-SHA256";
+      "Identity for the 'TLS_RSA_WITH_AES_128_CBC_SHA256' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-rsa-with-aes-256-cbc-sha256 {
+  identity TLS_RSA_WITH_AES_256_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-AES-256-CBC-SHA256";
+      "Identity for the 'TLS_RSA_WITH_AES_256_CBC_SHA256' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-dh-dss-with-aes-128-cbc-sha256 {
+  identity TLS_DH_DSS_WITH_AES_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-DSS-WITH-AES-128-CBC-SHA256";
+      "Identity for the 'TLS_DH_DSS_WITH_AES_128_CBC_SHA256' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-dh-rsa-with-aes-128-cbc-sha256 {
+  identity TLS_DH_RSA_WITH_AES_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-RSA-WITH-AES-128-CBC-SHA256";
+      "Identity for the 'TLS_DH_RSA_WITH_AES_128_CBC_SHA256' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-dhe-dss-with-aes-128-cbc-sha256 {
+  identity TLS_DHE_DSS_WITH_AES_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-DSS-WITH-AES-128-CBC-SHA256";
+      "Identity for the 'TLS_DHE_DSS_WITH_AES_128_CBC_SHA256' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-rsa-with-camellia-128-cbc-sha {
+  identity TLS_RSA_WITH_CAMELLIA_128_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-CAMELLIA-128-CBC-SHA";
+      "Identity for the 'TLS_RSA_WITH_CAMELLIA_128_CBC_SHA' algorithm.";
     reference
       "RFC 5932:
          Camellia Cipher Suites for TLS";
   }
 
-  identity tls-dh-dss-with-camellia-128-cbc-sha {
+  identity TLS_DH_DSS_WITH_CAMELLIA_128_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-DSS-WITH-CAMELLIA-128-CBC-SHA";
+      "Identity for the 'TLS_DH_DSS_WITH_CAMELLIA_128_CBC_SHA' algorithm.";
     reference
       "RFC 5932:
          Camellia Cipher Suites for TLS";
   }
 
-  identity tls-dh-rsa-with-camellia-128-cbc-sha {
+  identity TLS_DH_RSA_WITH_CAMELLIA_128_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-RSA-WITH-CAMELLIA-128-CBC-SHA";
+      "Identity for the 'TLS_DH_RSA_WITH_CAMELLIA_128_CBC_SHA' algorithm.";
     reference
       "RFC 5932:
          Camellia Cipher Suites for TLS";
   }
 
-  identity tls-dhe-dss-with-camellia-128-cbc-sha {
+  identity TLS_DHE_DSS_WITH_CAMELLIA_128_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-DSS-WITH-CAMELLIA-128-CBC-SHA";
+      "Identity for the 'TLS_DHE_DSS_WITH_CAMELLIA_128_CBC_SHA' algorithm.";
     reference
       "RFC 5932:
          Camellia Cipher Suites for TLS";
   }
 
-  identity tls-dhe-rsa-with-camellia-128-cbc-sha {
+  identity TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA";
+      "Identity for the 'TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA' algorithm.";
     reference
       "RFC 5932:
          Camellia Cipher Suites for TLS";
   }
 
-  identity tls-dh-anon-with-camellia-128-cbc-sha {
+  identity TLS_DH_anon_WITH_CAMELLIA_128_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-ANON-WITH-CAMELLIA-128-CBC-SHA";
+      "Identity for the 'TLS_DH_anon_WITH_CAMELLIA_128_CBC_SHA' algorithm.";
     reference
       "RFC 5932:
          Camellia Cipher Suites for TLS";
   }
 
-  identity tls-dhe-rsa-with-aes-128-cbc-sha256 {
+  identity TLS_DHE_RSA_WITH_AES_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-RSA-WITH-AES-128-CBC-SHA256";
+      "Identity for the 'TLS_DHE_RSA_WITH_AES_128_CBC_SHA256' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-dh-dss-with-aes-256-cbc-sha256 {
+  identity TLS_DH_DSS_WITH_AES_256_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-DSS-WITH-AES-256-CBC-SHA256";
+      "Identity for the 'TLS_DH_DSS_WITH_AES_256_CBC_SHA256' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-dh-rsa-with-aes-256-cbc-sha256 {
+  identity TLS_DH_RSA_WITH_AES_256_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-RSA-WITH-AES-256-CBC-SHA256";
+      "Identity for the 'TLS_DH_RSA_WITH_AES_256_CBC_SHA256' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-dhe-dss-with-aes-256-cbc-sha256 {
+  identity TLS_DHE_DSS_WITH_AES_256_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-DSS-WITH-AES-256-CBC-SHA256";
+      "Identity for the 'TLS_DHE_DSS_WITH_AES_256_CBC_SHA256' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-dhe-rsa-with-aes-256-cbc-sha256 {
+  identity TLS_DHE_RSA_WITH_AES_256_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-RSA-WITH-AES-256-CBC-SHA256";
+      "Identity for the 'TLS_DHE_RSA_WITH_AES_256_CBC_SHA256' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-dh-anon-with-aes-128-cbc-sha256 {
+  identity TLS_DH_anon_WITH_AES_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-ANON-WITH-AES-128-CBC-SHA256";
+      "Identity for the 'TLS_DH_anon_WITH_AES_128_CBC_SHA256' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-dh-anon-with-aes-256-cbc-sha256 {
+  identity TLS_DH_anon_WITH_AES_256_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-ANON-WITH-AES-256-CBC-SHA256";
+      "Identity for the 'TLS_DH_anon_WITH_AES_256_CBC_SHA256' algorithm.";
     reference
       "RFC 5246:
          The Transport Layer Security (TLS) Protocol Version 1.2";
   }
 
-  identity tls-rsa-with-camellia-256-cbc-sha {
+  identity TLS_RSA_WITH_CAMELLIA_256_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-CAMELLIA-256-CBC-SHA";
+      "Identity for the 'TLS_RSA_WITH_CAMELLIA_256_CBC_SHA' algorithm.";
     reference
       "RFC 5932:
          Camellia Cipher Suites for TLS";
   }
 
-  identity tls-dh-dss-with-camellia-256-cbc-sha {
+  identity TLS_DH_DSS_WITH_CAMELLIA_256_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-DSS-WITH-CAMELLIA-256-CBC-SHA";
+      "Identity for the 'TLS_DH_DSS_WITH_CAMELLIA_256_CBC_SHA' algorithm.";
     reference
       "RFC 5932:
          Camellia Cipher Suites for TLS";
   }
 
-  identity tls-dh-rsa-with-camellia-256-cbc-sha {
+  identity TLS_DH_RSA_WITH_CAMELLIA_256_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-RSA-WITH-CAMELLIA-256-CBC-SHA";
+      "Identity for the 'TLS_DH_RSA_WITH_CAMELLIA_256_CBC_SHA' algorithm.";
     reference
       "RFC 5932:
          Camellia Cipher Suites for TLS";
   }
 
-  identity tls-dhe-dss-with-camellia-256-cbc-sha {
+  identity TLS_DHE_DSS_WITH_CAMELLIA_256_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA";
+      "Identity for the 'TLS_DHE_DSS_WITH_CAMELLIA_256_CBC_SHA' algorithm.";
     reference
       "RFC 5932:
          Camellia Cipher Suites for TLS";
   }
 
-  identity tls-dhe-rsa-with-camellia-256-cbc-sha {
+  identity TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA";
+      "Identity for the 'TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA' algorithm.";
     reference
       "RFC 5932:
          Camellia Cipher Suites for TLS";
   }
 
-  identity tls-dh-anon-with-camellia-256-cbc-sha {
+  identity TLS_DH_anon_WITH_CAMELLIA_256_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-ANON-WITH-CAMELLIA-256-CBC-SHA";
+      "Identity for the 'TLS_DH_anon_WITH_CAMELLIA_256_CBC_SHA' algorithm.";
     reference
       "RFC 5932:
          Camellia Cipher Suites for TLS";
   }
 
-  identity tls-psk-with-rc4-128-sha {
+  identity TLS_PSK_WITH_RC4_128_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-WITH-RC4-128-SHA";
+      "Identity for the 'TLS_PSK_WITH_RC4_128_SHA' algorithm.";
     reference
       "RFC 4279:
-         Pre-Shared Key Ciphersuites for
-         Transport Layer Security (TLS)
+         Pre-Shared Key Ciphersuites for Transport Layer Security (TLS)
        RFC 6347:
-         Datagram Transport Layer Security version 1.2";
+         Datagram Transport Layer Security Version 1.2";
   }
 
-  identity tls-psk-with-3des-ede-cbc-sha {
+  identity TLS_PSK_WITH_3DES_EDE_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-WITH-3DES-EDE-CBC-SHA";
+      "Identity for the 'TLS_PSK_WITH_3DES_EDE_CBC_SHA' algorithm.";
     reference
       "RFC 4279:
-         Pre-Shared Key Ciphersuites for
-         Transport Layer Security (TLS)";
+         Pre-Shared Key Ciphersuites for Transport Layer Security (TLS)";
   }
 
-  identity tls-psk-with-aes-128-cbc-sha {
+  identity TLS_PSK_WITH_AES_128_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-WITH-AES-128-CBC-SHA";
+      "Identity for the 'TLS_PSK_WITH_AES_128_CBC_SHA' algorithm.";
     reference
       "RFC 4279:
-         Pre-Shared Key Ciphersuites for
-         Transport Layer Security (TLS)";
+         Pre-Shared Key Ciphersuites for Transport Layer Security (TLS)";
   }
 
-  identity tls-psk-with-aes-256-cbc-sha {
+  identity TLS_PSK_WITH_AES_256_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-WITH-AES-256-CBC-SHA";
+      "Identity for the 'TLS_PSK_WITH_AES_256_CBC_SHA' algorithm.";
     reference
       "RFC 4279:
-         Pre-Shared Key Ciphersuites for
-         Transport Layer Security (TLS)";
+         Pre-Shared Key Ciphersuites for Transport Layer Security (TLS)";
   }
 
-  identity tls-dhe-psk-with-rc4-128-sha {
+  identity TLS_DHE_PSK_WITH_RC4_128_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-PSK-WITH-RC4-128-SHA";
+      "Identity for the 'TLS_DHE_PSK_WITH_RC4_128_SHA' algorithm.";
     reference
       "RFC 4279:
-         Pre-Shared Key Ciphersuites for
-         Transport Layer Security (TLS)
+         Pre-Shared Key Ciphersuites for Transport Layer Security (TLS)
        RFC 6347:
-         Datagram Transport Layer Security version 1.2";
+         Datagram Transport Layer Security Version 1.2";
   }
 
-  identity tls-dhe-psk-with-3des-ede-cbc-sha {
+  identity TLS_DHE_PSK_WITH_3DES_EDE_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-PSK-WITH-3DES-EDE-CBC-SHA";
+      "Identity for the 'TLS_DHE_PSK_WITH_3DES_EDE_CBC_SHA' algorithm.";
     reference
       "RFC 4279:
-         Pre-Shared Key Ciphersuites for
-         Transport Layer Security (TLS)";
+         Pre-Shared Key Ciphersuites for Transport Layer Security (TLS)";
   }
 
-  identity tls-dhe-psk-with-aes-128-cbc-sha {
+  identity TLS_DHE_PSK_WITH_AES_128_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-PSK-WITH-AES-128-CBC-SHA";
+      "Identity for the 'TLS_DHE_PSK_WITH_AES_128_CBC_SHA' algorithm.";
     reference
       "RFC 4279:
-         Pre-Shared Key Ciphersuites for
-         Transport Layer Security (TLS)";
+         Pre-Shared Key Ciphersuites for Transport Layer Security (TLS)";
   }
 
-  identity tls-dhe-psk-with-aes-256-cbc-sha {
+  identity TLS_DHE_PSK_WITH_AES_256_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-PSK-WITH-AES-256-CBC-SHA";
+      "Identity for the 'TLS_DHE_PSK_WITH_AES_256_CBC_SHA' algorithm.";
     reference
       "RFC 4279:
-         Pre-Shared Key Ciphersuites for
-         Transport Layer Security (TLS)";
+         Pre-Shared Key Ciphersuites for Transport Layer Security (TLS)";
   }
 
-  identity tls-rsa-psk-with-rc4-128-sha {
+  identity TLS_RSA_PSK_WITH_RC4_128_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-PSK-WITH-RC4-128-SHA";
+      "Identity for the 'TLS_RSA_PSK_WITH_RC4_128_SHA' algorithm.";
     reference
       "RFC 4279:
-         Pre-Shared Key Ciphersuites for
-         Transport Layer Security (TLS)
+         Pre-Shared Key Ciphersuites for Transport Layer Security (TLS)
        RFC 6347:
-         Datagram Transport Layer Security version 1.2";
+         Datagram Transport Layer Security Version 1.2";
   }
 
-  identity tls-rsa-psk-with-3des-ede-cbc-sha {
+  identity TLS_RSA_PSK_WITH_3DES_EDE_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-PSK-WITH-3DES-EDE-CBC-SHA";
+      "Identity for the 'TLS_RSA_PSK_WITH_3DES_EDE_CBC_SHA' algorithm.";
     reference
       "RFC 4279:
-         Pre-Shared Key Ciphersuites for
-         Transport Layer Security (TLS)";
+         Pre-Shared Key Ciphersuites for Transport Layer Security (TLS)";
   }
 
-  identity tls-rsa-psk-with-aes-128-cbc-sha {
+  identity TLS_RSA_PSK_WITH_AES_128_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-PSK-WITH-AES-128-CBC-SHA";
+      "Identity for the 'TLS_RSA_PSK_WITH_AES_128_CBC_SHA' algorithm.";
     reference
       "RFC 4279:
-         Pre-Shared Key Ciphersuites for
-         Transport Layer Security (TLS)";
+         Pre-Shared Key Ciphersuites for Transport Layer Security (TLS)";
   }
 
-  identity tls-rsa-psk-with-aes-256-cbc-sha {
+  identity TLS_RSA_PSK_WITH_AES_256_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-PSK-WITH-AES-256-CBC-SHA";
+      "Identity for the 'TLS_RSA_PSK_WITH_AES_256_CBC_SHA' algorithm.";
     reference
       "RFC 4279:
-         Pre-Shared Key Ciphersuites for
-         Transport Layer Security (TLS)";
+         Pre-Shared Key Ciphersuites for Transport Layer Security (TLS)";
   }
 
-  identity tls-rsa-with-seed-cbc-sha {
+  identity TLS_RSA_WITH_SEED_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-SEED-CBC-SHA";
+      "Identity for the 'TLS_RSA_WITH_SEED_CBC_SHA' algorithm.";
     reference
       "RFC 4162:
-         Addition of SEED Ciphersuites to
-         Transport Layer Security (TLS)";
+         Addition of SEED Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dh-dss-with-seed-cbc-sha {
+  identity TLS_DH_DSS_WITH_SEED_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-DSS-WITH-SEED-CBC-SHA";
+      "Identity for the 'TLS_DH_DSS_WITH_SEED_CBC_SHA' algorithm.";
     reference
       "RFC 4162:
-         Addition of SEED Ciphersuites to
-         Transport Layer Security (TLS)";
+         Addition of SEED Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dh-rsa-with-seed-cbc-sha {
+  identity TLS_DH_RSA_WITH_SEED_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-RSA-WITH-SEED-CBC-SHA";
+      "Identity for the 'TLS_DH_RSA_WITH_SEED_CBC_SHA' algorithm.";
     reference
       "RFC 4162:
-         Addition of SEED Ciphersuites to
-         Transport Layer Security (TLS)";
+         Addition of SEED Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dhe-dss-with-seed-cbc-sha {
+  identity TLS_DHE_DSS_WITH_SEED_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-DSS-WITH-SEED-CBC-SHA";
+      "Identity for the 'TLS_DHE_DSS_WITH_SEED_CBC_SHA' algorithm.";
     reference
       "RFC 4162:
-         Addition of SEED Ciphersuites to
-         Transport Layer Security (TLS)";
+         Addition of SEED Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dhe-rsa-with-seed-cbc-sha {
+  identity TLS_DHE_RSA_WITH_SEED_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-RSA-WITH-SEED-CBC-SHA";
+      "Identity for the 'TLS_DHE_RSA_WITH_SEED_CBC_SHA' algorithm.";
     reference
       "RFC 4162:
-         Addition of SEED Ciphersuites to
-         Transport Layer Security (TLS)";
+         Addition of SEED Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dh-anon-with-seed-cbc-sha {
+  identity TLS_DH_anon_WITH_SEED_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-ANON-WITH-SEED-CBC-SHA";
+      "Identity for the 'TLS_DH_anon_WITH_SEED_CBC_SHA' algorithm.";
     reference
       "RFC 4162:
-         Addition of SEED Ciphersuites to
-         Transport Layer Security (TLS)";
+         Addition of SEED Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-rsa-with-aes-128-gcm-sha256 {
+  identity TLS_RSA_WITH_AES_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-AES-128-GCM-SHA256";
+      "Identity for the 'TLS_RSA_WITH_AES_128_GCM_SHA256' algorithm.";
     reference
       "RFC 5288:
-         AES-GCM Cipher Suites for TLS";
+         AES Galois Counter Mode (GCM) Cipher Suites for TLS";
   }
 
-  identity tls-rsa-with-aes-256-gcm-sha384 {
+  identity TLS_RSA_WITH_AES_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-AES-256-GCM-SHA384";
+      "Identity for the 'TLS_RSA_WITH_AES_256_GCM_SHA384' algorithm.";
     reference
       "RFC 5288:
-         AES-GCM Cipher Suites for TLS";
+         AES Galois Counter Mode (GCM) Cipher Suites for TLS";
   }
 
-  identity tls-dhe-rsa-with-aes-128-gcm-sha256 {
+  identity TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     description
-      "TLS-DHE-RSA-WITH-AES-128-GCM-SHA256";
+      "Identity for the 'TLS_DHE_RSA_WITH_AES_128_GCM_SHA256' algorithm.";
     reference
       "RFC 5288:
-         AES-GCM Cipher Suites for TLS";
+         AES Galois Counter Mode (GCM) Cipher Suites for TLS";
   }
 
-  identity tls-dhe-rsa-with-aes-256-gcm-sha384 {
+  identity TLS_DHE_RSA_WITH_AES_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     description
-      "TLS-DHE-RSA-WITH-AES-256-GCM-SHA384";
+      "Identity for the 'TLS_DHE_RSA_WITH_AES_256_GCM_SHA384' algorithm.";
     reference
       "RFC 5288:
-         AES-GCM Cipher Suites for TLS";
+         AES Galois Counter Mode (GCM) Cipher Suites for TLS";
   }
 
-  identity tls-dh-rsa-with-aes-128-gcm-sha256 {
+  identity TLS_DH_RSA_WITH_AES_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-RSA-WITH-AES-128-GCM-SHA256";
+      "Identity for the 'TLS_DH_RSA_WITH_AES_128_GCM_SHA256' algorithm.";
     reference
       "RFC 5288:
-         AES-GCM Cipher Suites for TLS";
+         AES Galois Counter Mode (GCM) Cipher Suites for TLS";
   }
 
-  identity tls-dh-rsa-with-aes-256-gcm-sha384 {
+  identity TLS_DH_RSA_WITH_AES_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-RSA-WITH-AES-256-GCM-SHA384";
+      "Identity for the 'TLS_DH_RSA_WITH_AES_256_GCM_SHA384' algorithm.";
     reference
       "RFC 5288:
-         AES-GCM Cipher Suites for TLS";
+         AES Galois Counter Mode (GCM) Cipher Suites for TLS";
   }
 
-  identity tls-dhe-dss-with-aes-128-gcm-sha256 {
+  identity TLS_DHE_DSS_WITH_AES_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-DSS-WITH-AES-128-GCM-SHA256";
+      "Identity for the 'TLS_DHE_DSS_WITH_AES_128_GCM_SHA256' algorithm.";
     reference
       "RFC 5288:
-         AES-GCM Cipher Suites for TLS";
+         AES Galois Counter Mode (GCM) Cipher Suites for TLS";
   }
 
-  identity tls-dhe-dss-with-aes-256-gcm-sha384 {
+  identity TLS_DHE_DSS_WITH_AES_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-DSS-WITH-AES-256-GCM-SHA384";
+      "Identity for the 'TLS_DHE_DSS_WITH_AES_256_GCM_SHA384' algorithm.";
     reference
       "RFC 5288:
-         AES-GCM Cipher Suites for TLS";
+         AES Galois Counter Mode (GCM) Cipher Suites for TLS";
   }
 
-  identity tls-dh-dss-with-aes-128-gcm-sha256 {
+  identity TLS_DH_DSS_WITH_AES_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-DSS-WITH-AES-128-GCM-SHA256";
+      "Identity for the 'TLS_DH_DSS_WITH_AES_128_GCM_SHA256' algorithm.";
     reference
       "RFC 5288:
-         AES-GCM Cipher Suites for TLS";
+         AES Galois Counter Mode (GCM) Cipher Suites for TLS";
   }
 
-  identity tls-dh-dss-with-aes-256-gcm-sha384 {
+  identity TLS_DH_DSS_WITH_AES_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-DSS-WITH-AES-256-GCM-SHA384";
+      "Identity for the 'TLS_DH_DSS_WITH_AES_256_GCM_SHA384' algorithm.";
     reference
       "RFC 5288:
-         AES-GCM Cipher Suites for TLS";
+         AES Galois Counter Mode (GCM) Cipher Suites for TLS";
   }
 
-  identity tls-dh-anon-with-aes-128-gcm-sha256 {
+  identity TLS_DH_anon_WITH_AES_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-ANON-WITH-AES-128-GCM-SHA256";
+      "Identity for the 'TLS_DH_anon_WITH_AES_128_GCM_SHA256' algorithm.";
     reference
       "RFC 5288:
-         AES-GCM Cipher Suites for TLS";
+         AES Galois Counter Mode (GCM) Cipher Suites for TLS";
   }
 
-  identity tls-dh-anon-with-aes-256-gcm-sha384 {
+  identity TLS_DH_anon_WITH_AES_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-ANON-WITH-AES-256-GCM-SHA384";
+      "Identity for the 'TLS_DH_anon_WITH_AES_256_GCM_SHA384' algorithm.";
     reference
       "RFC 5288:
-         AES-GCM Cipher Suites for TLS";
+         AES Galois Counter Mode (GCM) Cipher Suites for TLS";
   }
 
-  identity tls-psk-with-aes-128-gcm-sha256 {
+  identity TLS_PSK_WITH_AES_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-WITH-AES-128-GCM-SHA256";
+      "Identity for the 'TLS_PSK_WITH_AES_128_GCM_SHA256' algorithm.";
     reference
       "RFC 5487:
-         Pre-Shared Key Cipher Suites for Transport Layer Security
-         (TLS) with SHA-256/384 and AES Galois Counter Mode";
+         Pre-Shared Key Cipher Suites for TLS with SHA-256/384 and AES Galois
+         Counter Mode";
   }
 
-  identity tls-psk-with-aes-256-gcm-sha384 {
+  identity TLS_PSK_WITH_AES_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-WITH-AES-256-GCM-SHA384";
+      "Identity for the 'TLS_PSK_WITH_AES_256_GCM_SHA384' algorithm.";
     reference
       "RFC 5487:
-         Pre-Shared Key Cipher Suites for Transport Layer Security
-         (TLS) with SHA-256/384 and AES Galois Counter Mode";
+         Pre-Shared Key Cipher Suites for TLS with SHA-256/384 and AES Galois
+         Counter Mode";
   }
 
-  identity tls-dhe-psk-with-aes-128-gcm-sha256 {
+  identity TLS_DHE_PSK_WITH_AES_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     description
-      "TLS-DHE-PSK-WITH-AES-128-GCM-SHA256";
+      "Identity for the 'TLS_DHE_PSK_WITH_AES_128_GCM_SHA256' algorithm.";
     reference
       "RFC 5487:
-         Pre-Shared Key Cipher Suites for Transport Layer Security
-         (TLS) with SHA-256/384 and AES Galois Counter Mode";
+         Pre-Shared Key Cipher Suites for TLS with SHA-256/384 and AES Galois
+         Counter Mode";
   }
 
-  identity tls-dhe-psk-with-aes-256-gcm-sha384 {
+  identity TLS_DHE_PSK_WITH_AES_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     description
-      "TLS-DHE-PSK-WITH-AES-256-GCM-SHA384";
+      "Identity for the 'TLS_DHE_PSK_WITH_AES_256_GCM_SHA384' algorithm.";
     reference
       "RFC 5487:
-         Pre-Shared Key Cipher Suites for Transport Layer Security
-         (TLS) with SHA-256/384 and AES Galois Counter Mode";
+         Pre-Shared Key Cipher Suites for TLS with SHA-256/384 and AES Galois
+         Counter Mode";
   }
 
-  identity tls-rsa-psk-with-aes-128-gcm-sha256 {
-    base cipher-suite-alg-base;
-    status deprecated;
-    description
-      "TLS-RSA-PSK-WITH-AES-128-GCM-SHA256";
-    reference
-      "RFC 5487:
-         Pre-Shared Key Cipher Suites for Transport Layer Security
-         (TLS) with SHA-256/384 and AES Galois Counter Mode";
-  }
-
-  identity tls-rsa-psk-with-aes-256-gcm-sha384 {
+  identity TLS_RSA_PSK_WITH_AES_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-PSK-WITH-AES-256-GCM-SHA384";
+      "Identity for the 'TLS_RSA_PSK_WITH_AES_128_GCM_SHA256' algorithm.";
     reference
       "RFC 5487:
-         Pre-Shared Key Cipher Suites for Transport Layer Security
-         (TLS) with SHA-256/384 and AES Galois Counter Mode";
+         Pre-Shared Key Cipher Suites for TLS with SHA-256/384 and AES Galois
+         Counter Mode";
   }
 
-  identity tls-psk-with-aes-128-cbc-sha256 {
+  identity TLS_RSA_PSK_WITH_AES_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-WITH-AES-128-CBC-SHA256";
+      "Identity for the 'TLS_RSA_PSK_WITH_AES_256_GCM_SHA384' algorithm.";
     reference
       "RFC 5487:
-         Pre-Shared Key Cipher Suites for Transport Layer Security
-         (TLS) with SHA-256/384 and AES Galois Counter Mode";
+         Pre-Shared Key Cipher Suites for TLS with SHA-256/384 and AES Galois
+         Counter Mode";
   }
 
-  identity tls-psk-with-aes-256-cbc-sha384 {
+  identity TLS_PSK_WITH_AES_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-WITH-AES-256-CBC-SHA384";
+      "Identity for the 'TLS_PSK_WITH_AES_128_CBC_SHA256' algorithm.";
     reference
       "RFC 5487:
-         Pre-Shared Key Cipher Suites for Transport Layer Security
-         (TLS) with SHA-256/384 and AES Galois Counter Mode";
+         Pre-Shared Key Cipher Suites for TLS with SHA-256/384 and AES Galois
+         Counter Mode";
   }
 
-  identity tls-psk-with-null-sha256 {
+  identity TLS_PSK_WITH_AES_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-WITH-NULL-SHA256";
+      "Identity for the 'TLS_PSK_WITH_AES_256_CBC_SHA384' algorithm.";
     reference
       "RFC 5487:
-         Pre-Shared Key Cipher Suites for Transport Layer Security
-         (TLS) with SHA-256/384 and AES Galois Counter Mode";
+         Pre-Shared Key Cipher Suites for TLS with SHA-256/384 and AES Galois
+         Counter Mode";
   }
 
-  identity tls-psk-with-null-sha384 {
+  identity TLS_PSK_WITH_NULL_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-WITH-NULL-SHA384";
+      "Identity for the 'TLS_PSK_WITH_NULL_SHA256' algorithm.";
     reference
       "RFC 5487:
-         Pre-Shared Key Cipher Suites for Transport Layer Security
-         (TLS) with SHA-256/384 and AES Galois Counter Mode";
+         Pre-Shared Key Cipher Suites for TLS with SHA-256/384 and AES Galois
+         Counter Mode";
   }
 
-  identity tls-dhe-psk-with-aes-128-cbc-sha256 {
+  identity TLS_PSK_WITH_NULL_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-PSK-WITH-AES-128-CBC-SHA256";
+      "Identity for the 'TLS_PSK_WITH_NULL_SHA384' algorithm.";
     reference
       "RFC 5487:
-         Pre-Shared Key Cipher Suites for Transport Layer Security
-         (TLS) with SHA-256/384 and AES Galois Counter Mode";
+         Pre-Shared Key Cipher Suites for TLS with SHA-256/384 and AES Galois
+         Counter Mode";
   }
 
-  identity tls-dhe-psk-with-aes-256-cbc-sha384 {
+  identity TLS_DHE_PSK_WITH_AES_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-PSK-WITH-AES-256-CBC-SHA384";
+      "Identity for the 'TLS_DHE_PSK_WITH_AES_128_CBC_SHA256' algorithm.";
     reference
       "RFC 5487:
-         Pre-Shared Key Cipher Suites for Transport Layer Security
-         (TLS) with SHA-256/384 and AES Galois Counter Mode";
+         Pre-Shared Key Cipher Suites for TLS with SHA-256/384 and AES Galois
+         Counter Mode";
   }
 
-  identity tls-dhe-psk-with-null-sha256 {
+  identity TLS_DHE_PSK_WITH_AES_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-PSK-WITH-NULL-SHA256";
+      "Identity for the 'TLS_DHE_PSK_WITH_AES_256_CBC_SHA384' algorithm.";
     reference
       "RFC 5487:
-         Pre-Shared Key Cipher Suites for Transport Layer Security
-         (TLS) with SHA-256/384 and AES Galois Counter Mode";
+         Pre-Shared Key Cipher Suites for TLS with SHA-256/384 and AES Galois
+         Counter Mode";
   }
 
-  identity tls-dhe-psk-with-null-sha384 {
+  identity TLS_DHE_PSK_WITH_NULL_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-PSK-WITH-NULL-SHA384";
+      "Identity for the 'TLS_DHE_PSK_WITH_NULL_SHA256' algorithm.";
     reference
       "RFC 5487:
-         Pre-Shared Key Cipher Suites for Transport Layer Security
-         (TLS) with SHA-256/384 and AES Galois Counter Mode";
+         Pre-Shared Key Cipher Suites for TLS with SHA-256/384 and AES Galois
+         Counter Mode";
   }
 
-  identity tls-rsa-psk-with-aes-128-cbc-sha256 {
+  identity TLS_DHE_PSK_WITH_NULL_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-PSK-WITH-AES-128-CBC-SHA256";
+      "Identity for the 'TLS_DHE_PSK_WITH_NULL_SHA384' algorithm.";
     reference
       "RFC 5487:
-         Pre-Shared Key Cipher Suites for Transport Layer Security
-         (TLS) with SHA-256/384 and AES Galois Counter Mode";
+         Pre-Shared Key Cipher Suites for TLS with SHA-256/384 and AES Galois
+         Counter Mode";
   }
 
-  identity tls-rsa-psk-with-aes-256-cbc-sha384 {
+  identity TLS_RSA_PSK_WITH_AES_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-PSK-WITH-AES-256-CBC-SHA384";
+      "Identity for the 'TLS_RSA_PSK_WITH_AES_128_CBC_SHA256' algorithm.";
     reference
       "RFC 5487:
-         Pre-Shared Key Cipher Suites for Transport Layer Security
-         (TLS) with SHA-256/384 and AES Galois Counter Mode";
+         Pre-Shared Key Cipher Suites for TLS with SHA-256/384 and AES Galois
+         Counter Mode";
   }
 
-  identity tls-rsa-psk-with-null-sha256 {
+  identity TLS_RSA_PSK_WITH_AES_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-PSK-WITH-NULL-SHA256";
+      "Identity for the 'TLS_RSA_PSK_WITH_AES_256_CBC_SHA384' algorithm.";
     reference
       "RFC 5487:
-         Pre-Shared Key Cipher Suites for Transport Layer Security
-         (TLS) with SHA-256/384 and AES Galois Counter Mode";
+         Pre-Shared Key Cipher Suites for TLS with SHA-256/384 and AES Galois
+         Counter Mode";
   }
 
-  identity tls-rsa-psk-with-null-sha384 {
+  identity TLS_RSA_PSK_WITH_NULL_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-PSK-WITH-NULL-SHA384";
+      "Identity for the 'TLS_RSA_PSK_WITH_NULL_SHA256' algorithm.";
     reference
       "RFC 5487:
-         Pre-Shared Key Cipher Suites for Transport Layer Security
-         (TLS) with SHA-256/384 and AES Galois Counter Mode";
+         Pre-Shared Key Cipher Suites for TLS with SHA-256/384 and AES Galois
+         Counter Mode";
   }
 
-  identity tls-rsa-with-camellia-128-cbc-sha256 {
+  identity TLS_RSA_PSK_WITH_NULL_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-CAMELLIA-128-CBC-SHA256";
+      "Identity for the 'TLS_RSA_PSK_WITH_NULL_SHA384' algorithm.";
+    reference
+      "RFC 5487:
+         Pre-Shared Key Cipher Suites for TLS with SHA-256/384 and AES Galois
+         Counter Mode";
+  }
+
+  identity TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256 {
+    base cipher-suite-alg-base;
+    status deprecated;
+    description
+      "Identity for the 'TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256' algorithm.";
     reference
       "RFC 5932:
          Camellia Cipher Suites for TLS";
   }
 
-  identity tls-dh-dss-with-camellia-128-cbc-sha256 {
+  identity TLS_DH_DSS_WITH_CAMELLIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-DSS-WITH-CAMELLIA-128-CBC-SHA256";
+      "Identity for the 'TLS_DH_DSS_WITH_CAMELLIA_128_CBC_SHA256' algorithm.";
     reference
       "RFC 5932:
          Camellia Cipher Suites for TLS";
   }
 
-  identity tls-dh-rsa-with-camellia-128-cbc-sha256 {
+  identity TLS_DH_RSA_WITH_CAMELLIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-RSA-WITH-CAMELLIA-128-CBC-SHA256";
+      "Identity for the 'TLS_DH_RSA_WITH_CAMELLIA_128_CBC_SHA256' algorithm.";
     reference
       "RFC 5932:
          Camellia Cipher Suites for TLS";
   }
 
-  identity tls-dhe-dss-with-camellia-128-cbc-sha256 {
+  identity TLS_DHE_DSS_WITH_CAMELLIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-DSS-WITH-CAMELLIA-128-CBC-SHA256";
+      "Identity for the 'TLS_DHE_DSS_WITH_CAMELLIA_128_CBC_SHA256' algorithm.";
     reference
       "RFC 5932:
          Camellia Cipher Suites for TLS";
   }
 
-  identity tls-dhe-rsa-with-camellia-128-cbc-sha256 {
+  identity TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA256";
+      "Identity for the 'TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA256' algorithm.";
     reference
       "RFC 5932:
          Camellia Cipher Suites for TLS";
   }
 
-  identity tls-dh-anon-with-camellia-128-cbc-sha256 {
+  identity TLS_DH_anon_WITH_CAMELLIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-ANON-WITH-CAMELLIA-128-CBC-SHA256";
+      "Identity for the 'TLS_DH_anon_WITH_CAMELLIA_128_CBC_SHA256' algorithm.";
     reference
       "RFC 5932:
          Camellia Cipher Suites for TLS";
   }
 
-  identity tls-rsa-with-camellia-256-cbc-sha256 {
+  identity TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-CAMELLIA-256-CBC-SHA256";
+      "Identity for the 'TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256' algorithm.";
     reference
       "RFC 5932:
          Camellia Cipher Suites for TLS";
   }
 
-  identity tls-dh-dss-with-camellia-256-cbc-sha256 {
+  identity TLS_DH_DSS_WITH_CAMELLIA_256_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-DSS-WITH-CAMELLIA-256-CBC-SHA256";
+      "Identity for the 'TLS_DH_DSS_WITH_CAMELLIA_256_CBC_SHA256' algorithm.";
     reference
       "RFC 5932:
          Camellia Cipher Suites for TLS";
   }
 
-  identity tls-dh-rsa-with-camellia-256-cbc-sha256 {
+  identity TLS_DH_RSA_WITH_CAMELLIA_256_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-RSA-WITH-CAMELLIA-256-CBC-SHA256";
+      "Identity for the 'TLS_DH_RSA_WITH_CAMELLIA_256_CBC_SHA256' algorithm.";
     reference
       "RFC 5932:
          Camellia Cipher Suites for TLS";
   }
 
-  identity tls-dhe-dss-with-camellia-256-cbc-sha256 {
+  identity TLS_DHE_DSS_WITH_CAMELLIA_256_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA256";
+      "Identity for the 'TLS_DHE_DSS_WITH_CAMELLIA_256_CBC_SHA256' algorithm.";
     reference
       "RFC 5932:
          Camellia Cipher Suites for TLS";
   }
 
-  identity tls-dhe-rsa-with-camellia-256-cbc-sha256 {
+  identity TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA256";
+      "Identity for the 'TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA256' algorithm.";
     reference
       "RFC 5932:
          Camellia Cipher Suites for TLS";
   }
 
-  identity tls-dh-anon-with-camellia-256-cbc-sha256 {
+  identity TLS_DH_anon_WITH_CAMELLIA_256_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-ANON-WITH-CAMELLIA-256-CBC-SHA256";
+      "Identity for the 'TLS_DH_anon_WITH_CAMELLIA_256_CBC_SHA256' algorithm.";
     reference
       "RFC 5932:
          Camellia Cipher Suites for TLS";
   }
 
-  identity tls-sm4-gcm-sm3 {
+  identity TLS_SM4_GCM_SM3 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-SM4-GCM-SM3";
+      "Identity for the 'TLS_SM4_GCM_SM3' algorithm.";
     reference
       "RFC 8998:
-         ShangMi (SM) Cipher Suites for Transport Layer Security
-         (TLS) Protocol Version 1.3";
+         ShangMi (SM) Cipher Suites for TLS 1.3";
   }
 
-  identity tls-sm4-ccm-sm3 {
+  identity TLS_SM4_CCM_SM3 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-SM4-CCM-SM3";
+      "Identity for the 'TLS_SM4_CCM_SM3' algorithm.";
     reference
       "RFC 8998:
-         ShangMi (SM) Cipher Suites for Transport Layer Security
-         (TLS) Protocol Version 1.3";
+         ShangMi (SM) Cipher Suites for TLS 1.3";
   }
 
-  identity tls-empty-renegotiation-info-scsv {
+  identity TLS_EMPTY_RENEGOTIATION_INFO_SCSV {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-EMPTY-RENEGOTIATION-INFO-SCSV";
+      "Identity for the 'TLS_EMPTY_RENEGOTIATION_INFO_SCSV' algorithm.";
     reference
       "RFC 5746:
-         Transport Layer Security (TLS)
-         Renegotiation Indication Extension";
+         Transport Layer Security (TLS) Renegotiation Indication Extension";
   }
 
-  identity tls-aes-128-gcm-sha256 {
+  identity TLS_AES_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     description
-      "TLS-AES-128-GCM-SHA256";
+      "Identity for the 'TLS_AES_128_GCM_SHA256' algorithm.";
     reference
       "RFC 8446:
          The Transport Layer Security (TLS) Protocol Version 1.3";
   }
 
-  identity tls-aes-256-gcm-sha384 {
+  identity TLS_AES_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     description
-      "TLS-AES-256-GCM-SHA384";
+      "Identity for the 'TLS_AES_256_GCM_SHA384' algorithm.";
     reference
       "RFC 8446:
          The Transport Layer Security (TLS) Protocol Version 1.3";
   }
 
-  identity tls-chacha20-poly1305-sha256 {
+  identity TLS_CHACHA20_POLY1305_SHA256 {
     base cipher-suite-alg-base;
     description
-      "TLS-CHACHA20-POLY1305-SHA256";
+      "Identity for the 'TLS_CHACHA20_POLY1305_SHA256' algorithm.";
     reference
       "RFC 8446:
          The Transport Layer Security (TLS) Protocol Version 1.3";
   }
 
-  identity tls-aes-128-ccm-sha256 {
+  identity TLS_AES_128_CCM_SHA256 {
     base cipher-suite-alg-base;
     description
-      "TLS-AES-128-CCM-SHA256";
+      "Identity for the 'TLS_AES_128_CCM_SHA256' algorithm.";
     reference
       "RFC 8446:
          The Transport Layer Security (TLS) Protocol Version 1.3";
   }
 
-  identity tls-aes-128-ccm-8-sha256 {
+  identity TLS_AES_128_CCM_8_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-AES-128-CCM-8-SHA256";
+      "Identity for the 'TLS_AES_128_CCM_8_SHA256' algorithm.";
     reference
       "RFC 8446:
-         The Transport Layer Security (TLS) Protocol Version 1.3";
+         The Transport Layer Security (TLS) Protocol Version 1.3
+       IESG Action:
+         IESG Action 2018-08-16";
   }
 
-  identity tls-fallback-scsv {
+  identity TLS_AEGIS_256_SHA512 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-FALLBACK-SCSV";
+      "Identity for the 'TLS_AEGIS_256_SHA512' algorithm.";
+    reference
+      "draft-irtf-cfrg-aegis-aead-08:
+         The AEGIS Family of Authenticated Encryption Algorithms";
+  }
+
+  identity TLS_AEGIS_128L_SHA256 {
+    base cipher-suite-alg-base;
+    status deprecated;
+    description
+      "Identity for the 'TLS_AEGIS_128L_SHA256' algorithm.";
+    reference
+      "draft-irtf-cfrg-aegis-aead-08:
+         The AEGIS Family of Authenticated Encryption Algorithms";
+  }
+
+  identity TLS_FALLBACK_SCSV {
+    base cipher-suite-alg-base;
+    status deprecated;
+    description
+      "Identity for the 'TLS_FALLBACK_SCSV' algorithm.";
     reference
       "RFC 7507:
-         TLS Fallback Signaling Cipher Suite Value (SCSV)
-         for Preventing Protocol Downgrade Attacks";
+         TLS Fallback Signaling Cipher Suite Value (SCSV) for Preventing
+         Protocol Downgrade Attacks";
   }
 
-  identity tls-ecdh-ecdsa-with-null-sha {
+  identity TLS_ECDH_ECDSA_WITH_NULL_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-ECDSA-WITH-NULL-SHA";
+      "Identity for the 'TLS_ECDH_ECDSA_WITH_NULL_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier";
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier";
   }
 
-  identity tls-ecdh-ecdsa-with-rc4-128-sha {
+  identity TLS_ECDH_ECDSA_WITH_RC4_128_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-ECDSA-WITH-RC4-128-SHA";
+      "Identity for the 'TLS_ECDH_ECDSA_WITH_RC4_128_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier
        RFC 6347:
-         Datagram Transport Layer Security version 1.2";
+         Datagram Transport Layer Security Version 1.2";
   }
 
-  identity tls-ecdh-ecdsa-with-3des-ede-cbc-sha {
+  identity TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-ECDSA-WITH-3DES-EDE-CBC-SHA";
+      "Identity for the 'TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier";
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier";
   }
 
-  identity tls-ecdh-ecdsa-with-aes-128-cbc-sha {
+  identity TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-ECDSA-WITH-AES-128-CBC-SHA";
+      "Identity for the 'TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier";
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier";
   }
 
-  identity tls-ecdh-ecdsa-with-aes-256-cbc-sha {
+  identity TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-ECDSA-WITH-AES-256-CBC-SHA";
+      "Identity for the 'TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier";
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier";
   }
 
-  identity tls-ecdhe-ecdsa-with-null-sha {
+  identity TLS_ECDHE_ECDSA_WITH_NULL_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-ECDSA-WITH-NULL-SHA";
+      "Identity for the 'TLS_ECDHE_ECDSA_WITH_NULL_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier";
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier";
   }
 
-  identity tls-ecdhe-ecdsa-with-rc4-128-sha {
+  identity TLS_ECDHE_ECDSA_WITH_RC4_128_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-ECDSA-WITH-RC4-128-SHA";
+      "Identity for the 'TLS_ECDHE_ECDSA_WITH_RC4_128_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier
        RFC 6347:
-         Datagram Transport Layer Security version 1.2";
+         Datagram Transport Layer Security Version 1.2";
   }
 
-  identity tls-ecdhe-ecdsa-with-3des-ede-cbc-sha {
+  identity TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-ECDSA-WITH-3DES-EDE-CBC-SHA";
+      "Identity for the 'TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier";
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier";
   }
 
-  identity tls-ecdhe-ecdsa-with-aes-128-cbc-sha {
+  identity TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA";
+      "Identity for the 'TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier";
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier";
   }
 
-  identity tls-ecdhe-ecdsa-with-aes-256-cbc-sha {
+  identity TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA";
+      "Identity for the 'TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier";
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier";
   }
 
-  identity tls-ecdh-rsa-with-null-sha {
+  identity TLS_ECDH_RSA_WITH_NULL_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-RSA-WITH-NULL-SHA";
+      "Identity for the 'TLS_ECDH_RSA_WITH_NULL_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier";
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier";
   }
 
-  identity tls-ecdh-rsa-with-rc4-128-sha {
+  identity TLS_ECDH_RSA_WITH_RC4_128_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-RSA-WITH-RC4-128-SHA";
+      "Identity for the 'TLS_ECDH_RSA_WITH_RC4_128_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier
        RFC 6347:
-         Datagram Transport Layer Security version 1.2";
+         Datagram Transport Layer Security Version 1.2";
   }
 
-  identity tls-ecdh-rsa-with-3des-ede-cbc-sha {
+  identity TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-RSA-WITH-3DES-EDE-CBC-SHA";
+      "Identity for the 'TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier";
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier";
   }
 
-  identity tls-ecdh-rsa-with-aes-128-cbc-sha {
+  identity TLS_ECDH_RSA_WITH_AES_128_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-RSA-WITH-AES-128-CBC-SHA";
+      "Identity for the 'TLS_ECDH_RSA_WITH_AES_128_CBC_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier";
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier";
   }
 
-  identity tls-ecdh-rsa-with-aes-256-cbc-sha {
+  identity TLS_ECDH_RSA_WITH_AES_256_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-RSA-WITH-AES-256-CBC-SHA";
+      "Identity for the 'TLS_ECDH_RSA_WITH_AES_256_CBC_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier";
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier";
   }
 
-  identity tls-ecdhe-rsa-with-null-sha {
+  identity TLS_ECDHE_RSA_WITH_NULL_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-RSA-WITH-NULL-SHA";
+      "Identity for the 'TLS_ECDHE_RSA_WITH_NULL_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier";
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier";
   }
 
-  identity tls-ecdhe-rsa-with-rc4-128-sha {
+  identity TLS_ECDHE_RSA_WITH_RC4_128_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-RSA-WITH-RC4-128-SHA";
+      "Identity for the 'TLS_ECDHE_RSA_WITH_RC4_128_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier
        RFC 6347:
-         Datagram Transport Layer Security version 1.2";
+         Datagram Transport Layer Security Version 1.2";
   }
 
-  identity tls-ecdhe-rsa-with-3des-ede-cbc-sha {
+  identity TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-RSA-WITH-3DES-EDE-CBC-SHA";
+      "Identity for the 'TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier";
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier";
   }
 
-  identity tls-ecdhe-rsa-with-aes-128-cbc-sha {
+  identity TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA";
+      "Identity for the 'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier";
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier";
   }
 
-  identity tls-ecdhe-rsa-with-aes-256-cbc-sha {
+  identity TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA";
+      "Identity for the 'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier";
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier";
   }
 
-  identity tls-ecdh-anon-with-null-sha {
+  identity TLS_ECDH_anon_WITH_NULL_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-ANON-WITH-NULL-SHA";
+      "Identity for the 'TLS_ECDH_anon_WITH_NULL_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier";
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier";
   }
 
-  identity tls-ecdh-anon-with-rc4-128-sha {
+  identity TLS_ECDH_anon_WITH_RC4_128_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-ANON-WITH-RC4-128-SHA";
+      "Identity for the 'TLS_ECDH_anon_WITH_RC4_128_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier
        RFC 6347:
-         Datagram Transport Layer Security version 1.2";
+         Datagram Transport Layer Security Version 1.2";
   }
 
-  identity tls-ecdh-anon-with-3des-ede-cbc-sha {
+  identity TLS_ECDH_anon_WITH_3DES_EDE_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-ANON-WITH-3DES-EDE-CBC-SHA";
+      "Identity for the 'TLS_ECDH_anon_WITH_3DES_EDE_CBC_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier";
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier";
   }
 
-  identity tls-ecdh-anon-with-aes-128-cbc-sha {
+  identity TLS_ECDH_anon_WITH_AES_128_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-ANON-WITH-AES-128-CBC-SHA";
+      "Identity for the 'TLS_ECDH_anon_WITH_AES_128_CBC_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier";
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier";
   }
 
-  identity tls-ecdh-anon-with-aes-256-cbc-sha {
+  identity TLS_ECDH_anon_WITH_AES_256_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-ANON-WITH-AES-256-CBC-SHA";
+      "Identity for the 'TLS_ECDH_anon_WITH_AES_256_CBC_SHA' algorithm.";
     reference
       "RFC 8422:
-         Elliptic Curve Cryptography (ECC) Cipher Suites for
-         Transport Layer Security (TLS) Versions 1.2 and Earlier";
+         Elliptic Curve Cryptography (ECC) Cipher Suites for Transport Layer
+         Security (TLS) Versions 1.2 and Earlier";
   }
 
-  identity tls-srp-sha-with-3des-ede-cbc-sha {
+  identity TLS_SRP_SHA_WITH_3DES_EDE_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-SRP-SHA-WITH-3DES-EDE-CBC-SHA";
+      "Identity for the 'TLS_SRP_SHA_WITH_3DES_EDE_CBC_SHA' algorithm.";
     reference
       "RFC 5054:
-         Using SRP for TLS Authentication";
+         Using the Secure Remote Password (SRP) Protocol for TLS Authentication";
   }
 
-  identity tls-srp-sha-rsa-with-3des-ede-cbc-sha {
+  identity TLS_SRP_SHA_RSA_WITH_3DES_EDE_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-SRP-SHA-RSA-WITH-3DES-EDE-CBC-SHA";
+      "Identity for the 'TLS_SRP_SHA_RSA_WITH_3DES_EDE_CBC_SHA' algorithm.";
     reference
       "RFC 5054:
-         Using SRP for TLS Authentication";
+         Using the Secure Remote Password (SRP) Protocol for TLS Authentication";
   }
 
-  identity tls-srp-sha-dss-with-3des-ede-cbc-sha {
+  identity TLS_SRP_SHA_DSS_WITH_3DES_EDE_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-SRP-SHA-DSS-WITH-3DES-EDE-CBC-SHA";
+      "Identity for the 'TLS_SRP_SHA_DSS_WITH_3DES_EDE_CBC_SHA' algorithm.";
     reference
       "RFC 5054:
-         Using SRP for TLS Authentication";
+         Using the Secure Remote Password (SRP) Protocol for TLS Authentication";
   }
 
-  identity tls-srp-sha-with-aes-128-cbc-sha {
+  identity TLS_SRP_SHA_WITH_AES_128_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-SRP-SHA-WITH-AES-128-CBC-SHA";
+      "Identity for the 'TLS_SRP_SHA_WITH_AES_128_CBC_SHA' algorithm.";
     reference
       "RFC 5054:
-         Using SRP for TLS Authentication";
+         Using the Secure Remote Password (SRP) Protocol for TLS Authentication";
   }
 
-  identity tls-srp-sha-rsa-with-aes-128-cbc-sha {
+  identity TLS_SRP_SHA_RSA_WITH_AES_128_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-SRP-SHA-RSA-WITH-AES-128-CBC-SHA";
+      "Identity for the 'TLS_SRP_SHA_RSA_WITH_AES_128_CBC_SHA' algorithm.";
     reference
       "RFC 5054:
-         Using SRP for TLS Authentication";
+         Using the Secure Remote Password (SRP) Protocol for TLS Authentication";
   }
 
-  identity tls-srp-sha-dss-with-aes-128-cbc-sha {
+  identity TLS_SRP_SHA_DSS_WITH_AES_128_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-SRP-SHA-DSS-WITH-AES-128-CBC-SHA";
+      "Identity for the 'TLS_SRP_SHA_DSS_WITH_AES_128_CBC_SHA' algorithm.";
     reference
       "RFC 5054:
-         Using SRP for TLS Authentication";
+         Using the Secure Remote Password (SRP) Protocol for TLS Authentication";
   }
 
-  identity tls-srp-sha-with-aes-256-cbc-sha {
+  identity TLS_SRP_SHA_WITH_AES_256_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-SRP-SHA-WITH-AES-256-CBC-SHA";
+      "Identity for the 'TLS_SRP_SHA_WITH_AES_256_CBC_SHA' algorithm.";
     reference
       "RFC 5054:
-         Using SRP for TLS Authentication";
+         Using the Secure Remote Password (SRP) Protocol for TLS Authentication";
   }
 
-  identity tls-srp-sha-rsa-with-aes-256-cbc-sha {
+  identity TLS_SRP_SHA_RSA_WITH_AES_256_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-SRP-SHA-RSA-WITH-AES-256-CBC-SHA";
+      "Identity for the 'TLS_SRP_SHA_RSA_WITH_AES_256_CBC_SHA' algorithm.";
     reference
       "RFC 5054:
-         Using SRP for TLS Authentication";
+         Using the Secure Remote Password (SRP) Protocol for TLS Authentication";
   }
 
-  identity tls-srp-sha-dss-with-aes-256-cbc-sha {
+  identity TLS_SRP_SHA_DSS_WITH_AES_256_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-SRP-SHA-DSS-WITH-AES-256-CBC-SHA";
+      "Identity for the 'TLS_SRP_SHA_DSS_WITH_AES_256_CBC_SHA' algorithm.";
     reference
       "RFC 5054:
-         Using SRP for TLS Authentication";
+         Using the Secure Remote Password (SRP) Protocol for TLS Authentication";
   }
 
-  identity tls-ecdhe-ecdsa-with-aes-128-cbc-sha256 {
+  identity TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA256";
+      "Identity for the 'TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256' algorithm.";
     reference
       "RFC 5289:
-         TLS Elliptic Curve Cipher Suites with SHA-256/384
-         and AES Galois Counter Mode";
+         TLS Elliptic Curve Cipher Suites with SHA-256/384 and AES Galois
+         Counter Mode (GCM)";
   }
 
-  identity tls-ecdhe-ecdsa-with-aes-256-cbc-sha384 {
+  identity TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA384";
+      "Identity for the 'TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384' algorithm.";
     reference
       "RFC 5289:
-         TLS Elliptic Curve Cipher Suites with SHA-256/384
-         and AES Galois Counter Mode";
+         TLS Elliptic Curve Cipher Suites with SHA-256/384 and AES Galois
+         Counter Mode (GCM)";
   }
 
-  identity tls-ecdh-ecdsa-with-aes-128-cbc-sha256 {
+  identity TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-ECDSA-WITH-AES-128-CBC-SHA256";
+      "Identity for the 'TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256' algorithm.";
     reference
       "RFC 5289:
-         TLS Elliptic Curve Cipher Suites with SHA-256/384
-         and AES Galois Counter Mode";
+         TLS Elliptic Curve Cipher Suites with SHA-256/384 and AES Galois
+         Counter Mode (GCM)";
   }
 
-  identity tls-ecdh-ecdsa-with-aes-256-cbc-sha384 {
+  identity TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-ECDSA-WITH-AES-256-CBC-SHA384";
+      "Identity for the 'TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384' algorithm.";
     reference
       "RFC 5289:
-         TLS Elliptic Curve Cipher Suites with SHA-256/384
-         and AES Galois Counter Mode";
+         TLS Elliptic Curve Cipher Suites with SHA-256/384 and AES Galois
+         Counter Mode (GCM)";
   }
 
-  identity tls-ecdhe-rsa-with-aes-128-cbc-sha256 {
+  identity TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA256";
+      "Identity for the 'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256' algorithm.";
     reference
       "RFC 5289:
-         TLS Elliptic Curve Cipher Suites with SHA-256/384
-         and AES Galois Counter Mode";
+         TLS Elliptic Curve Cipher Suites with SHA-256/384 and AES Galois
+         Counter Mode (GCM)";
   }
 
-  identity tls-ecdhe-rsa-with-aes-256-cbc-sha384 {
+  identity TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA384";
+      "Identity for the 'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384' algorithm.";
     reference
       "RFC 5289:
-         TLS Elliptic Curve Cipher Suites with SHA-256/384
-         and AES Galois Counter Mode";
+         TLS Elliptic Curve Cipher Suites with SHA-256/384 and AES Galois
+         Counter Mode (GCM)";
   }
 
-  identity tls-ecdh-rsa-with-aes-128-cbc-sha256 {
+  identity TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-RSA-WITH-AES-128-CBC-SHA256";
+      "Identity for the 'TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256' algorithm.";
     reference
       "RFC 5289:
-         TLS Elliptic Curve Cipher Suites with SHA-256/384
-         and AES Galois Counter Mode";
+         TLS Elliptic Curve Cipher Suites with SHA-256/384 and AES Galois
+         Counter Mode (GCM)";
   }
 
-  identity tls-ecdh-rsa-with-aes-256-cbc-sha384 {
+  identity TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-RSA-WITH-AES-256-CBC-SHA384";
+      "Identity for the 'TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384' algorithm.";
     reference
       "RFC 5289:
-         TLS Elliptic Curve Cipher Suites with SHA-256/384
-         and AES Galois Counter Mode";
+         TLS Elliptic Curve Cipher Suites with SHA-256/384 and AES Galois
+         Counter Mode (GCM)";
   }
 
-  identity tls-ecdhe-ecdsa-with-aes-128-gcm-sha256 {
+  identity TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     description
-      "TLS-ECDHE-ECDSA-WITH-AES-128-GCM-SHA256";
+      "Identity for the 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256' algorithm.";
     reference
       "RFC 5289:
-         TLS Elliptic Curve Cipher Suites with SHA-256/384
-         and AES Galois Counter Mode";
+         TLS Elliptic Curve Cipher Suites with SHA-256/384 and AES Galois
+         Counter Mode (GCM)";
   }
 
-  identity tls-ecdhe-ecdsa-with-aes-256-gcm-sha384 {
+  identity TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     description
-      "TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384";
+      "Identity for the 'TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384' algorithm.";
     reference
       "RFC 5289:
-         TLS Elliptic Curve Cipher Suites with SHA-256/384
-         and AES Galois Counter Mode";
+         TLS Elliptic Curve Cipher Suites with SHA-256/384 and AES Galois
+         Counter Mode (GCM)";
   }
 
-  identity tls-ecdh-ecdsa-with-aes-128-gcm-sha256 {
-    base cipher-suite-alg-base;
-    status deprecated;
-    description
-      "TLS-ECDH-ECDSA-WITH-AES-128-GCM-SHA256";
-    reference
-      "RFC 5289:
-         TLS Elliptic Curve Cipher Suites with SHA-256/384
-         and AES Galois Counter Mode";
-  }
-
-  identity tls-ecdh-ecdsa-with-aes-256-gcm-sha384 {
+  identity TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-ECDSA-WITH-AES-256-GCM-SHA384";
+      "Identity for the 'TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256' algorithm.";
     reference
       "RFC 5289:
-         TLS Elliptic Curve Cipher Suites with SHA-256/384
-         and AES Galois Counter Mode";
+         TLS Elliptic Curve Cipher Suites with SHA-256/384 and AES Galois
+         Counter Mode (GCM)";
   }
 
-  identity tls-ecdhe-rsa-with-aes-128-gcm-sha256 {
-    base cipher-suite-alg-base;
-    description
-      "TLS-ECDHE-RSA-WITH-AES-128-GCM-SHA256";
-    reference
-      "RFC 5289:
-         TLS Elliptic Curve Cipher Suites with SHA-256/384
-         and AES Galois Counter Mode";
-  }
-
-  identity tls-ecdhe-rsa-with-aes-256-gcm-sha384 {
-    base cipher-suite-alg-base;
-    description
-      "TLS-ECDHE-RSA-WITH-AES-256-GCM-SHA384";
-    reference
-      "RFC 5289:
-         TLS Elliptic Curve Cipher Suites with SHA-256/384
-         and AES Galois Counter Mode";
-  }
-
-  identity tls-ecdh-rsa-with-aes-128-gcm-sha256 {
+  identity TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-RSA-WITH-AES-128-GCM-SHA256";
+      "Identity for the 'TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384' algorithm.";
     reference
       "RFC 5289:
-         TLS Elliptic Curve Cipher Suites with SHA-256/384
-         and AES Galois Counter Mode";
+         TLS Elliptic Curve Cipher Suites with SHA-256/384 and AES Galois
+         Counter Mode (GCM)";
   }
 
-  identity tls-ecdh-rsa-with-aes-256-gcm-sha384 {
+  identity TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 {
+    base cipher-suite-alg-base;
+    description
+      "Identity for the 'TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256' algorithm.";
+    reference
+      "RFC 5289:
+         TLS Elliptic Curve Cipher Suites with SHA-256/384 and AES Galois
+         Counter Mode (GCM)";
+  }
+
+  identity TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 {
+    base cipher-suite-alg-base;
+    description
+      "Identity for the 'TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384' algorithm.";
+    reference
+      "RFC 5289:
+         TLS Elliptic Curve Cipher Suites with SHA-256/384 and AES Galois
+         Counter Mode (GCM)";
+  }
+
+  identity TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-RSA-WITH-AES-256-GCM-SHA384";
+      "Identity for the 'TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256' algorithm.";
     reference
       "RFC 5289:
-         TLS Elliptic Curve Cipher Suites with SHA-256/384
-         and AES Galois Counter Mode";
+         TLS Elliptic Curve Cipher Suites with SHA-256/384 and AES Galois
+         Counter Mode (GCM)";
   }
 
-  identity tls-ecdhe-psk-with-rc4-128-sha {
+  identity TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-PSK-WITH-RC4-128-SHA";
+      "Identity for the 'TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384' algorithm.";
+    reference
+      "RFC 5289:
+         TLS Elliptic Curve Cipher Suites with SHA-256/384 and AES Galois
+         Counter Mode (GCM)";
+  }
+
+  identity TLS_ECDHE_PSK_WITH_RC4_128_SHA {
+    base cipher-suite-alg-base;
+    status deprecated;
+    description
+      "Identity for the 'TLS_ECDHE_PSK_WITH_RC4_128_SHA' algorithm.";
     reference
       "RFC 5489:
-         ECDHE_PSK Ciphersuites for Transport Layer Security (TLS)
+         ECDHE_PSK Cipher Suites for Transport Layer Security (TLS)
        RFC 6347:
-         Datagram Transport Layer Security version 1.2";
+         Datagram Transport Layer Security Version 1.2";
   }
 
-  identity tls-ecdhe-psk-with-3des-ede-cbc-sha {
+  identity TLS_ECDHE_PSK_WITH_3DES_EDE_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-PSK-WITH-3DES-EDE-CBC-SHA";
+      "Identity for the 'TLS_ECDHE_PSK_WITH_3DES_EDE_CBC_SHA' algorithm.";
     reference
       "RFC 5489:
-         ECDHE_PSK Ciphersuites for Transport Layer Security (TLS)";
+         ECDHE_PSK Cipher Suites for Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdhe-psk-with-aes-128-cbc-sha {
+  identity TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-PSK-WITH-AES-128-CBC-SHA";
+      "Identity for the 'TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA' algorithm.";
     reference
       "RFC 5489:
-         ECDHE_PSK Ciphersuites for Transport Layer Security (TLS)";
+         ECDHE_PSK Cipher Suites for Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdhe-psk-with-aes-256-cbc-sha {
+  identity TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-PSK-WITH-AES-256-CBC-SHA";
+      "Identity for the 'TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA' algorithm.";
     reference
       "RFC 5489:
-         ECDHE_PSK Ciphersuites for Transport Layer Security (TLS)";
+         ECDHE_PSK Cipher Suites for Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdhe-psk-with-aes-128-cbc-sha256 {
+  identity TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-PSK-WITH-AES-128-CBC-SHA256";
+      "Identity for the 'TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA256' algorithm.";
     reference
       "RFC 5489:
-         ECDHE_PSK Ciphersuites for Transport Layer Security (TLS)";
+         ECDHE_PSK Cipher Suites for Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdhe-psk-with-aes-256-cbc-sha384 {
+  identity TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-PSK-WITH-AES-256-CBC-SHA384";
+      "Identity for the 'TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA384' algorithm.";
     reference
       "RFC 5489:
-         ECDHE_PSK Ciphersuites for Transport Layer Security (TLS)";
+         ECDHE_PSK Cipher Suites for Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdhe-psk-with-null-sha {
+  identity TLS_ECDHE_PSK_WITH_NULL_SHA {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-PSK-WITH-NULL-SHA";
+      "Identity for the 'TLS_ECDHE_PSK_WITH_NULL_SHA' algorithm.";
     reference
       "RFC 5489:
-         ECDHE_PSK Ciphersuites for Transport Layer Security (TLS)";
+         ECDHE_PSK Cipher Suites for Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdhe-psk-with-null-sha256 {
+  identity TLS_ECDHE_PSK_WITH_NULL_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-PSK-WITH-NULL-SHA256";
+      "Identity for the 'TLS_ECDHE_PSK_WITH_NULL_SHA256' algorithm.";
     reference
       "RFC 5489:
-         ECDHE_PSK Ciphersuites for Transport Layer Security (TLS)";
+         ECDHE_PSK Cipher Suites for Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdhe-psk-with-null-sha384 {
+  identity TLS_ECDHE_PSK_WITH_NULL_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-PSK-WITH-NULL-SHA384";
+      "Identity for the 'TLS_ECDHE_PSK_WITH_NULL_SHA384' algorithm.";
     reference
       "RFC 5489:
-         ECDHE_PSK Ciphersuites for Transport Layer Security (TLS)";
+         ECDHE_PSK Cipher Suites for Transport Layer Security (TLS)";
   }
 
-  identity tls-rsa-with-aria-128-cbc-sha256 {
+  identity TLS_RSA_WITH_ARIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-ARIA-128-CBC-SHA256";
+      "Identity for the 'TLS_RSA_WITH_ARIA_128_CBC_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-rsa-with-aria-256-cbc-sha384 {
+  identity TLS_RSA_WITH_ARIA_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-ARIA-256-CBC-SHA384";
+      "Identity for the 'TLS_RSA_WITH_ARIA_256_CBC_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dh-dss-with-aria-128-cbc-sha256 {
+  identity TLS_DH_DSS_WITH_ARIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-DSS-WITH-ARIA-128-CBC-SHA256";
+      "Identity for the 'TLS_DH_DSS_WITH_ARIA_128_CBC_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dh-dss-with-aria-256-cbc-sha384 {
+  identity TLS_DH_DSS_WITH_ARIA_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-DSS-WITH-ARIA-256-CBC-SHA384";
+      "Identity for the 'TLS_DH_DSS_WITH_ARIA_256_CBC_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dh-rsa-with-aria-128-cbc-sha256 {
+  identity TLS_DH_RSA_WITH_ARIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-RSA-WITH-ARIA-128-CBC-SHA256";
+      "Identity for the 'TLS_DH_RSA_WITH_ARIA_128_CBC_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dh-rsa-with-aria-256-cbc-sha384 {
+  identity TLS_DH_RSA_WITH_ARIA_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-RSA-WITH-ARIA-256-CBC-SHA384";
+      "Identity for the 'TLS_DH_RSA_WITH_ARIA_256_CBC_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dhe-dss-with-aria-128-cbc-sha256 {
+  identity TLS_DHE_DSS_WITH_ARIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-DSS-WITH-ARIA-128-CBC-SHA256";
+      "Identity for the 'TLS_DHE_DSS_WITH_ARIA_128_CBC_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dhe-dss-with-aria-256-cbc-sha384 {
+  identity TLS_DHE_DSS_WITH_ARIA_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-DSS-WITH-ARIA-256-CBC-SHA384";
+      "Identity for the 'TLS_DHE_DSS_WITH_ARIA_256_CBC_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dhe-rsa-with-aria-128-cbc-sha256 {
+  identity TLS_DHE_RSA_WITH_ARIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-RSA-WITH-ARIA-128-CBC-SHA256";
+      "Identity for the 'TLS_DHE_RSA_WITH_ARIA_128_CBC_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dhe-rsa-with-aria-256-cbc-sha384 {
+  identity TLS_DHE_RSA_WITH_ARIA_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-RSA-WITH-ARIA-256-CBC-SHA384";
+      "Identity for the 'TLS_DHE_RSA_WITH_ARIA_256_CBC_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dh-anon-with-aria-128-cbc-sha256 {
+  identity TLS_DH_anon_WITH_ARIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-ANON-WITH-ARIA-128-CBC-SHA256";
+      "Identity for the 'TLS_DH_anon_WITH_ARIA_128_CBC_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dh-anon-with-aria-256-cbc-sha384 {
+  identity TLS_DH_anon_WITH_ARIA_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-ANON-WITH-ARIA-256-CBC-SHA384";
+      "Identity for the 'TLS_DH_anon_WITH_ARIA_256_CBC_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdhe-ecdsa-with-aria-128-cbc-sha256 {
+  identity TLS_ECDHE_ECDSA_WITH_ARIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-ECDSA-WITH-ARIA-128-CBC-SHA256";
+      "Identity for the 'TLS_ECDHE_ECDSA_WITH_ARIA_128_CBC_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdhe-ecdsa-with-aria-256-cbc-sha384 {
+  identity TLS_ECDHE_ECDSA_WITH_ARIA_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-ECDSA-WITH-ARIA-256-CBC-SHA384";
+      "Identity for the 'TLS_ECDHE_ECDSA_WITH_ARIA_256_CBC_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdh-ecdsa-with-aria-128-cbc-sha256 {
+  identity TLS_ECDH_ECDSA_WITH_ARIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-ECDSA-WITH-ARIA-128-CBC-SHA256";
+      "Identity for the 'TLS_ECDH_ECDSA_WITH_ARIA_128_CBC_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdh-ecdsa-with-aria-256-cbc-sha384 {
+  identity TLS_ECDH_ECDSA_WITH_ARIA_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-ECDSA-WITH-ARIA-256-CBC-SHA384";
+      "Identity for the 'TLS_ECDH_ECDSA_WITH_ARIA_256_CBC_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdhe-rsa-with-aria-128-cbc-sha256 {
+  identity TLS_ECDHE_RSA_WITH_ARIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-RSA-WITH-ARIA-128-CBC-SHA256";
+      "Identity for the 'TLS_ECDHE_RSA_WITH_ARIA_128_CBC_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdhe-rsa-with-aria-256-cbc-sha384 {
+  identity TLS_ECDHE_RSA_WITH_ARIA_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-RSA-WITH-ARIA-256-CBC-SHA384";
+      "Identity for the 'TLS_ECDHE_RSA_WITH_ARIA_256_CBC_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdh-rsa-with-aria-128-cbc-sha256 {
+  identity TLS_ECDH_RSA_WITH_ARIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-RSA-WITH-ARIA-128-CBC-SHA256";
+      "Identity for the 'TLS_ECDH_RSA_WITH_ARIA_128_CBC_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdh-rsa-with-aria-256-cbc-sha384 {
+  identity TLS_ECDH_RSA_WITH_ARIA_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-RSA-WITH-ARIA-256-CBC-SHA384";
+      "Identity for the 'TLS_ECDH_RSA_WITH_ARIA_256_CBC_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-rsa-with-aria-128-gcm-sha256 {
+  identity TLS_RSA_WITH_ARIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-ARIA-128-GCM-SHA256";
+      "Identity for the 'TLS_RSA_WITH_ARIA_128_GCM_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-rsa-with-aria-256-gcm-sha384 {
+  identity TLS_RSA_WITH_ARIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-ARIA-256-GCM-SHA384";
+      "Identity for the 'TLS_RSA_WITH_ARIA_256_GCM_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dhe-rsa-with-aria-128-gcm-sha256 {
+  identity TLS_DHE_RSA_WITH_ARIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-RSA-WITH-ARIA-128-GCM-SHA256";
+      "Identity for the 'TLS_DHE_RSA_WITH_ARIA_128_GCM_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dhe-rsa-with-aria-256-gcm-sha384 {
+  identity TLS_DHE_RSA_WITH_ARIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-RSA-WITH-ARIA-256-GCM-SHA384";
+      "Identity for the 'TLS_DHE_RSA_WITH_ARIA_256_GCM_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dh-rsa-with-aria-128-gcm-sha256 {
+  identity TLS_DH_RSA_WITH_ARIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-RSA-WITH-ARIA-128-GCM-SHA256";
+      "Identity for the 'TLS_DH_RSA_WITH_ARIA_128_GCM_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dh-rsa-with-aria-256-gcm-sha384 {
+  identity TLS_DH_RSA_WITH_ARIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-RSA-WITH-ARIA-256-GCM-SHA384";
+      "Identity for the 'TLS_DH_RSA_WITH_ARIA_256_GCM_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dhe-dss-with-aria-128-gcm-sha256 {
+  identity TLS_DHE_DSS_WITH_ARIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-DSS-WITH-ARIA-128-GCM-SHA256";
+      "Identity for the 'TLS_DHE_DSS_WITH_ARIA_128_GCM_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dhe-dss-with-aria-256-gcm-sha384 {
+  identity TLS_DHE_DSS_WITH_ARIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-DSS-WITH-ARIA-256-GCM-SHA384";
+      "Identity for the 'TLS_DHE_DSS_WITH_ARIA_256_GCM_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dh-dss-with-aria-128-gcm-sha256 {
+  identity TLS_DH_DSS_WITH_ARIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-DSS-WITH-ARIA-128-GCM-SHA256";
+      "Identity for the 'TLS_DH_DSS_WITH_ARIA_128_GCM_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dh-dss-with-aria-256-gcm-sha384 {
+  identity TLS_DH_DSS_WITH_ARIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-DSS-WITH-ARIA-256-GCM-SHA384";
+      "Identity for the 'TLS_DH_DSS_WITH_ARIA_256_GCM_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dh-anon-with-aria-128-gcm-sha256 {
+  identity TLS_DH_anon_WITH_ARIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-ANON-WITH-ARIA-128-GCM-SHA256";
+      "Identity for the 'TLS_DH_anon_WITH_ARIA_128_GCM_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dh-anon-with-aria-256-gcm-sha384 {
+  identity TLS_DH_anon_WITH_ARIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-ANON-WITH-ARIA-256-GCM-SHA384";
+      "Identity for the 'TLS_DH_anon_WITH_ARIA_256_GCM_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdhe-ecdsa-with-aria-128-gcm-sha256 {
+  identity TLS_ECDHE_ECDSA_WITH_ARIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-ECDSA-WITH-ARIA-128-GCM-SHA256";
+      "Identity for the 'TLS_ECDHE_ECDSA_WITH_ARIA_128_GCM_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdhe-ecdsa-with-aria-256-gcm-sha384 {
+  identity TLS_ECDHE_ECDSA_WITH_ARIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-ECDSA-WITH-ARIA-256-GCM-SHA384";
+      "Identity for the 'TLS_ECDHE_ECDSA_WITH_ARIA_256_GCM_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdh-ecdsa-with-aria-128-gcm-sha256 {
+  identity TLS_ECDH_ECDSA_WITH_ARIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-ECDSA-WITH-ARIA-128-GCM-SHA256";
+      "Identity for the 'TLS_ECDH_ECDSA_WITH_ARIA_128_GCM_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdh-ecdsa-with-aria-256-gcm-sha384 {
+  identity TLS_ECDH_ECDSA_WITH_ARIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-ECDSA-WITH-ARIA-256-GCM-SHA384";
+      "Identity for the 'TLS_ECDH_ECDSA_WITH_ARIA_256_GCM_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdhe-rsa-with-aria-128-gcm-sha256 {
+  identity TLS_ECDHE_RSA_WITH_ARIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-RSA-WITH-ARIA-128-GCM-SHA256";
+      "Identity for the 'TLS_ECDHE_RSA_WITH_ARIA_128_GCM_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdhe-rsa-with-aria-256-gcm-sha384 {
+  identity TLS_ECDHE_RSA_WITH_ARIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-RSA-WITH-ARIA-256-GCM-SHA384";
+      "Identity for the 'TLS_ECDHE_RSA_WITH_ARIA_256_GCM_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdh-rsa-with-aria-128-gcm-sha256 {
+  identity TLS_ECDH_RSA_WITH_ARIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-RSA-WITH-ARIA-128-GCM-SHA256";
+      "Identity for the 'TLS_ECDH_RSA_WITH_ARIA_128_GCM_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdh-rsa-with-aria-256-gcm-sha384 {
+  identity TLS_ECDH_RSA_WITH_ARIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-RSA-WITH-ARIA-256-GCM-SHA384";
+      "Identity for the 'TLS_ECDH_RSA_WITH_ARIA_256_GCM_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-psk-with-aria-128-cbc-sha256 {
+  identity TLS_PSK_WITH_ARIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-WITH-ARIA-128-CBC-SHA256";
+      "Identity for the 'TLS_PSK_WITH_ARIA_128_CBC_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-psk-with-aria-256-cbc-sha384 {
+  identity TLS_PSK_WITH_ARIA_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-WITH-ARIA-256-CBC-SHA384";
+      "Identity for the 'TLS_PSK_WITH_ARIA_256_CBC_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dhe-psk-with-aria-128-cbc-sha256 {
+  identity TLS_DHE_PSK_WITH_ARIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-PSK-WITH-ARIA-128-CBC-SHA256";
+      "Identity for the 'TLS_DHE_PSK_WITH_ARIA_128_CBC_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dhe-psk-with-aria-256-cbc-sha384 {
+  identity TLS_DHE_PSK_WITH_ARIA_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-PSK-WITH-ARIA-256-CBC-SHA384";
+      "Identity for the 'TLS_DHE_PSK_WITH_ARIA_256_CBC_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-rsa-psk-with-aria-128-cbc-sha256 {
+  identity TLS_RSA_PSK_WITH_ARIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-PSK-WITH-ARIA-128-CBC-SHA256";
+      "Identity for the 'TLS_RSA_PSK_WITH_ARIA_128_CBC_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-rsa-psk-with-aria-256-cbc-sha384 {
+  identity TLS_RSA_PSK_WITH_ARIA_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-PSK-WITH-ARIA-256-CBC-SHA384";
+      "Identity for the 'TLS_RSA_PSK_WITH_ARIA_256_CBC_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-psk-with-aria-128-gcm-sha256 {
+  identity TLS_PSK_WITH_ARIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-WITH-ARIA-128-GCM-SHA256";
+      "Identity for the 'TLS_PSK_WITH_ARIA_128_GCM_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-psk-with-aria-256-gcm-sha384 {
+  identity TLS_PSK_WITH_ARIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-WITH-ARIA-256-GCM-SHA384";
+      "Identity for the 'TLS_PSK_WITH_ARIA_256_GCM_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dhe-psk-with-aria-128-gcm-sha256 {
+  identity TLS_DHE_PSK_WITH_ARIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-PSK-WITH-ARIA-128-GCM-SHA256";
+      "Identity for the 'TLS_DHE_PSK_WITH_ARIA_128_GCM_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-dhe-psk-with-aria-256-gcm-sha384 {
+  identity TLS_DHE_PSK_WITH_ARIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-PSK-WITH-ARIA-256-GCM-SHA384";
+      "Identity for the 'TLS_DHE_PSK_WITH_ARIA_256_GCM_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-rsa-psk-with-aria-128-gcm-sha256 {
+  identity TLS_RSA_PSK_WITH_ARIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-PSK-WITH-ARIA-128-GCM-SHA256";
+      "Identity for the 'TLS_RSA_PSK_WITH_ARIA_128_GCM_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-rsa-psk-with-aria-256-gcm-sha384 {
+  identity TLS_RSA_PSK_WITH_ARIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-PSK-WITH-ARIA-256-GCM-SHA384";
+      "Identity for the 'TLS_RSA_PSK_WITH_ARIA_256_GCM_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdhe-psk-with-aria-128-cbc-sha256 {
+  identity TLS_ECDHE_PSK_WITH_ARIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-PSK-WITH-ARIA-128-CBC-SHA256";
+      "Identity for the 'TLS_ECDHE_PSK_WITH_ARIA_128_CBC_SHA256' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdhe-psk-with-aria-256-cbc-sha384 {
+  identity TLS_ECDHE_PSK_WITH_ARIA_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-PSK-WITH-ARIA-256-CBC-SHA384";
+      "Identity for the 'TLS_ECDHE_PSK_WITH_ARIA_256_CBC_SHA384' algorithm.";
     reference
       "RFC 6209:
-         Addition of the ARIA Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the ARIA Cipher Suites to Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdhe-ecdsa-with-camellia-128-cbc-sha256 {
+  identity TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-ECDSA-WITH-CAMELLIA-128-CBC-SHA256";
+      "Identity for the 'TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_CBC_SHA256'
+algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-ecdhe-ecdsa-with-camellia-256-cbc-sha384 {
+  identity TLS_ECDHE_ECDSA_WITH_CAMELLIA_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-ECDSA-WITH-CAMELLIA-256-CBC-SHA384";
+      "Identity for the 'TLS_ECDHE_ECDSA_WITH_CAMELLIA_256_CBC_SHA384'
+algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-ecdh-ecdsa-with-camellia-128-cbc-sha256 {
+  identity TLS_ECDH_ECDSA_WITH_CAMELLIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-ECDSA-WITH-CAMELLIA-128-CBC-SHA256";
+      "Identity for the 'TLS_ECDH_ECDSA_WITH_CAMELLIA_128_CBC_SHA256'
+algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-ecdh-ecdsa-with-camellia-256-cbc-sha384 {
+  identity TLS_ECDH_ECDSA_WITH_CAMELLIA_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-ECDSA-WITH-CAMELLIA-256-CBC-SHA384";
+      "Identity for the 'TLS_ECDH_ECDSA_WITH_CAMELLIA_256_CBC_SHA384'
+algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-ecdhe-rsa-with-camellia-128-cbc-sha256 {
+  identity TLS_ECDHE_RSA_WITH_CAMELLIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-RSA-WITH-CAMELLIA-128-CBC-SHA256";
+      "Identity for the 'TLS_ECDHE_RSA_WITH_CAMELLIA_128_CBC_SHA256'
+algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-ecdhe-rsa-with-camellia-256-cbc-sha384 {
+  identity TLS_ECDHE_RSA_WITH_CAMELLIA_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-RSA-WITH-CAMELLIA-256-CBC-SHA384";
+      "Identity for the 'TLS_ECDHE_RSA_WITH_CAMELLIA_256_CBC_SHA384'
+algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-ecdh-rsa-with-camellia-128-cbc-sha256 {
+  identity TLS_ECDH_RSA_WITH_CAMELLIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-RSA-WITH-CAMELLIA-128-CBC-SHA256";
+      "Identity for the 'TLS_ECDH_RSA_WITH_CAMELLIA_128_CBC_SHA256'
+algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-ecdh-rsa-with-camellia-256-cbc-sha384 {
+  identity TLS_ECDH_RSA_WITH_CAMELLIA_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-RSA-WITH-CAMELLIA-256-CBC-SHA384";
+      "Identity for the 'TLS_ECDH_RSA_WITH_CAMELLIA_256_CBC_SHA384'
+algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-rsa-with-camellia-128-gcm-sha256 {
+  identity TLS_RSA_WITH_CAMELLIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-CAMELLIA-128-GCM-SHA256";
+      "Identity for the 'TLS_RSA_WITH_CAMELLIA_128_GCM_SHA256' algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-rsa-with-camellia-256-gcm-sha384 {
+  identity TLS_RSA_WITH_CAMELLIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-CAMELLIA-256-GCM-SHA384";
+      "Identity for the 'TLS_RSA_WITH_CAMELLIA_256_GCM_SHA384' algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-dhe-rsa-with-camellia-128-gcm-sha256 {
+  identity TLS_DHE_RSA_WITH_CAMELLIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-RSA-WITH-CAMELLIA-128-GCM-SHA256";
+      "Identity for the 'TLS_DHE_RSA_WITH_CAMELLIA_128_GCM_SHA256' algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-dhe-rsa-with-camellia-256-gcm-sha384 {
+  identity TLS_DHE_RSA_WITH_CAMELLIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-RSA-WITH-CAMELLIA-256-GCM-SHA384";
+      "Identity for the 'TLS_DHE_RSA_WITH_CAMELLIA_256_GCM_SHA384' algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-dh-rsa-with-camellia-128-gcm-sha256 {
+  identity TLS_DH_RSA_WITH_CAMELLIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-RSA-WITH-CAMELLIA-128-GCM-SHA256";
+      "Identity for the 'TLS_DH_RSA_WITH_CAMELLIA_128_GCM_SHA256' algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-dh-rsa-with-camellia-256-gcm-sha384 {
+  identity TLS_DH_RSA_WITH_CAMELLIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-RSA-WITH-CAMELLIA-256-GCM-SHA384";
+      "Identity for the 'TLS_DH_RSA_WITH_CAMELLIA_256_GCM_SHA384' algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-dhe-dss-with-camellia-128-gcm-sha256 {
+  identity TLS_DHE_DSS_WITH_CAMELLIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-DSS-WITH-CAMELLIA-128-GCM-SHA256";
+      "Identity for the 'TLS_DHE_DSS_WITH_CAMELLIA_128_GCM_SHA256' algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-dhe-dss-with-camellia-256-gcm-sha384 {
+  identity TLS_DHE_DSS_WITH_CAMELLIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-DSS-WITH-CAMELLIA-256-GCM-SHA384";
+      "Identity for the 'TLS_DHE_DSS_WITH_CAMELLIA_256_GCM_SHA384' algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-dh-dss-with-camellia-128-gcm-sha256 {
+  identity TLS_DH_DSS_WITH_CAMELLIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-DSS-WITH-CAMELLIA-128-GCM-SHA256";
+      "Identity for the 'TLS_DH_DSS_WITH_CAMELLIA_128_GCM_SHA256' algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-dh-dss-with-camellia-256-gcm-sha384 {
+  identity TLS_DH_DSS_WITH_CAMELLIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-DSS-WITH-CAMELLIA-256-GCM-SHA384";
+      "Identity for the 'TLS_DH_DSS_WITH_CAMELLIA_256_GCM_SHA384' algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-dh-anon-with-camellia-128-gcm-sha256 {
+  identity TLS_DH_anon_WITH_CAMELLIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-ANON-WITH-CAMELLIA-128-GCM-SHA256";
+      "Identity for the 'TLS_DH_anon_WITH_CAMELLIA_128_GCM_SHA256' algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-dh-anon-with-camellia-256-gcm-sha384 {
+  identity TLS_DH_anon_WITH_CAMELLIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DH-ANON-WITH-CAMELLIA-256-GCM-SHA384";
+      "Identity for the 'TLS_DH_anon_WITH_CAMELLIA_256_GCM_SHA384' algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-ecdhe-ecdsa-with-camellia-128-gcm-sha256 {
+  identity TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-ECDSA-WITH-CAMELLIA-128-GCM-SHA256";
+      "Identity for the 'TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_GCM_SHA256'
+algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-ecdhe-ecdsa-with-camellia-256-gcm-sha384 {
+  identity TLS_ECDHE_ECDSA_WITH_CAMELLIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-ECDSA-WITH-CAMELLIA-256-GCM-SHA384";
+      "Identity for the 'TLS_ECDHE_ECDSA_WITH_CAMELLIA_256_GCM_SHA384'
+algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-ecdh-ecdsa-with-camellia-128-gcm-sha256 {
+  identity TLS_ECDH_ECDSA_WITH_CAMELLIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-ECDSA-WITH-CAMELLIA-128-GCM-SHA256";
+      "Identity for the 'TLS_ECDH_ECDSA_WITH_CAMELLIA_128_GCM_SHA256'
+algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-ecdh-ecdsa-with-camellia-256-gcm-sha384 {
+  identity TLS_ECDH_ECDSA_WITH_CAMELLIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-ECDSA-WITH-CAMELLIA-256-GCM-SHA384";
+      "Identity for the 'TLS_ECDH_ECDSA_WITH_CAMELLIA_256_GCM_SHA384'
+algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-ecdhe-rsa-with-camellia-128-gcm-sha256 {
+  identity TLS_ECDHE_RSA_WITH_CAMELLIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-RSA-WITH-CAMELLIA-128-GCM-SHA256";
+      "Identity for the 'TLS_ECDHE_RSA_WITH_CAMELLIA_128_GCM_SHA256'
+algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-ecdhe-rsa-with-camellia-256-gcm-sha384 {
+  identity TLS_ECDHE_RSA_WITH_CAMELLIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-RSA-WITH-CAMELLIA-256-GCM-SHA384";
+      "Identity for the 'TLS_ECDHE_RSA_WITH_CAMELLIA_256_GCM_SHA384'
+algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-ecdh-rsa-with-camellia-128-gcm-sha256 {
+  identity TLS_ECDH_RSA_WITH_CAMELLIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-RSA-WITH-CAMELLIA-128-GCM-SHA256";
+      "Identity for the 'TLS_ECDH_RSA_WITH_CAMELLIA_128_GCM_SHA256'
+algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-ecdh-rsa-with-camellia-256-gcm-sha384 {
+  identity TLS_ECDH_RSA_WITH_CAMELLIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDH-RSA-WITH-CAMELLIA-256-GCM-SHA384";
+      "Identity for the 'TLS_ECDH_RSA_WITH_CAMELLIA_256_GCM_SHA384'
+algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-psk-with-camellia-128-gcm-sha256 {
+  identity TLS_PSK_WITH_CAMELLIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-WITH-CAMELLIA-128-GCM-SHA256";
+      "Identity for the 'TLS_PSK_WITH_CAMELLIA_128_GCM_SHA256' algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-psk-with-camellia-256-gcm-sha384 {
+  identity TLS_PSK_WITH_CAMELLIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-WITH-CAMELLIA-256-GCM-SHA384";
+      "Identity for the 'TLS_PSK_WITH_CAMELLIA_256_GCM_SHA384' algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-dhe-psk-with-camellia-128-gcm-sha256 {
+  identity TLS_DHE_PSK_WITH_CAMELLIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-PSK-WITH-CAMELLIA-128-GCM-SHA256";
+      "Identity for the 'TLS_DHE_PSK_WITH_CAMELLIA_128_GCM_SHA256' algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-dhe-psk-with-camellia-256-gcm-sha384 {
+  identity TLS_DHE_PSK_WITH_CAMELLIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-PSK-WITH-CAMELLIA-256-GCM-SHA384";
+      "Identity for the 'TLS_DHE_PSK_WITH_CAMELLIA_256_GCM_SHA384' algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-rsa-psk-with-camellia-128-gcm-sha256 {
+  identity TLS_RSA_PSK_WITH_CAMELLIA_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-PSK-WITH-CAMELLIA-128-GCM-SHA256";
+      "Identity for the 'TLS_RSA_PSK_WITH_CAMELLIA_128_GCM_SHA256' algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-rsa-psk-with-camellia-256-gcm-sha384 {
+  identity TLS_RSA_PSK_WITH_CAMELLIA_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-PSK-WITH-CAMELLIA-256-GCM-SHA384";
+      "Identity for the 'TLS_RSA_PSK_WITH_CAMELLIA_256_GCM_SHA384' algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-psk-with-camellia-128-cbc-sha256 {
+  identity TLS_PSK_WITH_CAMELLIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-WITH-CAMELLIA-128-CBC-SHA256";
+      "Identity for the 'TLS_PSK_WITH_CAMELLIA_128_CBC_SHA256' algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-psk-with-camellia-256-cbc-sha384 {
+  identity TLS_PSK_WITH_CAMELLIA_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-WITH-CAMELLIA-256-CBC-SHA384";
+      "Identity for the 'TLS_PSK_WITH_CAMELLIA_256_CBC_SHA384' algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-dhe-psk-with-camellia-128-cbc-sha256 {
+  identity TLS_DHE_PSK_WITH_CAMELLIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-PSK-WITH-CAMELLIA-128-CBC-SHA256";
+      "Identity for the 'TLS_DHE_PSK_WITH_CAMELLIA_128_CBC_SHA256' algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-dhe-psk-with-camellia-256-cbc-sha384 {
+  identity TLS_DHE_PSK_WITH_CAMELLIA_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-PSK-WITH-CAMELLIA-256-CBC-SHA384";
+      "Identity for the 'TLS_DHE_PSK_WITH_CAMELLIA_256_CBC_SHA384' algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-rsa-psk-with-camellia-128-cbc-sha256 {
+  identity TLS_RSA_PSK_WITH_CAMELLIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-PSK-WITH-CAMELLIA-128-CBC-SHA256";
+      "Identity for the 'TLS_RSA_PSK_WITH_CAMELLIA_128_CBC_SHA256' algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-rsa-psk-with-camellia-256-cbc-sha384 {
+  identity TLS_RSA_PSK_WITH_CAMELLIA_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-PSK-WITH-CAMELLIA-256-CBC-SHA384";
+      "Identity for the 'TLS_RSA_PSK_WITH_CAMELLIA_256_CBC_SHA384' algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-ecdhe-psk-with-camellia-128-cbc-sha256 {
+  identity TLS_ECDHE_PSK_WITH_CAMELLIA_128_CBC_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-PSK-WITH-CAMELLIA-128-CBC-SHA256";
+      "Identity for the 'TLS_ECDHE_PSK_WITH_CAMELLIA_128_CBC_SHA256'
+algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-ecdhe-psk-with-camellia-256-cbc-sha384 {
+  identity TLS_ECDHE_PSK_WITH_CAMELLIA_256_CBC_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-PSK-WITH-CAMELLIA-256-CBC-SHA384";
+      "Identity for the 'TLS_ECDHE_PSK_WITH_CAMELLIA_256_CBC_SHA384'
+algorithm.";
     reference
       "RFC 6367:
-         Addition of the Camellia Cipher Suites to
-         Transport Layer Security (TLS)";
+         Addition of the Camellia Cipher Suites to Transport Layer Security
+         (TLS)";
   }
 
-  identity tls-rsa-with-aes-128-ccm {
+  identity TLS_RSA_WITH_AES_128_CCM {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-AES-128-CCM";
+      "Identity for the 'TLS_RSA_WITH_AES_128_CCM' algorithm.";
     reference
       "RFC 6655:
-         AES-CCM Cipher Suites for TLS";
+         AES-CCM Cipher Suites for Transport Layer Security (TLS)";
   }
 
-  identity tls-rsa-with-aes-256-ccm {
+  identity TLS_RSA_WITH_AES_256_CCM {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-AES-256-CCM";
+      "Identity for the 'TLS_RSA_WITH_AES_256_CCM' algorithm.";
     reference
       "RFC 6655:
-         AES-CCM Cipher Suites for TLS";
+         AES-CCM Cipher Suites for Transport Layer Security (TLS)";
   }
 
-  identity tls-dhe-rsa-with-aes-128-ccm {
+  identity TLS_DHE_RSA_WITH_AES_128_CCM {
     base cipher-suite-alg-base;
     description
-      "TLS-DHE-RSA-WITH-AES-128-CCM";
+      "Identity for the 'TLS_DHE_RSA_WITH_AES_128_CCM' algorithm.";
     reference
       "RFC 6655:
-         AES-CCM Cipher Suites for TLS";
+         AES-CCM Cipher Suites for Transport Layer Security (TLS)";
   }
 
-  identity tls-dhe-rsa-with-aes-256-ccm {
+  identity TLS_DHE_RSA_WITH_AES_256_CCM {
     base cipher-suite-alg-base;
     description
-      "TLS-DHE-RSA-WITH-AES-256-CCM";
+      "Identity for the 'TLS_DHE_RSA_WITH_AES_256_CCM' algorithm.";
     reference
       "RFC 6655:
-         AES-CCM Cipher Suites for TLS";
+         AES-CCM Cipher Suites for Transport Layer Security (TLS)";
   }
 
-  identity tls-rsa-with-aes-128-ccm-8 {
-    base cipher-suite-alg-base;
-    status deprecated;
-    description
-      "TLS-RSA-WITH-AES-128-CCM-8";
-    reference
-      "RFC 6655:
-         AES-CCM Cipher Suites for TLS";
-  }
-
-  identity tls-rsa-with-aes-256-ccm-8 {
+  identity TLS_RSA_WITH_AES_128_CCM_8 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-WITH-AES-256-CCM-8";
+      "Identity for the 'TLS_RSA_WITH_AES_128_CCM_8' algorithm.";
     reference
       "RFC 6655:
-         AES-CCM Cipher Suites for TLS";
+         AES-CCM Cipher Suites for Transport Layer Security (TLS)";
   }
 
-  identity tls-dhe-rsa-with-aes-128-ccm-8 {
+  identity TLS_RSA_WITH_AES_256_CCM_8 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-RSA-WITH-AES-128-CCM-8";
+      "Identity for the 'TLS_RSA_WITH_AES_256_CCM_8' algorithm.";
     reference
       "RFC 6655:
-         AES-CCM Cipher Suites for TLS";
+         AES-CCM Cipher Suites for Transport Layer Security (TLS)";
   }
 
-  identity tls-dhe-rsa-with-aes-256-ccm-8 {
+  identity TLS_DHE_RSA_WITH_AES_128_CCM_8 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-DHE-RSA-WITH-AES-256-CCM-8";
+      "Identity for the 'TLS_DHE_RSA_WITH_AES_128_CCM_8' algorithm.";
     reference
       "RFC 6655:
-         AES-CCM Cipher Suites for TLS";
+         AES-CCM Cipher Suites for Transport Layer Security (TLS)";
   }
 
-  identity tls-psk-with-aes-128-ccm {
+  identity TLS_DHE_RSA_WITH_AES_256_CCM_8 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-WITH-AES-128-CCM";
+      "Identity for the 'TLS_DHE_RSA_WITH_AES_256_CCM_8' algorithm.";
     reference
       "RFC 6655:
-         AES-CCM Cipher Suites for TLS";
+         AES-CCM Cipher Suites for Transport Layer Security (TLS)";
   }
 
-  identity tls-psk-with-aes-256-ccm {
+  identity TLS_PSK_WITH_AES_128_CCM {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-WITH-AES-256-CCM";
+      "Identity for the 'TLS_PSK_WITH_AES_128_CCM' algorithm.";
     reference
       "RFC 6655:
-         AES-CCM Cipher Suites for TLS";
+         AES-CCM Cipher Suites for Transport Layer Security (TLS)";
   }
 
-  identity tls-dhe-psk-with-aes-128-ccm {
-    base cipher-suite-alg-base;
-    description
-      "TLS-DHE-PSK-WITH-AES-128-CCM";
-    reference
-      "RFC 6655:
-         AES-CCM Cipher Suites for TLS";
-  }
-
-  identity tls-dhe-psk-with-aes-256-ccm {
-    base cipher-suite-alg-base;
-    description
-      "TLS-DHE-PSK-WITH-AES-256-CCM";
-    reference
-      "RFC 6655:
-         AES-CCM Cipher Suites for TLS";
-  }
-
-  identity tls-psk-with-aes-128-ccm-8 {
+  identity TLS_PSK_WITH_AES_256_CCM {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-WITH-AES-128-CCM-8";
+      "Identity for the 'TLS_PSK_WITH_AES_256_CCM' algorithm.";
     reference
       "RFC 6655:
-         AES-CCM Cipher Suites for TLS";
+         AES-CCM Cipher Suites for Transport Layer Security (TLS)";
   }
 
-  identity tls-psk-with-aes-256-ccm-8 {
+  identity TLS_DHE_PSK_WITH_AES_128_CCM {
+    base cipher-suite-alg-base;
+    description
+      "Identity for the 'TLS_DHE_PSK_WITH_AES_128_CCM' algorithm.";
+    reference
+      "RFC 6655:
+         AES-CCM Cipher Suites for Transport Layer Security (TLS)";
+  }
+
+  identity TLS_DHE_PSK_WITH_AES_256_CCM {
+    base cipher-suite-alg-base;
+    description
+      "Identity for the 'TLS_DHE_PSK_WITH_AES_256_CCM' algorithm.";
+    reference
+      "RFC 6655:
+         AES-CCM Cipher Suites for Transport Layer Security (TLS)";
+  }
+
+  identity TLS_PSK_WITH_AES_128_CCM_8 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-WITH-AES-256-CCM-8";
+      "Identity for the 'TLS_PSK_WITH_AES_128_CCM_8' algorithm.";
     reference
       "RFC 6655:
-         AES-CCM Cipher Suites for TLS";
+         AES-CCM Cipher Suites for Transport Layer Security (TLS)";
   }
 
-  identity tls-psk-dhe-with-aes-128-ccm-8 {
+  identity TLS_PSK_WITH_AES_256_CCM_8 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-DHE-WITH-AES-128-CCM-8";
+      "Identity for the 'TLS_PSK_WITH_AES_256_CCM_8' algorithm.";
     reference
       "RFC 6655:
-         AES-CCM Cipher Suites for TLS";
+         AES-CCM Cipher Suites for Transport Layer Security (TLS)";
   }
 
-  identity tls-psk-dhe-with-aes-256-ccm-8 {
+  identity TLS_PSK_DHE_WITH_AES_128_CCM_8 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-DHE-WITH-AES-256-CCM-8";
+      "Identity for the 'TLS_PSK_DHE_WITH_AES_128_CCM_8' algorithm.";
     reference
       "RFC 6655:
-         AES-CCM Cipher Suites for TLS";
+         AES-CCM Cipher Suites for Transport Layer Security (TLS)";
   }
 
-  identity tls-ecdhe-ecdsa-with-aes-128-ccm {
+  identity TLS_PSK_DHE_WITH_AES_256_CCM_8 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-ECDSA-WITH-AES-128-CCM";
+      "Identity for the 'TLS_PSK_DHE_WITH_AES_256_CCM_8' algorithm.";
+    reference
+      "RFC 6655:
+         AES-CCM Cipher Suites for Transport Layer Security (TLS)";
+  }
+
+  identity TLS_ECDHE_ECDSA_WITH_AES_128_CCM {
+    base cipher-suite-alg-base;
+    status deprecated;
+    description
+      "Identity for the 'TLS_ECDHE_ECDSA_WITH_AES_128_CCM' algorithm.";
     reference
       "RFC 7251:
-         AES-CCM ECC Cipher Suites for TLS";
+         AES-CCM Elliptic Curve Cryptography (ECC) Cipher Suites for TLS";
   }
 
-  identity tls-ecdhe-ecdsa-with-aes-256-ccm {
+  identity TLS_ECDHE_ECDSA_WITH_AES_256_CCM {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-ECDSA-WITH-AES-256-CCM";
+      "Identity for the 'TLS_ECDHE_ECDSA_WITH_AES_256_CCM' algorithm.";
     reference
       "RFC 7251:
-         AES-CCM ECC Cipher Suites for TLS";
+         AES-CCM Elliptic Curve Cryptography (ECC) Cipher Suites for TLS";
   }
 
-  identity tls-ecdhe-ecdsa-with-aes-128-ccm-8 {
+  identity TLS_ECDHE_ECDSA_WITH_AES_128_CCM_8 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-ECDSA-WITH-AES-128-CCM-8";
+      "Identity for the 'TLS_ECDHE_ECDSA_WITH_AES_128_CCM_8' algorithm.";
     reference
       "RFC 7251:
-         AES-CCM ECC Cipher Suites for TLS";
+         AES-CCM Elliptic Curve Cryptography (ECC) Cipher Suites for TLS";
   }
 
-  identity tls-ecdhe-ecdsa-with-aes-256-ccm-8 {
+  identity TLS_ECDHE_ECDSA_WITH_AES_256_CCM_8 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-ECDSA-WITH-AES-256-CCM-8";
+      "Identity for the 'TLS_ECDHE_ECDSA_WITH_AES_256_CCM_8' algorithm.";
     reference
       "RFC 7251:
-         AES-CCM ECC Cipher Suites for TLS";
+         AES-CCM Elliptic Curve Cryptography (ECC) Cipher Suites for TLS";
   }
 
-  identity tls-eccpwd-with-aes-128-gcm-sha256 {
+  identity TLS_ECCPWD_WITH_AES_128_GCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECCPWD-WITH-AES-128-GCM-SHA256";
+      "Identity for the 'TLS_ECCPWD_WITH_AES_128_GCM_SHA256' algorithm.";
     reference
       "RFC 8492:
-         Secure Password Ciphersuites for
-         Transport Layer Security (TLS)";
+         Secure Password Ciphersuites for Transport Layer Security (TLS)";
   }
 
-  identity tls-eccpwd-with-aes-256-gcm-sha384 {
+  identity TLS_ECCPWD_WITH_AES_256_GCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECCPWD-WITH-AES-256-GCM-SHA384";
+      "Identity for the 'TLS_ECCPWD_WITH_AES_256_GCM_SHA384' algorithm.";
     reference
       "RFC 8492:
-         Secure Password Ciphersuites for
-         Transport Layer Security (TLS)";
+         Secure Password Ciphersuites for Transport Layer Security (TLS)";
   }
 
-  identity tls-eccpwd-with-aes-128-ccm-sha256 {
+  identity TLS_ECCPWD_WITH_AES_128_CCM_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECCPWD-WITH-AES-128-CCM-SHA256";
+      "Identity for the 'TLS_ECCPWD_WITH_AES_128_CCM_SHA256' algorithm.";
     reference
       "RFC 8492:
-         Secure Password Ciphersuites for
-         Transport Layer Security (TLS)";
+         Secure Password Ciphersuites for Transport Layer Security (TLS)";
   }
 
-  identity tls-eccpwd-with-aes-256-ccm-sha384 {
+  identity TLS_ECCPWD_WITH_AES_256_CCM_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECCPWD-WITH-AES-256-CCM-SHA384";
+      "Identity for the 'TLS_ECCPWD_WITH_AES_256_CCM_SHA384' algorithm.";
     reference
       "RFC 8492:
-         Secure Password Ciphersuites for
-         Transport Layer Security (TLS)";
+         Secure Password Ciphersuites for Transport Layer Security (TLS)";
   }
 
-  identity tls-sha256-sha256 {
+  identity TLS_SHA256_SHA256 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-SHA256-SHA256";
+      "Identity for the 'TLS_SHA256_SHA256' algorithm.";
     reference
       "RFC 9150:
          TLS 1.3 Authentication and Integrity-Only Cipher Suites";
   }
 
-  identity tls-sha384-sha384 {
+  identity TLS_SHA384_SHA384 {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-SHA384-SHA384";
+      "Identity for the 'TLS_SHA384_SHA384' algorithm.";
     reference
       "RFC 9150:
          TLS 1.3 Authentication and Integrity-Only Cipher Suites";
   }
 
-  identity tls-gostr341112-256-with-kuznyechik-ctr-omac {
+  identity TLS_GOSTR341112_256_WITH_KUZNYECHIK_CTR_OMAC {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-GOSTR341112-256-WITH-KUZNYECHIK-CTR-OMAC";
+      "Identity for the 'TLS_GOSTR341112_256_WITH_KUZNYECHIK_CTR_OMAC'
+algorithm.";
     reference
       "RFC 9189:
-         GOST Cipher Suites for Transport Layer Security (TLS)
-         Protocol Version 1.2";
+         GOST Cipher Suites for Transport Layer Security (TLS) Protocol Version
+         1.2";
   }
 
-  identity tls-gostr341112-256-with-magma-ctr-omac {
+  identity TLS_GOSTR341112_256_WITH_MAGMA_CTR_OMAC {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-GOSTR341112-256-WITH-MAGMA-CTR-OMAC";
+      "Identity for the 'TLS_GOSTR341112_256_WITH_MAGMA_CTR_OMAC' algorithm.";
     reference
       "RFC 9189:
-         GOST Cipher Suites for Transport Layer Security (TLS)
-         Protocol Version 1.2";
+         GOST Cipher Suites for Transport Layer Security (TLS) Protocol Version
+         1.2";
   }
 
-  identity tls-gostr341112-256-with-28147-cnt-imit {
+  identity TLS_GOSTR341112_256_WITH_28147_CNT_IMIT {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-GOSTR341112-256-WITH-28147-CNT-IMIT";
+      "Identity for the 'TLS_GOSTR341112_256_WITH_28147_CNT_IMIT' algorithm.";
     reference
       "RFC 9189:
-         GOST Cipher Suites for Transport Layer Security (TLS)
-         Protocol Version 1.2";
+         GOST Cipher Suites for Transport Layer Security (TLS) Protocol Version
+         1.2";
   }
 
-  identity tls-ecdhe-rsa-with-chacha20-poly1305-sha256 {
-    base cipher-suite-alg-base;
-    description
-      "TLS-ECDHE-RSA-WITH-CHACHA20-POLY1305-SHA256";
-    reference
-      "RFC 7905:
-         ChaCha20-Poly1305 Cipher Suites for
-         Transport Layer Security (TLS)";
-  }
-
-  identity tls-ecdhe-ecdsa-with-chacha20-poly1305-sha256 {
-    base cipher-suite-alg-base;
-    description
-      "TLS-ECDHE-ECDSA-WITH-CHACHA20-POLY1305-SHA256";
-    reference
-      "RFC 7905:
-         ChaCha20-Poly1305 Cipher Suites for
-         Transport Layer Security (TLS)";
-  }
-
-  identity tls-dhe-rsa-with-chacha20-poly1305-sha256 {
-    base cipher-suite-alg-base;
-    description
-      "TLS-DHE-RSA-WITH-CHACHA20-POLY1305-SHA256";
-    reference
-      "RFC 7905:
-         ChaCha20-Poly1305 Cipher Suites for
-         Transport Layer Security (TLS)";
-  }
-
-  identity tls-psk-with-chacha20-poly1305-sha256 {
+  identity TLS_GOSTR341112_256_WITH_KUZNYECHIK_MGM_L {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-PSK-WITH-CHACHA20-POLY1305-SHA256";
+      "Identity for the 'TLS_GOSTR341112_256_WITH_KUZNYECHIK_MGM_L'
+algorithm.";
     reference
-      "RFC 7905:
-         ChaCha20-Poly1305 Cipher Suites for
-         Transport Layer Security (TLS)";
+      "RFC 9367:
+         GOST Cipher Suites for Transport Layer Security (TLS) Protocol Version
+         1.3";
   }
 
-  identity tls-ecdhe-psk-with-chacha20-poly1305-sha256 {
-    base cipher-suite-alg-base;
-    description
-      "TLS-ECDHE-PSK-WITH-CHACHA20-POLY1305-SHA256";
-    reference
-      "RFC 7905:
-         ChaCha20-Poly1305 Cipher Suites for
-         Transport Layer Security (TLS)";
-  }
-
-  identity tls-dhe-psk-with-chacha20-poly1305-sha256 {
-    base cipher-suite-alg-base;
-    description
-      "TLS-DHE-PSK-WITH-CHACHA20-POLY1305-SHA256";
-    reference
-      "RFC 7905:
-         ChaCha20-Poly1305 Cipher Suites for
-         Transport Layer Security (TLS)";
-  }
-
-  identity tls-rsa-psk-with-chacha20-poly1305-sha256 {
+  identity TLS_GOSTR341112_256_WITH_MAGMA_MGM_L {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-RSA-PSK-WITH-CHACHA20-POLY1305-SHA256";
+      "Identity for the 'TLS_GOSTR341112_256_WITH_MAGMA_MGM_L' algorithm.";
     reference
-      "RFC 7905:
-         ChaCha20-Poly1305 Cipher Suites for
-         Transport Layer Security (TLS)";
+      "RFC 9367:
+         GOST Cipher Suites for Transport Layer Security (TLS) Protocol Version
+         1.3";
   }
 
-  identity tls-ecdhe-psk-with-aes-128-gcm-sha256 {
-    base cipher-suite-alg-base;
-    description
-      "TLS-ECDHE-PSK-WITH-AES-128-GCM-SHA256";
-    reference
-      "RFC 8442:
-         ECDHE_PSK with AES-GCM and AES-CCM Cipher Suites";
-  }
-
-  identity tls-ecdhe-psk-with-aes-256-gcm-sha384 {
-    base cipher-suite-alg-base;
-    description
-      "TLS-ECDHE-PSK-WITH-AES-256-GCM-SHA384";
-    reference
-      "RFC 8442:
-         ECDHE_PSK with AES-GCM and AES-CCM Cipher Suites";
-  }
-
-  identity tls-ecdhe-psk-with-aes-128-ccm-8-sha256 {
+  identity TLS_GOSTR341112_256_WITH_KUZNYECHIK_MGM_S {
     base cipher-suite-alg-base;
     status deprecated;
     description
-      "TLS-ECDHE-PSK-WITH-AES-128-CCM-8-SHA256";
+      "Identity for the 'TLS_GOSTR341112_256_WITH_KUZNYECHIK_MGM_S'
+algorithm.";
     reference
-      "RFC 8442:
-         ECDHE_PSK with AES-GCM and AES-CCM Cipher Suites";
+      "RFC 9367:
+         GOST Cipher Suites for Transport Layer Security (TLS) Protocol Version
+         1.3";
   }
 
-  identity tls-ecdhe-psk-with-aes-128-ccm-sha256 {
+  identity TLS_GOSTR341112_256_WITH_MAGMA_MGM_S {
+    base cipher-suite-alg-base;
+    status deprecated;
+    description
+      "Identity for the 'TLS_GOSTR341112_256_WITH_MAGMA_MGM_S' algorithm.";
+    reference
+      "RFC 9367:
+         GOST Cipher Suites for Transport Layer Security (TLS) Protocol Version
+         1.3";
+  }
+
+  identity TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 {
     base cipher-suite-alg-base;
     description
-      "TLS-ECDHE-PSK-WITH-AES-128-CCM-SHA256";
+      "Identity for the 'TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256'
+algorithm.";
+    reference
+      "RFC 7905:
+         ChaCha20-Poly1305 Cipher Suites for Transport Layer Security (TLS)";
+  }
+
+  identity TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 {
+    base cipher-suite-alg-base;
+    description
+      "Identity for the 'TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256'
+algorithm.";
+    reference
+      "RFC 7905:
+         ChaCha20-Poly1305 Cipher Suites for Transport Layer Security (TLS)";
+  }
+
+  identity TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256 {
+    base cipher-suite-alg-base;
+    description
+      "Identity for the 'TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256'
+algorithm.";
+    reference
+      "RFC 7905:
+         ChaCha20-Poly1305 Cipher Suites for Transport Layer Security (TLS)";
+  }
+
+  identity TLS_PSK_WITH_CHACHA20_POLY1305_SHA256 {
+    base cipher-suite-alg-base;
+    status deprecated;
+    description
+      "Identity for the 'TLS_PSK_WITH_CHACHA20_POLY1305_SHA256' algorithm.";
+    reference
+      "RFC 7905:
+         ChaCha20-Poly1305 Cipher Suites for Transport Layer Security (TLS)";
+  }
+
+  identity TLS_ECDHE_PSK_WITH_CHACHA20_POLY1305_SHA256 {
+    base cipher-suite-alg-base;
+    description
+      "Identity for the 'TLS_ECDHE_PSK_WITH_CHACHA20_POLY1305_SHA256'
+algorithm.";
+    reference
+      "RFC 7905:
+         ChaCha20-Poly1305 Cipher Suites for Transport Layer Security (TLS)";
+  }
+
+  identity TLS_DHE_PSK_WITH_CHACHA20_POLY1305_SHA256 {
+    base cipher-suite-alg-base;
+    description
+      "Identity for the 'TLS_DHE_PSK_WITH_CHACHA20_POLY1305_SHA256'
+algorithm.";
+    reference
+      "RFC 7905:
+         ChaCha20-Poly1305 Cipher Suites for Transport Layer Security (TLS)";
+  }
+
+  identity TLS_RSA_PSK_WITH_CHACHA20_POLY1305_SHA256 {
+    base cipher-suite-alg-base;
+    status deprecated;
+    description
+      "Identity for the 'TLS_RSA_PSK_WITH_CHACHA20_POLY1305_SHA256'
+algorithm.";
+    reference
+      "RFC 7905:
+         ChaCha20-Poly1305 Cipher Suites for Transport Layer Security (TLS)";
+  }
+
+  identity TLS_ECDHE_PSK_WITH_AES_128_GCM_SHA256 {
+    base cipher-suite-alg-base;
+    description
+      "Identity for the 'TLS_ECDHE_PSK_WITH_AES_128_GCM_SHA256' algorithm.";
     reference
       "RFC 8442:
-         ECDHE_PSK with AES-GCM and AES-CCM Cipher Suites";
+         ECDHE_PSK with AES-GCM and AES-CCM Cipher Suites for TLS 1.2 and DTLS
+         1.2";
+  }
+
+  identity TLS_ECDHE_PSK_WITH_AES_256_GCM_SHA384 {
+    base cipher-suite-alg-base;
+    description
+      "Identity for the 'TLS_ECDHE_PSK_WITH_AES_256_GCM_SHA384' algorithm.";
+    reference
+      "RFC 8442:
+         ECDHE_PSK with AES-GCM and AES-CCM Cipher Suites for TLS 1.2 and DTLS
+         1.2";
+  }
+
+  identity TLS_ECDHE_PSK_WITH_AES_128_CCM_8_SHA256 {
+    base cipher-suite-alg-base;
+    status deprecated;
+    description
+      "Identity for the 'TLS_ECDHE_PSK_WITH_AES_128_CCM_8_SHA256' algorithm.";
+    reference
+      "RFC 8442:
+         ECDHE_PSK with AES-GCM and AES-CCM Cipher Suites for TLS 1.2 and DTLS
+         1.2";
+  }
+
+  identity TLS_ECDHE_PSK_WITH_AES_128_CCM_SHA256 {
+    base cipher-suite-alg-base;
+    description
+      "Identity for the 'TLS_ECDHE_PSK_WITH_AES_128_CCM_SHA256' algorithm.";
+    reference
+      "RFC 8442:
+         ECDHE_PSK with AES-GCM and AES-CCM Cipher Suites for TLS 1.2 and DTLS
+         1.2";
   }
 
 }

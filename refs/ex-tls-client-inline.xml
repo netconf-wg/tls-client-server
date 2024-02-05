@@ -25,7 +25,7 @@
         <tls12-psk>
             <inline-definition>
                 <key-format>ct:octet-string-key-format</key-format>
-                <cleartext-key>BASE64VALUE=</cleartext-key>
+                <cleartext-symmetric-key>BASE64VALUE=</cleartext-symmetric-key>
             </inline-definition>
             <id>example_id_string</id>
         </tls12-psk>
@@ -34,7 +34,7 @@
         <tls13-epsk>
             <inline-definition>
                 <key-format>ct:octet-string-key-format</key-format>
-                <cleartext-key>BASE64VALUE=</cleartext-key>
+                <cleartext-symmetric-key>BASE64VALUE=</cleartext-symmetric-key>
             </inline-definition>
             <external-identity>example_external_id</external-identity>
             <hash>sha-256</hash>
