@@ -1,6 +1,7 @@
 import re
 import csv
 import requests
+import textwrap
 import requests_cache
 from io import StringIO
 from datetime import datetime
@@ -63,23 +64,10 @@ module iana-tls-HNAME-algs {
       "RFC FFFF: YANG Groupings for TLS Clients and TLS Servers";
   }
 
-  // Typedefs
-
-  typedef HNAME-algorithm-ref {
-    type identityref {
-      base "HNAME-alg-base";
-    }
+  typedef tls-HNAME-algorithm {
     description
-      "A reference to a TLS SNAME algorithm identifier.";
-  }
-
-
-  // Identities
-
-  identity HNAME-alg-base {
-    description
-      "Base identity for TLS SNAME algorithms.";
-  }
+      "An enumeration for TLS SNAME algorithms.";
+    type enumeration {
 """
     # Replacements
     rep = {
@@ -105,13 +93,6 @@ def create_module_body(module, f):
     r = requests.get(module["csv_url"])
     assert r.status_code == 200, "Could not get " + module["csv_url"]
 
-#    # Ascertain the first CSV column's name
-#    with StringIO(r.text) as csv_file:
-#        csv_reader = csv.reader(csv_file)
-#        for row in csv_reader:
-#            first_colname = row[0]
-#            break
-
     # Parse each CSV line
     with StringIO(r.text) as csv_file:
         csv_reader = csv.DictReader(csv_file)
@@ -125,7 +106,7 @@ def create_module_body(module, f):
             if row["Description"].startswith("Reserved"):
                 continue
 
-            # Ensure this is 
+            # Ensure this is the TLS line
             assert row["Description"].startswith("TLS_"), "Unrecognized description: '" + row["Description"] + "'"
 
             # Set the 'refs' and 'titles' lists
@@ -184,36 +165,42 @@ def create_module_body(module, f):
                     else:
                         raise Exception(f'ref missing: {row}')
 
-            # Write out the identity statement
-            f.write('\n')
-            f.write(f'  identity {row["Description"]} {{\n')
-            f.write(f'    base {module["hypenated_name"]}-alg-base;\n')
+            # Write out the enum
+            f.write(f'      enum {row["Description"]} {{\n');
             if row["Recommended"] == 'N':
-                f.write(f'    status deprecated;\n')
-            f.write(f'    description\n')
-            f.write(f'      "Identity for the \'{row["Description"]}\' algorithm.";\n')
-            f.write( '    reference\n')
-            f.write( '      "')
+                f.write(f'        status deprecated;\n')
+            f.write(f'        description\n')
+            description = f'          "Enumeration for the \'{row["Description"]}\' algorithm.";'
+            description = textwrap.fill(description, width=69, subsequent_indent="           ")
+            f.write(f'{description}\n')
+            f.write('        reference\n')
+            f.write('          "')
             if row["Reference"] == "":
                 f.write('Missing in IANA registry.')
             else:
                 ref_len = len(refs)
                 for i in range(ref_len):
                     ref = refs[i]
-                    title = titles[i]
                     f.write(f'{ref}:\n')
-                    f.write(f'         {title}')
+                    title = "             " + titles[i]
+                    if i == ref_len - 1:
+                        title += '";'
+                    title = textwrap.fill(title, width=69, subsequent_indent="             ")
+                    f.write(f'{title}')
                     if i != ref_len - 1:
-                        f.write('\n       ')
-            f.write('";\n')
-            f.write('  }\n')
+                        f.write('\n           ')
+            f.write('\n')
+            f.write('      }\n')
 
 
 
 def create_module_end(f):
 
-    # Write module's closing brace
-    f.write('\n}\n')
+    # Close out the enumeration, typedef, and module
+    f.write("    }\n")
+    f.write("  }\n")
+    f.write('\n')
+    f.write('}\n')
 
 
 def create_module(module):

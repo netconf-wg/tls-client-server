@@ -33,10 +33,15 @@
     <area>Operations</area>
     <workgroup>NETCONF Working Group</workgroup>
     <abstract>
-      <t>This document defines three YANG 1.1
-        modules: the first defines features and groupings common to both TLS
-        clients and TLS servers, the second defines a grouping for a generic
-        TLS client, and the third defines a grouping for a generic TLS server.</t>
+      <t>This document presents four YANG 1.1 modules. Three "IETF" modules,
+        and one supporting "IANA" module.</t>
+      <t>The three IETF modules are: ietf-tls-common, ietf-tls-client, and 
+        ietf-tls-server.  The "ietf-tls-client" and "ietf-tls-server" modules
+        are the primary productions of this work, supporting the configuration
+        and monitoring of TLS clients and servers.</t> 
+      <t>The IANA module is: iana-tls-cipher-suite-algs.  This module 
+        defines YANG enumerations providing support for an IANA-maintained
+        algorithm registry.</t>
     </abstract>
     <note title="Editorial Note (To be removed by RFC Editor)">
       <t>This draft contains placeholder values that need to be replaced
@@ -76,7 +81,7 @@
           what looks ugly and ask the authors to make the adjustment.</t>
       <t>The following Appendix sections are to be removed prior to publication:
         <list style="symbols">
-          <li><xref target="iana-modules"/>.  YANG Modules for IANA</li>
+          <li><xref target="tls-cipher-algs-model"/>.  Initial Module for the "TLS Cipher Suites" Registry</li>
           <li><xref target="change-log"/>.  Change Log</li>
         </list>
       </t>
@@ -86,24 +91,31 @@
   <middle>
     <section title="Introduction">
 
-      <t>This document defines four YANG 1.1 <xref target="RFC7950"/>
+      <t>This document presents four YANG 1.1 <xref target="RFC7950"/>
           modules. Three "IETF" modules and one "IANA" module.</t> 
-        <t>The three IETF modules include:</t>
-      <ul>
-        <li>ietf-tls-common (<xref target="tls-common-model"/>)</li>
-        <li>ietf-tls-client (<xref target="tls-client-model"/>)</li>
-        <li>ietf-tls-server (<xref target="tls-server-model"/>)</li>
-      </ul>
-      <t>The one IANA module includes:</t>
-      <ul>
-        <li>iana-tls-encryption-algs (<xref target="tls-cipher-algs-model"/>)</li>
-      </ul>
+
+      <t>The three IETF modules are ietf-tls-common (<xref target="tls-common-model"/>),
+        ietf-tls-client (<xref target="tls-client-model"/>), and ietf-tls-server
+        (<xref target="tls-server-model"/>).  The "ietf-tls-client" and
+        "ietf-tls-server" modules are the primary productions of this work,
+        supporting the configuration and monitoring of TLS clients and servers.</t> 
+
+      <t>The IANA module is iana-tls-cipher-suite-algs (<xref target="tls-cipher-algs-model"/>).
+        This module defines YANG enumerations providing support for an IANA-maintained
+        algorithm registry.</t>
+
+      <t>This document only defines that the IANA module exists, 
+        and presents a script in <xref target="iana-script"/> that IANA
+        may use to generate the YANG module.  This document does not
+        publish initial version of this module.  IANA publishes
+        this module.</t>
+
 
       <section title="Regarding the IETF Modules">
   
         <t>The three IETF modules define features and groupings to model "generic" TLS
           clients and TLS servers, where "generic" should be interpreted as "least
-          common denominator" more so than "complete."  Basic TLS protocol support
+          common denominator" rather than "complete."  Basic TLS protocol support
           is afforded by these modules, leaving configuration of advance features
           to augmentations made by consuming modules.</t>
 
@@ -138,7 +150,8 @@ INSERT_TEXT_FROM_FILE(../common-intro-snippet.xml,150)
           described in <xref target="I-D.ietf-netconf-trust-anchors"/> and
           <xref target="I-D.ietf-netconf-keystore"/>, trust anchors and keys
           installed during manufacturing are expected to appear
-          in &lt;operational&gt;.</t>
+          in &lt;operational&gt; (<xref section="5.3" target="RFC8342"/>), and &lt;system&gt;
+          <xref target="I-D.ietf-netmod-system-config"/>, if implemented.</t>
       </section>
 
         <section title="Conventions">
@@ -667,7 +680,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
     </section>
 
     <section title="Security Considerations">
-      <section title='Template for the "iana-tls-cipher-suite-algs" Module'>
+      <section title='Considerations for the "iana-tls-cipher-suite-algs" Module'>
         <t>This section follows the template defined in <xref section="3.7.1" target="RFC8407"/>.</t>
         <t>The "iana-tls-cipher-suite-algs" YANG module defines a data model
           that is designed to be accessed via YANG based management
@@ -679,12 +692,11 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
           provides the means to restrict access for particular users to a
           pre-configured subset of all available protocol operations and
           content.</t>
-        <t>This YANG module defines YANG identities, for a public IANA-maintained
-          registry, and a single protocol-accessible read-only node for the subset
-          of those identities supported by a server.</t>
-        <t>YANG identities are not security-sensitive, as they are statically
+        <t>This YANG module defines YANG enumerations, for a public IANA-maintained
+          registry.</t>
+        <t>YANG enumerations are not security-sensitive, as they are statically
           defined in the publicly-accessible YANG module.  IANA MAY deprecate
-          and/or obsolete identities over time as needed to address security
+          and/or obsolete enumerations over time as needed to address security
           issues found in the algorithms.</t>
         <t>The protocol-accessible read-only node for the algorithms supported
           by a server is mildly sensitive, but not to the extent that special
@@ -695,7 +707,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
           is not provided here.</t>
       </section>
 
-      <section title="Template for the &quot;ietf-tls-common&quot; YANG Module">
+      <section title="Considerations for the &quot;ietf-tls-common&quot; YANG Module">
         <t>This section follows the template defined in <xref section="3.7.1" target="RFC8407"/>.</t>
 
         <t>The "ietf-tls-common" YANG module defines "grouping" statements
@@ -741,7 +753,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
           and thus the security consideration for such is not provided here.</t>
       </section>
 
-      <section title="Template for the &quot;ietf-tls-client&quot; YANG Module">
+      <section title="Considerations for the &quot;ietf-tls-client&quot; YANG Module">
         <t>This section follows the template defined in <xref section="3.7.1" target="RFC8407"/>.</t>
 
         <t>The "ietf-tls-client" YANG module defines "grouping" statements
@@ -790,7 +802,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
           and thus the security consideration for such is not provided here.</t>
       </section>
 
-      <section title="Template for the &quot;ietf-tls-server&quot; YANG Module">
+      <section title="Considerations for the &quot;ietf-tls-server&quot; YANG Module">
         <t>This section follows the template defined in <xref section="3.7.1" target="RFC8407"/>.</t>
 
         <t>The "ietf-tls-server" YANG module defines "grouping" statements
@@ -897,24 +909,51 @@ reference:    RFC FFFF
           </figure></t>
       </section>
 
-      <section title='The "iana-tls-cipher-suite-algs" Module'>
-        <t>IANA is requested to maintain a YANG module called "iana-tls-cipher-suite-algs"
-          that shadows the "TLS Cipher Suites" sub-registry of the
-          "Transport Layer Security (TLS) Parameters" registry <xref target="IANA-CIPHER-ALGS"/>.</t>
-        <t>This registry defines a YANG identity for each cipher suite algorithm, and a "base"
-          identity from which all of the other identities are derived.  Identities are chosen
-          over enumerations for extensibility reasons.</t>
+      <section title='Considerations for the "iana-tls-cipher-suite-algs" Module'>
+        <t>This section follows the template defined in <xref section="4.30.3.1"
+          target="I-D.ietf-netmod-rfc8407bis"/>.</t>
+        <t>This document presents a script (see <xref target="iana-script"/>) for
+          IANA to use to generate the IANA-maintained "iana-tls-cipher-suite-algs" YANG module.
+          The most recent version of the YANG module is available from the "YANG Parameters"
+          registry <xref target="IANA-YANG-PARAMETERS"/>.</t>
+        <t>IANA is requested to add the following note to the registry:</t>
+        <blockquote>New values must not be directly added to the "iana-tls-cipher-suite-algs"
+          YANG module.  They must instead be added to the "TLS Cipher Suites" sub-registry of
+          the "Transport Layer Security (TLS) Parameters" registry <xref target="IANA-CIPHER-ALGS"/>.</blockquote>
+        <t>When a value is added to the "TLS Cipher Suites" sub-registry, a new "enum"
+         statement must be added to the "iana-tls-cipher-suite-algs" YANG module.  The
+          "enum" statement, and sub-statements thereof, should be defined as follows:</t>
+        <dl newline="true">
+          <dt>enum</dt>
+          <dd>Replicates a name from the registry.</dd>
+          <dt>value</dt> 
+          <dd>Contains the decimal value of the IANA-assigned value.</dd>
+          <dt>status</dt>
+          <dd>Include only if a registration has been deprecated or obsoleted.
+            An IANA "Recommended" maps to YANG status "deprecated".  Since the registry
+            is unable to express a logical "MUST NOT" recommendation, there is no
+            mapping to YANG status "obsolete", which is unfortunate given
+            <eref target="https://datatracker.ietf.org/doc/status-change-tls-des-idea-ciphers-to-historic">Moving
+            single-DES and IDEA TLS ciphersuites to Historic</eref> .</dd>
+          <dt>description</dt>
+          <dd>Contains "Enumeration for the 'TLS_FOO' algorithm.", where "TLS_FOO" is
+            a placeholder for the algorithm's name (e.g., "TLS_PSK_WITH_AES_256_CBC_SHA").</dd>
+          <dt>reference</dt>
+          <dd>Replicates the reference(s) from the registry with the title of the
+            document(s) added.</dd>
+        </dl>
+        <t>Unassigned or reserved values are not present in the module.</t>
+        <t>When the "iana-tls-cipher-suite-algs" YANG module is updated, a
+          new "revision" statement with a unique revision date must be added
+          in front of the existing revision statements.  The "revision"
+          statement must have a "reference" substatement that points
+          to the document defining the registry update that resulted in this change.</t>
+        <t>IANA is requested to add the following note to the "TLS Cipher Suites"
+          sub-registry of the "Transport Layer Security (TLS) Parameters"
+          registry <xref target="IANA-CIPHER-ALGS"/>.</t>
+        <blockquote>When this registry is modified, the YANG module "iana-tls-cipher-suite-algs"
+          <xref target="IANA-YANG-PARAMETERS"/> must be updated as defined in RFC FFFF.</blockquote>
         <t>An initial version of this module can be found in <xref target="tls-cipher-algs-model"/>.</t>
-        <ul>
-          <li>Please note that this module was created on June 16th, 2022, and that additional
-            entries may have been added in the interim before this document's publication.
-            If this is that case, IANA may either publish just an updated module containing
-            the new entries, or publish the initial module as is immediately followed by a
-            "revision" containing the additional algorithm names.</li>
-          <li>Please also note that the "status" statement has been set to "deprecated", if the
-            "RECOMMENDED" column in the registry had the value 'N', and to "obsolete", if
-            the "References" column included <eref target="https://datatracker.ietf.org/doc/status-change-tls-des-idea-ciphers-to-historic">Moving single-DES and IDEA TLS ciphersuites to Historic</eref> reference.</li>
-        </ul>
       </section>
 
     </section>
@@ -977,6 +1016,8 @@ reference:    RFC FFFF
       <xi:include href="https://datatracker.ietf.org/doc/bibxml3/reference.I-D.ietf-netconf-http-client-server.xml"/>
       <xi:include href="https://datatracker.ietf.org/doc/bibxml3/reference.I-D.ietf-netconf-netconf-client-server.xml"/>
       <xi:include href="https://datatracker.ietf.org/doc/bibxml3/reference.I-D.ietf-netconf-restconf-client-server.xml"/>
+      <xi:include href="https://datatracker.ietf.org/doc/bibxml3/reference.I-D.ietf-netmod-system-config.xml"/>
+      <xi:include href="https://datatracker.ietf.org/doc/bibxml3/reference.I-D.ietf-netmod-rfc8407bis.xml"/>
 
       <reference anchor="IANA-CIPHER-ALGS" target="https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-4">
         <front>
@@ -985,69 +1026,36 @@ reference:    RFC FFFF
         </front>
       </reference>
 
+      <reference anchor="IANA-YANG-PARAMETERS" target="https://www.iana.org/assignments/yang-parameters">
+        <front>
+          <title>YANG Parameters</title>
+          <author>
+            <organization/>
+          </author>
+          <date>n.d.</date>
+        </front>
+      </reference>
+
     </references>
 
-    <section title='YANG Modules for IANA' removeInRFC="true" anchor="iana-modules">
+    <section title='Script to Generate IANA-Maintained YANG Modules' anchor="iana-script">
       <t>The module contained in this section was generated by the following script.
-        Run the script using the command `python gen-idenities.py`, to produce one
+        Run the script using the command `python gen-yang-module.py`, to produce one
         YANG module file in the current directory.</t>
+      <t>Be aware that the script does not attempt to copy the "revision" statements
+        from the previous/current YANG module.  Copying the revision statements must
+        be done manually.</t>
       <t>
         <figure>
-          <preamble>&lt;CODE BEGINS&gt; file "gen-identities.py"</preamble>
+          <preamble>&lt;CODE BEGINS&gt; file "gen-yang-module.py"</preamble>
           <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(gen-identities.py)
+INSERT_TEXT_FROM_FILE(gen-yang-module.py)
 ]]></artwork> 
           <postamble>&lt;CODE ENDS&gt;</postamble>
         </figure>
       </t>    
 
       <section title='Initial Module for the "TLS Cipher Suites" Registry' anchor="tls-cipher-algs-model">
-        <section title="Data Model Overview">
-          <t>This section provides an overview of the "iana-tls-cipher-suite-algs" module
-            in terms of its identities and protocol-accessible nodes.</t>
-          <section title="Identities" toc="exclude">
-            <t>The following diagram lists the base "identity" statements defined in the
-              module, of which there is just one, and illustrates that all the derived identity
-              statements are generated from the associated IANA-maintained registry
-              <xref target="IANA-CIPHER-ALGS"/>.</t>
-            <t>
-              <figure>
-                <artwork><![CDATA[
-Identities:
-  +-- cipher-suite-alg-base
-    +-- <identity-name from IANA registry>
-]]></artwork>
-              </figure>
-            </t>
-            <!--<aside>-->
-              <t>The diagram above uses syntax that is similar to but not
-                defined in <xref target="RFC8340"/>.</t>
-            <!--</aside>-->
-          </section>
-          <section title="Typedefs" toc="exclude">
-            <t>The following diagram illustrates the "typedef" statements
-              defined in the "iana-tls-cipher-suite-algs" module:</t>
-            <t>
-              <figure>
-               <artwork><![CDATA[
-Typedefs:
-  identityref
-    +-- cipher-suite-algorithm-ref
-]]></artwork>
-              </figure>
-            </t>
-            <!--<aside>-->
-              <t>The diagram above uses syntax that is similar to but not
-                defined in <xref target="RFC8340"/>.</t>
-            <!--</aside>-->
-            <t>Comments:</t>
-            <ul>
-              <li>The typedef defined in the "iana-tls-cipher-suite-algs" module
-                extends the "identityref" type defined in <xref target="RFC7950"/>.</li>
-            </ul>
-          </section>
-        </section>
-        <section title="YANG Module">
           <t>Following are the complete contents to the initial IANA-maintained YANG module.
             Please note that the date "YYYY-MM-DD" reflects the day on which the extraction
             occurred.  Applications SHOULD use the IANA-maintained module, not the module
@@ -1072,10 +1080,9 @@ INSERT_TEXT_FROM_FILE(iana-tls-cipher-suite-algs@YYYY-MM-DD.yang)
             </figure>
           </t>
         </section>
-      </section>
     </section>
 
-    <section title="Change Log" removeInRFC="true" anchor="change-log">
+    <section title="Change Log" anchor="change-log">
       <section title="00 to 01">
         <t><list style="symbols">
           <t>Noted that '0.0.0.0' and '::' might have special meanings.</t>
@@ -1437,24 +1444,39 @@ INSERT_TEXT_FROM_FILE(iana-tls-cipher-suite-algs@YYYY-MM-DD.yang)
           </list>
         </t> 
       </section>
-        <section title="35 to 36">
-          <t>  
-            <list style="symbols">
-              <t>Complete tls10/tls11 removal and update Jeff's email.</t>
-            </list>
-          </t> 
-        </section>
-        <section title="36 to 37">
-          <t>  
-            <list style="symbols">
-              <t>Addresses 1st-round of IESG reviews.</t>
-            </list>
-          </t> 
-        </section>
+      <section title="35 to 36">
+        <t>  
+          <list style="symbols">
+            <t>Complete tls10/tls11 removal and update Jeff's email.</t>
+          </list>
+        </t> 
+      </section>
+      <section title="36 to 37">
+        <t>  
+          <list style="symbols">
+            <t>Addresses 1st-round of IESG reviews.</t>
+          </list>
+        </t> 
+      </section>
+      <section title="37 to 39">
+        <t>  
+          <list style="symbols">
+            <t>Addresses issues found in OpsDir review of the ssh-client-server draft.</t>
+            <t>Replaced identities with enums in the IANA module.</t>
+            <t>Add refs to where the 'operational' and 'system' datastores are defined.</t>
+            <t>Updated Introduction to read more like the Abstract</t>
+            <t>Updated Editor-notes to NOT remove the script (just remove the initial IANA module)</t>
+            <t>Renamed Security Considerations section s/Template for/Considerations for/</t>
+            <t>s/defines/presents/ in a few places.</t>
+            <t>Renamed script from 'gen-identities.py' to 'gen-yang-module.py'</t>
+            <t>Removed the removeInRFC="true" attribute in Appendix sections</t>
+          </list>
+        </t> 
+      </section>
     </section>
 
     <section title="Acknowledgements" numbered="no">
-      <t>The authors would like to thank for following for lively discussions
+      <t>The authors would like to thank the following for lively discussions
         on list and in the halls (ordered by first name):
         Alan Luchuk,
         Andy Bierman,
@@ -1474,6 +1496,7 @@ INSERT_TEXT_FROM_FILE(iana-tls-cipher-suite-algs@YYYY-MM-DD.yang)
         Mehmet Ersue,
         Michal Vaško,
         Phil Shafer,
+        Qin Wu,
         Radek Krejci,
         Rob Wilton,
         Sean Turner,

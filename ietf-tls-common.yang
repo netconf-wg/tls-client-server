@@ -35,7 +35,7 @@ module ietf-tls-common {
     "This module defines a common features and groupings for
      Transport Layer Security (TLS).
 
-     Copyright (c) 2023 IETF Trust and the persons identified
+     Copyright (c) 2024 IETF Trust and the persons identified
      as authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with
@@ -181,9 +181,7 @@ module ietf-tls-common {
       description
         "Parameters regarding cipher suites.";
       leaf-list cipher-suite {
-        type identityref {
-          base tlscsa:cipher-suite-alg-base;
-        }
+        type tlscsa:tls-cipher-suite-algorithm;
         ordered-by user;
         description
           "Acceptable cipher suites in order of descending
@@ -211,7 +209,7 @@ module ietf-tls-common {
       "A container for a list of cipher suite algorithms supported
        by the server.";
     leaf-list supported-algorithm {
-      type tlscsa:cipher-suite-algorithm-ref;
+      type tlscsa:tls-cipher-suite-algorithm;
       description
         "A cipher suite algorithm supported by the server.";
     }
@@ -224,7 +222,7 @@ module ietf-tls-common {
        key using the specified key algorithm.";
     input {
       leaf algorithm {
-        type tlscsa:cipher-suite-algorithm-ref;
+        type tlscsa:tls-cipher-suite-algorithm;
         mandatory true;
         description
           "The cipher suite algorithm that the generated key is

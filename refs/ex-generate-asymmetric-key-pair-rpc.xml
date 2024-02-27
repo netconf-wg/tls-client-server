@@ -1,9 +1,8 @@
 <rpc message-id="101"
   xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
   <generate-asymmetric-key-pair
-    xmlns="urn:ietf:params:xml:ns:yang:ietf-tls-common"
-    xmlns:tlscsa="urn:ietf:params:xml:ns:yang:iana-tls-cipher-suite-algs">
-    <algorithm>tlscsa:TLS_ECDHE_PSK_WITH_AES_128_GCM_SHA256</algorithm>
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-tls-common">
+    <algorithm>TLS_ECDHE_PSK_WITH_AES_128_GCM_SHA256</algorithm>
     <num-bits>521</num-bits>
     <private-key-encoding>
       <encrypted>
