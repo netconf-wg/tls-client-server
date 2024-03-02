@@ -66,7 +66,6 @@ module ietf-tls-common {
   // Features
 
   feature tls12 {
-    status "deprecated";
     description
       "TLS Protocol Version 1.2 is supported. TLS 1.2 is obsolete
        and thus it is NOT RECOMMENDED to enable this feature.";
@@ -110,7 +109,6 @@ module ietf-tls-common {
   identity tls12 {
     if-feature "tls12";
     base tls-version-base;
-    status "deprecated";
     description
       "TLS Protocol Version 1.2.";
     reference
@@ -164,17 +162,21 @@ module ietf-tls-common {
     container tls-versions {
       description
         "Parameters regarding TLS versions.";
-      leaf-list tls-version {
+      leaf min {
         type identityref {
           base tls-version-base;
         }
-        ordered-by user;
         description
-          "Acceptable TLS protocol versions.
-
-           If this leaf-list is not configured (has zero elements)
-           the acceptable TLS protocol versions are implementation-
-           defined.";
+          "If not specified, then there is no configured
+           minimum version.";
+      }
+      leaf max {
+        type identityref {
+          base tls-version-base;
+        }
+        description
+          "If not specified, then there is no configured
+           maximum version.";
       }
     }
     container cipher-suites {

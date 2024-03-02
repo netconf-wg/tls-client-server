@@ -3,15 +3,14 @@
 
 <hello-params
    xmlns="urn:ietf:params:xml:ns:yang:ietf-tls-common"
-   xmlns:tlscmn="urn:ietf:params:xml:ns:yang:ietf-tls-common"
-   xmlns:tlscsa="urn:ietf:params:xml:ns:yang:iana-tls-cipher-suite-algs">
+   xmlns:tlscmn="urn:ietf:params:xml:ns:yang:ietf-tls-common">
   <tls-versions>
-    <tls-version>tlscmn:tls11</tls-version>
-    <tls-version>tlscmn:tls12</tls-version>
+    <min>tlscmn:tls12</min>
+    <max>tlscmn:tls13</max>
   </tls-versions>
   <cipher-suites>
-    <cipher-suite>tlscsa:tls-ecdhe-ecdsa-with-aes-256-cbc-sha</cipher-suite>
-    <cipher-suite>tlscsa:tls-dhe-rsa-with-aes-128-cbc-sha256</cipher-suite>
-    <cipher-suite>tlscsa:tls-rsa-with-3des-ede-cbc-sha</cipher-suite>
+    <cipher-suite>TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA</cipher-suite>
+    <cipher-suite>TLS_DHE_RSA_WITH_AES_128_CBC_SHA256</cipher-suite>
+    <cipher-suite>TLS_RSA_WITH_3DES_EDE_CBC_SHA</cipher-suite>
   </cipher-suites>
 </hello-params>

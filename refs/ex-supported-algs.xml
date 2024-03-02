@@ -1,15 +1,16 @@
 <supported-algorithms
-  xmlns="urn:ietf:params:xml:ns:yang:ietf-tls-common"
-  xmlns:tlscsa="urn:ietf:params:xml:ns:yang:iana-tls-cipher-suite-algs">
-  <supported-algorithm>tlscsa:tls-ecdhe-ecdsa-with-aes-256-cbc-sha</supported-algorithm>
-  <supported-algorithm>tlscsa:tls-dhe-rsa-with-aes-128-cbc-sha256</supported-algorithm>
-  <supported-algorithm>tlscsa:tls-rsa-with-3des-ede-cbc-sha</supported-algorithm>
-  <supported-algorithm>tlscsa:tls-ecdhe-psk-with-aes-256-gcm-sha384</supported-algorithm>
-  <supported-algorithm>tlscsa:tls-dhe-psk-with-chacha20-poly1305-sha256</supported-algorithm>
-  <supported-algorithm>tlscsa:tls-eccpwd-with-aes-256-gcm-sha384</supported-algorithm>
-  <supported-algorithm>tlscsa:tls-psk-with-aes-256-ccm</supported-algorithm>
-  <supported-algorithm>tlscsa:tls-dhe-psk-with-camellia-256-cbc-sha384</supported-algorithm>
-  <supported-algorithm>tlscsa:tls-ecdh-rsa-with-aes-256-cbc-sha384</supported-algorithm>
-  <supported-algorithm>tlscsa:tls-ecdh-rsa-with-3des-ede-cbc-sha</supported-algorithm>
-  <supported-algorithm>tlscsa:tls-dh-dss-with-aes-128-gcm-sha256</supported-algorithm>
+  xmlns="urn:ietf:params:xml:ns:yang:ietf-tls-common">
+  <supported-algorithm>TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA</supported-algorithm>
+  <supported-algorithm>TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384</supported-algorithm>
+  <supported-algorithm>TLS_DHE_RSA_WITH_AES_128_CBC_SHA256</supported-algorithm>
+  <supported-algorithm>TLS_RSA_WITH_3DES_EDE_CBC_SHA</supported-algorithm>
+  <supported-algorithm>TLS_ECDHE_PSK_WITH_AES_256_GCM_SHA384</supported-algorithm>
+  <supported-algorithm>TLS_DHE_PSK_WITH_CHACHA20_POLY1305_SHA256</supported-algorithm>
+  <supported-algorithm>TLS_ECCPWD_WITH_AES_256_GCM_SHA384</supported-algorithm>
+  <supported-algorithm>TLS_PSK_WITH_AES_256_CCM</supported-algorithm>
+  <supported-algorithm>TLS_PSK_WITH_AES_256_CCM_8</supported-algorithm>
+  <supported-algorithm>TLS_DHE_PSK_WITH_CAMELLIA_256_CBC_SHA384</supported-algorithm>
+  <supported-algorithm>TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384</supported-algorithm>
+  <supported-algorithm>TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA</supported-algorithm>
+  <supported-algorithm>TLS_DH_DSS_WITH_AES_128_GCM_SHA256</supported-algorithm>
 </supported-algorithms>

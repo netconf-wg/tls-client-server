@@ -33,8 +33,8 @@
     <area>Operations</area>
     <workgroup>NETCONF Working Group</workgroup>
     <abstract>
-      <t>This document presents four YANG 1.1 modules. Three "IETF" modules,
-        and one supporting "IANA" module.</t>
+      <t>This document presents four YANG 1.1 modules. Three IETF modules,
+        and one supporting IANA module.</t>
       <t>The three IETF modules are: ietf-tls-common, ietf-tls-client, and 
         ietf-tls-server.  The "ietf-tls-client" and "ietf-tls-server" modules
         are the primary productions of this work, supporting the configuration
@@ -100,11 +100,15 @@
         "ietf-tls-server" modules are the primary productions of this work,
         supporting the configuration and monitoring of TLS clients and servers.</t> 
 
+      <t>The groupings defined in this document are expected to be used in
+        conjuction with the groupings defined in <xref target="I-D.ietf-netconf-tcp-client-server"/>.
+        For instance, to configure the remote address/port and local address/port.</t>
+
       <t>The IANA module is iana-tls-cipher-suite-algs (<xref target="tls-cipher-algs-model"/>).
         This module defines YANG enumerations providing support for an IANA-maintained
         algorithm registry.</t>
 
-      <t>This document only defines that the IANA module exists, 
+      <t>This document assumes that the IANA module exists, 
         and presents a script in <xref target="iana-script"/> that IANA
         may use to generate the YANG module.  This document does not
         publish initial version of this module.  IANA publishes
@@ -216,8 +220,7 @@ INSERT_TEXT_FROM_FILE(../common-intro-snippet.xml,150)
       <t>Thus, in order to support both TLS1.2 and TLS1.3, the cipher-suites
       part of the "hello-params-grouping" grouping should include three parameters for
       configuring its permitted TLS algorithms, which are: TLS Cipher Suites,
-      TLS SignatureScheme, TLS Supported Groups. Note that TLS1.2 only uses
-      TLS Cipher Suites.</t>
+      TLS SignatureScheme, TLS Supported Groups.</t>
 
     <!--
       <t>Features are defined for algorithms that are OPTIONAL or are not
@@ -245,10 +248,9 @@ Features:
 ]]></artwork>
             </figure>
           </t>
-          <!--<aside>-->
-            <t>The diagram above uses syntax that is similar to but not
-              defined in <xref target="RFC8340"/>.</t>
-          <!--</aside>-->
+          <t>The diagram above uses syntax that is similar to but not
+            defined in <xref target="RFC8340"/>.</t>
+          <t>Please refer to the YANG module for a description of each feature.</t>
         </section>
 
         <section title="Identities" anchor="identities" toc="exclude">
@@ -426,10 +428,9 @@ Features:
 ]]></artwork>
             </figure>
           </t>
-          <!--<aside>-->
-            <t>The diagram above uses syntax that is similar to but not
-              defined in <xref target="RFC8340"/>.</t>
-          <!--</aside>-->
+          <t>The diagram above uses syntax that is similar to but not
+            defined in <xref target="RFC8340"/>.</t>
+          <t>Please refer to the YANG module for a description of each feature.</t>
         </section>
 
         <section title="Groupings" toc="exclude">
@@ -568,10 +569,9 @@ Features:
 ]]></artwork>
             </figure>
           </t>
-          <!--<aside>-->
-            <t>The diagram above uses syntax that is similar to but not
-              defined in <xref target="RFC8340"/>.</t>
-          <!--</aside>-->
+          <t>The diagram above uses syntax that is similar to but not
+            defined in <xref target="RFC8340"/>.</t>
+          <t>Please refer to the YANG module for a description of each feature.</t>
         </section>
 
         <section title="Groupings" toc="exclude">
@@ -680,6 +680,13 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
     </section>
 
     <section title="Security Considerations">
+
+      <t>The three IETF YANG modules in this document define groupings and will
+        not be deployed as standalone modules. Their security implications
+        may be context dependent based on their use in other modules.  The
+        designers of modules which import these grouping must conduct their
+        own analysis of the security considerations.</t>
+
       <section title='Considerations for the "iana-tls-cipher-suite-algs" Module'>
         <t>This section follows the template defined in <xref section="3.7.1" target="RFC8407"/>.</t>
         <t>The "iana-tls-cipher-suite-algs" YANG module defines a data model
@@ -698,10 +705,6 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
           defined in the publicly-accessible YANG module.  IANA MAY deprecate
           and/or obsolete enumerations over time as needed to address security
           issues found in the algorithms.</t>
-        <t>The protocol-accessible read-only node for the algorithms supported
-          by a server is mildly sensitive, but not to the extent that special
-          NACM annotations are needed to prevent read-access to regular
-          authenticated administrators.</t>
         <t>This module does not define any writable-nodes, RPCs, actions,
           or notifications, and thus the security consideration for such
           is not provided here.</t>
@@ -721,10 +724,6 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
           provides the means to restrict access for particular users to a
           pre-configured subset of all available protocol operations and
           content.</t>
-
-        <t>Since this module only defines groupings,
-          these considerations are primarily for the designers of other
-          modules that use these groupings.</t>
 
         <t>Please be aware that this YANG module uses groupings from
           other YANG modules that define nodes that may be considered
@@ -768,10 +767,6 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
           pre-configured subset of all available protocol operations and
           content.</t>
 
-        <t>Since this module only defines groupings,
-          these considerations are primarily for the designers of other
-          modules that use these groupings.</t>
-
         <t>Please be aware that this YANG module uses groupings from
           other YANG modules that define nodes that may be considered
           sensitive or vulnerable in network environments.  Please
@@ -783,13 +778,6 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
           are considered sensitive or vulnerable in network environments.
           The NACM "default-deny-all" extension has not been set for any
           data nodes defined in this module.</t>
-
-        <!--<aside>-->
-          <t>Please be aware that this module uses the "key" and "private-key"
-            nodes from the "ietf-crypto-types" module <xref target="I-D.ietf-netconf-crypto-types"/>,
-            where said nodes have the NACM extension "default-deny-all" set, thus
-            preventing unrestricted read-access to the cleartext key values.</t>
-        <!--</aside>-->
 
         <t>All the writable data nodes defined by this module may be
           considered sensitive or vulnerable in some network environments.
@@ -816,10 +804,6 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
           provides the means to restrict access for particular users to a
           pre-configured subset of all available protocol operations and
           content.</t>
-
-        <t>Since this module only defines groupings,
-          these considerations are primarily for the designers of other
-          modules that use these groupings.</t>
 
         <t>Please be aware that this YANG module uses groupings from
           other YANG modules that define nodes that may be considered
@@ -861,7 +845,7 @@ INSERT_TEXT_FROM_FILE(ietf-tls-server@YYYY-MM-DD.yang)
         <t><figure>
             <artwork>
 URI: urn:ietf:params:xml:ns:yang:iana-tls-cipher-suite-algs
-Registrant Contact: IANA
+Registrant Contact: The IESG
 XML: N/A, the requested URI is an XML namespace.
 
 URI: urn:ietf:params:xml:ns:yang:ietf-tls-common
@@ -945,9 +929,21 @@ reference:    RFC FFFF
         <t>Unassigned or reserved values are not present in the module.</t>
         <t>When the "iana-tls-cipher-suite-algs" YANG module is updated, a
           new "revision" statement with a unique revision date must be added
-          in front of the existing revision statements.  The "revision"
-          statement must have a "reference" substatement that points
-          to the document defining the registry update that resulted in this change.</t>
+          in front of the existing revision statements. The "revision"
+          must have a "description" statement explaining why the the update
+          occurred, and must have a "reference" substatement that points to the
+          document defining the registry update that resulted in this change.
+          For instance:</t>
+          <artwork>
+revision 2024-02-02 {
+    description
+        "This update reflect the update made to the underlying
+         Foo Bar registry per RFC XXXX.";
+    reference
+        "RFC XXXX: Extend the Foo Bars Registry
+                   to Support Something Important";
+}</artwork>
+
         <t>IANA is requested to add the following note to the "TLS Cipher Suites"
           sub-registry of the "Transport Layer Security (TLS) Parameters"
           registry <xref target="IANA-CIPHER-ALGS"/>.</t>
@@ -1039,19 +1035,19 @@ reference:    RFC FFFF
     </references>
 
     <section title='Script to Generate IANA-Maintained YANG Modules' anchor="iana-script">
-      <t>The module contained in this section was generated by the following script.
-        Run the script using the command `python gen-yang-module.py`, to produce one
+      <t>This section is not Normative.</t>
+      <t>The Python <eref target="https://www.python.org"/> script contained in this
+        section will create the  IANA-maintained module described in this document.</t>
+      <t>Run the script using the command `python gen-yang-modules.py`, to produce the
         YANG module file in the current directory.</t>
       <t>Be aware that the script does not attempt to copy the "revision" statements
         from the previous/current YANG module.  Copying the revision statements must
         be done manually.</t>
       <t>
         <figure>
-          <preamble>&lt;CODE BEGINS&gt; file "gen-yang-module.py"</preamble>
-          <artwork><![CDATA[
+          <sourcecode type="python" markers="true"><![CDATA[
 INSERT_TEXT_FROM_FILE(gen-yang-module.py)
-]]></artwork> 
-          <postamble>&lt;CODE ENDS&gt;</postamble>
+]]></sourcecode>
         </figure>
       </t>    
 
@@ -1473,6 +1469,13 @@ INSERT_TEXT_FROM_FILE(iana-tls-cipher-suite-algs@YYYY-MM-DD.yang)
           </list>
         </t> 
       </section>
+      <section title="39 to 40">
+        <t>  
+          <list style="symbols">
+            <t>Address IESG review comments.</t>
+          </list>
+        </t> 
+      </section>
     </section>
 
     <section title="Acknowledgements" numbered="no">
@@ -1485,6 +1488,7 @@ INSERT_TEXT_FROM_FILE(iana-tls-cipher-suite-algs@YYYY-MM-DD.yang)
         Bert Wijnen,
         David Lamparter,
         Dhruv Dhody,
+        Éric Vyncke,
         Gary Wu,
         Henk Birkholz,
         Jeff Hartley,
@@ -1495,10 +1499,14 @@ INSERT_TEXT_FROM_FILE(iana-tls-cipher-suite-algs@YYYY-MM-DD.yang)
         Martin Thomson,
         Mehmet Ersue,
         Michal Vaško,
+        Murray Kucherawy,
+        Paul Wouters,
         Phil Shafer,
         Qin Wu,
         Radek Krejci,
         Rob Wilton,
+        Roman Danyliw,
+        Russ Housley,
         Sean Turner,
         Tom Petch,
         and Thomas Martin.</t>

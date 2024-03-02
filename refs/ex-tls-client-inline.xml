@@ -4,6 +4,7 @@
 <tls-client
   xmlns="urn:ietf:params:xml:ns:yang:ietf-tls-client"
   xmlns:ct="urn:ietf:params:xml:ns:yang:ietf-crypto-types">
+
     <!-- how this client will authenticate itself to the server -->
     <client-identity>
         <certificate>
@@ -13,37 +14,8 @@
                 <cert-data>BASE64VALUE=</cert-data>
             </inline-definition>
         </certificate>
-        <!-- TESTED, BUT COMMENTED OUT DUE TO ONLY ONE ALLOWED AT A TIME
-        <raw-private-key>
-         <inline-definition>
-            <private-key-format>ct:rsa-private-key-format</private-key-format>
-            <cleartext-private-key>BASE64VALUE=</cleartext-private-key>
-          </inline-definition>
-        </raw-private-key>
-        -->
-        <!-- USE ONLY ONE AT A TIME  
-        <tls12-psk>
-            <inline-definition>
-                <key-format>ct:octet-string-key-format</key-format>
-                <cleartext-symmetric-key>BASE64VALUE=</cleartext-symmetric-key>
-            </inline-definition>
-            <id>example_id_string</id>
-        </tls12-psk>
-        -->
-        <!-- USE ONLY ONE AT A TIME
-        <tls13-epsk>
-            <inline-definition>
-                <key-format>ct:octet-string-key-format</key-format>
-                <cleartext-symmetric-key>BASE64VALUE=</cleartext-symmetric-key>
-            </inline-definition>
-            <external-identity>example_external_id</external-identity>
-            <hash>sha-256</hash>
-            <context>example_context_string</context>
-            <target-protocol>8443</target-protocol>
-            <target-kdf>12345</target-kdf>
-        </tls13-epsk>
-        -->
     </client-identity>
+
     <!-- which certificates will this client trust -->
     <server-authentication>
         <ca-certs>
@@ -87,10 +59,12 @@
         <tls12-psks/>
         <tls13-epsks/>
     </server-authentication>
+
     <keepalives>
         <test-peer-aliveness>
             <max-wait>30</max-wait>
             <max-attempts>3</max-attempts>
         </test-peer-aliveness>
     </keepalives>
+
 </tls-client>

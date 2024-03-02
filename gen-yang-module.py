@@ -38,7 +38,7 @@ module iana-tls-HNAME-algs {
      Email:  iana@iana.org";
 
   description
-    "This module defines identities for the Cipher Suite
+    "This module defines enumerations for the Cipher Suite
      algorithms defined in the 'TLS Cipher Suites' sub-registry
      of the 'Transport Layer Security (TLS) Parameters' registry
      maintained by IANA.
@@ -55,18 +55,21 @@ module iana-tls-HNAME-algs {
 
      The initial version of this YANG module is part of RFC FFFF
      (https://www.rfc-editor.org/info/rfcFFFF); see the RFC
-     itself for full legal notices.";
+     itself for full legal notices.
+
+     All versions of this module are published by IANA at
+     https://www.iana.org/assignments/yang-parameters.";
 
   revision DATE {
     description
-      "Reflects contents of the SNAME algorithms registry.";
+      "This initial version of the module was created using
+       the script defined in RFC FFFF to reflect the contents
+       of the SNAME algorithms registry maintained by IANA.";
     reference
       "RFC FFFF: YANG Groupings for TLS Clients and TLS Servers";
   }
 
   typedef tls-HNAME-algorithm {
-    description
-      "An enumeration for TLS SNAME algorithms.";
     type enumeration {
 """
     # Replacements
@@ -198,6 +201,8 @@ def create_module_end(f):
 
     # Close out the enumeration, typedef, and module
     f.write("    }\n")
+    f.write("    description")
+    f.write('      "An enumeration for TLS SNAME algorithms.";')
     f.write("  }\n")
     f.write('\n')
     f.write('}\n')
