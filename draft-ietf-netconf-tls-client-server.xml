@@ -101,8 +101,11 @@
         supporting the configuration and monitoring of TLS clients and servers.</t> 
 
       <t>The groupings defined in this document are expected to be used in
-        conjuction with the groupings defined in <xref target="I-D.ietf-netconf-tcp-client-server"/>.
-        For instance, to configure the remote address/port and local address/port.</t>
+        conjunction with the groupings defined in an underlying transport-level
+	      module, such as the groupings defined in <xref target="I-D.ietf-netconf-tcp-client-server"/>.
+        The transport-level data model enables the configuration of transport-level
+        values such as a remote address, a remote port, a local address, and a
+        local port.</t>
 
       <t>The IANA module is iana-tls-cipher-suite-algs (<xref target="tls-cipher-algs-model"/>).
         This module defines YANG enumerations providing support for an IANA-maintained
@@ -1473,6 +1476,15 @@ INSERT_TEXT_FROM_FILE(iana-tls-cipher-suite-algs@YYYY-MM-DD.yang)
         <t>  
           <list style="symbols">
             <t>Address IESG review comments.</t>
+          </list>
+        </t> 
+      </section>
+      <section title="40 to 41">
+        <t>   
+          <list style="symbols">
+            <t>Updated to reflect comments from Paul Wouters.</t>
+            <t>Fixed the "generate-asymmetric-key-pair" RPC to return the
+               location to where hidden keys are created.</t>
           </list>
         </t> 
       </section>

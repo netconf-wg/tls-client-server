@@ -38,7 +38,7 @@ module iana-tls-cipher-suite-algs {
      All versions of this module are published by IANA at
      https://www.iana.org/assignments/yang-parameters.";
 
-  revision 2024-03-02 {
+  revision 2024-03-16 {
     description
       "This initial version of the module was created using
        the script defined in RFC FFFF to reflect the contents
@@ -3545,6 +3545,8 @@ module iana-tls-cipher-suite-algs {
              1.2 and DTLS 1.2";
       }
     }
-    description      "An enumeration for TLS SNAME algorithms.";  }
+    description
+      "An enumeration for TLS cipher-suite algorithms.";
+  }
 
 }
